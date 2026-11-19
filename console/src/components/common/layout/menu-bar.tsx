@@ -35,15 +35,21 @@ import {
   CirclePlay,
   CloudCheck,
   Cpu,
+  Eye,
   FileChartPie,
   FolderKanban,
+  Globe,
   LayoutDashboard,
+  Lock,
   Plug,
   Plus,
   Puzzle,
+  Radio,
   Server,
+  Shield,
   Sparkles,
   Target,
+  Wallet,
 } from 'lucide-react';
 import { NavUser } from '../../ui/nav-user';
 import { NewBadge } from '../new-badge';
@@ -146,8 +152,57 @@ export const menu: NavGroup[] = [
   },
 
   {
+    title: 'Threat Intelligence',
+    url: '#',
+    items: [
+      {
+        title: 'IOC Feed',
+        icon: <Radio />,
+        url: '/cti-ioc-feed',
+        permission: 'vulnerability.read',
+      },
+      {
+        title: 'Data Leaks',
+        icon: <Lock />,
+        url: '/cti-data-leaks',
+        permission: 'vulnerability.read',
+      },
+      {
+        title: 'Brand Protection',
+        icon: <Shield />,
+        url: '/cti-brand-protection',
+        permission: 'vulnerability.read',
+      },
+      {
+        title: 'Dark Web Monitor',
+        icon: <Eye />,
+        url: '/cti-darkweb',
+        permission: 'vulnerability.read',
+      },
+      {
+        title: 'Crypto Intelligence',
+        icon: <Wallet />,
+        url: '/cti-crypto',
+        permission: 'vulnerability.read',
+      },
+      {
+        title: 'Social Monitor',
+        icon: <Globe />,
+        url: '/cti-social-monitor',
+        permission: 'vulnerability.read',
+      },
+      {
+        title: 'Supplier Risk',
+        icon: <Server />,
+        url: '/cti-supplier-risk',
+        permission: 'vulnerability.read',
+      },
+    ],
+  },
+  {
     title: 'Management',
     url: '#',
+    roles: ['admin'],
     items: [
       {
         title: 'Tools',

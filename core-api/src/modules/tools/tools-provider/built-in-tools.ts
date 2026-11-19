@@ -104,4 +104,118 @@ export const builtInTools: Tool[] = [
     version: '2.3.5',
     priority: JobPriority.MEDIUM,
   },
+
+  // ===== CTI TOOLS (Threat Intelligence) =====
+  {
+    name: 'ioc-feed',
+    categories: [
+      categorySpec(ToolCategory.VULNERABILITIES, [TargetType.DOMAIN, TargetType.IP], {
+        inputs: [DataKind.TARGET],
+        produces: [DataKind.VULNERABILITY],
+      }),
+    ],
+    description: 'Checks IPs, domains and hashes against threat intelligence feeds including OTX, GreyNoise and AbuseIPDB.',
+    logoUrl: '/static/images/tools/ioc-feed.png',
+    command: 'ioc-feed {{value}}',
+    parser: JSON.parse,
+    version: '1.0.0',
+    priority: JobPriority.MEDIUM,
+    isBuiltIn: true,
+  },
+  {
+    name: 'data-leaks',
+    categories: [
+      categorySpec(ToolCategory.VULNERABILITIES, [TargetType.DOMAIN], {
+        inputs: [DataKind.TARGET],
+        produces: [DataKind.VULNERABILITY],
+      }),
+    ],
+    description: 'Searches for exposed credentials and leaked data associated with the target domain.',
+    logoUrl: '/static/images/tools/data-leaks.png',
+    command: 'data-leaks {{value}}',
+    parser: JSON.parse,
+    version: '1.0.0',
+    priority: JobPriority.MEDIUM,
+    isBuiltIn: true,
+  },
+  {
+    name: 'brand-protection',
+    categories: [
+      categorySpec(ToolCategory.VULNERABILITIES, [TargetType.DOMAIN], {
+        inputs: [DataKind.TARGET],
+        produces: [DataKind.VULNERABILITY],
+      }),
+    ],
+    description: 'Detects typosquatting, phishing sites and brand impersonation targeting your domain.',
+    logoUrl: '/static/images/tools/brand-protection.png',
+    command: 'brand-protection {{value}}',
+    parser: JSON.parse,
+    version: '1.0.0',
+    priority: JobPriority.MEDIUM,
+    isBuiltIn: true,
+  },
+  {
+    name: 'darkweb',
+    categories: [
+      categorySpec(ToolCategory.VULNERABILITIES, [TargetType.DOMAIN], {
+        inputs: [DataKind.TARGET],
+        produces: [DataKind.VULNERABILITY],
+      }),
+    ],
+    description: 'Monitors dark web forums, ransomware leak sites and underground markets for mentions of your organization.',
+    logoUrl: '/static/images/tools/darkweb.png',
+    command: 'darkweb {{value}}',
+    parser: JSON.parse,
+    version: '1.0.0',
+    priority: JobPriority.MEDIUM,
+    isBuiltIn: true,
+  },
+  {
+    name: 'crypto',
+    categories: [
+      categorySpec(ToolCategory.VULNERABILITIES, [TargetType.DOMAIN, TargetType.IP], {
+        inputs: [DataKind.TARGET],
+        produces: [DataKind.VULNERABILITY],
+      }),
+    ],
+    description: 'Traces cryptocurrency transactions linked to your assets and checks blockchain abuse databases.',
+    logoUrl: '/static/images/tools/crypto.png',
+    command: 'crypto {{value}}',
+    parser: JSON.parse,
+    version: '1.0.0',
+    priority: JobPriority.MEDIUM,
+    isBuiltIn: true,
+  },
+  {
+    name: 'social-monitor',
+    categories: [
+      categorySpec(ToolCategory.VULNERABILITIES, [TargetType.DOMAIN], {
+        inputs: [DataKind.TARGET],
+        produces: [DataKind.VULNERABILITY],
+      }),
+    ],
+    description: 'Social media, news, Telegram and dark web social intelligence monitoring for your brand.',
+    logoUrl: '/static/images/tools/social-monitor.png',
+    command: 'social-monitor {{value}}',
+    parser: JSON.parse,
+    version: '1.0.0',
+    priority: JobPriority.MEDIUM,
+    isBuiltIn: true,
+  },
+  {
+    name: 'supplier-risk',
+    categories: [
+      categorySpec(ToolCategory.VULNERABILITIES, [TargetType.DOMAIN], {
+        inputs: [DataKind.TARGET],
+        produces: [DataKind.VULNERABILITY],
+      }),
+    ],
+    description: 'Assesses third-party and supplier risk using sanctions lists and open-source intelligence.',
+    logoUrl: '/static/images/tools/supplier-risk.png',
+    command: 'supplier-risk {{value}}',
+    parser: JSON.parse,
+    version: '1.0.0',
+    priority: JobPriority.MEDIUM,
+    isBuiltIn: true,
+  },
 ];
