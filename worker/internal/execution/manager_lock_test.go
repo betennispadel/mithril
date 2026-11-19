@@ -12,7 +12,7 @@ import (
 	"testing"
 	"time"
 
-	"oasm-worker/internal/runtime"
+	"mithril-worker/internal/runtime"
 )
 
 // slowCreateRuntime blocks inside Create until release is closed, holding the

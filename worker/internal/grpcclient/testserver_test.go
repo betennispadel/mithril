@@ -13,8 +13,8 @@ import (
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
 	"google.golang.org/grpc/test/bufconn"
-	jobsRegistry "oasm-worker/internal/gen/jobs_registry"
-	workers "oasm-worker/internal/gen/workers"
+	jobsRegistry "mithril-worker/internal/gen/jobs_registry"
+	workers "mithril-worker/internal/gen/workers"
 )
 
 // --- Hook-driven fake WorkersService ---

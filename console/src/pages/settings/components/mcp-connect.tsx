@@ -40,7 +40,7 @@ interface McpClient {
 
 function baseConfig(baseUrl: string, apiKey: string) {
   return {
-    'oasm-platform': {
+    'mithril-platform': {
       type: 'http' as const,
       url: `${baseUrl}/api/mcp`,
       headers: { 'x-mithril-api-key': apiKey },
@@ -80,7 +80,7 @@ const MCP_CLIENTS: McpClient[] = [
       JSON.stringify(
         {
           mcpServers: {
-            'oasm-platform': {
+            'mithril-platform': {
               type: 'http',
               url: `${b}/api/mcp`,
               headers: { 'x-mithril-api-key': k },
@@ -102,7 +102,7 @@ const MCP_CLIENTS: McpClient[] = [
       JSON.stringify(
         {
           mcpServers: {
-            'oasm-platform': {
+            'mithril-platform': {
               command: 'npx',
               args: ['-y', 'mcp-remote', `${b}/api/mcp`, '--header', `x-mithril-api-key: ${k}`],
             },
@@ -123,7 +123,7 @@ const MCP_CLIENTS: McpClient[] = [
       JSON.stringify(
         {
           mcpServers: {
-            'oasm-platform': {
+            'mithril-platform': {
               serverUrl: `${b}/api/mcp`,
               headers: { 'x-mithril-api-key': k },
             },
@@ -144,7 +144,7 @@ const MCP_CLIENTS: McpClient[] = [
       JSON.stringify(
         {
           mcpServers: {
-            'oasm-platform': {
+            'mithril-platform': {
               type: 'http',
               url: `${b}/api/mcp`,
               headers: { 'x-mithril-api-key': k },
@@ -186,7 +186,7 @@ const MCP_CLIENTS: McpClient[] = [
       JSON.stringify(
         {
           mcpServers: {
-            'oasm-platform': {
+            'mithril-platform': {
               httpUrl: `${b}/api/mcp`,
               headers: { 'x-mithril-api-key': k },
             },
@@ -207,7 +207,7 @@ const MCP_CLIENTS: McpClient[] = [
       JSON.stringify(
         {
           mcp: {
-            'oasm-platform': {
+            'mithril-platform': {
               type: 'remote',
               url: `${b}/api/mcp`,
               headers: { 'x-mithril-api-key': k },

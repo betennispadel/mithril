@@ -275,18 +275,18 @@ func TestBuildContainerEnvSplitsGrpcHostPort(t *testing.T) {
 // unknown, so no WORKER_GRPC_PORT var is invented.
 func TestBuildContainerEnvNoPortAddrEmitsHostOnly(t *testing.T) {
 	spec := JobSpec{JobID: "j-noport", Tool: "nuclei", TraceID: "tr-noport"}
-	env := buildContainerEnv(spec, "oasm-worker", "tok", "exec-1", EgressConfig{})
+	env := buildContainerEnv(spec, "mithril-worker", "tok", "exec-1", EgressConfig{})
 	var hostFound bool
 	for _, e := range env {
 		if strings.HasPrefix(e, "WORKER_GRPC_PORT=") {
 			t.Fatalf("no-port addr must not emit WORKER_GRPC_PORT, got %q", e)
 		}
-		if e == "WORKER_GRPC_HOST=oasm-worker" {
+		if e == "WORKER_GRPC_HOST=mithril-worker" {
 			hostFound = true
 		}
 	}
 	if !hostFound {
-		t.Fatal("WORKER_GRPC_HOST=oasm-worker not found in env")
+		t.Fatal("WORKER_GRPC_HOST=mithril-worker not found in env")
 	}
 }
 
@@ -1312,8 +1312,8 @@ func TestCreateUsesOasmPrefixName(t *testing.T) {
 	}
 
 	name := engine.createName
-	if !strings.HasPrefix(name, "oasm-") {
-		t.Fatalf("container name %q must start with oasm-", name)
+	if !strings.HasPrefix(name, "mithril-") {
+		t.Fatalf("container name %q must start with mithril-", name)
 	}
 	if !dockerNameRe.MatchString(name) {
 		t.Fatalf("container name %q violates Docker name charset %s", name, dockerNameRe)
@@ -1368,11 +1368,11 @@ func TestCreateLabelsPoolKeyAndLastUsed(t *testing.T) {
 		t.Fatalf("Create: %v", err)
 	}
 
-	if engine.labels["oasm.pool_key"] != "library/nuclei" {
-		t.Fatalf("label oasm.pool_key = %q, want library/nuclei (prune filter)", engine.labels["oasm.pool_key"])
+	if engine.labels["mithril.pool_key"] != "library/nuclei" {
+		t.Fatalf("label mithril.pool_key = %q, want library/nuclei (prune filter)", engine.labels["mithril.pool_key"])
 	}
-	if _, ok := engine.labels["oasm.last_used"]; !ok {
-		t.Fatal("label oasm.last_used must be set (sweeper info)")
+	if _, ok := engine.labels["mithril.last_used"]; !ok {
+		t.Fatal("label mithril.last_used must be set (sweeper info)")
 	}
 }
 
@@ -1428,7 +1428,7 @@ func TestCreateRetriesOn409NameConflict(t *testing.T) {
 		t.Fatalf("expected 2 recorded names, got %v", engine.createNames)
 	}
 	for _, n := range engine.createNames {
-		if !strings.HasPrefix(n, "oasm-") || !dockerNameRe.MatchString(n) {
+		if !strings.HasPrefix(n, "mithril-") || !dockerNameRe.MatchString(n) {
 			t.Fatalf("bad retry name %q", n)
 		}
 	}

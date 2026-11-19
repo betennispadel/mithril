@@ -8,7 +8,7 @@ import (
 	"github.com/spf13/viper"
 )
 
-// Path defaults live under the per-user ~/.oasm, never the working directory
+// Path defaults live under the per-user ~/.mithril, never the working directory
 // (an elevated PowerShell starts in C:\Windows\System32).
 func TestLoadConfigPathDefaultsUnderUserHome(t *testing.T) {
 	home, err := os.UserHomeDir()
@@ -20,10 +20,10 @@ func TestLoadConfigPathDefaultsUnderUserHome(t *testing.T) {
 	if err != nil {
 		t.Fatalf("LoadConfig: %v", err)
 	}
-	if want := filepath.Join(home, ".oasm", "oasm-tools"); cfg.ToolPath != want {
+	if want := filepath.Join(home, ".mithril", "mithril-tools"); cfg.ToolPath != want {
 		t.Fatalf("tool_path default = %q, want %q", cfg.ToolPath, want)
 	}
-	if want := filepath.Join(home, ".oasm", "agent-sessions"); cfg.WorkspaceRoot != want {
+	if want := filepath.Join(home, ".mithril", "agent-sessions"); cfg.WorkspaceRoot != want {
 		t.Fatalf("workspace_root default = %q, want %q", cfg.WorkspaceRoot, want)
 	}
 }

@@ -69,8 +69,8 @@ tasks:
   # Docker Compose orchestration
   # Starts all services using docker compose with environment variables
   # Builds and recreates the full stack; `task docker-compose workers=3` scales
-  # the `oasm-worker` service (not `worker`). Connector containers dial each
-  # replica on its own IP over the oasm-connectors network — no host port.
+  # the `mithril-worker` service (not `worker`). Connector containers dial each
+  # replica on its own IP over the mithril-connectors network — no host port.
   docker-compose:
     cmds:
       - |
@@ -86,15 +86,15 @@ tasks:
         fi
         export WORKER_DOCKER_GID
         echo "Docker socket group gid for worker: ${WORKER_DOCKER_GID}"
-        docker compose --env-file ./core-api/.env up -d --build --force-recreate --scale oasm-worker={{.workers | default 1}}
+        docker compose --env-file ./core-api/.env up -d --build --force-recreate --scale mithril-worker={{.workers | default 1}}
 
   proto:
     cmds:
       - mkdir -p worker/internal/gen/jobs_registry worker/internal/gen/workers
       - go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
       - go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
-      - cd core-api && pnpm exec protoc -I src/proto src/proto/*.proto --go_out=../worker/internal/gen --go_opt=module=oasm-worker/internal/gen --go-grpc_out=../worker/internal/gen --go-grpc_opt=module=oasm-worker/internal/gen
-      # Worker ↔ connector contract (copy of oasm-connectors/sdk/proto/connector.proto).
+      - cd core-api && pnpm exec protoc -I src/proto src/proto/*.proto --go_out=../worker/internal/gen --go_opt=module=mithril-worker/internal/gen --go-grpc_out=../worker/internal/gen --go-grpc_opt=module=mithril-worker/internal/gen
+      # Worker ↔ connector contract (copy of mithril-connectors/sdk/proto/connector.proto).
       - cd core-api && pnpm exec protoc -I ../worker/internal/proto ../worker/internal/proto/connector.proto --go_out=../worker/internal/gen/connector --go_opt=paths=source_relative --go-grpc_out=../worker/internal/gen/connector --go-grpc_opt=paths=source_relative
 
   # Project initialization
@@ -156,9 +156,9 @@ tasks:
       - task: api:migration:revert
 
   # Sync latest connectors manifest
-  # Pulls oasm-connectors/manifest.json into core-api/resources/connectors/manifest.json
+  # Pulls mithril-connectors/manifest.json into core-api/resources/connectors/manifest.json
   # (the file the API reads to know which connector images exist). Set
-  # MANIFEST_PATH=<path> to read a local oasm-connectors checkout instead of main.
+  # MANIFEST_PATH=<path> to read a local mithril-connectors checkout instead of main.
   sync-connectors:
     cmds:
       - node scripts/sync-tool-manifest.mjs
@@ -178,7 +178,7 @@ tasks:
   #
   # Before tagging it writes version/author/license into core-api/package.json
   # and console/package.json and commits only those two files on main as
-  # `release(oasm): v0.9.0`. The tag points at that commit; main and the tag are
+  # `release(mithril): v0.9.0`. The tag points at that commit; main and the tag are
   # pushed together with `git push --atomic`.
   #
   # Everything downstream keys off the tag: build-release.yml triggers on
@@ -186,7 +186,7 @@ tasks:
   # images and the draft release. The draft is published by hand afterwards —
   # the workflow deliberately does not publish it.
   release:
-    desc: Stamp the package.json files, commit release(oasm), tag and push, kicking off build-release.yml
+    desc: Stamp the package.json files, commit release(mithril), tag and push, kicking off build-release.yml
     preconditions:
       - sh: test -n "{{.VERSION}}{{.version}}{{.CLI_ARGS}}"
         msg: 'Version is required: task release -- v0.9.0'

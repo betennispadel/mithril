@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	"oasm-worker/internal/connector"
-	"oasm-worker/internal/runtime"
+	"mithril-worker/internal/connector"
+	"mithril-worker/internal/runtime"
 )
 
 // Phase 3 replica policy: the pool caps how many busy containers may exist

@@ -4,15 +4,15 @@ import (
 	"context"
 	"testing"
 
-	"oasm-worker/internal/runtime"
+	"mithril-worker/internal/runtime"
 )
 
 func TestPoolKeyForSeparatesAgentLane(t *testing.T) {
-	img := " GHCR.io/oasm/nuclei:3 "
-	if got := poolKeyFor(JobSpec{Image: img}); got != "ghcr.io/oasm/nuclei:3" {
+	img := " GHCR.io/betennispadel/connector-palantir:3 "
+	if got := poolKeyFor(JobSpec{Image: img}); got != "ghcr.io/betennispadel/connector-palantir:3" {
 		t.Fatalf("registry key: got %q", got)
 	}
-	if got := poolKeyFor(JobSpec{Image: img, Lane: AgentLane}); got != "ghcr.io/oasm/nuclei:3#agent" {
+	if got := poolKeyFor(JobSpec{Image: img, Lane: AgentLane}); got != "ghcr.io/betennispadel/connector-palantir:3#agent" {
 		t.Fatalf("agent key: got %q", got)
 	}
 }
@@ -23,7 +23,7 @@ func TestAgentLaneHasItsOwnReplicaCount(t *testing.T) {
 	rt := runtime.NewFakeRuntime()
 	mgr := NewManager(rt, 0)
 	mgr.SetPool(NewPoolManager(0, 1, 0))
-	img := "ghcr.io/oasm-platform/connector-nmap:7.97"
+	img := "ghcr.io/betennispadel/connector-sting:7.97"
 
 	if _, err := mgr.Submit(context.Background(), JobSpec{Tool: "nmap", Image: img, JobID: "registry-1"}); err != nil {
 		t.Fatalf("registry submit: %v", err)

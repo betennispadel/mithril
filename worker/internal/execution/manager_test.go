@@ -8,7 +8,7 @@ import (
 	"testing"
 	"time"
 
-	"oasm-worker/internal/runtime"
+	"mithril-worker/internal/runtime"
 )
 
 // failRuntime wraps FakeRuntime and forces Cancel/Cleanup to fail, simulating a

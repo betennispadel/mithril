@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"sync"
 
-	pb "oasm-worker/internal/gen/connector"
+	pb "mithril-worker/internal/gen/connector"
 )
 
 // ---------------------------------------------------------------------------

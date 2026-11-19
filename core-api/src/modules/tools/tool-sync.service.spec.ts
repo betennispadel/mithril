@@ -19,7 +19,7 @@ const connector = (over: Record<string, unknown>): Record<string, unknown> => ({
   slug: 'nessus',
   description: 'desc',
   version: '1.0.0',
-  author: 'oasm',
+  author: 'mithril',
   capabilities: [{ name: 'vulnerabilities', targetTypes: ['domain', 'ip', 'cidr'] }],
   ...over,
 });

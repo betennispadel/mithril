@@ -10,7 +10,7 @@ import (
 
 	"google.golang.org/grpc/metadata"
 
-	pb "oasm-worker/internal/gen/connector"
+	pb "mithril-worker/internal/gen/connector"
 )
 
 // captureLogger records Info/Warning lines for asserting connector logs.

@@ -12,11 +12,11 @@ import (
 	"time"
 
 	"google.golang.org/protobuf/types/known/timestamppb"
-	"oasm-worker/internal/execution"
-	workers "oasm-worker/internal/gen/workers"
-	"oasm-worker/internal/hostmetrics"
-	"oasm-worker/internal/resource"
-	"oasm-worker/internal/runtime"
+	"mithril-worker/internal/execution"
+	workers "mithril-worker/internal/gen/workers"
+	"mithril-worker/internal/hostmetrics"
+	"mithril-worker/internal/resource"
+	"mithril-worker/internal/runtime"
 )
 
 const maxReportedContainers = 500

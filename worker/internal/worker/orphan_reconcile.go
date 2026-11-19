@@ -4,7 +4,7 @@ import (
 	"context"
 	"time"
 
-	"oasm-worker/internal/runtime"
+	"mithril-worker/internal/runtime"
 )
 
 // orphanReconciler is the startup wiring's view of the runtime: the single

@@ -20,7 +20,7 @@ func TestTimeoutConstantsDocumentedValues(t *testing.T) {
 		t.Fatalf("ConnectorCleanupTimeout = %v, want 30s", ConnectorCleanupTimeout)
 	}
 	if ConnectorSDKSendTimeout != 30*time.Second {
-		t.Fatalf("ConnectorSDKSendTimeout = %v, want 30s (matches oasm-connectors/sdk)", ConnectorSDKSendTimeout)
+		t.Fatalf("ConnectorSDKSendTimeout = %v, want 30s (matches mithril-connectors/sdk)", ConnectorSDKSendTimeout)
 	}
 	if JobTimeoutSecondsKey != "timeoutSeconds" {
 		t.Fatalf("JobTimeoutSecondsKey = %q, want timeoutSeconds (manifest/Job spec)", JobTimeoutSecondsKey)

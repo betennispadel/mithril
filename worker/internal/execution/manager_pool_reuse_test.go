@@ -15,9 +15,9 @@ import (
 
 	"google.golang.org/grpc/metadata"
 
-	"oasm-worker/internal/connector"
-	pb "oasm-worker/internal/gen/connector"
-	"oasm-worker/internal/runtime"
+	"mithril-worker/internal/connector"
+	pb "mithril-worker/internal/gen/connector"
+	"mithril-worker/internal/runtime"
 )
 
 // fakeConnectStream is an in-memory pb.ConnectorService_ConnectServer acting as

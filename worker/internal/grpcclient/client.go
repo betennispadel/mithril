@@ -14,15 +14,15 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/credentials/insecure"
-	"oasm-worker/internal/config"
-	"oasm-worker/internal/filelock"
-	jobRegistryPb "oasm-worker/internal/gen/jobs_registry"
-	workerPb "oasm-worker/internal/gen/workers"
-	"oasm-worker/internal/security"
+	"mithril-worker/internal/config"
+	"mithril-worker/internal/filelock"
+	jobRegistryPb "mithril-worker/internal/gen/jobs_registry"
+	workerPb "mithril-worker/internal/gen/workers"
+	"mithril-worker/internal/security"
 )
 
 // tokenFileName is the persisted worker token's file name inside the per-user
-// data dir (~/.oasm). Override with the WORKER_TOKEN_FILE environment variable.
+// data dir (~/.mithril). Override with the WORKER_TOKEN_FILE environment variable.
 const tokenFileName = ".worker-token"
 
 // Client wraps the gRPC connection to core-api and the generated service
@@ -177,7 +177,7 @@ func (c *Client) OpenJobSecrets(job *jobRegistryPb.Job) (config, inputs map[stri
 }
 
 // resolveTokenFilePath returns WORKER_TOKEN_FILE when set, otherwise the
-// per-user default (~/.oasm/.worker-token).
+// per-user default (~/.mithril/.worker-token).
 func resolveTokenFilePath() string {
 	if p := os.Getenv("WORKER_TOKEN_FILE"); p != "" {
 		return p

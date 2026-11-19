@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"google.golang.org/grpc/metadata"
-	workers "oasm-worker/internal/gen/workers"
+	workers "mithril-worker/internal/gen/workers"
 )
 
 type staticTelemetryProvider struct {

@@ -3,7 +3,7 @@ package worker
 import (
 	"testing"
 
-	connectorpb "oasm-worker/internal/gen/connector"
+	connectorpb "mithril-worker/internal/gen/connector"
 )
 
 // TestFindingToVulnerabilityCarriesCodeFields: a repository scanner's

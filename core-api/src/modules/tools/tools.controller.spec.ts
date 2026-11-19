@@ -117,7 +117,7 @@ describe('ToolsController.getConnectorBySlug', () => {
       name: 'Nuclei',
       slug: 'nuclei',
       version: '1.0.0',
-      image: 'ghcr.io/oasm-platform/connector-nuclei:1.0.0',
+      image: 'ghcr.io/betennispadel/connector-palantir:1.0.0',
       capabilities: [
         { name: 'vulnerabilities', targetTypes: ['domain', 'ip'], inputsSchema },
       ],

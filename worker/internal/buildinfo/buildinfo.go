@@ -3,7 +3,7 @@
 // Version is stamped at link time so the worker reports the same release as
 // the core-api and console images built from the same tag:
 //
-//	go build -ldflags "-X oasm-worker/internal/buildinfo.Version=v0.13.0" ./cmd/app
+//	go build -ldflags "-X mithril-worker/internal/buildinfo.Version=v0.13.0" ./cmd/app
 //
 // The Docker image does this from the APP_VERSION build arg, which the release
 // workflow sets to the git tag for all three services.

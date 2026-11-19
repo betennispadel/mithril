@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	workers "oasm-worker/internal/gen/workers"
+	workers "mithril-worker/internal/gen/workers"
 )
 
 // ConnectInternalNetwork reports the worker's network interfaces for the

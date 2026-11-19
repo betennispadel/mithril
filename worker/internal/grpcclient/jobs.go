@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	jobsRegistry "oasm-worker/internal/gen/jobs_registry"
+	jobsRegistry "mithril-worker/internal/gen/jobs_registry"
 )
 
 // NextJob pulls the next job from the registry.

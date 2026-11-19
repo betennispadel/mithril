@@ -8,7 +8,7 @@ import (
 
 // containerNameRe is the shipped name shape: oasm-<tool-slug>-<registry-slug>-<rand4>.
 // Slugs may themselves contain dashes, so the shape is checked structurally.
-var containerNameRe = regexp.MustCompile(`^oasm-[a-z0-9]+(?:-[a-z0-9]+)*-[0-9a-f]{4}$`)
+var containerNameRe = regexp.MustCompile(`^mithril-[a-z0-9]+(?:-[a-z0-9]+)*-[0-9a-f]{4}$`)
 
 // Container naming contract: oasm-<tool-slug>-<registry-slug>-<rand4>.
 // Keep it short enough to read in a container listing and free of the doubled
@@ -25,37 +25,37 @@ func TestBuildContainerNameFormat(t *testing.T) {
 			name:      "ghcr registry",
 			tool:      "Nuclei Scanner",
 			image:     "ghcr.io/open-asm/nuclei:1.0",
-			wantParts: []string{"oasm-", "nuclei-scanner", "ghcr-io"},
+			wantParts: []string{"mithril-", "nuclei-scanner", "ghcr-io"},
 		},
 		{
 			name:      "docker hub short form",
 			tool:      "nikto",
 			image:     "nikto:latest",
-			wantParts: []string{"oasm-", "nikto", "docker-io"},
+			wantParts: []string{"mithril-", "nikto", "docker-io"},
 		},
 		{
 			name:      "docker hub explicit library",
 			tool:      "nuclei",
 			image:     "library/nuclei",
-			wantParts: []string{"oasm-", "nuclei", "docker-io"},
+			wantParts: []string{"mithril-", "nuclei", "docker-io"},
 		},
 		{
 			name:      "registry with port",
 			tool:      "nmap",
-			image:     "registry.local:5000/oasm/nmap:7.97",
-			wantParts: []string{"oasm-", "nmap", "registry-local-5000"},
+			image:     "registry.local:5000/betennispadel/connector-sting:7.97",
+			wantParts: []string{"mithril-", "nmap", "registry-local-5000"},
 		},
 		{
 			name:      "localhost registry",
 			tool:      "ffuf",
 			image:     "localhost/ffuf:latest",
-			wantParts: []string{"oasm-", "ffuf", "localhost"},
+			wantParts: []string{"mithril-", "ffuf", "localhost"},
 		},
 		{
 			name:      "digest reference",
 			tool:      "httpx",
 			image:     "ghcr.io/open-asm/httpx@sha256:abc123",
-			wantParts: []string{"oasm-", "httpx", "ghcr-io"},
+			wantParts: []string{"mithril-", "httpx", "ghcr-io"},
 		},
 	}
 
@@ -66,8 +66,8 @@ func TestBuildContainerNameFormat(t *testing.T) {
 			if !dockerNameRe.MatchString(got) {
 				t.Fatalf("name %q violates Docker name charset %s", got, dockerNameRe)
 			}
-			if !strings.HasPrefix(got, "oasm-") {
-				t.Fatalf("name %q must start with oasm-", got)
+			if !strings.HasPrefix(got, "mithril-") {
+				t.Fatalf("name %q must start with mithril-", got)
 			}
 			if strings.Contains(got, "--") {
 				t.Fatalf("name %q must not contain a doubled separator", got)
@@ -78,7 +78,7 @@ func TestBuildContainerNameFormat(t *testing.T) {
 				t.Fatalf("name %q must not embed the image repository path", got)
 			}
 			if !containerNameRe.MatchString(got) {
-				t.Fatalf("name %q does not match oasm-<tool>-<registry>-<rand4> (%s)", got, containerNameRe)
+				t.Fatalf("name %q does not match mithril-<tool>-<registry>-<rand4> (%s)", got, containerNameRe)
 			}
 			prev := 0
 			for _, part := range tc.wantParts {
@@ -145,8 +145,8 @@ func TestBuildContainerNameRandomSuffixVaries(t *testing.T) {
 // oasm- prefix rather than collapsing to a bare "oasm--..." string.
 func TestBuildContainerNameHandlesEmptyTool(t *testing.T) {
 	got := buildContainerName("", "ghcr.io/open-asm/nuclei:1.0")
-	if !strings.HasPrefix(got, "oasm-") {
-		t.Fatalf("name %q must start with oasm-", got)
+	if !strings.HasPrefix(got, "mithril-") {
+		t.Fatalf("name %q must start with mithril-", got)
 	}
 	if !dockerNameRe.MatchString(got) {
 		t.Fatalf("name %q violates Docker name charset %s", got, dockerNameRe)
@@ -155,6 +155,6 @@ func TestBuildContainerNameHandlesEmptyTool(t *testing.T) {
 		t.Fatalf("name %q must not contain a doubled separator", got)
 	}
 	if !containerNameRe.MatchString(got) {
-		t.Fatalf("name %q does not match oasm-<tool>-<registry>-<rand4> (%s)", got, containerNameRe)
+		t.Fatalf("name %q does not match mithril-<tool>-<registry>-<rand4> (%s)", got, containerNameRe)
 	}
 }

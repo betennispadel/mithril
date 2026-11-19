@@ -166,7 +166,7 @@ describe('JobsRegistryController', () => {
       mockConnectorRegistry.getConnector.mockReturnValue({
         name: 'Nikto - Web Server Scanner',
         slug: 'nikto',
-        image: 'ghcr.io/oasm-platform/connector-nikto:2.6.1',
+        image: 'ghcr.io/betennispadel/connector-dementor:2.6.1',
       });
       mockToolConfigProfilesService.resolveConfigForJob.mockResolvedValue({});
 
@@ -179,7 +179,7 @@ describe('JobsRegistryController', () => {
       // ...but the worker receives the stable slug.
       expect(result.tool).toBe('nikto');
       expect(result.image).toBe(
-        'ghcr.io/oasm-platform/connector-nikto:2.6.1',
+        'ghcr.io/betennispadel/connector-dementor:2.6.1',
       );
       // Host asset: the historical single `target` input.
       expect(result.inputs).toEqual({
@@ -204,7 +204,7 @@ describe('JobsRegistryController', () => {
       mockConnectorRegistry.getConnector.mockReturnValue({
         name: 'Nmap',
         slug: 'nmap',
-        image: 'ghcr.io/oasm-platform/connector-nmap:7.97',
+        image: 'ghcr.io/betennispadel/connector-sting:7.97',
         egress: 'direct',
       });
       mockToolConfigProfilesService.resolveConfigForJob.mockResolvedValue({});
@@ -227,7 +227,7 @@ describe('JobsRegistryController', () => {
       });
       mockConnectorRegistry.getConnector.mockReturnValue({
         slug: 'nuclei',
-        image: 'ghcr.io/oasm-platform/connector-nuclei:3',
+        image: 'ghcr.io/betennispadel/connector-palantir:3',
         configInband: true,
       });
       mockToolConfigProfilesService.resolveConfigForJob.mockResolvedValue({});
@@ -251,7 +251,7 @@ describe('JobsRegistryController', () => {
       mockConnectorRegistry.getConnector.mockReturnValue({
         name: 'Nikto',
         slug: 'nikto',
-        image: 'ghcr.io/oasm-platform/connector-nikto:2.6.1',
+        image: 'ghcr.io/betennispadel/connector-dementor:2.6.1',
       });
       mockToolConfigProfilesService.resolveConfigForJob.mockResolvedValue({});
 
@@ -278,7 +278,7 @@ describe('JobsRegistryController', () => {
       mockConnectorRegistry.getConnector.mockReturnValue({
         name: 'Gitleaks',
         slug: 'gitleaks',
-        image: 'ghcr.io/oasm-platform/connector-gitleaks:8',
+        image: 'ghcr.io/betennispadel/connector-zion-archive:8',
       });
       mockToolConfigProfilesService.resolveConfigForJob.mockResolvedValue({});
       mockIntegrationConfig.getIntegrationWithDecryptedConfig.mockResolvedValue({
@@ -316,7 +316,7 @@ describe('JobsRegistryController', () => {
       });
       mockConnectorRegistry.getConnector.mockReturnValue({
         slug: 'gitleaks',
-        image: 'ghcr.io/oasm-platform/connector-gitleaks:8',
+        image: 'ghcr.io/betennispadel/connector-zion-archive:8',
       });
       mockToolConfigProfilesService.resolveConfigForJob.mockResolvedValue({});
       mockIntegrationConfig.getIntegrationWithDecryptedConfig.mockRejectedValue(
@@ -348,7 +348,7 @@ describe('JobsRegistryController', () => {
     const useNessusConnector = (): void => {
       mockConnectorRegistry.getConnector.mockReturnValue({
         slug: 'nessus',
-        image: 'ghcr.io/oasm-platform/connector-nessus:1',
+        image: 'ghcr.io/betennispadel/connector-horcrux:1',
         configSchema: {
           properties: { apiKey: { type: 'string' }, rate: { type: 'number' } },
         },

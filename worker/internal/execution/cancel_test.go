@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"oasm-worker/internal/runtime"
+	"mithril-worker/internal/runtime"
 )
 
 func TestManagerCancelPropagatesToRuntime(t *testing.T) {

@@ -7,7 +7,7 @@ import (
 	"strings"
 	"testing"
 
-	workers "oasm-worker/internal/gen/workers"
+	workers "mithril-worker/internal/gen/workers"
 )
 
 // OwnerID must derive from the persisted join token so a restart produces

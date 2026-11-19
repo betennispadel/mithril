@@ -7,7 +7,7 @@ import (
 	"sync"
 	"time"
 
-	"oasm-worker/internal/runtime"
+	"mithril-worker/internal/runtime"
 )
 
 // ErrPoolExhausted is returned by Manager.Submit (Phase 3 replica policy)

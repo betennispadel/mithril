@@ -7,7 +7,7 @@ import (
 	"math/rand"
 	"time"
 
-	workers "oasm-worker/internal/gen/workers"
+	workers "mithril-worker/internal/gen/workers"
 )
 
 // TelemetryProvider builds one bounded worker snapshot. Implementations must

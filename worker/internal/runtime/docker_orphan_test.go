@@ -11,12 +11,12 @@ import (
 )
 
 // managed builds a seeded engine-list entry the way DockerRuntime.Create
-// stamps containers: oasm-managed always, oasm.worker_id only when the
+// stamps containers: oasm-managed always, mithril.worker_id only when the
 // owner is known.
 func managed(id, state, owner string) container.Summary {
-	labels := map[string]string{"oasm-managed": "true"}
+	labels := map[string]string{"mithril-managed": "true"}
 	if owner != "" {
-		labels["oasm.worker_id"] = owner
+		labels["mithril.worker_id"] = owner
 	}
 	return container.Summary{ID: id, State: state, Labels: labels}
 }
@@ -83,8 +83,8 @@ func TestCreateStampsWorkerIDLabel(t *testing.T) {
 		t.Fatalf("Create: %v", err)
 	}
 
-	if got := engine.labels["oasm.worker_id"]; got != "owner-abc" {
-		t.Fatalf("container label oasm.worker_id = %q, want %q", got, "owner-abc")
+	if got := engine.labels["mithril.worker_id"]; got != "owner-abc" {
+		t.Fatalf("container label mithril.worker_id = %q, want %q", got, "owner-abc")
 	}
 }
 
@@ -99,8 +99,8 @@ func TestCreateOmitsEmptyWorkerIDLabel(t *testing.T) {
 		t.Fatalf("Create: %v", err)
 	}
 
-	if _, ok := engine.labels["oasm.worker_id"]; ok {
-		t.Fatal("oasm.worker_id label must be omitted when WorkerID is empty (unknown owner must not look like ours)")
+	if _, ok := engine.labels["mithril.worker_id"]; ok {
+		t.Fatal("mithril.worker_id label must be omitted when WorkerID is empty (unknown owner must not look like ours)")
 	}
 }
 
@@ -227,8 +227,8 @@ func TestReconcileListsManagedOnly(t *testing.T) {
 	if engine.listCalls != 1 {
 		t.Fatalf("list calls = %d, want 1", engine.listCalls)
 	}
-	if !strings.Contains(engine.listFilters, "oasm-managed=true") {
-		t.Fatalf("list filters = %q, want it to contain oasm-managed=true", engine.listFilters)
+	if !strings.Contains(engine.listFilters, "mithril-managed=true") {
+		t.Fatalf("list filters = %q, want it to contain mithril-managed=true", engine.listFilters)
 	}
 }
 

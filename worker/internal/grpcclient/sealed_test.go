@@ -6,7 +6,7 @@ import (
 	"os"
 	"testing"
 
-	workers "oasm-worker/internal/gen/workers"
+	workers "mithril-worker/internal/gen/workers"
 )
 
 // The worker sends the public half of a key it keeps next to its token, so

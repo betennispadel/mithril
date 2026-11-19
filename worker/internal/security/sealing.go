@@ -11,7 +11,7 @@ import (
 
 // jobSecretsInfo is the HPKE info core-api seals job secrets with
 // (JOB_SECRETS_INFO in job-secret-sealer.ts).
-const jobSecretsInfo = "oasm job secrets v1"
+const jobSecretsInfo = "mithril job secrets v1"
 
 var kem = hpke.DHKEM(ecdh.P256())
 

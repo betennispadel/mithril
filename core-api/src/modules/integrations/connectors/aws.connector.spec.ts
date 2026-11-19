@@ -307,7 +307,7 @@ describe('AwsConnector', () => {
       const persistConfigPatch = jest.fn().mockResolvedValue(undefined);
       const config = makeConfig({
         connectionMethod: 'assumeRole',
-        roleArn: 'arn:aws:iam::{accountId}:role/oasm',
+        roleArn: 'arn:aws:iam::{accountId}:role/mithril',
         externalId: 'ext',
         __dryRun: true,
         persistConfigPatch,
@@ -359,7 +359,7 @@ describe('AwsConnector', () => {
         new AwsConnector().syncAssets(
           makeConfig({
             connectionMethod: 'assumeRole',
-            roleArn: 'arn:aws:iam::{accountId}:role/oasm',
+            roleArn: 'arn:aws:iam::{accountId}:role/mithril',
             externalId: 'ext',
           }),
         ),
@@ -388,7 +388,7 @@ describe('AwsConnector', () => {
 
       const config = makeConfig({
         connectionMethod: 'assumeRole',
-        roleArn: 'arn:aws:iam::{accountId}:role/oasm',
+        roleArn: 'arn:aws:iam::{accountId}:role/mithril',
         externalId: 'ext',
       });
       const result = await new AwsConnector().syncAssets(config);
@@ -420,7 +420,7 @@ describe('AwsConnector', () => {
       const result = await new AwsConnector().syncAssets(
         makeConfig({
           connectionMethod: 'assumeRole',
-          roleArn: 'arn:aws:iam::{accountId}:role/oasm',
+          roleArn: 'arn:aws:iam::{accountId}:role/mithril',
           externalId: 'ext',
         }),
       );

@@ -6,7 +6,7 @@ import (
 	"strings"
 	"testing"
 
-	jobsRegistry "oasm-worker/internal/gen/jobs_registry"
+	jobsRegistry "mithril-worker/internal/gen/jobs_registry"
 )
 
 func TestNextJob_ReturnsJob(t *testing.T) {

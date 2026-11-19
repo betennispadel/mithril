@@ -8,7 +8,7 @@ import (
 	"strconv"
 	"strings"
 
-	"oasm-worker/internal/grpcclient"
+	"mithril-worker/internal/grpcclient"
 )
 
 type NetworkInfo struct {

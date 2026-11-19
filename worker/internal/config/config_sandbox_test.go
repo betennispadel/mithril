@@ -22,13 +22,13 @@ func TestLoadConfigAgentSandboxDefaults(t *testing.T) {
 func TestLoadConfigAgentSandboxFromEnv(t *testing.T) {
 	viper.Reset()
 	t.Setenv("WORKER_AGENT_SANDBOX", "true")
-	t.Setenv("WORKER_AGENT_SANDBOX_IMAGE", "oasm/oasm-worker:1.2.3")
+	t.Setenv("WORKER_AGENT_SANDBOX_IMAGE", "mithril/mithril-worker:1.2.3")
 	t.Setenv("WORKER_AGENT_SANDBOX_TOOLS_SOURCE", "tools-vol")
 	cfg, err := LoadConfig()
 	if err != nil {
 		t.Fatalf("LoadConfig: %v", err)
 	}
-	if !cfg.AgentSandbox || cfg.AgentSandboxImage != "oasm/oasm-worker:1.2.3" || cfg.AgentSandboxToolsSource != "tools-vol" {
+	if !cfg.AgentSandbox || cfg.AgentSandboxImage != "mithril/mithril-worker:1.2.3" || cfg.AgentSandboxToolsSource != "tools-vol" {
 		t.Fatalf("got %v/%q/%q", cfg.AgentSandbox, cfg.AgentSandboxImage, cfg.AgentSandboxToolsSource)
 	}
 }

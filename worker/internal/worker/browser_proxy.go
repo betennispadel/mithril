@@ -13,7 +13,7 @@ import (
 	"syscall"
 	"time"
 
-	"oasm-worker/internal/egress"
+	"mithril-worker/internal/egress"
 )
 
 // publicProxy is the forward proxy each browser session on a shared

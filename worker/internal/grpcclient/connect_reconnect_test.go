@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"google.golang.org/grpc"
-	workers "oasm-worker/internal/gen/workers"
+	workers "mithril-worker/internal/gen/workers"
 )
 
 // Connect survives many alive-stream drops (core-api restarts, network blips).

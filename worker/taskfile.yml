@@ -68,12 +68,12 @@ tasks:
   build-cli:
     cmds:
       - echo "Building OASM CLI Worker..."
-      - go build -o bin/oasm-cli ./cmd/cli
+      - go build -o bin/mithril-cli ./cmd/cli
 
   build-app:
     cmds:
       - echo "Building OASM App Worker..."
-      - CGO_ENABLED=0 go build -o bin/oasm-app ./cmd/app
+      - CGO_ENABLED=0 go build -o bin/mithril-app ./cmd/app
 
   clean:
     cmds:

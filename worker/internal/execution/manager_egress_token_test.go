@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"oasm-worker/internal/runtime"
+	"mithril-worker/internal/runtime"
 )
 
 // fakeRT is a minimal ExecutionRuntime for token-lifetime tests.

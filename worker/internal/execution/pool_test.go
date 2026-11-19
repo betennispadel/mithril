@@ -31,7 +31,7 @@ func TestPoolAcquireHandlePreservesContainerName(t *testing.T) {
 	p, _ := newPoolForTest(t, now)
 	p.Add(poolEntry{
 		ID:         "c1",
-		Name:       "oasm-nuclei-abc123",
+		Name:       "mithril-nuclei-abc123",
 		Image:      "nuclei",
 		PoolKey:    "nuclei",
 		State:      PoolStateIdle,
@@ -42,8 +42,8 @@ func TestPoolAcquireHandlePreservesContainerName(t *testing.T) {
 	if !ok {
 		t.Fatal("AcquireHandle must hit an idle container with a matching pool key")
 	}
-	if handle.Name != "oasm-nuclei-abc123" {
-		t.Fatalf("AcquireHandle returned name %q, want %q", handle.Name, "oasm-nuclei-abc123")
+	if handle.Name != "mithril-nuclei-abc123" {
+		t.Fatalf("AcquireHandle returned name %q, want %q", handle.Name, "mithril-nuclei-abc123")
 	}
 }
 

@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"oasm-worker/internal/runtime"
+	"mithril-worker/internal/runtime"
 )
 
 // submitAndRelease runs one job to completion so its container goes idle.
@@ -26,7 +26,7 @@ func TestWarmContainerIsReusedOnlyWithinItsWorkspace(t *testing.T) {
 	rt := runtime.NewFakeRuntime()
 	mgr := NewManager(rt, 0)
 	mgr.SetPool(NewPoolManager(time.Hour, 0, 0))
-	img := "ghcr.io/oasm-platform/connector-nuclei:3"
+	img := "ghcr.io/betennispadel/connector-palantir:3"
 
 	submitAndRelease(t, mgr, JobSpec{Tool: "nuclei", Image: img, JobID: "a", WorkspaceID: "ws-1"})
 	submitAndRelease(t, mgr, JobSpec{Tool: "nuclei", Image: img, JobID: "b", WorkspaceID: "ws-2"})
@@ -46,7 +46,7 @@ func TestRegistryJobWithConfigButNoWorkspaceNeverReuses(t *testing.T) {
 	rt := runtime.NewFakeRuntime()
 	mgr := NewManager(rt, 0)
 	mgr.SetPool(NewPoolManager(time.Hour, 0, 0))
-	img := "ghcr.io/oasm-platform/connector-nuclei:3"
+	img := "ghcr.io/betennispadel/connector-palantir:3"
 	config := map[string]any{"apiKey": "k"}
 
 	submitAndRelease(t, mgr, JobSpec{Tool: "nuclei", Image: img, JobID: "a", Config: config})

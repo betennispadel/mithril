@@ -4,7 +4,7 @@ import (
 	"context"
 	"time"
 
-	"oasm-worker/internal/runtime"
+	"mithril-worker/internal/runtime"
 )
 
 // ContainerDescriptor is an immutable view of one OASM-managed container.

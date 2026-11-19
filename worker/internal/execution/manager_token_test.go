@@ -6,7 +6,7 @@ import (
 	"testing"
 	"unicode/utf8"
 
-	"oasm-worker/internal/runtime"
+	"mithril-worker/internal/runtime"
 )
 
 // Per-execution connector tokens: Submit mints a single-use token BEFORE the

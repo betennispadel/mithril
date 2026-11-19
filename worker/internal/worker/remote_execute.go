@@ -12,10 +12,10 @@ import (
 	"sync"
 	"time"
 
-	pb "oasm-worker/internal/gen/workers"
+	pb "mithril-worker/internal/gen/workers"
 
-	"oasm-worker/internal/grpcclient"
-	"oasm-worker/internal/runtime"
+	"mithril-worker/internal/grpcclient"
+	"mithril-worker/internal/runtime"
 )
 
 // agentCommandSandbox runs agent shell commands in an isolated per-session

@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"strings"
 
-	"oasm-worker/internal/runtime"
+	"mithril-worker/internal/runtime"
 )
 
 // Limits enforces CPU/mem/time via runtime opts.

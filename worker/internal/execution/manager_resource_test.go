@@ -5,7 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	"oasm-worker/internal/runtime"
+	"mithril-worker/internal/runtime"
 )
 
 // captureRuntime wraps FakeRuntime and records the RuntimeOpts passed to

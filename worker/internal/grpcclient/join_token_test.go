@@ -8,7 +8,7 @@ import (
 	"sync"
 	"testing"
 
-	workers "oasm-worker/internal/gen/workers"
+	workers "mithril-worker/internal/gen/workers"
 )
 
 // recordingLogger captures log calls so tests can assert on warn messages.

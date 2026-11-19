@@ -1,7 +1,7 @@
 package main
 
 import (
-	"oasm-worker/internal/cli"
+	"mithril-worker/internal/cli"
 )
 
 func main() {

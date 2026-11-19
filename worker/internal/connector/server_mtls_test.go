@@ -20,7 +20,7 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 
-	pb "oasm-worker/internal/gen/connector"
+	pb "mithril-worker/internal/gen/connector"
 )
 
 // testPKI holds self-signed CA + server + client certificates (stdlib only,
@@ -41,7 +41,7 @@ func newTestPKI(t *testing.T) *testPKI {
 	}
 	caTmpl := &x509.Certificate{
 		SerialNumber:          big.NewInt(1),
-		Subject:               pkix.Name{CommonName: "oasm-test-ca"},
+		Subject:               pkix.Name{CommonName: "mithril-test-ca"},
 		NotBefore:             time.Now().Add(-time.Hour),
 		NotAfter:              time.Now().Add(time.Hour),
 		IsCA:                  true,
@@ -82,7 +82,7 @@ func newTestPKI(t *testing.T) *testPKI {
 	}
 	clientTmpl := &x509.Certificate{
 		SerialNumber: big.NewInt(3),
-		Subject:      pkix.Name{CommonName: "oasm-test-connector"},
+		Subject:      pkix.Name{CommonName: "mithril-test-connector"},
 		NotBefore:    time.Now().Add(-time.Hour),
 		NotAfter:     time.Now().Add(time.Hour),
 		KeyUsage:     x509.KeyUsageDigitalSignature,

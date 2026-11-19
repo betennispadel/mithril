@@ -5,8 +5,8 @@ import (
 	"testing"
 	"time"
 
-	"oasm-worker/internal/config"
-	"oasm-worker/internal/worker"
+	"mithril-worker/internal/config"
+	"mithril-worker/internal/worker"
 )
 
 // TestProgressModelRendersBarForActivePull: a live pull occupies one line and
@@ -18,7 +18,7 @@ func TestProgressModelRendersBarForActivePull(t *testing.T) {
 		t.Fatal("a fresh model must render nothing")
 	}
 
-	m.update("job-1", "ghcr.io/oasm-platform/connector-nmap:7.97", 0.42, false)
+	m.update("job-1", "ghcr.io/betennispadel/connector-sting:7.97", 0.42, false)
 
 	if !m.active() || m.height() != 1 {
 		t.Fatalf("active=%t height=%d, want true/1", m.active(), m.height())

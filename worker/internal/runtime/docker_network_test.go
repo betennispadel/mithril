@@ -27,10 +27,10 @@ func selfInspector(t *testing.T, networks map[string]*network.EndpointSettings) 
 // them keep the default port without a published host port.
 func TestResolveSelfNetworkAddrUsesOwnIPOnNetwork(t *testing.T) {
 	di := selfInspector(t, map[string]*network.EndpointSettings{
-		"oasm":            {IPAddress: "172.20.0.5"},
-		"oasm-connectors": {IPAddress: "172.21.0.7"},
+		"mithril":            {IPAddress: "172.20.0.5"},
+		"mithril-connectors": {IPAddress: "172.21.0.7"},
 	})
-	got, err := resolveSelfNetworkAddr(context.Background(), di, "worker-1", "oasm-connectors", 26276)
+	got, err := resolveSelfNetworkAddr(context.Background(), di, "worker-1", "mithril-connectors", 26276)
 	if err != nil {
 		t.Fatalf("resolveSelfNetworkAddr: %v", err)
 	}
@@ -41,10 +41,10 @@ func TestResolveSelfNetworkAddrUsesOwnIPOnNetwork(t *testing.T) {
 
 func TestResolveSelfNetworkAddrFailsWhenNotAttached(t *testing.T) {
 	di := selfInspector(t, map[string]*network.EndpointSettings{
-		"oasm": {IPAddress: "172.20.0.5"},
+		"mithril": {IPAddress: "172.20.0.5"},
 	})
-	_, err := resolveSelfNetworkAddr(context.Background(), di, "worker-1", "oasm-connectors", 26276)
-	if err == nil || !strings.Contains(err.Error(), "oasm-connectors") {
+	_, err := resolveSelfNetworkAddr(context.Background(), di, "worker-1", "mithril-connectors", 26276)
+	if err == nil || !strings.Contains(err.Error(), "mithril-connectors") {
 		t.Fatalf("err = %v, want a failure naming the missing network", err)
 	}
 }
@@ -57,7 +57,7 @@ func TestResolveSelfNetworkAddrFailsOutsideContainer(t *testing.T) {
 			return container.InspectResponse{}, errors.New("No such container: my-laptop")
 		},
 	}
-	_, err := resolveSelfNetworkAddr(context.Background(), di, "my-laptop", "oasm-connectors", 26276)
+	_, err := resolveSelfNetworkAddr(context.Background(), di, "my-laptop", "mithril-connectors", 26276)
 	if err == nil || !strings.Contains(err.Error(), "must run as a container") {
 		t.Fatalf("err = %v, want guidance that the worker must be a container", err)
 	}

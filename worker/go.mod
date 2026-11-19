@@ -1,4 +1,4 @@
-module oasm-worker
+module mithril-worker
 
 go 1.26.7
 

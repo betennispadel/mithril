@@ -12,7 +12,7 @@ import (
 	"sync/atomic"
 	"testing"
 
-	"oasm-worker/internal/egress"
+	"mithril-worker/internal/egress"
 )
 
 func proxiedClient(t *testing.T, p *publicProxy) *http.Client {

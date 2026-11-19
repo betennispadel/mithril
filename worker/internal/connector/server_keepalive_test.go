@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	pb "oasm-worker/internal/gen/connector"
+	pb "mithril-worker/internal/gen/connector"
 )
 
 // Phase 2 warm-pool keepalive: a clean Done ends the EXECUTION, not the

@@ -8,10 +8,10 @@ import (
 	"sync"
 	"time"
 
-	"oasm-worker/internal/connector"
-	"oasm-worker/internal/execution"
-	connectorpb "oasm-worker/internal/gen/connector"
-	pb "oasm-worker/internal/gen/workers"
+	"mithril-worker/internal/connector"
+	"mithril-worker/internal/execution"
+	connectorpb "mithril-worker/internal/gen/connector"
+	pb "mithril-worker/internal/gen/workers"
 )
 
 // toolResultSender streams one raw result event of an agent tool run to core.

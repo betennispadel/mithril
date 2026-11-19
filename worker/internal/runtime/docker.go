@@ -27,7 +27,7 @@ import (
 	"github.com/docker/docker/client"
 	"github.com/docker/docker/errdefs"
 
-	"oasm-worker/internal/security"
+	"mithril-worker/internal/security"
 )
 
 // DockerRuntime implements ExecutionRuntime via Docker Engine API over docker.sock.
@@ -540,7 +540,7 @@ func randHex4() string {
 
 // maxToolSlugLen caps the tool segment; maxRegistrySlugLen caps the registry
 // segment. Together they keep the whole name well under Docker's 128-char limit
-// (5 "oasm-" + 80 + 1 + 32 + 1 + 4 random = 123).
+// (5 "mithril-" + 80 + 1 + 32 + 1 + 4 random = 123).
 const (
 	maxToolSlugLen     = 80
 	maxRegistrySlugLen = 32
@@ -548,7 +548,7 @@ const (
 
 // imageRegistrySlug extracts the registry host from an image reference and
 // renders it into Docker's container-name charset: "ghcr.io" → "ghcr-io",
-// "registry.local:5000/oasm/nmap:7.97" → "registry-local-5000".
+// "registry.local:5000/betennispadel/connector-sting:7.97" → "registry-local-5000".
 //
 // Only the REGISTRY is kept, never the repository path — the old scheme cut
 // the whole image key at 8 chars, which leaked the repo ("ghcr-io-open-asm-…")
@@ -648,7 +648,7 @@ func sanitizeVolumeName(s string) string {
 // opt-in if auto-update ever needed.
 
 // persistPathsFromLabels extracts container paths that should be backed by a
-// per-image named volume. The oasm.persist label is a comma-separated list
+// per-image named volume. The mithril.persist label is a comma-separated list
 // of absolute paths; relative or blank entries are ignored.
 func persistPathsFromLabels(labels map[string]string) []string {
 	raw, ok := labels["mithril.persist"]
@@ -728,9 +728,9 @@ func (d *DockerRuntime) Create(ctx context.Context, spec JobSpec, opts RuntimeOp
 	env := buildContainerEnv(spec, d.connectorAddr, d.connectorToken, execID, EgressConfig{Addr: d.egressAddr, GrpcHost: d.egressGrpcHost, Enabled: !direct})
 
 	// Container config: image, env, labels for lifecycle management.
-	// oasm.pool_key (normalized image) names pooled containers and lets the
+	// mithril.pool_key (normalized image) names pooled containers and lets the
 	// sweeper identify them; oasm-managed scopes the startup orphan
-	// reconcile; oasm.last_used is informational only — the in-memory pool
+	// reconcile; mithril.last_used is informational only — the in-memory pool
 	// owns sweep timing.
 	labels := map[string]string{
 		"trace_id":     opts.TraceID,
@@ -777,7 +777,7 @@ func (d *DockerRuntime) Create(ctx context.Context, spec JobSpec, opts RuntimeOp
 		d.logInfo("docker: image pull skipped (cached): %s", spec.Image)
 	}
 
-	// Per-image persistence: read oasm.persist label (comma-separated
+	// Per-image persistence: read mithril.persist label (comma-separated
 	// absolute container paths) from the image. Each path gets a named
 	// volume derived from the image reference so same-image containers
 	// share one volume while different images get separate ones.
@@ -1154,7 +1154,7 @@ type ReconcileReport struct {
 //
 //	tier 1  exited/created/dead/removing → always remove: nothing can use
 //	        them and they only accumulate across crashes;
-//	tier 2  running/paused/restarting AND oasm.worker_id == ownerID
+//	tier 2  running/paused/restarting AND mithril.worker_id == ownerID
 //	        (non-empty) → force remove: a fresh process holds no streams or
 //	        exec tokens for them, so they can never be adopted;
 //	tier 3  live AND owner different or missing → KEEP: on a shared
@@ -1172,7 +1172,7 @@ func (d *DockerRuntime) ReconcileOrphans(ctx context.Context, ownerID string) Re
 		return rep
 	}
 	f := filters.NewArgs()
-	f.Add("label", "oasm-managed=true")
+	f.Add("label", "mithril-managed=true")
 	list, err := d.cli.ContainerList(ctx, container.ListOptions{All: true, Filters: f})
 	if err != nil {
 		d.logWarning("docker: orphan reconcile list failed: %v", err)

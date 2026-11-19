@@ -1,12 +1,12 @@
 services:
   console:
     container_name: console
-    image: oasm/oasm-console:latest
+    image: mithril/mithril-console:latest
     build:
       context: .
       dockerfile: console/Dockerfile
     networks:
-      - oasm
+      - mithril
     env_file:
       - ./console/.env
     ports:
@@ -28,13 +28,13 @@ services:
         condition: service_started
 
   core-api:
-    container_name: oasm-api
-    image: oasm/oasm-api:latest
+    container_name: mithril-api
+    image: mithril/mithril-api:latest
     build:
       context: .
       dockerfile: core-api/Dockerfile
     networks:
-      - oasm
+      - mithril
     env_file:
       - ./core-api/.env
     ports:
@@ -69,8 +69,8 @@ services:
       timeout: 30s
       retries: 10
 
-  oasm-worker:
-    image: oasm/oasm-worker:latest
+  mithril-worker:
+    image: mithril/mithril-worker:latest
     build:
       context: ./worker
       dockerfile: Dockerfile
@@ -85,10 +85,10 @@ services:
       # inside the container). Every replica of a scaled service shares it.
       # Override with WORKER_NAME in the shell or the --env-file; this list
       # wins over ./worker/.env.
-      - WORKER_NAME=${WORKER_NAME:-oasm-builtin-worker}
+      - WORKER_NAME=${WORKER_NAME:-mithril-builtin-worker}
       # Concurrency auto-sizes from the container's CPU/RAM (cgroup-aware).
       # Pin it by setting WORKER_MAX_CONCURRENCY to a positive value.
-      - WORKER_TOOL_PATH=/app/oasm-tools
+      - WORKER_TOOL_PATH=/app/mithril-tools
       # Persist the join token on the worker-state volume: without it every
       # container recreation mints a fresh identity and startup orphan
       # reconcile can no longer recognize the previous run's containers.
@@ -98,11 +98,11 @@ services:
       # worker. Required for a global worker to serve agents of every
       # workspace; fails closed (commands error) if Docker is unreachable.
       - WORKER_AGENT_SANDBOX=true
-      # Connector containers join the oasm-connectors network and dial this
+      # Connector containers join the mithril-connectors network and dial this
       # replica directly on its own IP there (:26276). No host port is
-      # published, so the service scales: `--scale oasm-worker=3`. Connectors
-      # are NOT on the oasm network, so they cannot reach postgres/redis.
-      - WORKER_CONNECTOR_NETWORK=oasm-connectors
+      # published, so the service scales: `--scale mithril-worker=3`. Connectors
+      # are NOT on the mithril network, so they cannot reach postgres/redis.
+      - WORKER_CONNECTOR_NETWORK=mithril-connectors
       # Replicas share worker-state: each one locks its own token slot
       # (.worker-token, .worker-token.1, ...) and keeps a distinct identity.
     logging:
@@ -111,7 +111,7 @@ services:
         max-size: 10m
         max-file: '3'
     volumes:
-      - worker-tools-cache:/app/oasm-tools:rw
+      - worker-tools-cache:/app/mithril-tools:rw
       - worker-state:/app/state
       # The worker spawns connector containers via the Docker Engine API
       # (internal/runtime/docker.go), so it MUST reach a daemon. Mount the host
@@ -132,15 +132,15 @@ services:
     group_add:
       - "${WORKER_DOCKER_GID:-0}"
     networks:
-      - oasm
-      - oasm-connectors
+      - mithril
+      - mithril-connectors
     restart: 'always'
     depends_on:
       core-api:
         condition: service_healthy
 
   postgres:
-    container_name: oasm-postgres
+    container_name: mithril-postgres
     image: pgvector/pgvector:pg18
     restart: always
     env_file:
@@ -165,7 +165,7 @@ services:
     ports:
       - '127.0.0.1:${POSTGRES_PORT:-5432}:5432'
     networks:
-      - oasm
+      - mithril
     healthcheck:
       test: ['CMD-SHELL', 'pg_isready']
       interval: 1s
@@ -173,14 +173,14 @@ services:
       retries: 10
 
   redis:
-    container_name: oasm-redis
+    container_name: mithril-redis
     image: redis:alpine
     restart: always
     # Loopback only: it carries every workspace's remote-execute results.
     ports:
       - '127.0.0.1:6379:6379'
     networks:
-      - oasm
+      - mithril
     logging:
       driver: json-file
       options:
@@ -207,21 +207,21 @@ services:
   geo-ip:
     container_name: geo-ip
     # DB-IP Lite databases ship inside the image (rebuilt daily), so no volume.
-    image: oasm/dbip:latest
+    image: mithril/dbip:latest
     networks:
-      - oasm
+      - mithril
     ports:
       - '127.0.0.1:4360:4360'
     restart: 'always'
 
   rustfs:
-    container_name: oasm-rustfs
+    container_name: mithril-rustfs
     image: rustfs/rustfs:latest
-    # oasm-connectors: the nuclei connector downloads custom templates from
+    # mithril-connectors: the nuclei connector downloads custom templates from
     # presigned URLs signed against RUSTFS_ENDPOINT (http://rustfs:9000).
     networks:
-      - oasm
-      - oasm-connectors
+      - mithril
+      - mithril-connectors
     ports:
       - '127.0.0.1:9000:9000'
       - '127.0.0.1:9001:9001'
@@ -239,10 +239,10 @@ services:
     command: ['/data']
 
   migration:
-    container_name: oasm-migration
-    image: oasm/oasm-api:latest
+    container_name: mithril-migration
+    image: mithril/mithril-api:latest
     networks:
-      - oasm
+      - mithril
     env_file:
       - ./core-api/.env
     environment:
@@ -272,14 +272,14 @@ volumes:
   worker-state:
 
 networks:
-  oasm:
+  mithril:
     driver: bridge
   # Fixed name (no project prefix): the worker attaches connector containers it
   # spawns through the Engine API by this exact name.
   # internal: no route out, so connector egress goes through the worker's
   # egress proxy (:26277). Raw port scanners (nmap, rustscan) are exempt: the
   # worker also attaches them to the default bridge.
-  oasm-connectors:
-    name: oasm-connectors
+  mithril-connectors:
+    name: mithril-connectors
     driver: bridge
     internal: true

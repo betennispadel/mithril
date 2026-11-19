@@ -11,11 +11,11 @@ import (
 
 func sandboxSpec() AgentSandboxSpec {
 	return AgentSandboxSpec{
-		Image:       "oasm/oasm-worker:latest",
+		Image:       "mithril/mithril-worker:latest",
 		SessionID:   "sess-1",
 		OwnerID:     "owner-abc",
-		ToolsMount:  &mount.Mount{Type: mount.TypeVolume, Source: "open-asm_worker-tools-cache", Target: "/app/oasm-tools", ReadOnly: true},
-		ToolsTarget: "/app/oasm-tools",
+		ToolsMount:  &mount.Mount{Type: mount.TypeVolume, Source: "mithril_worker-tools-cache", Target: "/app/mithril-tools", ReadOnly: true},
+		ToolsTarget: "/app/mithril-tools",
 	}
 }
 
@@ -23,7 +23,7 @@ func sandboxSpec() AgentSandboxSpec {
 func TestBuildAgentSandboxConfig_MinimalEnv(t *testing.T) {
 	cfg, _ := BuildAgentSandboxConfig(sandboxSpec())
 	want := []string{
-		"PATH=/app/oasm-tools:" + agentSandboxBasePath,
+		"PATH=/app/mithril-tools:" + agentSandboxBasePath,
 		"HOME=/workspace",
 	}
 	if !slices.Equal(cfg.Env, want) {
@@ -32,7 +32,7 @@ func TestBuildAgentSandboxConfig_MinimalEnv(t *testing.T) {
 	if !slices.Equal(cfg.Entrypoint, []string{"sleep", "infinity"}) {
 		t.Fatalf("Entrypoint = %v, want [sleep infinity] (the image entrypoint is the worker itself)", cfg.Entrypoint)
 	}
-	if cfg.User != "1000:1000" || cfg.WorkingDir != "/workspace" || cfg.Image != "oasm/oasm-worker:latest" {
+	if cfg.User != "1000:1000" || cfg.WorkingDir != "/workspace" || cfg.Image != "mithril/mithril-worker:latest" {
 		t.Fatalf("User/WorkingDir/Image = %q/%q/%q", cfg.User, cfg.WorkingDir, cfg.Image)
 	}
 }
@@ -40,10 +40,10 @@ func TestBuildAgentSandboxConfig_MinimalEnv(t *testing.T) {
 // The exec must not inherit the image's ENV (the worker image bakes WORKER_*
 // defaults): env -i with only the sandbox env, then the wrapped command.
 func TestAgentSandboxExecCmd(t *testing.T) {
-	got := agentSandboxExecCmd("/app/oasm-tools", "ls -la")
+	got := agentSandboxExecCmd("/app/mithril-tools", "ls -la")
 	want := []string{
 		"env", "-i",
-		"PATH=/app/oasm-tools:" + agentSandboxBasePath,
+		"PATH=/app/mithril-tools:" + agentSandboxBasePath,
 		"HOME=/workspace",
 		"sh", "-c", "(ls -la) 2>&1",
 	}
@@ -55,9 +55,9 @@ func TestAgentSandboxExecCmd(t *testing.T) {
 func TestBuildAgentSandboxConfig_Labels(t *testing.T) {
 	cfg, _ := BuildAgentSandboxConfig(sandboxSpec())
 	want := map[string]string{
-		"oasm.agent_sandbox": "true",
-		"oasm.session_id":    "sess-1",
-		"oasm.worker_id":     "owner-abc",
+		"mithril.agent_sandbox": "true",
+		"mithril.session_id":    "sess-1",
+		"mithril.worker_id":     "owner-abc",
 	}
 	for k, v := range want {
 		if cfg.Labels[k] != v {
@@ -66,15 +66,15 @@ func TestBuildAgentSandboxConfig_Labels(t *testing.T) {
 	}
 	// Not oasm-managed: the connector pool/reconcile must not treat a
 	// sandbox as one of its containers.
-	if _, ok := cfg.Labels["oasm-managed"]; ok {
-		t.Error("sandbox must not carry the oasm-managed label")
+	if _, ok := cfg.Labels["mithril-managed"]; ok {
+		t.Error("sandbox must not carry the mithril-managed label")
 	}
 
 	spec := sandboxSpec()
 	spec.OwnerID = ""
 	cfg, _ = BuildAgentSandboxConfig(spec)
-	if _, ok := cfg.Labels["oasm.worker_id"]; ok {
-		t.Error("empty owner must omit oasm.worker_id")
+	if _, ok := cfg.Labels["mithril.worker_id"]; ok {
+		t.Error("empty owner must omit mithril.worker_id")
 	}
 }
 
@@ -132,8 +132,8 @@ func TestBuildAgentSandboxConfig_OnlyReadOnlyToolsMount(t *testing.T) {
 		t.Fatalf("Mounts = %v, want exactly the tools mount", hc.Mounts)
 	}
 	m := hc.Mounts[0]
-	if !m.ReadOnly || m.Target != "/app/oasm-tools" || m.Source != "open-asm_worker-tools-cache" {
-		t.Fatalf("tools mount = %+v, want read-only volume at /app/oasm-tools", m)
+	if !m.ReadOnly || m.Target != "/app/mithril-tools" || m.Source != "mithril_worker-tools-cache" {
+		t.Fatalf("tools mount = %+v, want read-only volume at /app/mithril-tools", m)
 	}
 
 	spec := sandboxSpec()
@@ -147,13 +147,13 @@ func TestBuildAgentSandboxConfig_OnlyReadOnlyToolsMount(t *testing.T) {
 func selfContainer(image string, mounts ...container.MountPoint) *container.InspectResponse {
 	return &container.InspectResponse{
 		ContainerJSONBase: &container.ContainerJSONBase{Image: image},
-		Config:            &container.Config{Image: "oasm/oasm-worker:latest"},
+		Config:            &container.Config{Image: "mithril/mithril-worker:latest"},
 		Mounts:            mounts,
 	}
 }
 
 func TestResolveSandboxToolsMount(t *testing.T) {
-	const tp = "/app/oasm-tools"
+	const tp = "/app/mithril-tools"
 	cases := []struct {
 		name     string
 		override string
@@ -174,17 +174,17 @@ func TestResolveSandboxToolsMount(t *testing.T) {
 		},
 		{
 			name:     "override windows host path",
-			override: `C:\oasm\tools`, toolPath: tp,
-			want: &mount.Mount{Type: mount.TypeBind, Source: `C:\oasm\tools`},
+			override: `C:\mithril\tools`, toolPath: tp,
+			want: &mount.Mount{Type: mount.TypeBind, Source: `C:\mithril\tools`},
 		},
 		{
 			name:     "containerized: volume at tool path",
 			toolPath: tp,
 			self: selfContainer("sha256:x",
 				container.MountPoint{Type: mount.TypeVolume, Name: "open-asm_worker-state", Source: "/var/lib/docker/volumes/s/_data", Destination: "/app/state"},
-				container.MountPoint{Type: mount.TypeVolume, Name: "open-asm_worker-tools-cache", Source: "/var/lib/docker/volumes/t/_data", Destination: tp},
+				container.MountPoint{Type: mount.TypeVolume, Name: "mithril_worker-tools-cache", Source: "/var/lib/docker/volumes/t/_data", Destination: tp},
 			),
-			want: &mount.Mount{Type: mount.TypeVolume, Source: "open-asm_worker-tools-cache"},
+			want: &mount.Mount{Type: mount.TypeVolume, Source: "mithril_worker-tools-cache"},
 		},
 		{
 			name:     "containerized: bind at tool path",
@@ -207,8 +207,8 @@ func TestResolveSandboxToolsMount(t *testing.T) {
 		},
 		{
 			name:     "host worker: host tool path",
-			toolPath: "/home/u/.oasm/oasm-tools",
-			want:     &mount.Mount{Type: mount.TypeBind, Source: "/home/u/.oasm/oasm-tools"},
+			toolPath: "/home/u/.mithril/mithril-tools",
+			want:     &mount.Mount{Type: mount.TypeBind, Source: "/home/u/.mithril/mithril-tools"},
 		},
 	}
 	for _, tc := range cases {
@@ -232,10 +232,10 @@ func TestResolveSandboxToolsMount(t *testing.T) {
 }
 
 func TestSandboxToolsTarget(t *testing.T) {
-	if got := sandboxToolsTarget("/app/oasm-tools"); got != "/app/oasm-tools" {
+	if got := sandboxToolsTarget("/app/mithril-tools"); got != "/app/mithril-tools" {
 		t.Errorf("POSIX tool path must be kept, got %q", got)
 	}
-	if got := sandboxToolsTarget(`C:\Users\u\.oasm\oasm-tools`); got != agentSandboxToolsFallback {
+	if got := sandboxToolsTarget(`C:\Users\u\.mithril\mithril-tools`); got != agentSandboxToolsFallback {
 		t.Errorf("Windows tool path must map to %s, got %q", agentSandboxToolsFallback, got)
 	}
 }
@@ -247,14 +247,14 @@ func TestResolveSandboxImage(t *testing.T) {
 	if got := resolveSandboxImage("", selfContainer("sha256:self")); got != "sha256:self" {
 		t.Errorf("containerized worker must reuse its own image id, got %q", got)
 	}
-	if got := resolveSandboxImage("", nil); got != "oasm/oasm-worker:latest" {
-		t.Errorf("host worker default = %q, want oasm/oasm-worker:latest", got)
+	if got := resolveSandboxImage("", nil); got != "mithril/mithril-worker:latest" {
+		t.Errorf("host worker default = %q, want mithril/mithril-worker:latest", got)
 	}
 }
 
 func TestAgentSandboxName(t *testing.T) {
 	n := agentSandboxName("3F2A9C1E-0000-4000-8000-ABCDEFABCDEF/../x")
-	if !strings.HasPrefix(n, "oasm-agent-") || len(n) > 128 || strings.ContainsAny(n, "/. ") {
+	if !strings.HasPrefix(n, "mithril-agent-") || len(n) > 128 || strings.ContainsAny(n, "/. ") {
 		t.Fatalf("invalid container name %q", n)
 	}
 }

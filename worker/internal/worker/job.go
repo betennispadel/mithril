@@ -12,16 +12,16 @@ import (
 	"sync"
 	"time"
 
-	connectorpb "oasm-worker/internal/gen/connector"
-	pb "oasm-worker/internal/gen/jobs_registry"
+	connectorpb "mithril-worker/internal/gen/connector"
+	pb "mithril-worker/internal/gen/jobs_registry"
 
 	"github.com/go-rod/rod"
 
-	"oasm-worker/internal/connector"
-	"oasm-worker/internal/dnsresolver"
-	"oasm-worker/internal/execution"
-	"oasm-worker/internal/grpcclient"
-	"oasm-worker/internal/security"
+	"mithril-worker/internal/connector"
+	"mithril-worker/internal/dnsresolver"
+	"mithril-worker/internal/execution"
+	"mithril-worker/internal/grpcclient"
+	"mithril-worker/internal/security"
 )
 
 // bridgeEntry links a Docker execution back to the originating job.
@@ -579,7 +579,7 @@ func processConnectorJob(ctx context.Context, job *pb.Job, grpcClient *grpcclien
 		Inputs: inputsMap,
 		Config: configMap,
 		JobID:  job.Id,
-		// Ownership fingerprint for the oasm.worker_id label — lets the NEXT
+		// Ownership fingerprint for the mithril.worker_id label — lets the NEXT
 		// boot's ReconcileOrphans recognize this worker's own containers.
 		WorkerID:     grpcClient.OwnerID(),
 		DirectEgress: job.GetDirectEgress(),

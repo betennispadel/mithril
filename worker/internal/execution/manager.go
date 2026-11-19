@@ -10,8 +10,8 @@ import (
 	"sync"
 	"time"
 
-	"oasm-worker/internal/resource"
-	"oasm-worker/internal/runtime"
+	"mithril-worker/internal/resource"
+	"mithril-worker/internal/runtime"
 )
 
 // Resource limit keys inside JobSpec.Limits — the scheduling context
@@ -403,7 +403,7 @@ func (m *Manager) Submit(ctx context.Context, spec JobSpec) (string, error) {
 			// Pooled container identity for name + labels (docker runtime).
 			PoolKey: poolKey,
 			// Ownership fingerprint (grpcclient.OwnerID) — forwarded verbatim
-			// so DockerRuntime.Create can stamp oasm.worker_id. Dropping it
+			// so DockerRuntime.Create can stamp mithril.worker_id. Dropping it
 			// here would silently disable the startup orphan reconcile.
 			WorkerID: spec.WorkerID,
 			// Single-use auth: the connector's Register must present this

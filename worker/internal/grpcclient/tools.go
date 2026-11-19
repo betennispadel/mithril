@@ -18,8 +18,8 @@ import (
 	"strings"
 	"time"
 
-	"oasm-worker/internal/filelock"
-	workers "oasm-worker/internal/gen/workers"
+	"mithril-worker/internal/filelock"
+	workers "mithril-worker/internal/gen/workers"
 )
 
 // toolDownloadLockName serializes DownloadTools across workers sharing one

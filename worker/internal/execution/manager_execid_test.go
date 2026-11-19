@@ -5,7 +5,7 @@ import (
 	"sync"
 	"testing"
 
-	"oasm-worker/internal/runtime"
+	"mithril-worker/internal/runtime"
 )
 
 // recordingRuntime wraps FakeRuntime and counts Start calls so the Submit

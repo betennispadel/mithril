@@ -123,8 +123,8 @@ func TestVolumeNameForImage(t *testing.T) {
 	if a != b {
 		t.Fatalf("same image must produce same volume name: %q != %q", a, b)
 	}
-	if !strings.HasPrefix(a, "oasm-") {
-		t.Fatalf("volume name must start with oasm-, got %q", a)
+	if !strings.HasPrefix(a, "mithril-") {
+		t.Fatalf("volume name must start with mithril-, got %q", a)
 	}
 	c := volumeNameForImage("ghcr.io/test/other:2.0")
 	if a == c {
@@ -138,16 +138,16 @@ func TestPersistPathsFromLabels(t *testing.T) {
 		t.Fatalf("nil labels → nil, got %v", paths)
 	}
 	// Empty label → nil.
-	if paths := persistPathsFromLabels(map[string]string{"oasm.persist": " "}); paths != nil {
+	if paths := persistPathsFromLabels(map[string]string{"mithril.persist": " "}); paths != nil {
 		t.Fatalf("blank label → nil, got %v", paths)
 	}
 	// Parse comma-separated absolute paths.
-	paths := persistPathsFromLabels(map[string]string{"oasm.persist": "/data, /cache"})
+	paths := persistPathsFromLabels(map[string]string{"mithril.persist": "/data, /cache"})
 	if len(paths) != 2 || paths[0] != "/data" || paths[1] != "/cache" {
 		t.Fatalf("unexpected paths: %v", paths)
 	}
 	// Relative paths and blanks are ignored.
-	paths = persistPathsFromLabels(map[string]string{"oasm.persist": "/ok, bad, , /also-ok"})
+	paths = persistPathsFromLabels(map[string]string{"mithril.persist": "/ok, bad, , /also-ok"})
 	if len(paths) != 2 || paths[0] != "/ok" || paths[1] != "/also-ok" {
 		t.Fatalf("unexpected filtered paths: %v", paths)
 	}
@@ -155,7 +155,7 @@ func TestPersistPathsFromLabels(t *testing.T) {
 
 func TestCreateMountsLabelDrivenVolume(t *testing.T) {
 	engine := newFakeDockerEngine()
-	engine.imageLabels = map[string]string{"oasm.persist": "/data"}
+	engine.imageLabels = map[string]string{"mithril.persist": "/data"}
 	log := &captureLogger{}
 	r := newFakeDockerRuntime(t, engine, log)
 
@@ -177,7 +177,7 @@ func TestCreateMountsLabelDrivenVolume(t *testing.T) {
 }
 
 func TestCreateNoBindsWithoutPersistLabel(t *testing.T) {
-	engine := newFakeDockerEngine() // no imageLabels → no oasm.persist
+	engine := newFakeDockerEngine() // no imageLabels → no mithril.persist
 	log := &captureLogger{}
 	r := newFakeDockerRuntime(t, engine, log)
 
@@ -189,7 +189,7 @@ func TestCreateNoBindsWithoutPersistLabel(t *testing.T) {
 		t.Fatalf("Create: %v", err)
 	}
 
-	// No oasm.persist label → Binds must be empty.
+	// No mithril.persist label → Binds must be empty.
 	var req struct {
 		HostConfig struct {
 			Binds []string `json:"Binds"`

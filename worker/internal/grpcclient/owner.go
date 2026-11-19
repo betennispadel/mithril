@@ -9,7 +9,7 @@ import (
 // of sha256("tok:"+<join token>), or "" when the worker has no identity yet
 // (first-ever run, pre-join).
 //
-// It is stamped into connector container labels (oasm.worker_id) at Create
+// It is stamped into connector container labels (mithril.worker_id) at Create
 // time so a restarted worker's ReconcileOrphans can distinguish its own
 // orphans from a sibling worker's live containers on a shared engine. The raw
 // token never leaves this process.

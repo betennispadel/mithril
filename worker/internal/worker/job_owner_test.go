@@ -9,14 +9,14 @@ import (
 
 	"google.golang.org/protobuf/types/known/structpb"
 
-	"oasm-worker/internal/connector"
-	"oasm-worker/internal/execution"
-	pb "oasm-worker/internal/gen/jobs_registry"
+	"mithril-worker/internal/connector"
+	"mithril-worker/internal/execution"
+	pb "mithril-worker/internal/gen/jobs_registry"
 )
 
 // The JobSpec that reaches DockerRuntime.Create must carry the worker's
 // ownership fingerprint so every connector container is stamped with
-// oasm.worker_id — the basis of the next boot's orphan reconcile.
+// mithril.worker_id — the basis of the next boot's orphan reconcile.
 func TestProcessConnectorJobStampsOwnerWorkerID(t *testing.T) {
 	bridgeMu.Lock()
 	bridge = make(map[string]*bridgeEntry)

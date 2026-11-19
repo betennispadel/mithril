@@ -8,10 +8,10 @@ import (
 	"testing"
 	"time"
 
-	"oasm-worker/internal/connector"
-	"oasm-worker/internal/execution"
-	connectorpb "oasm-worker/internal/gen/connector"
-	pb "oasm-worker/internal/gen/workers"
+	"mithril-worker/internal/connector"
+	"mithril-worker/internal/execution"
+	connectorpb "mithril-worker/internal/gen/connector"
+	pb "mithril-worker/internal/gen/workers"
 )
 
 type sentEvent struct {
@@ -48,7 +48,7 @@ func TestAgentToolFailsFastWhenPoolExhausted(t *testing.T) {
 	pool := execution.NewPoolManager(0, 1, 0)
 	pool.SetResourceBudget(1000, 1<<30)
 	mgr.SetPool(pool)
-	img := "ghcr.io/oasm-platform/connector-nmap:7.97"
+	img := "ghcr.io/betennispadel/connector-sting:7.97"
 	cpu, mem := "1000m", "512Mi"
 
 	// Occupy the whole node budget.

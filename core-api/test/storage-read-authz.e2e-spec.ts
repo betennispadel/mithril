@@ -67,7 +67,7 @@ describe('Storage presign + public-read matrix (e2e)', () => {
     'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==',
     'base64',
   );
-  const textPayload = 'oasm storage read authz e2e\n';
+  const textPayload = 'mithril storage read authz e2e\n';
 
   async function seedScreenshotChain(
     workspaceId: string,

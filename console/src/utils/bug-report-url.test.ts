@@ -31,7 +31,7 @@ describe('detectBrowser', () => {
 });
 
 describe('buildBugReportUrl', () => {
-  const repo = 'https://github.com/oasm-platform/open-asm';
+  const repo = 'https://github.com/betennispadel/mithril';
 
   it('prefills template, version and browser', () => {
     const url = new URL(

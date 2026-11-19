@@ -6,9 +6,9 @@ import (
 	"testing"
 	"time"
 
-	"oasm-worker/internal/connector"
-	"oasm-worker/internal/execution"
-	pb "oasm-worker/internal/gen/jobs_registry"
+	"mithril-worker/internal/connector"
+	"mithril-worker/internal/execution"
+	pb "mithril-worker/internal/gen/jobs_registry"
 )
 
 // TestProcessConnectorJobPoolWaitIsSilent: when every replica of an image is
@@ -35,14 +35,14 @@ func TestProcessConnectorJobPoolWaitIsSilent(t *testing.T) {
 		return &pb.Job{
 			Id:    "job-pool-wait",
 			Tool:  "nmap",
-			Image: "ghcr.io/oasm-platform/connector-nmap:7.97",
+			Image: "ghcr.io/betennispadel/connector-sting:7.97",
 		}
 	}
 
 	// Occupy the single replica slot with a first execution.
 	occupied, err := mgr.Submit(context.Background(), execution.JobSpec{
 		Tool:  "nmap",
-		Image: "ghcr.io/oasm-platform/connector-nmap:7.97",
+		Image: "ghcr.io/betennispadel/connector-sting:7.97",
 		JobID: "job-occupier",
 	})
 	if err != nil {

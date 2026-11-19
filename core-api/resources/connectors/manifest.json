@@ -5,14 +5,14 @@
       "name": "One Ring",
       "slug": "acunetix",
       "version": "0.1.0",
-      "image": "ghcr.io/betennispadel/connector-acunetix:0.1.0",
+      "image": "ghcr.io/betennispadel/connector-one-ring:0.1.0",
       "author": "oasm",
       "pricingTier": [
         "free"
       ],
       "homepage": "https://www.acunetix.com",
-      "repositoryUrl": "https://github.com/oasm-platform/oasm-connectors",
-      "supportUrl": "https://github.com/oasm-platform/oasm-connectors/issues",
+      "repositoryUrl": "https://github.com/betennispadel/mithril-connectors",
+      "supportUrl": "https://github.com/betennispadel/mithril-connectors/issues",
       "shortDescription": "Acunetix web vulnerability scanner",
       "description": "Connects to an Acunetix instance, runs a scan against a target, and streams the discovered vulnerabilities back to the Worker.",
       "capabilities": [
@@ -93,10 +93,10 @@
             "ui:placeholder": "11111111-1111-1111-1111-111111111111"
           },
           "targetDescription": {
-            "description": "Description stored on the Acunetix target created for this scan. Defaults to oasm-scan.",
+            "description": "Description stored on the Acunetix target created for this scan. Defaults to mithril-scan.",
             "title": "Target description",
             "type": "string",
-            "ui:placeholder": "oasm-scan"
+            "ui:placeholder": "mithril-scan"
           },
           "url": {
             "description": "Base URL of the Acunetix instance (https://host:3443 for on-premises, https://app.invicti.com for Acunetix Online). /api/v1 is appended when absent.",
@@ -126,14 +126,14 @@
       "name": "Niffler",
       "slug": "arjun",
       "version": "2.2.7",
-      "image": "ghcr.io/betennispadel/connector-arjun:2.2.7",
+      "image": "ghcr.io/betennispadel/connector-niffler:2.2.7",
       "author": "oasm",
       "pricingTier": [
         "free"
       ],
       "homepage": "https://github.com/s0md3v/Arjun",
-      "repositoryUrl": "https://github.com/oasm-platform/oasm-connectors",
-      "supportUrl": "https://github.com/oasm-platform/oasm-connectors/issues",
+      "repositoryUrl": "https://github.com/betennispadel/mithril-connectors",
+      "supportUrl": "https://github.com/betennispadel/mithril-connectors/issues",
       "shortDescription": "HTTP parameter discovery",
       "description": "Discovers hidden HTTP parameters for a URL using Arjun, probing a wordlist of parameter names against the target and reporting every parameter the endpoint responds to.",
       "capabilities": [
@@ -305,14 +305,14 @@
       "name": "Time-Turner",
       "slug": "gau",
       "version": "2.2.4",
-      "image": "ghcr.io/betennispadel/connector-gau:2.2.4",
+      "image": "ghcr.io/betennispadel/connector-time-turner:2.2.4",
       "author": "oasm",
       "pricingTier": [
         "free"
       ],
       "homepage": "https://github.com/lc/gau",
-      "repositoryUrl": "https://github.com/oasm-platform/oasm-connectors",
-      "supportUrl": "https://github.com/oasm-platform/oasm-connectors/issues",
+      "repositoryUrl": "https://github.com/betennispadel/mithril-connectors",
+      "supportUrl": "https://github.com/betennispadel/mithril-connectors/issues",
       "shortDescription": "Historical URL discovery via public archives",
       "description": "Discovers historical/archived URLs for a domain using Gau (GetAllUrls) across Wayback Machine, Common Crawl, AlienVault OTX and urlscan.io.",
       "capabilities": [
@@ -448,14 +448,14 @@
       "name": "Zion Archive",
       "slug": "gitleaks",
       "version": "8.30.1",
-      "image": "ghcr.io/betennispadel/connector-gitleaks:8.30.1",
+      "image": "ghcr.io/betennispadel/connector-zion-archive:8.30.1",
       "author": "oasm",
       "pricingTier": [
         "free"
       ],
       "homepage": "https://gitleaks.io",
-      "repositoryUrl": "https://github.com/oasm-platform/oasm-connectors",
-      "supportUrl": "https://github.com/oasm-platform/oasm-connectors/issues",
+      "repositoryUrl": "https://github.com/betennispadel/mithril-connectors",
+      "supportUrl": "https://github.com/betennispadel/mithril-connectors/issues",
       "shortDescription": "Finds secrets committed to Git repositories",
       "description": "Scans the repositories of a Git organization for committed credentials \u2014 API keys, tokens, private keys, passwords \u2014 with Gitleaks rules. Secret values are redacted at the source: findings name the rule, file, line and commit, never the secret itself. Optionally scans recent history, where deleted secrets remain exposed.",
       "capabilities": [
@@ -538,14 +538,14 @@
       "name": "Elder Wand",
       "slug": "katana",
       "version": "1.8.0",
-      "image": "ghcr.io/betennispadel/connector-katana:1.8.0",
+      "image": "ghcr.io/betennispadel/connector-elder-wand:1.8.0",
       "author": "oasm",
       "pricingTier": [
         "free"
       ],
       "homepage": "https://github.com/projectdiscovery/katana",
-      "repositoryUrl": "https://github.com/oasm-platform/oasm-connectors",
-      "supportUrl": "https://github.com/oasm-platform/oasm-connectors/issues",
+      "repositoryUrl": "https://github.com/betennispadel/mithril-connectors",
+      "supportUrl": "https://github.com/betennispadel/mithril-connectors/issues",
       "shortDescription": "Web crawler and endpoint discovery",
       "description": "Crawls a target website with Katana (ProjectDiscovery) up to a configurable depth and streams every discovered HTTP/HTTPS URL as a finding for URL discovery.",
       "capabilities": [
@@ -747,14 +747,14 @@
       "name": "Horcrux",
       "slug": "nessus",
       "version": "0.2.0",
-      "image": "ghcr.io/betennispadel/connector-nessus:0.2.0",
+      "image": "ghcr.io/betennispadel/connector-horcrux:0.2.0",
       "author": "oasm",
       "pricingTier": [
         "free"
       ],
       "homepage": "https://www.tenable.com",
-      "repositoryUrl": "https://github.com/oasm-platform/oasm-connectors",
-      "supportUrl": "https://github.com/oasm-platform/oasm-connectors/issues",
+      "repositoryUrl": "https://github.com/betennispadel/mithril-connectors",
+      "supportUrl": "https://github.com/betennispadel/mithril-connectors/issues",
       "shortDescription": "Tenable Nessus vulnerability scanner",
       "description": "Connects to a Tenable Nessus instance, creates and runs a scan against a target, and streams the discovered vulnerabilities back to the Worker as JSONL findings.",
       "capabilities": [
@@ -860,14 +860,14 @@
       "name": "Dementor",
       "slug": "nikto",
       "version": "2.6.1",
-      "image": "ghcr.io/betennispadel/connector-nikto:2.6.1",
+      "image": "ghcr.io/betennispadel/connector-dementor:2.6.1",
       "author": "oasm",
       "pricingTier": [
         "free"
       ],
       "homepage": "https://cirt.net/Nikto2",
-      "repositoryUrl": "https://github.com/oasm-platform/oasm-connectors",
-      "supportUrl": "https://github.com/oasm-platform/oasm-connectors/issues",
+      "repositoryUrl": "https://github.com/betennispadel/mithril-connectors",
+      "supportUrl": "https://github.com/betennispadel/mithril-connectors/issues",
       "shortDescription": "Signature-based web server and CGI scanner",
       "description": "Scans a web server for 7,000+ known issues: dangerous files and CGIs, outdated server software, missing security headers, and version-specific flaws. Each finding is classified from Nikto's own test database and correlated with CVE references.",
       "capabilities": [
@@ -1037,14 +1037,14 @@
       "name": "Sting",
       "slug": "nmap",
       "version": "7.97",
-      "image": "ghcr.io/betennispadel/connector-nmap:7.99",
+      "image": "ghcr.io/betennispadel/connector-sting:7.99",
       "author": "oasm",
       "pricingTier": [
         "free"
       ],
       "homepage": "https://nmap.org",
-      "repositoryUrl": "https://github.com/oasm-platform/oasm-connectors",
-      "supportUrl": "https://github.com/oasm-platform/oasm-connectors/issues",
+      "repositoryUrl": "https://github.com/betennispadel/mithril-connectors",
+      "supportUrl": "https://github.com/betennispadel/mithril-connectors/issues",
       "shortDescription": "TCP/UDP port scanner and CVE detection",
       "description": "Scans a single host with Nmap (Nmap Security Scanner) and streams every open port as a finding for port scanning: one finding per protocol/port with its Nmap service name, product and version. For vulnerabilities it adds service version detection and the vulners NSE script and streams one finding per CVE matched to a detected service version. Unprivileged TCP connect scan; requires no raw sockets.",
       "capabilities": [
@@ -1171,14 +1171,14 @@
       "name": "Palantir",
       "slug": "nuclei",
       "version": "3.11.1",
-      "image": "ghcr.io/betennispadel/connector-nuclei:3.11.1",
+      "image": "ghcr.io/betennispadel/connector-palantir:3.11.1",
       "author": "oasm",
       "pricingTier": [
         "free"
       ],
       "homepage": "https://projectdiscovery.io",
-      "repositoryUrl": "https://github.com/oasm-platform/oasm-connectors",
-      "supportUrl": "https://github.com/oasm-platform/oasm-connectors/issues",
+      "repositoryUrl": "https://github.com/betennispadel/mithril-connectors",
+      "supportUrl": "https://github.com/betennispadel/mithril-connectors/issues",
       "shortDescription": "Fast template-based vulnerability scanner",
       "description": "Runs ProjectDiscovery Nuclei template-based scans against a target URL to detect known vulnerabilities, misconfigurations, and exposed secrets.",
       "capabilities": [
@@ -1325,14 +1325,14 @@
       "name": "Red Pill",
       "slug": "zap",
       "version": "2.17.0",
-      "image": "ghcr.io/betennispadel/connector-zap:2.17.0",
+      "image": "ghcr.io/betennispadel/connector-red-pill:2.17.0",
       "author": "oasm",
       "pricingTier": [
         "free"
       ],
       "homepage": "https://www.zaproxy.org",
-      "repositoryUrl": "https://github.com/oasm-platform/oasm-connectors",
-      "supportUrl": "https://github.com/oasm-platform/oasm-connectors/issues",
+      "repositoryUrl": "https://github.com/betennispadel/mithril-connectors",
+      "supportUrl": "https://github.com/betennispadel/mithril-connectors/issues",
       "shortDescription": "OWASP ZAP dynamic web application scanner",
       "description": "Runs OWASP ZAP (Zed Attack Proxy) against a target web application using the Automation Framework, then streams the discovered alerts back to the Worker as normalized findings.",
       "capabilities": [
@@ -1447,14 +1447,14 @@
       "name": "Bullet Time",
       "slug": "rustscan",
       "version": "2.4.1",
-      "image": "ghcr.io/betennispadel/connector-rustscan:2.4.1",
+      "image": "ghcr.io/betennispadel/connector-bullet-time:2.4.1",
       "author": "oasm",
       "pricingTier": [
         "free"
       ],
       "homepage": "https://github.com/bee-san/RustScan",
-      "repositoryUrl": "https://github.com/oasm-platform/oasm-connectors",
-      "supportUrl": "https://github.com/oasm-platform/oasm-connectors/issues",
+      "repositoryUrl": "https://github.com/betennispadel/mithril-connectors",
+      "supportUrl": "https://github.com/betennispadel/mithril-connectors/issues",
       "shortDescription": "Fast async TCP/UDP port scanner",
       "description": "Scans a single host with RustScan in greppable mode and streams every open port as a finding for port scanning: one finding per protocol/port. Async TCP connect scan; needs no raw sockets, no privileges and no nmap, so findings carry no service or version \u2014 run the Nmap connector alongside it for service detection.",
       "capabilities": [
@@ -1554,14 +1554,14 @@
       "name": "Morpheus",
       "slug": "trivy",
       "version": "0.76.2",
-      "image": "ghcr.io/betennispadel/connector-trivy:0.76.2",
+      "image": "ghcr.io/betennispadel/connector-morpheus:0.76.2",
       "author": "oasm",
       "pricingTier": [
         "free"
       ],
       "homepage": "https://trivy.dev",
-      "repositoryUrl": "https://github.com/oasm-platform/oasm-connectors",
-      "supportUrl": "https://github.com/oasm-platform/oasm-connectors/issues",
+      "repositoryUrl": "https://github.com/betennispadel/mithril-connectors",
+      "supportUrl": "https://github.com/betennispadel/mithril-connectors/issues",
       "shortDescription": "Finds vulnerable dependencies and IaC misconfigurations in Git repositories",
       "description": "Scans the repositories of a Git organization with Aqua Security Trivy. Reports known vulnerabilities (CVE, GHSA) in the dependencies declared by lockfiles and manifests \u2014 npm, pip, Go, Maven, Cargo, Composer, NuGet, RubyGems and more \u2014 with the installed and fixed versions, and misconfigurations in Dockerfiles, Kubernetes manifests, Helm charts and Terraform. Secret scanning can be turned on in the profile; secret values are never reported.",
       "capabilities": [
@@ -1685,14 +1685,14 @@
       "name": "Agent Smith",
       "slug": "wpscan",
       "version": "4.2.0",
-      "image": "ghcr.io/betennispadel/connector-wpscan:4.2.0",
+      "image": "ghcr.io/betennispadel/connector-agent-smith:4.2.0",
       "author": "oasm",
       "pricingTier": [
         "free"
       ],
       "homepage": "https://wpscan.com",
-      "repositoryUrl": "https://github.com/oasm-platform/oasm-connectors",
-      "supportUrl": "https://github.com/oasm-platform/oasm-connectors/issues",
+      "repositoryUrl": "https://github.com/betennispadel/mithril-connectors",
+      "supportUrl": "https://github.com/betennispadel/mithril-connectors/issues",
       "shortDescription": "WordPress vulnerability scanner",
       "description": "Scans WordPress sites using WPScan to enumerate vulnerable plugins and themes, detect known CVEs, misconfigurations, and weak credentials.",
       "capabilities": [
@@ -1962,14 +1962,14 @@
       "name": "Marauders Map",
       "slug": "dirsearch",
       "version": "0.5.0",
-      "image": "ghcr.io/betennispadel/connector-dirsearch:0.5.0",
+      "image": "ghcr.io/betennispadel/connector-marauders-map:0.5.0",
       "author": "oasm",
       "pricingTier": [
         "free"
       ],
       "homepage": "https://github.com/maurosoria/dirsearch",
-      "repositoryUrl": "https://github.com/oasm-platform/oasm-connectors",
-      "supportUrl": "https://github.com/oasm-platform/oasm-connectors/issues",
+      "repositoryUrl": "https://github.com/betennispadel/mithril-connectors",
+      "supportUrl": "https://github.com/betennispadel/mithril-connectors/issues",
       "shortDescription": "Brute-force web path and file discovery",
       "description": "Discovers hidden files, directories and endpoints on a web target by brute-forcing paths from a wordlist with dirsearch, filtering by status code and file extension.",
       "capabilities": [
@@ -2163,14 +2163,14 @@
       "name": "Alohomora",
       "slug": "ffuf",
       "version": "2.3.0",
-      "image": "ghcr.io/betennispadel/connector-ffuf:2.3.0",
+      "image": "ghcr.io/betennispadel/connector-alohomora:2.3.0",
       "author": "oasm",
       "pricingTier": [
         "free"
       ],
       "homepage": "https://github.com/ffuf/ffuf",
-      "repositoryUrl": "https://github.com/oasm-platform/oasm-connectors",
-      "supportUrl": "https://github.com/oasm-platform/oasm-connectors/issues",
+      "repositoryUrl": "https://github.com/betennispadel/mithril-connectors",
+      "supportUrl": "https://github.com/betennispadel/mithril-connectors/issues",
       "shortDescription": "Directory and file discovery via web fuzzing",
       "description": "Fuzzes a target path base with ffuf wordlists to discover directories, files and endpoints, streaming every match as a finding for URL discovery.",
       "capabilities": [
@@ -2382,14 +2382,14 @@
       "name": "Architect",
       "slug": "semgrep",
       "version": "1.90.0",
-      "image": "connector-semgrep:1.90.0",
+      "image": "connector-architect:1.90.0",
       "author": "custom",
       "pricingTier": [
         "free"
       ],
       "homepage": "https://semgrep.dev",
-      "repositoryUrl": "https://github.com/betennispadel/oasm-connectors",
-      "supportUrl": "https://github.com/betennispadel/oasm-connectors/issues",
+      "repositoryUrl": "https://github.com/betennispadel/mithril-connectors",
+      "supportUrl": "https://github.com/betennispadel/mithril-connectors/issues",
       "shortDescription": "Static code analysis for security vulnerabilities",
       "description": "Runs Semgrep SAST against a Git repository and streams security findings back to the Worker. Detects injection flaws, insecure dependencies, hardcoded secrets and hundreds of other vulnerability classes across 30+ languages using the auto ruleset.",
       "agentTool": true,

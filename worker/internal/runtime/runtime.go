@@ -22,7 +22,7 @@ type JobSpec struct {
 	// random hex ID.
 	ExecID string
 	// PoolKey is the normalized (lowercase) container image the Manager
-	// resolves; the Docker runtime uses it for the oasm.pool_key label and for
+	// resolves; the Docker runtime uses it for the mithril.pool_key label and for
 	// the registry segment of the container name
 	// (oasm-<tool-slug>-<registry-slug>-<rand4>). Empty for direct runtime
 	// users, which fall back to the image.
@@ -38,7 +38,7 @@ type JobSpec struct {
 	ConnectorToken string
 	// WorkerID is the owning worker's identity fingerprint
 	// (grpcclient.OwnerID(): hash of the persisted join token — never the
-	// raw secret). Stamped as the oasm.worker_id container
+	// raw secret). Stamped as the mithril.worker_id container
 	// label so a restarted worker's ReconcileOrphans can tell its own orphans
 	// from a sibling worker's live containers on a shared engine. Empty
 	// (direct runtime users) → label omitted → never tier-2 removable by

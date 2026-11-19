@@ -1,6 +1,6 @@
 package config
 
-import "oasm-worker/internal/sysresources"
+import "mithril-worker/internal/sysresources"
 
 const (
 	// AutoConcurrencyMemoryPerJobBytes is the memory budget assumed for one

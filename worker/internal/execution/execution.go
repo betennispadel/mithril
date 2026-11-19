@@ -3,7 +3,7 @@ package execution
 import (
 	"time"
 
-	"oasm-worker/internal/runtime"
+	"mithril-worker/internal/runtime"
 )
 
 // JobSpec is a single-source alias to runtime.JobSpec (Tool, Image, Version, Inputs, Limits, TraceID).

@@ -4,7 +4,7 @@ import (
 	"strings"
 	"testing"
 
-	"oasm-worker/internal/config"
+	"mithril-worker/internal/config"
 )
 
 // The worker runs in one of two modes: "cli" (interactive TUI, default)

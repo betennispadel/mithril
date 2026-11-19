@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"oasm-worker/internal/runtime"
+	"mithril-worker/internal/runtime"
 )
 
 func TestContainerSnapshotsDeduplicateActivePoolEntries(t *testing.T) {

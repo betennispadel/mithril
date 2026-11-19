@@ -8,7 +8,7 @@ import (
 	"runtime"
 	"strings"
 
-	workers "oasm-worker/internal/gen/workers"
+	workers "mithril-worker/internal/gen/workers"
 )
 
 // mapRunMode converts a string mode to the proto WorkerRunMode enum.

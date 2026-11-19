@@ -11,7 +11,7 @@ import (
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/test/bufconn"
-	workers "oasm-worker/internal/gen/workers"
+	workers "mithril-worker/internal/gen/workers"
 )
 
 // streamTestService is the WorkersService fake plus a controllable Connect, the

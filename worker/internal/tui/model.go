@@ -2,8 +2,8 @@ package tui
 
 import (
 	"fmt"
-	"oasm-worker/internal/config"
-	"oasm-worker/internal/worker"
+	"mithril-worker/internal/config"
+	"mithril-worker/internal/worker"
 	"strings"
 	"time"
 

@@ -6,10 +6,10 @@ import (
 	"testing"
 	"time"
 
-	"oasm-worker/internal/connector"
-	"oasm-worker/internal/execution"
-	connectorpb "oasm-worker/internal/gen/connector"
-	"oasm-worker/internal/runtime"
+	"mithril-worker/internal/connector"
+	"mithril-worker/internal/execution"
+	connectorpb "mithril-worker/internal/gen/connector"
+	"mithril-worker/internal/runtime"
 )
 
 // recordedCtx snapshots a context's state at the moment the runtime received

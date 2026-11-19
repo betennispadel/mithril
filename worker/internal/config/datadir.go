@@ -9,7 +9,7 @@ import (
 // cache, agent session workspaces and the persisted join token.
 const dataDirName = ".mithril"
 
-// DataDir returns <user home>/.oasm on every OS (%USERPROFILE% on Windows,
+// DataDir returns <user home>/.mithril on every OS (%USERPROFILE% on Windows,
 // $HOME on Linux/macOS). Defaults must not depend on the working directory: an
 // elevated PowerShell starts in C:\Windows\System32, where the worker cannot
 // write. Falls back to the working directory only when no home is resolvable.

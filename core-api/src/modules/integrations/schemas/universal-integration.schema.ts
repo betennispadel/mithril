@@ -25,7 +25,7 @@ import { webhookSchema } from './webhook.schema';
  */
 export const universalIntegrationSchema = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
-  $id: 'https://oasm.io/schemas/integration-config.json',
+  $id: 'https://mithril.dev/schemas/integration-config.json',
   title: 'Integration Configuration',
   description:
     'Discriminated union of all supported integration configurations.',

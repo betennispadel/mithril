@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 	"log"
-	"oasm-worker/internal/cli"
+	"mithril-worker/internal/cli"
 )
 
 func main() {

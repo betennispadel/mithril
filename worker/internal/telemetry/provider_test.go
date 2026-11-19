@@ -6,9 +6,9 @@ import (
 	"testing"
 	"time"
 
-	"oasm-worker/internal/execution"
-	workers "oasm-worker/internal/gen/workers"
-	"oasm-worker/internal/runtime"
+	"mithril-worker/internal/execution"
+	workers "mithril-worker/internal/gen/workers"
+	"mithril-worker/internal/runtime"
 )
 
 type fakeManager struct {
@@ -37,7 +37,7 @@ func TestSnapshotMapsNodeAndManagedContainerState(t *testing.T) {
 	manager := &fakeManager{
 		descriptors: []execution.ContainerDescriptor{
 			{
-				Handle:         runtime.Handle{ID: "active", Name: "oasm-nmap", CreatedAt: now},
+				Handle:         runtime.Handle{ID: "active", Name: "mithril-nmap", CreatedAt: now},
 				Image:          "example/nmap:latest",
 				ImageVersion:   "1.0.0",
 				Tool:           "nmap",
@@ -53,7 +53,7 @@ func TestSnapshotMapsNodeAndManagedContainerState(t *testing.T) {
 				LastUsedAt:     now,
 			},
 			{
-				Handle:     runtime.Handle{ID: "idle", Name: "oasm-naabu", CreatedAt: now},
+				Handle:     runtime.Handle{ID: "idle", Name: "mithril-naabu", CreatedAt: now},
 				Image:      "example/naabu:latest",
 				Tool:       "naabu",
 				Pooled:     true,

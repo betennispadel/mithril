@@ -28,7 +28,7 @@ const (
 	agentSandboxSessionLabel = "mithril.session_id"
 	agentSandboxOwnerLabel   = "mithril.worker_id"
 
-	agentSandboxDefaultImage = "oasm/oasm-worker:latest"
+	agentSandboxDefaultImage = "mithril/mithril-worker:latest"
 	agentSandboxWorkdir      = "/workspace"
 	agentSandboxUser         = "1000:1000"
 	// agentSandboxToolsFallback is where tools are mounted when the worker's
@@ -48,7 +48,7 @@ var ErrSandboxSessionClosed = errors.New("agent sandbox session closed")
 // AgentSandboxOptions configures NewAgentSandbox.
 type AgentSandboxOptions struct {
 	// Image overrides the sandbox image. Empty = the worker's own container
-	// image when containerized, else oasm/oasm-worker:latest.
+	// image when containerized, else mithril/mithril-worker:latest.
 	Image string
 	// ToolPath is the worker's absolute tool directory.
 	ToolPath string
@@ -56,7 +56,7 @@ type AgentSandboxOptions struct {
 	// an absolute host path. Empty = auto-detect.
 	ToolsSource string
 	// OwnerID returns the worker ownership fingerprint stamped as
-	// oasm.worker_id (grpcclient.OwnerID). Evaluated per create: the first-ever
+	// mithril.worker_id (grpcclient.OwnerID). Evaluated per create: the first-ever
 	// run only has an identity after Join.
 	OwnerID func() string
 }

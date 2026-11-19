@@ -10,7 +10,7 @@ import (
 	"testing"
 	"time"
 
-	"oasm-worker/internal/runtime"
+	"mithril-worker/internal/runtime"
 )
 
 // blockingCreateRuntime holds every Create inside the check-then-create window

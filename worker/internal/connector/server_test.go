@@ -12,7 +12,7 @@ import (
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/status"
 
-	pb "oasm-worker/internal/gen/connector"
+	pb "mithril-worker/internal/gen/connector"
 )
 
 // startTestServer creates a server on a random port with the given token and

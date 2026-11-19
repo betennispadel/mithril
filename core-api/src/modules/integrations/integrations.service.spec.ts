@@ -275,7 +275,7 @@ describe('IntegrationsService', () => {
     const workloadIdentityConfig = {
       connectionMethod: 'workloadIdentity',
       region: 'us-east-1',
-      roleArn: 'arn:aws:iam::123456789012:role/oasm',
+      roleArn: 'arn:aws:iam::123456789012:role/mithril',
       webIdentityToken: 'oidc-token',
     };
     const awsCreateArgs = {

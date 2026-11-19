@@ -7,7 +7,7 @@ import (
 	"testing"
 	"time"
 
-	"oasm-worker/internal/runtime"
+	"mithril-worker/internal/runtime"
 )
 
 // stubOrphanReconciler records how the startup wiring called the runtime.

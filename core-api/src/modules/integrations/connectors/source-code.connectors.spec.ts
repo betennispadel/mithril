@@ -226,7 +226,7 @@ describe('source-code connectors', () => {
       await connector.createTicket({
         ...config,
         ticketRepository: 'acme/platform/web',
-        ticketLabels: ['security', 'oasm'],
+        ticketLabels: ['security', 'mithril'],
         text: 'first line\nsecond line',
       });
 
@@ -237,7 +237,7 @@ describe('source-code connectors', () => {
       expect(JSON.parse(init.body as string)).toEqual({
         title: 'first line',
         description: 'first line\nsecond line',
-        labels: 'security,oasm',
+        labels: 'security,mithril',
       });
     });
   });

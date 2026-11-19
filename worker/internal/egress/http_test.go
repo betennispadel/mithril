@@ -43,7 +43,7 @@ func backendURL(t *testing.T, srv *httptest.Server) string {
 }
 
 func basicFor(token string) string {
-	return "Basic " + base64.StdEncoding.EncodeToString([]byte("oasm:"+token))
+	return "Basic " + base64.StdEncoding.EncodeToString([]byte("mithril:"+token))
 }
 
 // startEgress starts a test server on 127.0.0.1 with the given auth. The
@@ -86,7 +86,7 @@ func TestHTTPForwardValidToken(t *testing.T) {
 		gotLog += fmt.Sprintf(format, args...) + "\n"
 	}))
 
-	proxyURL, _ := url.Parse("http://oasm:tok-http-1@" + srv.Addr().String())
+	proxyURL, _ := url.Parse("http://mithril:tok-http-1@" + srv.Addr().String())
 	client := &http.Client{Transport: &http.Transport{Proxy: http.ProxyURL(proxyURL)}}
 	resp, err := client.Get(backendURL(t, backend) + "/path")
 	if err != nil {
@@ -118,7 +118,7 @@ func TestHTTPForwardLogsBytes(t *testing.T) {
 		defer mu.Unlock()
 		gotLog += fmt.Sprintf(format, args...) + "\n"
 	}))
-	proxyURL, _ := url.Parse("http://oasm:tok-bytes@" + srv.Addr().String())
+	proxyURL, _ := url.Parse("http://mithril:tok-bytes@" + srv.Addr().String())
 	client := &http.Client{Transport: &http.Transport{Proxy: http.ProxyURL(proxyURL)}}
 	resp, err := client.Get(backendURL(t, backend) + "/")
 	if err != nil {

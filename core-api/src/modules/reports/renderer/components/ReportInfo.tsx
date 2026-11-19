@@ -48,13 +48,13 @@ export const ReportInfo: React.FC = () => (
       <Text>
         <Text style={styles.linkLabel}>LinkedIn </Text>
         <Text style={styles.linkValue}>
-          https://www.linkedin.com/company/oasm-platform
+          https://www.linkedin.com/company/mithril-platform
         </Text>
       </Text>
       <Text>
         <Text style={styles.linkLabel}>Github </Text>
         <Text style={styles.linkValue}>
-          https://github.com/oasm-platform
+          https://github.com/betennispadel
         </Text>
       </Text>
     </View>

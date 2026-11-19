@@ -4,7 +4,7 @@ import (
 	"context"
 	"io"
 
-	workers "oasm-worker/internal/gen/workers"
+	workers "mithril-worker/internal/gen/workers"
 )
 
 // Alive opens the server-streaming Alive channel and consumes heartbeats until

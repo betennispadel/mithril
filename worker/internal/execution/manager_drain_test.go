@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"oasm-worker/internal/runtime"
+	"mithril-worker/internal/runtime"
 )
 
 // W2 shutdown drain: workerCancel() only stops the SweepLoop, which would

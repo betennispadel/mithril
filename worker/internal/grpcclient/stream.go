@@ -6,8 +6,8 @@ import (
 	"runtime"
 	"time"
 
-	"oasm-worker/internal/buildinfo"
-	workers "oasm-worker/internal/gen/workers"
+	"mithril-worker/internal/buildinfo"
+	workers "mithril-worker/internal/gen/workers"
 )
 
 // StreamCancelFunc is invoked when core-api asks the worker to stop a job.

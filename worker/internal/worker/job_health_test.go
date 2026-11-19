@@ -7,10 +7,10 @@ import (
 	"testing"
 	"time"
 
-	"oasm-worker/internal/connector"
-	"oasm-worker/internal/execution"
-	pb "oasm-worker/internal/gen/jobs_registry"
-	"oasm-worker/internal/runtime"
+	"mithril-worker/internal/connector"
+	"mithril-worker/internal/execution"
+	pb "mithril-worker/internal/gen/jobs_registry"
+	"mithril-worker/internal/runtime"
 )
 
 func resetWorkerGlobals() {
@@ -234,7 +234,7 @@ func TestHandleConnectorResultConnectorErrorDoesNotBackOffImage(t *testing.T) {
 	events := make(chan TuiEvent, 64)
 	proxy := connector.NewProxy()
 
-	image := "ghcr.io/oasm-platform/connector-wpscan:3.8.25"
+	image := "ghcr.io/betennispadel/connector-agent-smith:3.8.25"
 	backoff := execution.NewImageBackoff()
 	oldBackoff := swapImageBackoff(backoff)
 	defer func() { imageBackoff = oldBackoff }()

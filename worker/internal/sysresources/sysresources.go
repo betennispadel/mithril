@@ -9,7 +9,7 @@ import (
 	"strconv"
 	"strings"
 
-	"oasm-worker/internal/hostmetrics"
+	"mithril-worker/internal/hostmetrics"
 )
 
 // Detect returns the CPU count and memory (bytes) available to this process.

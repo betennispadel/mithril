@@ -6,7 +6,7 @@ import (
 
 	"github.com/docker/docker/api/types/container"
 
-	"oasm-worker/internal/security"
+	"mithril-worker/internal/security"
 )
 
 // W4: security.DefaultIsolation must reach the Docker HostConfig. The Create

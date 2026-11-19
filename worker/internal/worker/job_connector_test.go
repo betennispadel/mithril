@@ -7,12 +7,12 @@ import (
 	"testing"
 	"time"
 
-	"oasm-worker/internal/connector"
-	"oasm-worker/internal/execution"
-	connectorpb "oasm-worker/internal/gen/connector"
-	pb "oasm-worker/internal/gen/jobs_registry"
-	"oasm-worker/internal/runtime"
-	"oasm-worker/internal/security"
+	"mithril-worker/internal/connector"
+	"mithril-worker/internal/execution"
+	connectorpb "mithril-worker/internal/gen/connector"
+	pb "mithril-worker/internal/gen/jobs_registry"
+	"mithril-worker/internal/runtime"
+	"mithril-worker/internal/security"
 )
 
 // TestHandleConnectorResultAggregatesVulnerabilityChunks: N result chunks
@@ -534,12 +534,12 @@ func TestHandleConnectorResultFailureCarriesContainerLogs(t *testing.T) {
 	mgr := execution.NewManager(fakeRT, 0)
 
 	// Logs is keyed on a Manager execution, so the exec must exist in Manager.
-	execID, err := mgr.Submit(context.Background(), execution.JobSpec{Tool: "nmap", Image: "ghcr.io/oasm-platform/connector-nmap:7.97"})
+	execID, err := mgr.Submit(context.Background(), execution.JobSpec{Tool: "nmap", Image: "ghcr.io/betennispadel/connector-sting:7.97"})
 	if err != nil {
 		t.Fatalf("mgr.Submit: %v", err)
 	}
 	bridgeMu.Lock()
-	bridge[execID] = &bridgeEntry{jobID: "job-log", category: "ports_scanner", release: func() {}, image: "ghcr.io/oasm-platform/connector-nmap:7.97"}
+	bridge[execID] = &bridgeEntry{jobID: "job-log", category: "ports_scanner", release: func() {}, image: "ghcr.io/betennispadel/connector-sting:7.97"}
 	bridgeMu.Unlock()
 	resultCh := make(chan connector.ResultMsg, 4)
 	proxy.Register(execID, resultCh)

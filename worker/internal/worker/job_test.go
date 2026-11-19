@@ -16,13 +16,13 @@ import (
 	"google.golang.org/grpc/test/bufconn"
 	"google.golang.org/protobuf/types/known/structpb"
 
-	"oasm-worker/internal/connector"
-	"oasm-worker/internal/execution"
-	connectorpb "oasm-worker/internal/gen/connector"
-	pb "oasm-worker/internal/gen/jobs_registry"
-	workerspb "oasm-worker/internal/gen/workers"
-	"oasm-worker/internal/grpcclient"
-	"oasm-worker/internal/runtime"
+	"mithril-worker/internal/connector"
+	"mithril-worker/internal/execution"
+	connectorpb "mithril-worker/internal/gen/connector"
+	pb "mithril-worker/internal/gen/jobs_registry"
+	workerspb "mithril-worker/internal/gen/workers"
+	"mithril-worker/internal/grpcclient"
+	"mithril-worker/internal/runtime"
 )
 
 // captureStream is an in-memory connector bidi stream used to capture the
@@ -541,7 +541,7 @@ func TestProcessJobConnectorWithoutRuntime(t *testing.T) {
 	events := make(chan TuiEvent, 64)
 
 	jobsSrv.nextFn = func() (*pb.Job, error) {
-		return &pb.Job{Id: "job-nort-1", Image: "ghcr.io/oasm-platform/connector-nuclei:3.11.1"}, nil
+		return &pb.Job{Id: "job-nort-1", Image: "ghcr.io/betennispadel/connector-palantir:3.11.1"}, nil
 	}
 
 	hadJob, usedAsync := processJob(context.Background(), pullJob(t, client), client, nil, "", events, nil, nil, nil)
@@ -645,7 +645,7 @@ func TestProcessJobOpensSealedSecrets(t *testing.T) {
 	if err != nil {
 		t.Fatalf("worker public key: %v", err)
 	}
-	enc, sender, err := hpke.NewSender(pub, hpke.HKDFSHA256(), hpke.AES256GCM(), []byte("oasm job secrets v1"))
+	enc, sender, err := hpke.NewSender(pub, hpke.HKDFSHA256(), hpke.AES256GCM(), []byte("mithril job secrets v1"))
 	if err != nil {
 		t.Fatal(err)
 	}

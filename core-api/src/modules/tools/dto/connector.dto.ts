@@ -15,7 +15,7 @@ export class ConnectorCategoryDto extends ToolCategorySpec {
 /**
  * Connector metadata exposed by GET /tools/connectors/:slug. Mirrors the
  * connector manifest entry; description/author/pricingTier fields are optional
- * because not every oasm-connectors manifest provides them.
+ * because not every mithril-connectors manifest provides them.
  */
 export class ConnectorDto {
   @ApiProperty()

@@ -4,9 +4,9 @@ import (
 	"context"
 	"time"
 
-	"oasm-worker/internal/config"
-	"oasm-worker/internal/grpcclient"
-	"oasm-worker/internal/runtime"
+	"mithril-worker/internal/config"
+	"mithril-worker/internal/grpcclient"
+	"mithril-worker/internal/runtime"
 )
 
 // initAgentSandbox builds the agent command sandbox on the Docker runtime and

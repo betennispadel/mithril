@@ -18,7 +18,7 @@ describe('IntegrationConfigReader', () => {
   const integration = {
     id: 'int-1',
     workspaceId: 'ws-1',
-    config: { apiToken: 'cipher', team: 'oasm' },
+    config: { apiToken: 'cipher', team: 'mithril' },
   } as unknown as Integration;
   let repo: { findOne: jest.Mock };
   let encryption: { getDEK: jest.Mock };
@@ -42,7 +42,7 @@ describe('IntegrationConfigReader', () => {
     expect(encryption.getDEK).toHaveBeenCalledWith('ws-1');
     expect(result).toEqual({
       integration,
-      decryptedConfig: { apiToken: 'plain(cipher)', team: 'oasm', dek: 'dek' },
+      decryptedConfig: { apiToken: 'plain(cipher)', team: 'mithril', dek: 'dek' },
     });
   });
 
