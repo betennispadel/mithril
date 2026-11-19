@@ -116,12 +116,37 @@ export default function ToolDetail() {
   // Local state to track installation status
   const [isInstalled, setIsInstalled] = useState(false);
 
+
+// Fantasy display names → actual manifest slugs for connector metadata fetch.
+// The DB INSERT trigger renames slug-based names to these fantasy names;
+// the metadata endpoint (/api/tools/connectors/:slug) still uses the original slug.
+const FANTASY_NAME_TO_SLUG: Record<string, string> = {
+  'One Ring': 'acunetix',
+  'Niffler': 'arjun',
+  'Time-Turner': 'gau',
+  'Zion Archive': 'gitleaks',
+  'Elder Wand': 'katana',
+  'Horcrux': 'nessus',
+  'Dementor': 'nikto',
+  'Sting': 'nmap',
+  'Palantir': 'nuclei',
+  'Red Pill': 'zap',
+  'Bullet Time': 'rustscan',
+  'Morpheus': 'trivy',
+  'Agent Smith': 'wpscan',
+  'Marauders Map': 'dirsearch',
+  'Alohomora': 'ffuf',
+  'Architect': 'semgrep',
+};
+
   // Connector manifest metadata (Overview tab). Backend stores connector
   // tools with name = slug (syncConnectorsFromManifest sets name = slug;
   // tool-config-profiles.service: "Tool.name IS the connector slug").
+  // Fantasy names (e.g. "Sting") are mapped back to their manifest slug ("nmap")
+  // because the metadata endpoint uses the original slug.
   const toolSlug =
     toolResponse?.type === ToolsControllerGetManyToolsType.connector
-      ? toolResponse.name
+      ? (FANTASY_NAME_TO_SLUG[toolResponse.name] ?? toolResponse.name)
       : undefined;
   const { data: connectorMeta, isLoading: connectorMetaLoading } =
     useToolsControllerGetConnectorBySlug(toolSlug ?? '', {
