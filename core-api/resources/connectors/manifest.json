@@ -5,7 +5,7 @@
       "name": "One Ring",
       "slug": "acunetix",
       "version": "0.1.0",
-      "image": "ghcr.io/oasm-platform/connector-acunetix:0.1.0",
+      "image": "ghcr.io/betennispadel/connector-acunetix:0.1.0",
       "author": "oasm",
       "pricingTier": [
         "free"
@@ -126,7 +126,7 @@
       "name": "Niffler",
       "slug": "arjun",
       "version": "2.2.7",
-      "image": "ghcr.io/oasm-platform/connector-arjun:2.2.7",
+      "image": "ghcr.io/betennispadel/connector-arjun:2.2.7",
       "author": "oasm",
       "pricingTier": [
         "free"
@@ -305,7 +305,7 @@
       "name": "Time-Turner",
       "slug": "gau",
       "version": "2.2.4",
-      "image": "ghcr.io/oasm-platform/connector-gau:2.2.4",
+      "image": "ghcr.io/betennispadel/connector-gau:2.2.4",
       "author": "oasm",
       "pricingTier": [
         "free"
@@ -448,7 +448,7 @@
       "name": "Zion Archive",
       "slug": "gitleaks",
       "version": "8.30.1",
-      "image": "ghcr.io/oasm-platform/connector-gitleaks:8.30.1",
+      "image": "ghcr.io/betennispadel/connector-gitleaks:8.30.1",
       "author": "oasm",
       "pricingTier": [
         "free"
@@ -538,7 +538,7 @@
       "name": "Elder Wand",
       "slug": "katana",
       "version": "1.8.0",
-      "image": "ghcr.io/oasm-platform/connector-katana:1.8.0",
+      "image": "ghcr.io/betennispadel/connector-katana:1.8.0",
       "author": "oasm",
       "pricingTier": [
         "free"
@@ -747,7 +747,7 @@
       "name": "Horcrux",
       "slug": "nessus",
       "version": "0.2.0",
-      "image": "ghcr.io/oasm-platform/connector-nessus:0.2.0",
+      "image": "ghcr.io/betennispadel/connector-nessus:0.2.0",
       "author": "oasm",
       "pricingTier": [
         "free"
@@ -860,7 +860,7 @@
       "name": "Dementor",
       "slug": "nikto",
       "version": "2.6.1",
-      "image": "ghcr.io/oasm-platform/connector-nikto:2.6.1",
+      "image": "ghcr.io/betennispadel/connector-nikto:2.6.1",
       "author": "oasm",
       "pricingTier": [
         "free"
@@ -1037,7 +1037,7 @@
       "name": "Sting",
       "slug": "nmap",
       "version": "7.97",
-      "image": "ghcr.io/oasm-platform/connector-nmap:7.97",
+      "image": "ghcr.io/betennispadel/connector-nmap:7.99",
       "author": "oasm",
       "pricingTier": [
         "free"
@@ -1171,7 +1171,7 @@
       "name": "Palantir",
       "slug": "nuclei",
       "version": "3.11.1",
-      "image": "ghcr.io/oasm-platform/connector-nuclei:3.11.1",
+      "image": "ghcr.io/betennispadel/connector-nuclei:3.11.1",
       "author": "oasm",
       "pricingTier": [
         "free"
@@ -1325,7 +1325,7 @@
       "name": "Red Pill",
       "slug": "zap",
       "version": "2.17.0",
-      "image": "ghcr.io/oasm-platform/connector-zap:2.17.0",
+      "image": "ghcr.io/betennispadel/connector-zap:2.17.0",
       "author": "oasm",
       "pricingTier": [
         "free"
@@ -1447,7 +1447,7 @@
       "name": "Bullet Time",
       "slug": "rustscan",
       "version": "2.4.1",
-      "image": "ghcr.io/oasm-platform/connector-rustscan:2.4.1",
+      "image": "ghcr.io/betennispadel/connector-rustscan:2.4.1",
       "author": "oasm",
       "pricingTier": [
         "free"
@@ -1554,7 +1554,7 @@
       "name": "Morpheus",
       "slug": "trivy",
       "version": "0.76.2",
-      "image": "ghcr.io/oasm-platform/connector-trivy:0.76.2",
+      "image": "ghcr.io/betennispadel/connector-trivy:0.76.2",
       "author": "oasm",
       "pricingTier": [
         "free"
@@ -1685,7 +1685,7 @@
       "name": "Agent Smith",
       "slug": "wpscan",
       "version": "4.2.0",
-      "image": "ghcr.io/oasm-platform/connector-wpscan:4.2.0",
+      "image": "ghcr.io/betennispadel/connector-wpscan:4.2.0",
       "author": "oasm",
       "pricingTier": [
         "free"
@@ -1962,7 +1962,7 @@
       "name": "Marauders Map",
       "slug": "dirsearch",
       "version": "0.5.0",
-      "image": "ghcr.io/oasm-platform/connector-dirsearch:0.5.0",
+      "image": "ghcr.io/betennispadel/connector-dirsearch:0.5.0",
       "author": "oasm",
       "pricingTier": [
         "free"
@@ -2163,7 +2163,7 @@
       "name": "Alohomora",
       "slug": "ffuf",
       "version": "2.3.0",
-      "image": "ghcr.io/oasm-platform/connector-ffuf:2.3.0",
+      "image": "ghcr.io/betennispadel/connector-ffuf:2.3.0",
       "author": "oasm",
       "pricingTier": [
         "free"
