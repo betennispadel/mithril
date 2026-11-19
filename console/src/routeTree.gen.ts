@@ -49,6 +49,14 @@ import { Route as AuthedTargetsStartDiscoveryRouteImport } from './routes/_authe
 import { Route as AuthedToolsIndexRouteImport } from './routes/_authed/tools/index'
 import { Route as AuthedToolsIdRouteImport } from './routes/_authed/tools/$id'
 import { Route as AuthedVulnerabilitiesIndexRouteImport } from './routes/_authed/vulnerabilities/index'
+import { Route as AuthedCtiBrandProtectionIndexRouteImport } from './routes/_authed/cti-brand-protection/index'
+import { Route as AuthedCtiCryptoIndexRouteImport } from './routes/_authed/cti-crypto/index'
+import { Route as AuthedCtiDarkwebIndexRouteImport } from './routes/_authed/cti-darkweb/index'
+import { Route as AuthedCtiDataLeaksIndexRouteImport } from './routes/_authed/cti-data-leaks/index'
+import { Route as AuthedCtiIocFeedIndexRouteImport } from './routes/_authed/cti-ioc-feed/index'
+import { Route as AuthedCtiSocialMonitorIndexRouteImport } from './routes/_authed/cti-social-monitor/index'
+import { Route as AuthedCtiSupplierRiskIndexRouteImport } from './routes/_authed/cti-supplier-risk/index'
+
 import { Route as AuthedVulnerabilitiesIdRouteImport } from './routes/_authed/vulnerabilities/$id'
 import { Route as AuthedWorkersIndexRouteImport } from './routes/_authed/workers/index'
 import { Route as AuthedWorkersIdRouteImport } from './routes/_authed/workers/$id'
@@ -273,6 +281,49 @@ const AuthedToolsIdRoute = AuthedToolsIdRouteImport.update({
   path: '/tools/$id',
   getParentRoute: () => AuthedRoute,
 } as any)
+
+const AuthedCtiBrandProtectionIndexRoute = AuthedCtiBrandProtectionIndexRouteImport.update({
+  id: '/cti-brand-protection/',
+  path: '/cti-brand-protection/',
+  getParentRoute: () => AuthedRoute,
+})
+
+const AuthedCtiCryptoIndexRoute = AuthedCtiCryptoIndexRouteImport.update({
+  id: '/cti-crypto/',
+  path: '/cti-crypto/',
+  getParentRoute: () => AuthedRoute,
+})
+
+const AuthedCtiDarkwebIndexRoute = AuthedCtiDarkwebIndexRouteImport.update({
+  id: '/cti-darkweb/',
+  path: '/cti-darkweb/',
+  getParentRoute: () => AuthedRoute,
+})
+
+const AuthedCtiDataLeaksIndexRoute = AuthedCtiDataLeaksIndexRouteImport.update({
+  id: '/cti-data-leaks/',
+  path: '/cti-data-leaks/',
+  getParentRoute: () => AuthedRoute,
+})
+
+const AuthedCtiIocFeedIndexRoute = AuthedCtiIocFeedIndexRouteImport.update({
+  id: '/cti-ioc-feed/',
+  path: '/cti-ioc-feed/',
+  getParentRoute: () => AuthedRoute,
+})
+
+const AuthedCtiSocialMonitorIndexRoute = AuthedCtiSocialMonitorIndexRouteImport.update({
+  id: '/cti-social-monitor/',
+  path: '/cti-social-monitor/',
+  getParentRoute: () => AuthedRoute,
+})
+
+const AuthedCtiSupplierRiskIndexRoute = AuthedCtiSupplierRiskIndexRouteImport.update({
+  id: '/cti-supplier-risk/',
+  path: '/cti-supplier-risk/',
+  getParentRoute: () => AuthedRoute,
+})
+
 const AuthedVulnerabilitiesIndexRoute =
   AuthedVulnerabilitiesIndexRouteImport.update({
     id: '/vulnerabilities/',
@@ -449,6 +500,13 @@ export interface FileRoutesByFullPath {
   '/providers/': typeof AuthedProvidersIndexRoute
   '/targets/': typeof AuthedTargetsIndexRoute
   '/tools/': typeof AuthedToolsIndexRoute
+  '/cti-brand-protection/': typeof AuthedCtiBrandProtectionIndexRoute
+  '/cti-crypto/': typeof AuthedCtiCryptoIndexRoute
+  '/cti-darkweb/': typeof AuthedCtiDarkwebIndexRoute
+  '/cti-data-leaks/': typeof AuthedCtiDataLeaksIndexRoute
+  '/cti-ioc-feed/': typeof AuthedCtiIocFeedIndexRoute
+  '/cti-social-monitor/': typeof AuthedCtiSocialMonitorIndexRoute
+  '/cti-supplier-risk/': typeof AuthedCtiSupplierRiskIndexRoute
   '/vulnerabilities/': typeof AuthedVulnerabilitiesIndexRoute
   '/workers/': typeof AuthedWorkersIndexRoute
   '/workspaces/': typeof AuthedWorkspacesIndexRoute
@@ -579,6 +637,13 @@ export interface FileRoutesById {
   '/_authed/providers/': typeof AuthedProvidersIndexRoute
   '/_authed/targets/': typeof AuthedTargetsIndexRoute
   '/_authed/tools/': typeof AuthedToolsIndexRoute
+  '/_authed/cti-brand-protection/': typeof AuthedCtiBrandProtectionIndexRoute
+  '/_authed/cti-crypto/': typeof AuthedCtiCryptoIndexRoute
+  '/_authed/cti-darkweb/': typeof AuthedCtiDarkwebIndexRoute
+  '/_authed/cti-data-leaks/': typeof AuthedCtiDataLeaksIndexRoute
+  '/_authed/cti-ioc-feed/': typeof AuthedCtiIocFeedIndexRoute
+  '/_authed/cti-social-monitor/': typeof AuthedCtiSocialMonitorIndexRoute
+  '/_authed/cti-supplier-risk/': typeof AuthedCtiSupplierRiskIndexRoute
   '/_authed/vulnerabilities/': typeof AuthedVulnerabilitiesIndexRoute
   '/_authed/workers/': typeof AuthedWorkersIndexRoute
   '/_authed/workspaces/': typeof AuthedWorkspacesIndexRoute
@@ -646,6 +711,13 @@ export interface FileRouteTypes {
     | '/providers/'
     | '/targets/'
     | '/tools/'
+    | '/cti-brand-protection/'
+    | '/cti-crypto/'
+    | '/cti-darkweb/'
+    | '/cti-data-leaks/'
+    | '/cti-ioc-feed/'
+    | '/cti-social-monitor/'
+    | '/cti-supplier-risk/'
     | '/vulnerabilities/'
     | '/workers/'
     | '/workspaces/'
@@ -1083,6 +1155,55 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthedToolsIdRouteImport
       parentRoute: typeof AuthedRoute
     }
+    '/_authed/cti-brand-protection/': {
+      id: '/_authed/cti-brand-protection/'
+      path: '/cti-brand-protection'
+      fullPath: '/cti-brand-protection/'
+      preLoaderRoute: typeof AuthedCtiBrandProtectionIndexRouteImport
+      parentRoute: typeof AuthedRoute
+    }
+    '/_authed/cti-crypto/': {
+      id: '/_authed/cti-crypto/'
+      path: '/cti-crypto'
+      fullPath: '/cti-crypto/'
+      preLoaderRoute: typeof AuthedCtiCryptoIndexRouteImport
+      parentRoute: typeof AuthedRoute
+    }
+    '/_authed/cti-darkweb/': {
+      id: '/_authed/cti-darkweb/'
+      path: '/cti-darkweb'
+      fullPath: '/cti-darkweb/'
+      preLoaderRoute: typeof AuthedCtiDarkwebIndexRouteImport
+      parentRoute: typeof AuthedRoute
+    }
+    '/_authed/cti-data-leaks/': {
+      id: '/_authed/cti-data-leaks/'
+      path: '/cti-data-leaks'
+      fullPath: '/cti-data-leaks/'
+      preLoaderRoute: typeof AuthedCtiDataLeaksIndexRouteImport
+      parentRoute: typeof AuthedRoute
+    }
+    '/_authed/cti-ioc-feed/': {
+      id: '/_authed/cti-ioc-feed/'
+      path: '/cti-ioc-feed'
+      fullPath: '/cti-ioc-feed/'
+      preLoaderRoute: typeof AuthedCtiIocFeedIndexRouteImport
+      parentRoute: typeof AuthedRoute
+    }
+    '/_authed/cti-social-monitor/': {
+      id: '/_authed/cti-social-monitor/'
+      path: '/cti-social-monitor'
+      fullPath: '/cti-social-monitor/'
+      preLoaderRoute: typeof AuthedCtiSocialMonitorIndexRouteImport
+      parentRoute: typeof AuthedRoute
+    }
+    '/_authed/cti-supplier-risk/': {
+      id: '/_authed/cti-supplier-risk/'
+      path: '/cti-supplier-risk'
+      fullPath: '/cti-supplier-risk/'
+      preLoaderRoute: typeof AuthedCtiSupplierRiskIndexRouteImport
+      parentRoute: typeof AuthedRoute
+    }
     '/_authed/vulnerabilities/': {
       id: '/_authed/vulnerabilities/'
       path: '/vulnerabilities'
@@ -1289,6 +1410,13 @@ interface AuthedRouteChildren {
   AuthedProvidersIndexRoute: typeof AuthedProvidersIndexRoute
   AuthedTargetsIndexRoute: typeof AuthedTargetsIndexRoute
   AuthedToolsIndexRoute: typeof AuthedToolsIndexRoute
+  AuthedCtiBrandProtectionIndexRoute: typeof AuthedCtiBrandProtectionIndexRoute
+  AuthedCtiCryptoIndexRoute: typeof AuthedCtiCryptoIndexRoute
+  AuthedCtiDarkwebIndexRoute: typeof AuthedCtiDarkwebIndexRoute
+  AuthedCtiDataLeaksIndexRoute: typeof AuthedCtiDataLeaksIndexRoute
+  AuthedCtiIocFeedIndexRoute: typeof AuthedCtiIocFeedIndexRoute
+  AuthedCtiSocialMonitorIndexRoute: typeof AuthedCtiSocialMonitorIndexRoute
+  AuthedCtiSupplierRiskIndexRoute: typeof AuthedCtiSupplierRiskIndexRoute
   AuthedVulnerabilitiesIndexRoute: typeof AuthedVulnerabilitiesIndexRoute
   AuthedWorkersIndexRoute: typeof AuthedWorkersIndexRoute
   AuthedWorkspacesIndexRoute: typeof AuthedWorkspacesIndexRoute
@@ -1335,6 +1463,13 @@ const AuthedRouteChildren: AuthedRouteChildren = {
   AuthedProvidersIndexRoute: AuthedProvidersIndexRoute,
   AuthedTargetsIndexRoute: AuthedTargetsIndexRoute,
   AuthedToolsIndexRoute: AuthedToolsIndexRoute,
+  AuthedCtiBrandProtectionIndexRoute: AuthedCtiBrandProtectionIndexRoute,
+  AuthedCtiCryptoIndexRoute: AuthedCtiCryptoIndexRoute,
+  AuthedCtiDarkwebIndexRoute: AuthedCtiDarkwebIndexRoute,
+  AuthedCtiDataLeaksIndexRoute: AuthedCtiDataLeaksIndexRoute,
+  AuthedCtiIocFeedIndexRoute: AuthedCtiIocFeedIndexRoute,
+  AuthedCtiSocialMonitorIndexRoute: AuthedCtiSocialMonitorIndexRoute,
+  AuthedCtiSupplierRiskIndexRoute: AuthedCtiSupplierRiskIndexRoute,
   AuthedVulnerabilitiesIndexRoute: AuthedVulnerabilitiesIndexRoute,
   AuthedWorkersIndexRoute: AuthedWorkersIndexRoute,
   AuthedWorkspacesIndexRoute: AuthedWorkspacesIndexRoute,
