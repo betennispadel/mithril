@@ -99,3 +99,6 @@ asset-groups-lastrun.png
 api-test-out.txt
 tsc-out.txt
 console/tsc-out.txt
+# Large files and CI
+core-api/public/archived/*.tar.gz
+core-api/public/archived/*.zip
