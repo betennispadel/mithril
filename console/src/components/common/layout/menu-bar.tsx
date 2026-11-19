@@ -36,6 +36,7 @@ import {
   CloudCheck,
   Cpu,
   Eye,
+  FileCode,
   FileChartPie,
   FolderKanban,
   Globe,
@@ -195,6 +196,18 @@ export const menu: NavGroup[] = [
         title: 'Supplier Risk',
         icon: <Server />,
         url: '/cti-supplier-risk',
+        permission: 'vulnerability.read',
+      },
+    ],
+  },
+  {
+    title: 'SAST',
+    url: '#',
+    items: [
+      {
+        title: 'Semgrep',
+        icon: <FileCode />,
+        url: '/sast',
         permission: 'vulnerability.read',
       },
     ],

@@ -54,6 +54,7 @@ import { Route as AuthedCtiCryptoIndexRouteImport } from './routes/_authed/cti-c
 import { Route as AuthedCtiDarkwebIndexRouteImport } from './routes/_authed/cti-darkweb/index'
 import { Route as AuthedCtiDataLeaksIndexRouteImport } from './routes/_authed/cti-data-leaks/index'
 import { Route as AuthedCtiIocFeedIndexRouteImport } from './routes/_authed/cti-ioc-feed/index'
+import { Route as AuthedSastIndexRouteImport } from './routes/_authed/sast/index'
 import { Route as AuthedCtiSocialMonitorIndexRouteImport } from './routes/_authed/cti-social-monitor/index'
 import { Route as AuthedCtiSupplierRiskIndexRouteImport } from './routes/_authed/cti-supplier-risk/index'
 
@@ -309,6 +310,10 @@ const AuthedCtiDataLeaksIndexRoute = AuthedCtiDataLeaksIndexRouteImport.update({
 const AuthedCtiIocFeedIndexRoute = AuthedCtiIocFeedIndexRouteImport.update({
   id: '/cti-ioc-feed/',
   path: '/cti-ioc-feed/',
+
+const AuthedSastIndexRoute = AuthedSastIndexRouteImport.update({
+  id: '/sast/',
+  path: '/sast/',
   getParentRoute: () => AuthedRoute,
 })
 
@@ -505,6 +510,7 @@ export interface FileRoutesByFullPath {
   '/cti-darkweb/': typeof AuthedCtiDarkwebIndexRoute
   '/cti-data-leaks/': typeof AuthedCtiDataLeaksIndexRoute
   '/cti-ioc-feed/': typeof AuthedCtiIocFeedIndexRoute
+  '/sast/': typeof AuthedSastIndexRoute
   '/cti-social-monitor/': typeof AuthedCtiSocialMonitorIndexRoute
   '/cti-supplier-risk/': typeof AuthedCtiSupplierRiskIndexRoute
   '/vulnerabilities/': typeof AuthedVulnerabilitiesIndexRoute
@@ -642,6 +648,7 @@ export interface FileRoutesById {
   '/_authed/cti-darkweb/': typeof AuthedCtiDarkwebIndexRoute
   '/_authed/cti-data-leaks/': typeof AuthedCtiDataLeaksIndexRoute
   '/_authed/cti-ioc-feed/': typeof AuthedCtiIocFeedIndexRoute
+  '/_authed/sast/': typeof AuthedSastIndexRoute
   '/_authed/cti-social-monitor/': typeof AuthedCtiSocialMonitorIndexRoute
   '/_authed/cti-supplier-risk/': typeof AuthedCtiSupplierRiskIndexRoute
   '/_authed/vulnerabilities/': typeof AuthedVulnerabilitiesIndexRoute
@@ -716,6 +723,7 @@ export interface FileRouteTypes {
     | '/cti-darkweb/'
     | '/cti-data-leaks/'
     | '/cti-ioc-feed/'
+    | '/sast/'
     | '/cti-social-monitor/'
     | '/cti-supplier-risk/'
     | '/vulnerabilities/'
@@ -1183,6 +1191,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthedCtiDataLeaksIndexRouteImport
       parentRoute: typeof AuthedRoute
     }
+    '/_authed/sast/': {
+      id: '/_authed/sast/'
+      path: '/sast'
+      fullPath: '/sast/'
+      preLoaderRoute: typeof AuthedSastIndexRouteImport
+      parentRoute: typeof AuthedRoute
+    }
     '/_authed/cti-ioc-feed/': {
       id: '/_authed/cti-ioc-feed/'
       path: '/cti-ioc-feed'
@@ -1414,6 +1429,7 @@ interface AuthedRouteChildren {
   AuthedCtiCryptoIndexRoute: typeof AuthedCtiCryptoIndexRoute
   AuthedCtiDarkwebIndexRoute: typeof AuthedCtiDarkwebIndexRoute
   AuthedCtiDataLeaksIndexRoute: typeof AuthedCtiDataLeaksIndexRoute
+  AuthedSastIndexRoute: typeof AuthedSastIndexRoute
   AuthedCtiIocFeedIndexRoute: typeof AuthedCtiIocFeedIndexRoute
   AuthedCtiSocialMonitorIndexRoute: typeof AuthedCtiSocialMonitorIndexRoute
   AuthedCtiSupplierRiskIndexRoute: typeof AuthedCtiSupplierRiskIndexRoute
@@ -1467,6 +1483,7 @@ const AuthedRouteChildren: AuthedRouteChildren = {
   AuthedCtiCryptoIndexRoute: AuthedCtiCryptoIndexRoute,
   AuthedCtiDarkwebIndexRoute: AuthedCtiDarkwebIndexRoute,
   AuthedCtiDataLeaksIndexRoute: AuthedCtiDataLeaksIndexRoute,
+  AuthedSastIndexRoute: AuthedSastIndexRoute,
   AuthedCtiIocFeedIndexRoute: AuthedCtiIocFeedIndexRoute,
   AuthedCtiSocialMonitorIndexRoute: AuthedCtiSocialMonitorIndexRoute,
   AuthedCtiSupplierRiskIndexRoute: AuthedCtiSupplierRiskIndexRoute,
