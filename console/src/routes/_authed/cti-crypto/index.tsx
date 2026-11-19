@@ -3,6 +3,8 @@ import { z } from 'zod';
 import { tableSearch } from '@/lib/table-search';
 import CryptoPage from '@/pages/cti/crypto';
 
+const DEFAULT_WHERE = '{"logic":"and","items":[{"field":"tool","op":"eq","value":"crypto"}]}';
+
 const table = tableSearch({ sortBy: 'severity', sortOrder: 'DESC' });
 
 const searchSchema = z.object({
@@ -12,11 +14,11 @@ const searchSchema = z.object({
   createdFrom: z.string().optional(),
   createdTo: z.string().optional(),
   targetId: z.string().optional(),
-  where: z.string().optional(),
+  where: z.string().default(DEFAULT_WHERE),
 });
 
 export const Route = createFileRoute('/_authed/cti-crypto/')({
   validateSearch: searchSchema,
-  search: { middlewares: [stripSearchParams(table.defaults)] },
+  search: { middlewares: [stripSearchParams({ ...table.defaults, where: DEFAULT_WHERE })] },
   component: () => <CryptoPage />,
 });
