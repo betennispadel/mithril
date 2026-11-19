@@ -13,7 +13,7 @@ func TestSetupCmdEnv_DropsSecretEnv(t *testing.T) {
 	t.Setenv("WORKER_API_KEY", "platform-cloud-key")
 	t.Setenv("WORKER_CONNECTOR_TOKEN", "connector-secret")
 	t.Setenv("Worker_Token_File", "/app/state/.worker-token")
-	t.Setenv("OASM_CLOUD_APIKEY", "cloud-key")
+	t.Setenv("MITHRIL_CLOUD_APIKEY", "cloud-key")
 	t.Setenv("oasm_lower", "x")
 	t.Setenv("SANDBOX_KEEP_ME", "kept")
 	t.Setenv("MYWORKER_API", "kept-too") // prefix match only, not substring

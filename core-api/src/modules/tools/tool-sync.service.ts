@@ -240,7 +240,7 @@ export class ToolSyncService implements OnModuleInit {
         continue;
       }
       const author = String((rawEntry['author'] as string) ?? '').trim().toLowerCase();
-      const isOfficialSupport = author === 'oasm';
+      const isOfficialSupport = author === 'mithril';
 
       // logoUrl must mirror the manifest's logo presence exactly: a missing/empty
       // logo maps to SQL NULL (never a stale /connectors/<slug>.png path). The

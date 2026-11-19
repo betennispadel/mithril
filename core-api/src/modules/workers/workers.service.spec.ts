@@ -330,7 +330,7 @@ describe('WorkersService', () => {
     beforeEach(() => {
       // Default config: no cloud key
       (mockConfigService.get as jest.Mock).mockImplementation((key: string) => {
-        if (key === 'OASM_CLOUD_APIKEY') return '';
+        if (key === 'MITHRIL_CLOUD_APIKEY') return '';
         return undefined;
       });
     });
@@ -615,7 +615,7 @@ describe('WorkersService', () => {
   describe('join - one-time join keys', () => {
     beforeEach(() => {
       (mockConfigService.get as jest.Mock).mockImplementation((key: string) =>
-        key === 'OASM_CLOUD_APIKEY' ? 'cloud-key' : undefined,
+        key === 'MITHRIL_CLOUD_APIKEY' ? 'cloud-key' : undefined,
       );
       (mockWorkerInstanceRepository.save as jest.Mock).mockImplementation(
         (data: Record<string, unknown>) => data,
@@ -725,7 +725,7 @@ describe('WorkersService', () => {
       expect(mockEventBridge.publishSafely).not.toHaveBeenCalled();
     });
 
-    it('joins cloud workers with OASM_CLOUD_APIKEY without touching join keys', async () => {
+    it('joins cloud workers with MITHRIL_CLOUD_APIKEY without touching join keys', async () => {
       (mockWorkerInstanceRepository.findOne as jest.Mock).mockResolvedValue({
         id: 'w-cloud',
         workspaceId: null,

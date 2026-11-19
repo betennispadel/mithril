@@ -6,7 +6,7 @@
       "slug": "acunetix",
       "version": "0.1.0",
       "image": "ghcr.io/betennispadel/connector-one-ring:0.1.0",
-      "author": "oasm",
+      "author": "mithril",
       "pricingTier": [
         "free"
       ],
@@ -127,7 +127,7 @@
       "slug": "arjun",
       "version": "2.2.7",
       "image": "ghcr.io/betennispadel/connector-niffler:2.2.7",
-      "author": "oasm",
+      "author": "mithril",
       "pricingTier": [
         "free"
       ],
@@ -306,7 +306,7 @@
       "slug": "gau",
       "version": "2.2.4",
       "image": "ghcr.io/betennispadel/connector-time-turner:2.2.4",
-      "author": "oasm",
+      "author": "mithril",
       "pricingTier": [
         "free"
       ],
@@ -449,7 +449,7 @@
       "slug": "gitleaks",
       "version": "8.30.1",
       "image": "ghcr.io/betennispadel/connector-zion-archive:8.30.1",
-      "author": "oasm",
+      "author": "mithril",
       "pricingTier": [
         "free"
       ],
@@ -539,7 +539,7 @@
       "slug": "katana",
       "version": "1.8.0",
       "image": "ghcr.io/betennispadel/connector-elder-wand:1.8.0",
-      "author": "oasm",
+      "author": "mithril",
       "pricingTier": [
         "free"
       ],
@@ -748,7 +748,7 @@
       "slug": "nessus",
       "version": "0.2.0",
       "image": "ghcr.io/betennispadel/connector-horcrux:0.2.0",
-      "author": "oasm",
+      "author": "mithril",
       "pricingTier": [
         "free"
       ],
@@ -861,7 +861,7 @@
       "slug": "nikto",
       "version": "2.6.1",
       "image": "ghcr.io/betennispadel/connector-dementor:2.6.1",
-      "author": "oasm",
+      "author": "mithril",
       "pricingTier": [
         "free"
       ],
@@ -1038,7 +1038,7 @@
       "slug": "nmap",
       "version": "7.97",
       "image": "ghcr.io/betennispadel/connector-sting:7.99",
-      "author": "oasm",
+      "author": "mithril",
       "pricingTier": [
         "free"
       ],
@@ -1172,7 +1172,7 @@
       "slug": "nuclei",
       "version": "3.11.1",
       "image": "ghcr.io/betennispadel/connector-palantir:3.11.1",
-      "author": "oasm",
+      "author": "mithril",
       "pricingTier": [
         "free"
       ],
@@ -1326,7 +1326,7 @@
       "slug": "zap",
       "version": "2.17.0",
       "image": "ghcr.io/betennispadel/connector-red-pill:2.17.0",
-      "author": "oasm",
+      "author": "mithril",
       "pricingTier": [
         "free"
       ],
@@ -1448,7 +1448,7 @@
       "slug": "rustscan",
       "version": "2.4.1",
       "image": "ghcr.io/betennispadel/connector-bullet-time:2.4.1",
-      "author": "oasm",
+      "author": "mithril",
       "pricingTier": [
         "free"
       ],
@@ -1555,7 +1555,7 @@
       "slug": "trivy",
       "version": "0.76.2",
       "image": "ghcr.io/betennispadel/connector-morpheus:0.76.2",
-      "author": "oasm",
+      "author": "mithril",
       "pricingTier": [
         "free"
       ],
@@ -1686,7 +1686,7 @@
       "slug": "wpscan",
       "version": "4.2.0",
       "image": "ghcr.io/betennispadel/connector-agent-smith:4.2.0",
-      "author": "oasm",
+      "author": "mithril",
       "pricingTier": [
         "free"
       ],
@@ -1963,7 +1963,7 @@
       "slug": "dirsearch",
       "version": "0.5.0",
       "image": "ghcr.io/betennispadel/connector-marauders-map:0.5.0",
-      "author": "oasm",
+      "author": "mithril",
       "pricingTier": [
         "free"
       ],
@@ -2164,7 +2164,7 @@
       "slug": "ffuf",
       "version": "2.3.0",
       "image": "ghcr.io/betennispadel/connector-alohomora:2.3.0",
-      "author": "oasm",
+      "author": "mithril",
       "pricingTier": [
         "free"
       ],
