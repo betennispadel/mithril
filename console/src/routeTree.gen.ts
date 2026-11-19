@@ -310,6 +310,8 @@ const AuthedCtiDataLeaksIndexRoute = AuthedCtiDataLeaksIndexRouteImport.update({
 const AuthedCtiIocFeedIndexRoute = AuthedCtiIocFeedIndexRouteImport.update({
   id: '/cti-ioc-feed/',
   path: '/cti-ioc-feed/',
+  getParentRoute: () => AuthedRoute,
+})
 
 const AuthedSastIndexRoute = AuthedSastIndexRouteImport.update({
   id: '/sast/',
