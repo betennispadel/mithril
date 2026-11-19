@@ -930,7 +930,7 @@ export class AgentsCompletionsService {
     });
     return [
       `[PROJECT]: This conversation is about the project "${project.name}" (projectId ${project.id})${project.archivedAt ? ', which is archived (read-only)' : ''}.`,
-      'Every OASM data tool (assets, vulnerabilities, ports, technologies, TLS, statistics) and every project tool is locked to it: they only return and change data inside this project, whatever projectId you pass.',
+      'Every Mithril data tool (assets, vulnerabilities, ports, technologies, TLS, statistics) and every project tool is locked to it: they only return and change data inside this project, whatever projectId you pass.',
       'Answer from the project scope; say so when the user asks about something outside it.',
       ...(project.instruction
         ? [`[PROJECT INSTRUCTION] (set by the project's members; follow it):\n${project.instruction}`]

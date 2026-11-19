@@ -44,7 +44,7 @@ export interface MailServerConfig {
  */
 @Injectable()
 export class SystemConfigsService implements OnModuleInit {
-  private static readonly DEFAULT_SYSTEM_NAME = 'OASM';
+  private static readonly DEFAULT_SYSTEM_NAME = 'Mithril';
   /** Defaults per settings section; stored fields override them */
   private static readonly DEFAULT_SETTINGS: SystemSettings = {
     auth: { allowSignUp: false },

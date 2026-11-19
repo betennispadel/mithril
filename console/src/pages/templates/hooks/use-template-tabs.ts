@@ -20,7 +20,7 @@ export type TemplateTab = {
 
 export const DEFAULT_TEMPLATE_NAME = 'example-template.yaml';
 
-export const DEFAULT_TEMPLATE_CONTENT = `# Welcome to OASM Templates
+export const DEFAULT_TEMPLATE_CONTENT = `# Welcome to Mithril Templates
 
 id: example-template # Unique identifier for the template
 

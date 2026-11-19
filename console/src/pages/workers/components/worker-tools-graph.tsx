@@ -417,13 +417,13 @@ function OasmNodeComponent() {
       <span className="flex size-14 shrink-0 items-center justify-center overflow-hidden rounded-full border bg-card dark:bg-white">
         <img
           src="/logo.png"
-          alt="OASM Platform"
+          alt="Mithril Platform"
           width={32}
           height={32}
           className="object-contain"
         />
       </span>
-      <span className={LABEL_CLASS}>OASM Platform</span>
+      <span className={LABEL_CLASS}>Mithril Platform</span>
     </div>
   );
 }

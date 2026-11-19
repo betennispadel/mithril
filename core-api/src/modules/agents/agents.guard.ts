@@ -68,7 +68,7 @@ export function guardApprovalMeta(
 }
 
 export const platformRefusal = (ruleId: string, reason: string) =>
-  `Blocked by OASM platform policy [${ruleId}]: ${reason}. This is a fixed safety rule the platform enforces on every agent run, not a firewall or filter on the target, so rewording, encoding, splitting or chaining the command will not get past it and must not be attempted. Do not retry; continue with a non-destructive approach, or tell the user this has to be done outside OASM.`;
+  `Blocked by Mithril platform policy [${ruleId}]: ${reason}. This is a fixed safety rule the platform enforces on every agent run, not a firewall or filter on the target, so rewording, encoding, splitting or chaining the command will not get past it and must not be attempted. Do not retry; continue with a non-destructive approach, or tell the user this has to be done outside Mithril.`;
 
 /**
  * Code-enforced checks on agent tool calls, run before the approval flow in

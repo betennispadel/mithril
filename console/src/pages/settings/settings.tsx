@@ -189,7 +189,7 @@ export const settingsTabGroups: SettingsTabGroup[] = [
         icon: <Plug />,
         content: {
           title: 'MCP Connect',
-          description: 'Connect to OASM server via MCP protocol',
+          description: 'Connect to Mithril server via MCP protocol',
         },
         component: <McpConnect />,
         permission: 'workspace.apikey',

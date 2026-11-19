@@ -25,7 +25,7 @@ export function AiGenButton({
       <Link
         to="/aistudio"
         search={{ text: AI_GEN_TEMPLATE_PROMPT, autoSubmit: false }}
-        title="Write a template with OASM AI Studio"
+        title="Write a template with Mithril AI Studio"
       >
         {children ?? (
           <>

@@ -10,7 +10,7 @@ const ROUTE_LABELS: Record<string, string> = {
   '/$': 'Page not found',
   '/login': 'Sign in',
   '/signup': 'Sign up',
-  '/init-admin': 'Set up OASM',
+  '/init-admin': 'Set up Mithril',
   '/invite/:token': 'Invitation',
   '/targets/:id': 'Target',
   '/targets/:id/:tab': 'Target',

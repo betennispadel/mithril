@@ -6,7 +6,7 @@ import {
   useRootControllerGetMetadata,
 } from '@/services/apis/gen/queries';
 
-const DEFAULT_BRAND = 'OASM';
+const DEFAULT_BRAND = 'Mithril';
 
 /**
  * Keeps `document.title` on `<page> | <brand>` for every route: the title
