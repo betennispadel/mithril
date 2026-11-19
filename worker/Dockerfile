@@ -24,8 +24,8 @@ COPY . .
 # The version is linked into the binary, so it travels with it even when the
 # image's env and labels are not inspected.
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=$TARGETARCH go build \
-    -ldflags="-w -s -extldflags '-static' -X oasm-worker/internal/buildinfo.Version=${APP_VERSION}" \
-    -o oasm-worker ./cmd/app
+    -ldflags="-w -s -extldflags '-static' -X mithril-worker/internal/buildinfo.Version=${APP_VERSION}" \
+    -o mithril-worker ./cmd/app
 
 # Stage 2: Runtime
 FROM debian:bookworm-slim
@@ -49,10 +49,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Create tool directory and persistent state directory (worker token file —
 # survives container recreation so the join identity, and therefore orphan
 # ownership, stays stable). Owned by the worker user via the chown below.
-RUN mkdir -p /app/oasm-tools /app/state
+RUN mkdir -p /app/mithril-tools /app/state
 
 # Copy binary from builder
-COPY --from=builder /app/oasm-worker .
+COPY --from=builder /app/mithril-worker .
 
 # Create non-root user for security
 RUN groupadd -g 1000 worker && \
@@ -74,7 +74,7 @@ USER worker
 ENV WORKER_MAX_CONCURRENCY=10
 ENV WORKER_GRPC_HOST=localhost
 ENV WORKER_GRPC_PORT=16276
-ENV WORKER_TOOL_PATH=oasm-tools
+ENV WORKER_TOOL_PATH=mithril-tools
 
 # Metadata
 LABEL org.opencontainers.image.title="OASM Worker"
@@ -83,4 +83,4 @@ LABEL org.opencontainers.image.vendor="OASM Platform"
 LABEL org.opencontainers.image.version=$APP_VERSION
 
 # Entrypoint
-ENTRYPOINT ["/app/oasm-worker"]
+ENTRYPOINT ["/app/mithril-worker"]

@@ -3000,7 +3000,7 @@ const file_workers_proto_rawDesc = "" +
 	"\x13BuiltinToolRegistry\x12#.workers.BuiltinToolRegistryRequest\x1a$.workers.BuiltinToolRegistryResponse\x12k\n" +
 	"\x16RemoteExecuteSubscribe\x12&.workers.RemoteExecuteSubscribeRequest\x1a'.workers.RemoteExecuteSubscribeResponse0\x01\x12Z\n" +
 	"\x13RemoteExecuteResult\x12\".workers.RemoteExecuteResultStream\x1a\x1f.workers.RemoteExecuteResultAck\x12;\n" +
-	"\aConnect\x12\x15.workers.WorkerToCore\x1a\x15.workers.CoreToWorker(\x010\x01B\"Z mithril-worker/internal/gen/workersb\x06proto3"
+	"\aConnect\x12\x15.workers.WorkerToCore\x1a\x15.workers.CoreToWorker(\x010\x01B%Z#mithril-worker/internal/gen/workersb\x06proto3"
 
 var (
 	file_workers_proto_rawDescOnce sync.Once
