@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="core-api/public/images/logo.png" alt="Mithril Logo" width="150" />
+  <img src="core-api/public/images/logo.png?raw=true" alt="Mithril Logo" width="150" />
 </p>
 
 <h1 align="center">Open Attack Surface Management (Mithril)</h1>
