@@ -43,7 +43,7 @@ function baseConfig(baseUrl: string, apiKey: string) {
     'oasm-platform': {
       type: 'http' as const,
       url: `${baseUrl}/api/mcp`,
-      headers: { 'x-oasm-api-key': apiKey },
+      headers: { 'x-mithril-api-key': apiKey },
     },
   };
 }
@@ -83,7 +83,7 @@ const MCP_CLIENTS: McpClient[] = [
             'oasm-platform': {
               type: 'http',
               url: `${b}/api/mcp`,
-              headers: { 'x-oasm-api-key': k },
+              headers: { 'x-mithril-api-key': k },
             },
           },
         },
@@ -104,7 +104,7 @@ const MCP_CLIENTS: McpClient[] = [
           mcpServers: {
             'oasm-platform': {
               command: 'npx',
-              args: ['-y', 'mcp-remote', `${b}/api/mcp`, '--header', `x-oasm-api-key: ${k}`],
+              args: ['-y', 'mcp-remote', `${b}/api/mcp`, '--header', `x-mithril-api-key: ${k}`],
             },
           },
         },
@@ -125,7 +125,7 @@ const MCP_CLIENTS: McpClient[] = [
           mcpServers: {
             'oasm-platform': {
               serverUrl: `${b}/api/mcp`,
-              headers: { 'x-oasm-api-key': k },
+              headers: { 'x-mithril-api-key': k },
             },
           },
         },
@@ -147,7 +147,7 @@ const MCP_CLIENTS: McpClient[] = [
             'oasm-platform': {
               type: 'http',
               url: `${b}/api/mcp`,
-              headers: { 'x-oasm-api-key': k },
+              headers: { 'x-mithril-api-key': k },
             },
           },
         },
@@ -188,7 +188,7 @@ const MCP_CLIENTS: McpClient[] = [
           mcpServers: {
             'oasm-platform': {
               httpUrl: `${b}/api/mcp`,
-              headers: { 'x-oasm-api-key': k },
+              headers: { 'x-mithril-api-key': k },
             },
           },
         },
@@ -210,7 +210,7 @@ const MCP_CLIENTS: McpClient[] = [
             'oasm-platform': {
               type: 'remote',
               url: `${b}/api/mcp`,
-              headers: { 'x-oasm-api-key': k },
+              headers: { 'x-mithril-api-key': k },
             },
           },
         },

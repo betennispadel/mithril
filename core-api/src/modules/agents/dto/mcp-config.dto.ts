@@ -60,7 +60,7 @@ export class MCPServerConfigDto {
 
   @ApiPropertyOptional({
     description: 'HTTP headers included with MCP server requests',
-    example: { 'x-oasm-api-key': 'sk-...' },
+    example: { 'x-mithril-api-key': 'sk-...' },
     type: 'object',
     additionalProperties: { type: 'string' },
   })

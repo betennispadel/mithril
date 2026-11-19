@@ -1,6 +1,6 @@
 import { SetMetadata } from '@nestjs/common';
 
-export const EVENT_LANE_METADATA = 'oasm:event-lane';
+export const EVENT_LANE_METADATA = 'mithril:event-lane';
 
 /**
  * Marks an {@link EventSink} provider as the consumer of one lane.

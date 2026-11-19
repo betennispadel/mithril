@@ -109,7 +109,7 @@ func LoadConfig() (*Config, error) {
 	viper.SetDefault("grpc_host", "localhost")
 	viper.SetDefault("grpc_port", 16276)
 	viper.SetDefault("tls_enabled", false) // WORKER_TLS_ENABLED / --grpc-tls: TLS to core-api (required through Cloudflare on :443)
-	viper.SetDefault("tool_path", DataPath("oasm-tools"))
+	viper.SetDefault("tool_path", DataPath("mithril-tools"))
 	viper.SetDefault("workspace_root", DataPath("agent-sessions"))
 	viper.SetDefault("connector_port", 26276)
 	viper.SetDefault("connector_addr", "") // REQUIRED dial address for connector containers; empty fails fast unless connector_addr_allow_autodetect is set

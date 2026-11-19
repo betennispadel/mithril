@@ -596,7 +596,7 @@ func imageRegistrySlug(image string) string {
 // poolRef is the pool key when set, else the image — both carry the registry,
 // so the name stays identical whether or not the warm pool is enabled.
 func buildContainerName(tool, poolRef string) string {
-	return fmt.Sprintf("oasm-%s-%s-%s", sanitizeToolName(tool), imageRegistrySlug(poolRef), randHex4())
+	return fmt.Sprintf("mithril-%s-%s-%s", sanitizeToolName(tool), imageRegistrySlug(poolRef), randHex4())
 }
 
 // imageIsCached reports whether the engine already holds a local copy of the
@@ -615,12 +615,12 @@ func volumeNameForImage(image string) string {
 	s := sanitizeVolumeName(image)
 	h := fnv.New32a()
 	h.Write([]byte(image))
-	return "oasm-" + s + "-" + fmt.Sprintf("%08x", h.Sum32())
+	return "mithril-" + s + "-" + fmt.Sprintf("%08x", h.Sum32())
 }
 
 // sanitizeVolumeName lowercases, replaces non-alphanumeric runs with single
 // dashes, trims leading/trailing dashes, and truncates to keep the full
-// Docker volume name ≤ 63 characters ("oasm-" + sanitized + "-" + 8hex).
+// Docker volume name ≤ 63 characters ("mithril-" + sanitized + "-" + 8hex).
 func sanitizeVolumeName(s string) string {
 	s = strings.ToLower(s)
 	var b strings.Builder
@@ -635,7 +635,7 @@ func sanitizeVolumeName(s string) string {
 		}
 	}
 	result := strings.Trim(b.String(), "-")
-	// "oasm-" + sanitized + "-" + 8hex = 14 + len(sanitized) ≤ 63 → ≤49.
+	// "mithril-" + sanitized + "-" + 8hex = 14 + len(sanitized) ≤ 63 → ≤49.
 	if len(result) > 49 {
 		result = result[:49]
 		result = strings.TrimRight(result, "-")
@@ -651,7 +651,7 @@ func sanitizeVolumeName(s string) string {
 // per-image named volume. The oasm.persist label is a comma-separated list
 // of absolute paths; relative or blank entries are ignored.
 func persistPathsFromLabels(labels map[string]string) []string {
-	raw, ok := labels["oasm.persist"]
+	raw, ok := labels["mithril.persist"]
 	if !ok || strings.TrimSpace(raw) == "" {
 		return nil
 	}
@@ -736,19 +736,19 @@ func (d *DockerRuntime) Create(ctx context.Context, spec JobSpec, opts RuntimeOp
 		"trace_id":     opts.TraceID,
 		"tool":         spec.Tool,
 		"exec_id":      execID,
-		"oasm-managed": "true",
+		"mithril-managed": "true",
 	}
 	poolRef := spec.PoolKey
 	if poolRef == "" {
 		poolRef = spec.Image
 	}
-	labels["oasm.pool_key"] = poolRef
-	labels["oasm.last_used"] = time.Now().UTC().Format(time.RFC3339)
+	labels["mithril.pool_key"] = poolRef
+	labels["mithril.last_used"] = time.Now().UTC().Format(time.RFC3339)
 	// Ownership stamp (startup orphan reconcile): hash of the worker identity
 	// so a restarted worker reclaims ITS running orphans and never a
 	// sibling's. Absent for direct runtime users → tier 3 (keep) only.
 	if spec.WorkerID != "" {
-		labels["oasm.worker_id"] = spec.WorkerID
+		labels["mithril.worker_id"] = spec.WorkerID
 	}
 	// Labels assigned after the struct literal so gofmt keeps
 	// "Image: spec.Image" single-spaced (source-guard test).
@@ -858,11 +858,11 @@ func (d *DockerRuntime) Create(ctx context.Context, spec JobSpec, opts RuntimeOp
 			"tool":          spec.Tool,
 			"exec_id":       execID,
 			"job_id":        spec.JobID,
-			"oasm.pool_key": poolRef,
+			"mithril.pool_key": poolRef,
 		},
 	}
 	if spec.WorkerID != "" {
-		handle.Labels["oasm.worker_id"] = spec.WorkerID
+		handle.Labels["mithril.worker_id"] = spec.WorkerID
 	}
 	return handle, nil
 }
@@ -1180,7 +1180,7 @@ func (d *DockerRuntime) ReconcileOrphans(ctx context.Context, ownerID string) Re
 	}
 	for _, c := range list {
 		terminal := isTerminalState(c.State)
-		ours := ownerID != "" && c.Labels["oasm.worker_id"] == ownerID
+		ours := ownerID != "" && c.Labels["mithril.worker_id"] == ownerID
 		switch {
 		case terminal, ours:
 			if err := d.cli.ContainerRemove(ctx, c.ID, container.RemoveOptions{Force: true}); err != nil {
@@ -1196,7 +1196,7 @@ func (d *DockerRuntime) ReconcileOrphans(ctx context.Context, ownerID string) Re
 		default:
 			rep.SkippedForeign++
 			d.logInfo("docker: orphan: keeping foreign running container %s owner=%q state=%q",
-				shortID(c.ID), c.Labels["oasm.worker_id"], c.State)
+				shortID(c.ID), c.Labels["mithril.worker_id"], c.State)
 		}
 	}
 	d.logInfo("docker: orphan reconcile: stopped=%d own_running=%d foreign_kept=%d failed=%d owner_id=%q",

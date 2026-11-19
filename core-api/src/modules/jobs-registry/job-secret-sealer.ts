@@ -6,7 +6,7 @@ import {
 } from '@hpke/core';
 
 /** HPKE application info; the worker opens with the same string. */
-export const JOB_SECRETS_INFO = 'oasm job secrets v1';
+export const JOB_SECRETS_INFO = 'mithril job secrets v1';
 
 const ALG = 'DHKEM-P256-HKDF-SHA256/HKDF-SHA256/AES-256-GCM';
 

@@ -96,7 +96,7 @@ func (p *httpProxy) authenticate(r *http.Request) (string, bool) {
 func (p *httpProxy) needAuth(w http.ResponseWriter, r *http.Request) (string, bool) {
 	label, ok := p.authenticate(r)
 	if !ok {
-		w.Header().Set("Proxy-Authenticate", `Basic realm="oasm-egress"`)
+		w.Header().Set("Proxy-Authenticate", `Basic realm="mithril-egress"`)
 		http.Error(w, "proxy authentication required", http.StatusProxyAuthRequired)
 		p.srv.logWarning("egress deny method=%s target=%s reason=auth", r.Method, requestTarget(r))
 		return "", false

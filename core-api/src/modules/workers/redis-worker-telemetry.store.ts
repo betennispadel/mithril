@@ -15,7 +15,7 @@ export class RedisWorkerTelemetryStore extends WorkerTelemetryStore {
   }
 
   private key(workerId: string): string {
-    return `oasm:worker:telemetry:v1:${workerId}`;
+    return `mithril:worker:telemetry:v1:${workerId}`;
   }
 
   override async write(snapshot: WorkerTelemetrySnapshot): Promise<void> {

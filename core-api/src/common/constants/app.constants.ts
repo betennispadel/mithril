@@ -21,7 +21,7 @@ export const WORKER_JOIN_KEY_PREFIX = 'workers:api:';
 export const WORKER_JOIN_KEY_ID_PREFIX = 'workers:api-id:';
 export const LIMIT_WORKSPACE_CREATE = 5;
 export const API_KEY_LENGTH = 36;
-export const MCP_API_KEY_HEADER = 'x-oasm-api-key';
+export const MCP_API_KEY_HEADER = 'x-mithril-api-key';
 /** Controller path (under API_GLOBAL_PREFIX) that authenticates with MCP_API_KEY_HEADER instead of a session. */
 export const MCP_AUTH_PATH = 'mcp';
 export const WORKER_TOKEN_HEADER = 'worker-token';
@@ -65,7 +65,7 @@ export const GITHUB_REPO = 'oasm-platform/open-asm';
 export const GIT_REPO_URL = `https://github.com/${GITHUB_REPO}`;
 export const DOCS_URL = 'https://docs.oasm.io';
 export const HOME_PAGE_URL = 'https://oasm.dev';
-export const DEFAULT_ENCRYPTION_KEY = 'OASM_DEFAULT_ENCRYPTION_KEY';
+export const DEFAULT_ENCRYPTION_KEY = 'MITHRIL_DEFAULT_ENCRYPTION_KEY';
 
 // --- Jobs registry ---------------------------------------------------------
 
@@ -124,14 +124,14 @@ export const JOB_RETENTION_DELETE_BATCH = 10_000;
 // --- Event bus -------------------------------------------------------------
 
 /** Redis Stream key every event lands on (`EventBridgeService` publishes here). */
-export const EVENT_BUS_STREAM = 'oasm:events';
+export const EVENT_BUS_STREAM = 'mithril:events';
 
 /**
  * CloudEvents `source` for the core-api process. Absolute URI because the spec
  * RECOMMENDS it, and fixed because uniqueness comes from `id` (a fresh UUID per
  * event), not from the source.
  */
-export const EVENT_BUS_SOURCE = 'oasm://core-api';
+export const EVENT_BUS_SOURCE = 'mithril://core-api';
 
 /**
  * Stream retention: `MAXLEN ~ n` on every XADD plus a 7-day TTL on the key.
@@ -145,9 +145,9 @@ export const EVENT_BUS_SOURCE = 'oasm://core-api';
 export const EVENT_BUS_MAXLEN = 100_000;
 export const EVENT_BUS_TTL_SECONDS = 7 * 24 * 60 * 60;
 
-/** Dead-letter stream per workspace: `oasm:events:dlq:{workspaceId}`. */
+/** Dead-letter stream per workspace: `mithril:events:dlq:{workspaceId}`. */
 export const eventBusDlqKey = (workspaceId: string): string =>
-  `oasm:events:dlq:${workspaceId}`;
+  `mithril:events:dlq:${workspaceId}`;
 
 /**
  * Consumer group names live in {@link EventBusGroup} (`common/enums/enum.ts`),

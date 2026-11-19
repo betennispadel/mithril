@@ -59,7 +59,7 @@ import { InvalidInputError, NotFoundError } from '@/common/errors/domain.errors'
  * [A-Za-z0-9_-], which a hex digest satisfies.
  */
 export function deriveTelegramWebhookSecret(botToken: string): string {
-  return createHmac('sha256', 'oasm.telegram.webhook')
+  return createHmac('sha256', 'mithril.telegram.webhook')
     .update(botToken)
     .digest('hex');
 }

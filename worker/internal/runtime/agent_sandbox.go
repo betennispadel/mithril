@@ -24,16 +24,16 @@ import (
 // worker the host holds the platform cloud key, the join token and
 // docker.sock; the sandbox gets none of them — only a read-only tools mount.
 const (
-	AgentSandboxLabel        = "oasm.agent_sandbox"
-	agentSandboxSessionLabel = "oasm.session_id"
-	agentSandboxOwnerLabel   = "oasm.worker_id"
+	AgentSandboxLabel        = "mithril.agent_sandbox"
+	agentSandboxSessionLabel = "mithril.session_id"
+	agentSandboxOwnerLabel   = "mithril.worker_id"
 
 	agentSandboxDefaultImage = "oasm/oasm-worker:latest"
 	agentSandboxWorkdir      = "/workspace"
 	agentSandboxUser         = "1000:1000"
 	// agentSandboxToolsFallback is where tools are mounted when the worker's
 	// own tool path is not a POSIX path (a Windows host worker).
-	agentSandboxToolsFallback = "/opt/oasm-tools"
+	agentSandboxToolsFallback = "/opt/mithril-tools"
 	agentSandboxBasePath      = "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
 	agentSandboxPidsLimit = 512
@@ -501,7 +501,7 @@ func agentSandboxName(sessionID string) string {
 	if len(slug) > 40 {
 		slug = strings.Trim(slug[:40], "-")
 	}
-	return fmt.Sprintf("oasm-agent-%s-%s", slug, randHex4())
+	return fmt.Sprintf("mithril-agent-%s-%s", slug, randHex4())
 }
 
 // Close force-removes the session's container. Safe to call repeatedly and

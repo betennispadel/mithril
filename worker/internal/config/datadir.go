@@ -7,7 +7,7 @@ import (
 
 // dataDirName is the per-user directory holding the worker's state: the tool
 // cache, agent session workspaces and the persisted join token.
-const dataDirName = ".oasm"
+const dataDirName = ".mithril"
 
 // DataDir returns <user home>/.oasm on every OS (%USERPROFILE% on Windows,
 // $HOME on Linux/macOS). Defaults must not depend on the working directory: an

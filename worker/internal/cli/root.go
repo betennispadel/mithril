@@ -178,7 +178,7 @@ The worker runs in one of two modes, reported to core-api when it joins:
 	rootCmd.Flags().Bool("grpc-tls", false, "Connect to the gRPC server over TLS (e.g. cloud.oasm.io:443 behind Cloudflare); overridable with WORKER_TLS_ENABLED")
 	viper.BindPFlag("tls_enabled", rootCmd.Flags().Lookup("grpc-tls"))
 
-	rootCmd.Flags().String("tool-path", config.DataPath("oasm-tools"), "Tool path")
+	rootCmd.Flags().String("tool-path", config.DataPath("mithril-tools"), "Tool path")
 	viper.BindPFlag("tool_path", rootCmd.Flags().Lookup("tool-path"))
 
 	rootCmd.Flags().String("network", "", "Network ID for internal network connection")

@@ -62,7 +62,7 @@ type Row = ArtifactDto | FolderRow;
 const isFolder = (row: Row): row is FolderRow => 'isFolder' in row;
 
 type ViewMode = 'grid' | 'list';
-const VIEW_KEY = 'oasm.files.view';
+const VIEW_KEY = 'mithril.files.view';
 
 const ACCESS_LABEL: Record<ArtifactDto['shareType'], string> = {
   private: 'Private',
