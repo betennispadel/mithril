@@ -2,9 +2,9 @@
   <img src="core-api/public/images/logo.png?raw=true" alt="Mithril Logo" width="150" />
 </p>
 
-<h1 align="center">Open Attack Surface Management (Mithril)</h1>
+<h1 align="center">Mithril</h1>
 
-<p align="center"><strong>Open-source Attack Surface Management. Discover assets. Identify exposure. Own your security data.</strong></p>
+<p align="center"><strong>Attack Surface Management. Discover assets. Identify exposure. Own your security data.</strong></p>
 
 <p align="center">
   <a href="https://github.com/betennispadel/mithril/releases"><img src="https://img.shields.io/github/v/release/betennispadel/mithril?style=flat-square&label=release" alt="Latest Release"></a>
@@ -16,7 +16,7 @@
   <a href="https://docs.mithril.dev"><img src="https://img.shields.io/badge/docs-2fc414?style=flat-square&logo=gitbook&logoColor=white" alt="Documentation"></a>
 </p>
 
-Mithril is a self-hostable, open-source Attack Surface Management platform. It inventories internet-facing assets, runs distributed scans through pluggable connectors, and tracks the resulting vulnerabilities in one workspace, with AI Studio — a security agent that works directly on that data. Security teams stop stitching together spreadsheets, one-off scanners, and hosted-only tools.
+Mithril is a self-hostable Attack Surface Management platform. It inventories internet-facing assets, runs distributed scans through pluggable connectors, and tracks the resulting vulnerabilities in one workspace, with AI Studio — a security agent that works directly on that data. Security teams stop stitching together spreadsheets, one-off scanners, and hosted-only tools.
 
 📖 **Documentation → [docs.mithril.dev](https://docs.mithril.dev)**
 
@@ -348,4 +348,4 @@ If Mithril is useful to you, please star the repo — it helps others discover t
 
 ## Sponsors
 
-Mithril is supported by [Anthropic](https://www.anthropic.com) through its startup program. Thank you for backing open-source security tooling.
+Mithril is supported by [Anthropic](https://www.anthropic.com) through its startup program. Thank you for your support.
