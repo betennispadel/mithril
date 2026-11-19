@@ -123,7 +123,7 @@ declares `web` must accept a URL there, port included.
 
 Each mode of a tool says what it takes and what it finds. For a connector this
 is in its `manifest.yaml` in
-[oasm-connectors](https://github.com/oasm-platform/oasm-connectors):
+[mithril-connectors](https://github.com/betennispadel/mithril-connectors):
 
 ```yaml
 capabilities:
@@ -210,5 +210,5 @@ service httpx confirmed live, and the host itself when discovery found none.
 
 To add a kind: add it to `DataKind` and to `INPUT_KINDS` or `PRODUCED_KINDS`.
 Then teach `planStepInputs` what one item of it is, and load its rows in
-`StepScopeLoader`. Finally, list it in the `oasm-connectors` manifest
+`StepScopeLoader`. Finally, list it in the `mithril-connectors` manifest
 validator and in this page.

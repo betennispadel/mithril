@@ -63,7 +63,7 @@ pnpm workspace (`pnpm-workspace.yaml`, `packageManager: pnpm@10.33.2`) with 2 No
 - `console/` — React 19 + Vite 8 + Tailwind v4. TanStack **Router** (file-based, `src/routes/` → generated `routeTree.gen.ts`) + TanStack Query, orval API client, shadcn/radix-ui/base-ui, recharts/echarts, xyflow, leaflet, Playwright e2e in `console/e2e/`.
 - `worker/` — Go 1.26 scanning worker (cobra + viper). Two entry points: `cmd/cli` (interactive TUI / headless) and `cmd/app` (env-driven, used by the Docker image). Talks to core-api over gRPC (`worker/internal/grpcclient/`, stubs in `worker/internal/gen/`), **spawns connector containers through the Docker Engine API** (`worker/internal/runtime/docker.go`), serves the connector callback gRPC on `:26276` (`worker/internal/connector/`), go-rod browser automation.
 
-Shared infra (see `docker-compose.yml`): PostgreSQL `pgvector/pgvector:pg18` (`:5432`), Redis (`:6379`), geo-ip (`oasm/dbip`, DB-IP Lite, `:4360`), RustFS S3 (`:9000`, admin UI `:9001`).
+Shared infra (see `docker-compose.yml`): PostgreSQL `pgvector/pgvector:pg18` (`:5432`), Redis (`:6379`), geo-ip (`mithril/dbip`, DB-IP Lite, `:4360`), RustFS S3 (`:9000`, admin UI `:9001`).
 
 ## Key Commands (via `task`, from the repo root)
 
@@ -103,7 +103,7 @@ task worker:format     # go fmt ./...
 task worker:check      # go build ./... (compile check)
 task worker:test       # go test ./...
 task worker:test-race  # go test -race ./... (use for concurrency changes)
-task worker:build      # bin/oasm-cli + bin/oasm-app
+task worker:build      # bin/mithril-cli + bin/mithril-app
 task worker:install    # go mod tidy
 
 # Codegen (MUST run after contract changes)
@@ -117,7 +117,7 @@ task migration:run
 task migration:revert
 
 # Docker
-task docker-compose    # build+recreate full stack (workers=N scales oasm-worker, default 1)
+task docker-compose    # build+recreate full stack (workers=N scales mithril-worker, default 1)
 
 # Release — see Releases below; only when the user explicitly asks
 task release -- patch --dry-run          # preview: prints every change and command, writes nothing
@@ -153,7 +153,7 @@ Migration location: `core-api/src/database/migrations/` (88 files, newest last).
 1. `task init` — enables pnpm via corepack, copies `core-api/example.env` → `.env` and `console/example.env` → `.env` (only when missing), runs `pnpm install` + `task worker:install` (`go mod tidy`), and starts `postgres` + `redis` + `geo-ip` + `rustfs` via compose.
 2. `worker/.env` must be created by hand from `worker/.example.env` (`task init` does not copy it) — `WORKER_API_KEY` must match the key core-api expects.
 3. `task dev` → API `:6276` (gRPC `:16276`, Swagger/Scalar at `/api/docs`), console `:5173`.
-4. `task worker:dev` for a local worker. Worker **tools are not installed by any task** — the worker pulls them at runtime: `DownloadTools` (`worker/internal/grpcclient/tools.go`) calls the core-api `BuiltinToolRegistry` gRPC, downloads/extracts the archives into `WORKER_TOOL_PATH` (default `oasm-tools`; Docker backs it with the shared `worker-tools-cache` volume), and caches versions in `.tool_versions.json` there. So the first worker boot needs core-api **and** its storage reachable. There is no `task worker:tools` — that task does not exist, and `worker/scripts/install.{sh,ps1}` are release-binary installers for end users, not tool installers.
+4. `task worker:dev` for a local worker. Worker **tools are not installed by any task** — the worker pulls them at runtime: `DownloadTools` (`worker/internal/grpcclient/tools.go`) calls the core-api `BuiltinToolRegistry` gRPC, downloads/extracts the archives into `WORKER_TOOL_PATH` (default `mithril-tools`; Docker backs it with the shared `worker-tools-cache` volume), and caches versions in `.tool_versions.json` there. So the first worker boot needs core-api **and** its storage reachable. There is no `task worker:tools` — that task does not exist, and `worker/scripts/install.{sh,ps1}` are release-binary installers for end users, not tool installers.
 
 ## Configuration Files & Linting
 
@@ -176,7 +176,7 @@ Migration location: `core-api/src/database/migrations/` (88 files, newest last).
 
 | File | Key vars |
 |---|---|
-| `core-api/.env` (from `example.env`) | `POSTGRES_*`, `REDIS_URL`, `PORT=6276`, `GRPC_PORT=16276`, `GEO_IP_URL`, `OASM_CLOUD_APIKEY`, `ENCRYPTION_KEYS` (comma-separated KEKs, **last = active**), `RUSTFS_ENDPOINT/ACCESS_KEY/SECRET_KEY`, `AUDIT_ARCHIVE_DIR`, `TRUSTED_ORIGINS` (browser origins besides `BASE_URL` that get CORS, from the API and the storage buckets, and pass better-auth's origin check; the only origin list, `CORS_ALLOWED_ORIGINS` is no longer read; required for a console opened over plain http off localhost, e.g. a LAN/VPN IP). Optional cloud-S3 knobs (`STORAGE_URL_BASE`, `S3_*`) default in `storage.config.ts` |
+| `core-api/.env` (from `example.env`) | `POSTGRES_*`, `REDIS_URL`, `PORT=6276`, `GRPC_PORT=16276`, `GEO_IP_URL`, `Mithril_CLOUD_APIKEY`, `ENCRYPTION_KEYS` (comma-separated KEKs, **last = active**), `RUSTFS_ENDPOINT/ACCESS_KEY/SECRET_KEY`, `AUDIT_ARCHIVE_DIR`, `TRUSTED_ORIGINS` (browser origins besides `BASE_URL` that get CORS, from the API and the storage buckets, and pass better-auth's origin check; the only origin list, `CORS_ALLOWED_ORIGINS` is no longer read; required for a console opened over plain http off localhost, e.g. a LAN/VPN IP). Optional cloud-S3 knobs (`STORAGE_URL_BASE`, `S3_*`) default in `storage.config.ts` |
 | `console/.env` (from `example.env`) | `VITE_API_URL` (dev `http://localhost:6276`) |
 | `worker/.env` (from `.example.env`) | `WORKER_API_KEY`, `WORKER_MAX_CONCURRENCY`, `WORKER_GRPC_HOST/PORT`, plus `WORKER_MODE`, `WORKER_TOOL_PATH`, `WORKER_TOKEN_FILE`, `WORKER_CONNECTOR_ADDR`, `WORKER_CONNECTOR_ADDR_ALLOW_AUTODETECT`, `WORKER_NETWORK`, `WORKER_DNS_RESOLVERS` (resolvers pinned onto built-in naabu via `-r`; empty = `/etc/resolv.conf`, `off` = naabu's public resolvers) |
 
@@ -205,10 +205,10 @@ Migration location: `core-api/src/database/migrations/` (88 files, newest last).
 - Go module `worker/`, business logic in `internal/{cli,config,connector,execution,runtime,grpcclient,hostmetrics,observability,resource,security,telemetry,transport,tui,worker}`.
 - `cmd/cli` flags: `--mode cli|node`, `--api-key`, `--max-concurrency`, `--grpc-host`, `--grpc-port`, `--tool-path`, `--network`. `cmd/app` is the same thing driven purely by `WORKER_*` env.
 - **Connector model:** the worker node is a *node* that dispatches work to connector containers over the Docker Engine API and serves their callback gRPC on `:26276`. It therefore needs the host Docker socket (docker-outside-of-docker, root-equivalent — trusted images only) and the socket's group (`group_add: ['0']` on Docker Desktop). It auto-adds the `host-gateway` extra-host on Linux so `host.docker.internal` resolves; `WORKER_CONNECTOR_ADDR_ALLOW_AUTODETECT=1` is a **dev-only** escape hatch (compose sets `WORKER_CONNECTOR_NETWORK` instead: connectors join that network and dial the worker container's own IP on it).
-- **Warm-pool isolation:** an idle connector container is reused only for a job of the same workspace (`Job.workspace_id` → `poolEntry.Tenant`); a job with config but no workspace (older core-api) never reuses one. The config reaches the container as `OASM_CONFIG` env only when the manifest lacks `configInband`; it always travels in `ExecuteJob`. `security.SecretMasker` replaces the job's secrets with `***` in container logs, raw results and error messages before they reach Core.
+- **Warm-pool isolation:** an idle connector container is reused only for a job of the same workspace (`Job.workspace_id` → `poolEntry.Tenant`); a job with config but no workspace (older core-api) never reuses one. The config reaches the container as `Mithril_CONFIG` env only when the manifest lacks `configInband`; it always travels in `ExecuteJob`. `security.SecretMasker` replaces the job's secrets with `***` in container logs, raw results and error messages before they reach Core.
 - The worker's HPKE key lives at `<WORKER_TOKEN_FILE>.key` (0600, created on first start) and its public half is sent on Join; core-api seals job secrets to it (`Job.sealed`). Losing the key file while keeping the token makes sealed jobs fail until the worker rejoins with a new join key.
 - Join identity is persisted at `WORKER_TOKEN_FILE` on the `worker-state` volume. Losing that file mints a new identity and startup orphan-reconcile can no longer recognise previously spawned containers.
-- Connector catalogue comes from `core-api/resources/connectors/manifest.json`; refresh with `task sync-connectors` (set `MANIFEST_PATH=<local oasm-connectors checkout>/manifest.json` to preview an unmerged connector instead of pulling `main`).
+- Connector catalogue comes from `core-api/resources/connectors/manifest.json`; refresh with `task sync-connectors` (set `MANIFEST_PATH=<local mithril-connectors checkout>/manifest.json` to preview an unmerged connector instead of pulling `main`).
 
 ### console
 - `components/{ui,common,<feature>}/` for shared/primitive/feature components, `pages/<page>/components/` for page-local logic.
@@ -250,8 +250,8 @@ What a real run does, in order — it stops at the first failure:
 
 1. **Pre-flight**: `git fetch --prune --prune-tags` (tags deleted on the remote are dropped locally), then refuses unless the working tree is completely clean (untracked files count), the current branch is `main`, HEAD equals `origin/main`, the tag exists neither locally nor on the remote, and the version is newer than the newest semver tag. Both package.json files are read and checked here too.
 2. **Checks**: `task lint` then `task test`, then the tree must still be clean (`api:lint` runs `--fix`). Commit any lint fixes and run the release again.
-3. **Stamp**: writes `version` (tag without `v`), `author: "oasm-platform"` and `license: "AGPL-3.0-only"` into `core-api/package.json` and `console/package.json`. The root `package.json` is the workspace manifest and is not touched. Values live in `PACKAGES` / `PACKAGE_FIELDS` at the top of `scripts/release.mjs`.
-4. **Commit**: only those two files, on `main`, as `release(oasm): v0.13.0`. If the commit fails (e.g. the hook), both files are restored and nothing is tagged.
+3. **Stamp**: writes `version` (tag without `v`), `author: "betennispadel"` and `license: "AGPL-3.0-only"` into `core-api/package.json` and `console/package.json`. The root `package.json` is the workspace manifest and is not touched. Values live in `PACKAGES` / `PACKAGE_FIELDS` at the top of `scripts/release.mjs`.
+4. **Commit**: only those two files, on `main`, as `release(mithril): v0.13.0`. If the commit fails (e.g. the hook), both files are restored and nothing is tagged.
 5. **Tag**: annotated tag on the release commit; its message is the changelog since the previous tag.
 6. **Push**: `git push --atomic origin refs/heads/main refs/tags/v0.13.0` — both refs land or neither does. This is a direct push to protected `main`, so it only works for an account allowed to bypass the protection.
 
@@ -268,9 +268,9 @@ Gotchas:
 
 `task docker-compose` = `docker compose --env-file ./core-api/.env up -d --build --force-recreate`.
 
-Services: `console` (`:3000`), `core-api` (`:6276` + `:16276`, healthcheck `/api/health`), `oasm-worker` (socket-mounted, connector callback `:26276` on the `oasm-connectors` network, not published), `postgres` (pg18+pgvector), `redis`, `geo-ip` (`:4360`), `rustfs` (`:9000`/`:9001`), and a one-shot `migration` service that gates `core-api` startup (`service_completed_successfully`).
+Services: `console` (`:3000`), `core-api` (`:6276` + `:16276`, healthcheck `/api/health`), `mithril-worker` (socket-mounted, connector callback `:26276` on the `mithril-connectors` network, not published), `postgres` (pg18+pgvector), `redis`, `geo-ip` (`:4360`), `rustfs` (`:9000`/`:9001`), and a one-shot `migration` service that gates `core-api` startup (`service_completed_successfully`).
 
-The compose service key is `oasm-worker`, **not** `worker`. It scales (`task docker-compose workers=3`): connector containers join the `oasm-connectors` network and dial each replica on its own IP, so nothing is published on the host. `oasm-connectors` is `internal: true`: connectors reach the internet only through the worker egress proxy (`:26277`, `worker/internal/egress`); connectors whose manifest says `egress: direct` (nmap, rustscan; core-api sends it as `Job.direct_egress` / `ToolRun.direct_egress`) are also attached to the default `bridge` and go direct. An existing non-internal `oasm-connectors` network must be removed (`docker network rm oasm-connectors`) before compose recreates it. Replicas share `worker-state` but each locks its own token slot (`.worker-token`, `.worker-token.1`, …) — two workers resuming the same token would share an identity and reap each other's connectors.
+The compose service key is `mithril-worker`, **not** `worker`. It scales (`task docker-compose workers=3`): connector containers join the `mithril-connectors` network and dial each replica on its own IP, so nothing is published on the host. `mithril-connectors` is `internal: true`: connectors reach the internet only through the worker egress proxy (`:26277`, `worker/internal/egress`); connectors whose manifest says `egress: direct` (nmap, rustscan; core-api sends it as `Job.direct_egress` / `ToolRun.direct_egress`) are also attached to the default `bridge` and go direct. An existing non-internal `mithril-connectors` network must be removed (`docker network rm mithril-connectors`) before compose recreates it. Replicas share `worker-state` but each locks its own token slot (`.worker-token`, `.worker-token.1`, …) — two workers resuming the same token would share an identity and reap each other's connectors.
 
 Volumes worth knowing: `pgdata` (mounted at `/var/lib/postgresql` — pg18 layout), `redis-data`, `rustfs-data`, `worker-tools-cache` (shared tool cache across workers), `worker-state` (worker join identity). `.open-api` is bind-mounted into `core-api` so the container regenerates the spec the console codegen consumes.
 

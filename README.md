@@ -1,24 +1,24 @@
 <p align="center">
-  <img src="core-api/public/images/logo.png" alt="OASM Logo" width="150" />
+  <img src="core-api/public/images/logo.png" alt="Mithril Logo" width="150" />
 </p>
 
-<h1 align="center">Open Attack Surface Management (OASM)</h1>
+<h1 align="center">Open Attack Surface Management (Mithril)</h1>
 
 <p align="center"><strong>Open-source Attack Surface Management. Discover assets. Identify exposure. Own your security data.</strong></p>
 
 <p align="center">
-  <a href="https://github.com/oasm-platform/open-asm/releases"><img src="https://img.shields.io/github/v/release/oasm-platform/open-asm?style=flat-square&label=release" alt="Latest Release"></a>
-  <a href="https://github.com/oasm-platform/open-asm/actions/workflows/build-nightly.yml"><img src="https://img.shields.io/github/actions/workflow/status/oasm-platform/open-asm/build-nightly.yml?style=flat-square&label=ci" alt="CI"></a>
-  <a href="https://hub.docker.com/r/oasm/oasm-api"><img src="https://img.shields.io/docker/pulls/oasm/oasm-api?style=flat-square&logo=docker&logoColor=white" alt="Docker Pulls"></a>
+  <a href="https://github.com/betennispadel/mithril/releases"><img src="https://img.shields.io/github/v/release/betennispadel/mithril?style=flat-square&label=release" alt="Latest Release"></a>
+  <a href="https://github.com/betennispadel/mithril/actions/workflows/build-nightly.yml"><img src="https://img.shields.io/github/actions/workflow/status/betennispadel/mithril/build-nightly.yml?style=flat-square&label=ci" alt="CI"></a>
+  <a href="https://hub.docker.com/r/mithril/mithril-api"><img src="https://img.shields.io/docker/pulls/mithril/mithril-api?style=flat-square&logo=docker&logoColor=white" alt="Docker Pulls"></a>
   <a href="https://discord.gg/fWqbNHXR8H"><img src="https://img.shields.io/badge/discord-5865F2?style=flat-square&logo=discord&logoColor=white" alt="Discord"></a>
-  <a href="https://www.linkedin.com/company/oasm-platform"><img src="https://img.shields.io/badge/linkedin-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn"></a>
-  <a href="https://x.com/OasmPlatform"><img src="https://img.shields.io/badge/x-000000?style=flat-square&logo=x&logoColor=white" alt="X"></a>
-  <a href="https://docs.oasm.io"><img src="https://img.shields.io/badge/docs-2fc414?style=flat-square&logo=gitbook&logoColor=white" alt="Documentation"></a>
+  <a href="https://www.linkedin.com/company/betennispadel"><img src="https://img.shields.io/badge/linkedin-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn"></a>
+  <a href="https://x.com/MithrilSec"><img src="https://img.shields.io/badge/x-000000?style=flat-square&logo=x&logoColor=white" alt="X"></a>
+  <a href="https://docs.mithril.dev"><img src="https://img.shields.io/badge/docs-2fc414?style=flat-square&logo=gitbook&logoColor=white" alt="Documentation"></a>
 </p>
 
-OASM is a self-hostable, open-source Attack Surface Management platform. It inventories internet-facing assets, runs distributed scans through pluggable connectors, and tracks the resulting vulnerabilities in one workspace, with AI Studio — a security agent that works directly on that data. Security teams stop stitching together spreadsheets, one-off scanners, and hosted-only tools.
+Mithril is a self-hostable, open-source Attack Surface Management platform. It inventories internet-facing assets, runs distributed scans through pluggable connectors, and tracks the resulting vulnerabilities in one workspace, with AI Studio — a security agent that works directly on that data. Security teams stop stitching together spreadsheets, one-off scanners, and hosted-only tools.
 
-📖 **Documentation → [docs.oasm.io](https://docs.oasm.io)**
+📖 **Documentation → [docs.mithril.dev](https://docs.mithril.dev)**
 
 ## Table of Contents
 
@@ -46,7 +46,7 @@ Attack Surface Management (ASM) in practice means three loops:
 2. **Assess** — run scanners against those assets and normalize findings into trackable vulnerabilities.
 3. **Operate** — group assets, schedule recurring scans, notify the right channel, and audit what changed.
 
-OASM implements these loops as one integrated, self-hosted stack: a web console for daily work, a NestJS core API for business logic and orchestration, and Go workers that execute scans in isolated connector containers. PostgreSQL (pgvector), Redis/BullMQ, S3-compatible storage, and a Geo-IP proxy back the platform. Your data stays in your infrastructure; scanning tools stay decoupled so adding a tool never requires an OASM release.
+Mithril implements these loops as one integrated, self-hosted stack: a web console for daily work, a NestJS core API for business logic and orchestration, and Go workers that execute scans in isolated connector containers. PostgreSQL (pgvector), Redis/BullMQ, S3-compatible storage, and a Geo-IP proxy back the platform. Your data stays in your infrastructure; scanning tools stay decoupled so adding a tool never requires an Mithril release.
 
 ## Key Features
 
@@ -56,20 +56,20 @@ OASM implements these loops as one integrated, self-hosted stack: a web console 
 | **Vulnerability tracking** | Scan findings normalized into trackable vulnerabilities with severity, status, and evidence detail, so teams triage and follow up in one place. |
 | **Asset groups + schedules** | Bundle related assets, attach scan workflows with cron schedules (or pause with `disabled`), and trigger on-demand runs per group. |
 | **Distributed workers** | Workers join over gRPC, pull queued jobs, run each scan in an isolated container, and stream findings back. Several workers can share one host. |
-| **Pluggable connectors** | Each scanner ships as a versioned container image from a companion repo and is synced locally — adding or upgrading a tool never requires an OASM release. |
+| **Pluggable connectors** | Each scanner ships as a versioned container image from a companion repo and is synced locally — adding or upgrading a tool never requires an Mithril release. |
 | **Workflows** | Cron-scheduled or event-triggered scan workflows with a job graph, so recurring coverage runs without manual kicks. |
 | **Notifications** | In-app notifications plus Slack, Discord, Telegram, and generic webhooks, filtered per integration by event type and severity. |
 | **Cloud asset sync** | Scheduled pull of assets from AWS, Cloudflare, and Vercel, keeping the inventory in sync with cloud estates. |
 | **Repositories & ticketing** | Keep GitHub and GitLab repositories in the inventory, and open an issue for every new vulnerability. See [Integrations](#integrations). |
 | **AI Studio** | A security agent that works on your own data and workers: it plans, delegates to subagents, runs commands in a sandboxed terminal, drives a headless browser, and reports back — within the approval level you set. See [AI Studio](#ai-studio). |
-| **MCP server** | Connect any MCP-compatible AI client to your instance with an API key and work with OASM data from the tools you already use. |
+| **MCP server** | Connect any MCP-compatible AI client to your instance with an API key and work with Mithril data from the tools you already use. |
 | **Enrichment & storage** | Automatic IP geolocation plus S3-compatible storage for scan artifacts and PDF reports. |
 | **Multi-workspace & access control** | Isolated workspaces per team or project, with owner/member roles, API keys, and an audit log archived as JSONL. |
 | **API & docs** | Versioned REST API with interactive Swagger/Scalar docs, backed by a tracked OpenAPI spec the console client is generated from. |
 
 ## AI Studio
 
-AI Studio is the security agent built into OASM. It works on your workspace data and your own workers, with the model you choose, and it only acts as far as your approval setting allows.
+AI Studio is the security agent built into Mithril. It works on your workspace data and your own workers, with the model you choose, and it only acts as far as your approval setting allows.
 
 - **Ask and Agent modes.** Ask answers questions from your inventory and findings. Agent turns a goal into a visible to-do plan and works through it step by step until it reaches an answer.
 - **Subagents.** The main agent hands parts of a task to background subagents that run in parallel, each with its own model and limits — planner, researcher, pentest, retester, reporter, asset analyst, or your own. Every subagent's steps and tool calls are recorded and open in the chat side panel.
@@ -140,42 +140,42 @@ graph TD
     C3 -->|Scan| Internet
 ```
 
-→ Full diagram and scan lifecycle: [docs.oasm.io/architecture](https://docs.oasm.io/architecture)
+→ Full diagram and scan lifecycle: [docs.mithril.dev/architecture](https://docs.mithril.dev/architecture)
 
 ## Connectors
 
-Scanning tools live as isolated Docker images in the companion repo [oasm-connectors](https://github.com/oasm-platform/oasm-connectors), each wrapping a tool in a small adapter. OASM reads that catalog as data (`task sync-connectors`), so a worker resolves the right image and runs the tool on demand inside its own container — adding or upgrading a scanner never needs an OASM release.
+Scanning tools live as isolated Docker images in the companion repo [mithril-connectors](https://github.com/betennispadel/mithril-connectors), each wrapping a tool in a small adapter. Mithril reads that catalog as data (`task sync-connectors`), so a worker resolves the right image and runs the tool on demand inside its own container — adding or upgrading a scanner never needs an Mithril release.
 
-Browse every connector in the [marketplace](https://oasm.dev/marketplace), then install the ones you need from **Tools** in the console.
+Browse every connector in the [marketplace](https://mithril.dev/marketplace), then install the ones you need from **Tools** in the console.
 
 <table>
   <tr>
-    <td align="center" width="72"><img src="https://raw.githubusercontent.com/oasm-platform/oasm-connectors/main/ports_scanner/nmap/logo.png" width="40" height="40" alt="Nmap" title="Nmap"></td>
-    <td align="center" width="72"><img src="https://raw.githubusercontent.com/oasm-platform/oasm-connectors/main/ports_scanner/rustscan/logo.png" width="40" height="40" alt="RustScan" title="RustScan"></td>
-    <td align="center" width="72"><img src="https://raw.githubusercontent.com/oasm-platform/oasm-connectors/main/url_discovery/katana/logo.png" width="40" height="40" alt="Katana" title="Katana"></td>
-    <td align="center" width="72"><img src="https://raw.githubusercontent.com/oasm-platform/oasm-connectors/main/url_discovery/ffuf/logo.png" width="40" height="40" alt="ffuf" title="ffuf"></td>
-    <td align="center" width="72"><img src="https://raw.githubusercontent.com/oasm-platform/oasm-connectors/main/url_discovery/dirsearch/logo.png" width="40" height="40" alt="dirsearch" title="dirsearch"></td>
-    <td align="center" width="72"><img src="https://raw.githubusercontent.com/oasm-platform/oasm-connectors/main/url_discovery/arjun/logo.png" width="40" height="40" alt="Arjun" title="Arjun"></td>
-    <td align="center" width="72"><img src="https://raw.githubusercontent.com/oasm-platform/oasm-connectors/main/secrets/gitleaks/logo.png" width="40" height="40" alt="Gitleaks" title="Gitleaks"></td>
+    <td align="center" width="72"><img src="https://raw.githubusercontent.com/betennispadel/mithril-connectors/main/ports_scanner/nmap/logo.png" width="40" height="40" alt="Nmap" title="Nmap"></td>
+    <td align="center" width="72"><img src="https://raw.githubusercontent.com/betennispadel/mithril-connectors/main/ports_scanner/rustscan/logo.png" width="40" height="40" alt="RustScan" title="RustScan"></td>
+    <td align="center" width="72"><img src="https://raw.githubusercontent.com/betennispadel/mithril-connectors/main/url_discovery/katana/logo.png" width="40" height="40" alt="Katana" title="Katana"></td>
+    <td align="center" width="72"><img src="https://raw.githubusercontent.com/betennispadel/mithril-connectors/main/url_discovery/ffuf/logo.png" width="40" height="40" alt="ffuf" title="ffuf"></td>
+    <td align="center" width="72"><img src="https://raw.githubusercontent.com/betennispadel/mithril-connectors/main/url_discovery/dirsearch/logo.png" width="40" height="40" alt="dirsearch" title="dirsearch"></td>
+    <td align="center" width="72"><img src="https://raw.githubusercontent.com/betennispadel/mithril-connectors/main/url_discovery/arjun/logo.png" width="40" height="40" alt="Arjun" title="Arjun"></td>
+    <td align="center" width="72"><img src="https://raw.githubusercontent.com/betennispadel/mithril-connectors/main/secrets/gitleaks/logo.png" width="40" height="40" alt="Gitleaks" title="Gitleaks"></td>
   </tr>
   <tr>
-    <td align="center" width="72"><img src="https://raw.githubusercontent.com/oasm-platform/oasm-connectors/main/vulnerabilities/nuclei/logo.png" width="40" height="40" alt="Nuclei" title="Nuclei"></td>
-    <td align="center" width="72"><img src="https://raw.githubusercontent.com/oasm-platform/oasm-connectors/main/vulnerabilities/zap/logo.png" width="40" height="40" alt="OWASP ZAP" title="OWASP ZAP"></td>
-    <td align="center" width="72"><img src="https://raw.githubusercontent.com/oasm-platform/oasm-connectors/main/vulnerabilities/nikto/logo.png" width="40" height="40" alt="Nikto" title="Nikto"></td>
-    <td align="center" width="72"><img src="https://raw.githubusercontent.com/oasm-platform/oasm-connectors/main/vulnerabilities/wpscan/logo.png" width="40" height="40" alt="WPScan" title="WPScan"></td>
-    <td align="center" width="72"><img src="https://raw.githubusercontent.com/oasm-platform/oasm-connectors/main/vulnerabilities/nessus/logo.png" width="40" height="40" alt="Nessus" title="Nessus"></td>
-    <td align="center" width="72"><img src="https://raw.githubusercontent.com/oasm-platform/oasm-connectors/main/vulnerabilities/acunetix/logo.png" width="40" height="40" alt="Acunetix" title="Acunetix"></td>
-    <td align="center" width="72"><img src="https://raw.githubusercontent.com/oasm-platform/oasm-connectors/main/sca/trivy/logo.png" width="40" height="40" alt="Trivy" title="Trivy"></td>
+    <td align="center" width="72"><img src="https://raw.githubusercontent.com/betennispadel/mithril-connectors/main/vulnerabilities/nuclei/logo.png" width="40" height="40" alt="Nuclei" title="Nuclei"></td>
+    <td align="center" width="72"><img src="https://raw.githubusercontent.com/betennispadel/mithril-connectors/main/vulnerabilities/zap/logo.png" width="40" height="40" alt="OWASP ZAP" title="OWASP ZAP"></td>
+    <td align="center" width="72"><img src="https://raw.githubusercontent.com/betennispadel/mithril-connectors/main/vulnerabilities/nikto/logo.png" width="40" height="40" alt="Nikto" title="Nikto"></td>
+    <td align="center" width="72"><img src="https://raw.githubusercontent.com/betennispadel/mithril-connectors/main/vulnerabilities/wpscan/logo.png" width="40" height="40" alt="WPScan" title="WPScan"></td>
+    <td align="center" width="72"><img src="https://raw.githubusercontent.com/betennispadel/mithril-connectors/main/vulnerabilities/nessus/logo.png" width="40" height="40" alt="Nessus" title="Nessus"></td>
+    <td align="center" width="72"><img src="https://raw.githubusercontent.com/betennispadel/mithril-connectors/main/vulnerabilities/acunetix/logo.png" width="40" height="40" alt="Acunetix" title="Acunetix"></td>
+    <td align="center" width="72"><img src="https://raw.githubusercontent.com/betennispadel/mithril-connectors/main/sca/trivy/logo.png" width="40" height="40" alt="Trivy" title="Trivy"></td>
   </tr>
 </table>
 
 ## Integrations
 
-Connect OASM to the tools your team already uses. Integrations are set up per workspace from **Integrations** in the console.
+Connect Mithril to the tools your team already uses. Integrations are set up per workspace from **Integrations** in the console.
 
 **Alerts — Slack, Discord, Telegram, Webhook**
 
-OASM pushes only the events worth acting on: new vulnerabilities, vulnerability status changes, finished or failed scans, and failed syncs. Each integration chooses which event types and which severity levels it receives.
+Mithril pushes only the events worth acting on: new vulnerabilities, vulnerability status changes, finished or failed scans, and failed syncs. Each integration chooses which event types and which severity levels it receives.
 
 - **Slack** and **Discord** post to a channel through an incoming webhook.
 - **Telegram** uses your own bot. Members link a chat with `/pair` (and `/unpair` to stop). It works through a Telegram webhook, or falls back to polling when the instance has no public URL.
@@ -191,7 +191,7 @@ Pull assets straight from your cloud accounts on a schedule, so new infrastructu
 
 **Source code — GitHub, GitLab**
 
-Add a GitHub or GitLab organization as a target and OASM keeps its repositories in the inventory: new ones are added, renamed ones are followed, and deleted ones are disabled with their history kept. Workflows can scan repositories as soon as a sync finishes. GitHub Enterprise Server and self-managed GitLab are supported.
+Add a GitHub or GitLab organization as a target and Mithril keeps its repositories in the inventory: new ones are added, renamed ones are followed, and deleted ones are disabled with their history kept. Workflows can scan repositories as soon as a sync finishes. GitHub Enterprise Server and self-managed GitLab are supported.
 
 **Ticketing — GitHub Issues, GitLab Issues**
 
@@ -241,7 +241,7 @@ The same GitHub or GitLab connection can open an issue in a repository you choos
 *Worker fleet — online status, installed toolset, and active jobs for every scanning worker across global and workspace scopes.*
 
 ![McpConnect](docs/images/mcp.png)
-*MCP connect — copy-paste JSON config that plugs any MCP-compatible AI client into your OASM instance via API key.*
+*MCP connect — copy-paste JSON config that plugs any MCP-compatible AI client into your Mithril instance via API key.*
 
 ![JobRegistry](docs/images/job_registry.png)
 *Job registry — the scan pipeline per target (subdomain discovery → port scan → HTTP probe → screenshot) with per-job status, timing, and history.*
@@ -263,8 +263,8 @@ The same GitHub or GitLab connection can open an issue in a repository you choos
 Prerequisites: Docker + Docker Compose, [Task](https://taskfile.dev/#/installation), Node.js 22, pnpm 10.33.2, Go 1.26 (for local dev).
 
 ```bash
-git clone https://github.com/oasm-platform/open-asm.git
-cd open-asm
+git clone https://github.com/betennispadel/mithril.git
+cd mithril
 
 cp core-api/example.env core-api/.env
 cp console/example.env console/.env
@@ -284,7 +284,7 @@ This builds and starts console, core API, worker, Postgres, Redis, Geo-IP proxy,
 | Redis | `localhost:6379` |
 | Geo-IP | `localhost:4360` |
 | RustFS | `localhost:9000` (admin UI `:9001`) |
-| Worker callback | `:26276` on the `oasm-connectors` network, not published (scale with `--scale oasm-worker=N`) |
+| Worker callback | `:26276` on the `mithril-connectors` network, not published (scale with `--scale mithril-worker=N`) |
 
 Notes:
 
@@ -292,8 +292,8 @@ Notes:
 - Opening the console from any address other than `localhost` over plain http (e.g. `http://192.168.1.10:3000`, or a host name without TLS): add that origin to `TRUSTED_ORIGINS` in `core-api/.env` (comma-separated exact origins, no wildcards) and recreate `core-api`. Otherwise sign-in fails with `403 INVALID_ORIGIN`. `TRUSTED_ORIGINS` is the only origin setting; `BASE_URL` is trusted on top of it.
 - On native Linux the worker needs the Docker socket group: `task docker-compose` detects `WORKER_DOCKER_GID` automatically. Raw `docker compose up` needs `WORKER_DOCKER_GID=$(stat -c '%g' /var/run/docker.sock) docker compose up -d --build`.
 - The socket mount is root-equivalent — only run trusted connector images.
-- Pre-built images: `oasm/oasm-console`, `oasm/oasm-api`, `oasm/oasm-worker` on Docker Hub.
-- Production deploy: [oasm-docker](https://github.com/oasm-platform/oasm-docker) — see [docs.oasm.io/deployment](https://docs.oasm.io/deployment).
+- Pre-built images: `mithril/mithril-console`, `mithril/mithril-api`, `mithril/mithril-worker` on Docker Hub.
+- Production deploy: [mithril-docker](https://github.com/betennispadel/mithril-docker) — see [docs.mithril.dev/deployment](https://docs.mithril.dev/deployment).
 
 ## Development
 
@@ -309,7 +309,7 @@ Key commands: `task build`, `task lint` (API then console, sequential — never 
 
 Layout: `core-api/` (NestJS, `src/modules/*`, `src/mcp/`, `src/proto/`), `console/` (React 19 + Vite + TanStack Router/Query, `src/routes/`, orval client in `src/services/apis/gen/`), `worker/` (Go, `internal/*`, entries `cmd/cli` + `cmd/app`).
 
-→ Full setup, conventions, and CI: [DEVELOPER_GUIDE.md](DEVELOPER_GUIDE.md) · [docs.oasm.io/developer-guide](https://docs.oasm.io/developer-guide)
+→ Full setup, conventions, and CI: [DEVELOPER_GUIDE.md](DEVELOPER_GUIDE.md) · [docs.mithril.dev/developer-guide](https://docs.mithril.dev/developer-guide)
 
 ## Contributing
 
@@ -322,30 +322,30 @@ See [`CONTRIBUTING.md`](CONTRIBUTING.md) for the full process. Short version:
 
 ## Security
 
-See [`SECURITY.md`](SECURITY.md). Short version: report sensitive vulnerabilities via [private Security Advisories](https://github.com/oasm-platform/open-asm/security/advisories/new) — no dedicated email, no formal SLA. Non-sensitive hardening ideas can go in a public [bug report](https://github.com/oasm-platform/open-asm/issues/new?template=bug-report.yml).
+See [`SECURITY.md`](SECURITY.md). Short version: report sensitive vulnerabilities via [private Security Advisories](https://github.com/betennispadel/mithril/security/advisories/new) — no dedicated email, no formal SLA. Non-sensitive hardening ideas can go in a public [bug report](https://github.com/betennispadel/mithril/issues/new?template=bug-report.yml).
 
 ## Community and Resources
 
-- Repository: [github.com/oasm-platform/open-asm](https://github.com/oasm-platform/open-asm)
-- Issues: [open-asm/issues](https://github.com/oasm-platform/open-asm/issues) (bug-report + feature-request templates)
-- Releases: [open-asm/releases](https://github.com/oasm-platform/open-asm/releases)
-- Docs: [docs.oasm.io](https://docs.oasm.io)
-- Connectors repo: [oasm-platform/oasm-connectors](https://github.com/oasm-platform/oasm-connectors)
-- Marketplace: [oasm.dev/marketplace](https://oasm.dev/marketplace)
+- Repository: [github.com/betennispadel/mithril](https://github.com/betennispadel/mithril)
+- Issues: [mithril/issues](https://github.com/betennispadel/mithril/issues) (bug-report + feature-request templates)
+- Releases: [mithril/releases](https://github.com/betennispadel/mithril/releases)
+- Docs: [docs.mithril.dev](https://docs.mithril.dev)
+- Connectors repo: [betennispadel/mithril-connectors](https://github.com/betennispadel/mithril-connectors)
+- Marketplace: [mithril.dev/marketplace](https://mithril.dev/marketplace)
 - Discord / LinkedIn / X: see badges at the top.
 
 ## License
 
 [GNU Affero General Public License v3.0](LICENSE) — see `LICENSE` in the repo root.
 
-If you run a modified version of OASM as a network service, the AGPL requires you to offer its users the complete source of that modified version.
+If you run a modified version of Mithril as a network service, the AGPL requires you to offer its users the complete source of that modified version.
 
 ## Star History
 
-If OASM is useful to you, please star the repo — it helps others discover the project.
+If Mithril is useful to you, please star the repo — it helps others discover the project.
 
-[![Star History Chart](https://api.star-history.com/svg?repos=oasm-platform/open-asm&type=date&legend=top-left)](https://www.star-history.com/?repos=oasm-platform%2Fopen-asm&type=date&legend=top-left)
+[![Star History Chart](https://api.star-history.com/svg?repos=betennispadel/mithril&type=date&legend=top-left)](https://www.star-history.com/?repos=betennispadel%2Fmithril&type=date&legend=top-left)
 
 ## Sponsors
 
-OASM is supported by [Anthropic](https://www.anthropic.com) through its startup program. Thank you for backing open-source security tooling.
+Mithril is supported by [Anthropic](https://www.anthropic.com) through its startup program. Thank you for backing open-source security tooling.

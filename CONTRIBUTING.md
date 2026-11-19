@@ -1,11 +1,11 @@
-# Contributing to OASM
+# Contributing to Mithril
 
 Thanks for considering a contribution. This guide reflects how this repo actually works — read the [Hard Rules](#hard-rules) first, they are the mistakes every newcomer makes here.
 
 ## Ways to Contribute
 
 - **Bug fixes** — especially tenant-isolation, auth, and scanner-pipeline bugs.
-- **New connectors** — live in the separate [oasm-connectors](https://github.com/oasm-platform/oasm-connectors) repo, not here. This repo only syncs its `manifest.json`.
+- **New connectors** — live in the separate [mithril-connectors](https://github.com/betennispadel/mithril-connectors) repo, not here. This repo only syncs its `manifest.json`.
 - **Docs and tests** — always welcome, lowest review friction.
 - **Security workflow improvements** — asset discovery, finding triage, scheduling, alerting.
 
@@ -22,8 +22,8 @@ Thanks for considering a contribution. This guide reflects how this repo actuall
 ## Setup
 
 ```bash
-git clone https://github.com/oasm-platform/open-asm.git
-cd open-asm
+git clone https://github.com/betennispadel/mithril.git
+cd mithril
 task init        # deps + example.env copies + postgres/redis/geo-ip/rustfs
 # worker/.env is NOT created by task init — copy it manually:
 cp worker/.example.env worker/.env   # then set WORKER_API_KEY

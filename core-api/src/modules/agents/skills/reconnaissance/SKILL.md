@@ -1,6 +1,6 @@
 ---
 name: reconnaissance
-description: Attack-surface mapping methodology — passive discovery, subdomain and DNS enumeration, live-host probing, ports, services, technologies, TLS, content discovery, parameter mining and JS analysis, correlating everything with OASM workspace data. Load before testing anything so you test a mapped surface, not a guess.
+description: Attack-surface mapping methodology — passive discovery, subdomain and DNS enumeration, live-host probing, ports, services, technologies, TLS, content discovery, parameter mining and JS analysis, correlating everything with Mithril workspace data. Load before testing anything so you test a mapped surface, not a guess.
 ---
 
 # Reconnaissance & attack-surface mapping

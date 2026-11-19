@@ -1,6 +1,6 @@
 # event-bridge module
 
-The event bus. Domain events are written as CloudEvents to one Redis Stream (`EVENT_BUS_STREAM = 'oasm:events'`) and read back by one consumer group per lane (`EventBusGroup`). The audit trail, in-app notifications, outbound integrations, project scope/triggers and issue automation are all lanes over this stream. `@Global()`, registered in `app.module.ts` (not `combine.module.ts`).
+The event bus. Domain events are written as CloudEvents to one Redis Stream (`EVENT_BUS_STREAM = 'mithril:events'`) and read back by one consumer group per lane (`EventBusGroup`). The audit trail, in-app notifications, outbound integrations, project scope/triggers and issue automation are all lanes over this stream. `@Global()`, registered in `app.module.ts` (not `combine.module.ts`).
 
 ## Layout
 
@@ -27,7 +27,7 @@ The event bus. Domain events are written as CloudEvents to one Redis Stream (`EV
 | `projects` (projects module) | asset, project, vulnerability | `asset.discovered`, `project.assets.added`, `project.run.completed`, `vulnerability.detected` | `ProjectsService.addDiscoveredAssets` / `ProjectTriggersService.onTriggerEvent` | trigger events: `wasEventHandled` then `markEventHandled` after the work |
 | `issues` (issues module) | vulnerability | `vulnerability.detected`, `.resurfaced`, `.fixed` | `IssueAutomationService.onVulnerabilityEvent` | same check-then-mark |
 
-- Redis keys: stream `oasm:events` (`MAXLEN` 100k, 7-day `EXPIRE` refreshed on every write), DLQ `oasm:events:dlq:<workspaceId>`, markers `event-bus:handled:<group>:<key>` (7 days).
+- Redis keys: stream `mithril:events` (`MAXLEN` 100k, 7-day `EXPIRE` refreshed on every write), DLQ `mism:events:dlq:<workspaceId>`, markers `event-bus:handled:<group>:<key>` (7 days).
 
 ## Invariants
 

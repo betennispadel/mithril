@@ -25,7 +25,7 @@ Scan worker nodes: join/identity, liveness, listing, the gRPC channels a worker 
 
 - gRPC `WorkersService` (`src/proto/workers.proto`). `Join`, `Alive` (server stream, refresh every 10 s) and `GetManifest` have no guard. `Storage`, `WorkerTelemetry`, `ConnectInternalNetwork`, `BuiltinToolRegistry`, `RemoteExecuteSubscribe` and `RemoteExecuteResult` use `GrpcWorkerTokenGuard`. `Connect` validates the `worker-token` metadata itself.
 - Events (`EventBridgeService.publishSafely`): `worker.joined` (with `metadata.joinKeyId`), `worker.rejoined`, `worker.disconnected`, `worker.timed_out`. Only workers with a `workspaceId` are announced; cloud workers are skipped.
-- Redis keys: `workers:api:<apiKey>` + `workers:api-id:<id>` (join key, TTL 300 s); `oasm:worker:telemetry:v1:<workerId>` (TTL 90 s, `stale` after 30 s); `agent:conv:worker:<conversationId>` (TTL 1 day).
+- Redis keys: `workers:api:<apiKey>` + `workers:api-id:<id>` (join key, TTL 300 s); `mithril:worker:telemetry:v1:<workerId>` (TTL 90 s, `stale` after 30 s); `agent:conv:worker:<conversationId>` (TTL 1 day).
 - Redis channels: publishes `remote-execute:results:<sessionId>`; `worker:stream:cancel` and `worker:stream:jobs` (`WORKER_STREAM_CANCEL_CHANNEL` / `WORKER_STREAM_JOBS_CHANNEL`).
 - Exports `WorkersService`, `RemoteExecuteSubscribeService`, `GrpcWorkerContext`, `AliveStreamManager`, `WorkerTelemetryService`, `WorkerStreamRegistry`. Not global: imported by `JobsRegistryModule` (`WorkerStreamRegistry`, `GrpcWorkerContext`, and `WorkersService` for `WorkerTokenGuard` / `GrpcWorkerTokenGuard`), `RemoteExecuteModule` and `AgentsModule`.
 
@@ -38,7 +38,7 @@ Scan worker nodes: join/identity, liveness, listing, the gRPC channels a worker 
 
 ## Invariants
 
-- **Join order** (`WorkersService.join`). (1) A live join key is consumed with `GETDEL`, so it is single-use; it creates a workspace worker, or resumes the token's worker if that worker is already in the key's workspace. (2) A known token resumes its worker. (3) `OASM_CLOUD_APIKEY` creates a cloud worker (`CLOUD` + `BUILT_IN`, no workspace). (4) Anything else is an `RpcException`.
+- **Join order** (`WorkersService.join`). (1) A live join key is consumed with `GETDEL`, so it is single-use; it creates a workspace worker, or resumes the token's worker if that worker is already in the key's workspace. (2) A known token resumes its worker. (3) `Mithril_CLOUD_APIKEY` creates a cloud worker (`CLOUD` + `BUILT_IN`, no workspace). (4) Anything else is an `RpcException`.
 - **Encryption key.** gRPC `Join` may carry `encryption_public_key` (HPKE, DHKEM P-256). It is validated (`isValidEncryptionPublicKey`) and stored base64 in `workers.encryptionPublicKey` for a new worker, or on the first rejoin of a worker that had none (an upgraded worker). A registered key is never replaced: a different key on rejoin is ignored and logged, because a stolen token must not swap in its own key. A worker that lost its key rejoins with a new join key.
 - **Rejoin refreshes** `ipAddress`, `runMode` and `name` (a blank reported name keeps the stored one), so a restart with a new `WORKER_NAME` renames the same identity.
 - **Worker detail IP/location** (`getWorkerById`): `ipAddress` is returned only when `isPublicIp` holds (loopback, RFC 1918, CGNAT, link-local and ULA are hidden) and is unmapped to IPv4. `location` is looked up per request through `GeoIpService` (no cache, no column); a failed or unknown lookup yields `null` and never fails the request. The list (`getWorkerList`) returns neither.

@@ -1,6 +1,6 @@
-# Developer Guide for Open Attack Surface Management (OASM)
+# Developer Guide for Open Attack Surface Management (Mithril)
 
-This guide provides detailed instructions for setting up your local development environment, running the services, and contributing to the OASM project.
+This guide provides detailed instructions for setting up your local development environment, running the services, and contributing to the Mithril project.
 
 ## Table of Contents
 
@@ -58,7 +58,7 @@ Before you begin, ensure you have the following installed:
 The project is organized into several key directories:
 
 ```
-open-asm/
+mithril/
 ├── core-api/           # NestJS API server
 │   ├── src/            # Source code
 │   │   ├── database/   # DataSource config + TypeORM migrations
@@ -105,7 +105,7 @@ This command will:
 
 It does **not** create `worker/.env` — copy `worker/.example.env` to `worker/.env` manually and set `WORKER_API_KEY` to the key core-api expects.
 
-Worker scanning tools (nuclei, subfinder, httpx, naabu, dnsx) are **not** installed by any task. The worker downloads them at runtime from the core-api `BuiltinToolRegistry` gRPC into `WORKER_TOOL_PATH` (default `oasm-tools`), caching versions in `.tool_versions.json` there. In Docker, that directory is the shared `worker-tools-cache` volume.
+Worker scanning tools (nuclei, subfinder, httpx, naabu, dnsx) are **not** installed by any task. The worker downloads them at runtime from the core-api `BuiltinToolRegistry` gRPC into `WORKER_TOOL_PATH` (default `mithril-tools`), caching versions in `.tool_versions.json` there. In Docker, that directory is the shared `worker-tools-cache` volume.
 
 After running `task init`, you can start all services using `task dev` or run them individually as described below.
 
@@ -184,7 +184,7 @@ task worker:dev-app
 ```
 
 On first run the worker downloads its scanning tools from core-api into
-`WORKER_TOOL_PATH` (default `oasm-tools`), so core-api and its object storage
+`WORKER_TOOL_PATH` (default `mithril-tools`), so core-api and its object storage
 must be reachable.
 
 ## Database Setup
@@ -392,7 +392,7 @@ stubs into `worker/internal/gen/`.
 ### Connector Catalog Sync
 
 Scanning connectors are versioned Docker images maintained in the separate
-[oasm-connectors](https://github.com/oasm-platform/oasm-connectors) repository.
+[mithril-connectors](https://github.com/betennispadel/mithril-connectors) repository.
 Refresh the local copy of the catalog with:
 
 ```bash
@@ -401,7 +401,7 @@ task sync-connectors
 
 This writes `core-api/resources/connectors/manifest.json`, which core-api reads
 to resolve connector images and input schemas. Set
-`MANIFEST_PATH=<path>/manifest.json` to sync from a local `oasm-connectors`
+`MANIFEST_PATH=<path>/manifest.json` to sync from a local `mithril-connectors`
 checkout instead of the `main` branch.
 
 ## Presigned Direct Storage Access
@@ -699,8 +699,8 @@ This starts:
 - RustFS S3-compatible storage (port 9000, admin UI 9001)
 
 Notes:
-- The compose service key is `oasm-worker` (not `worker`). It scales: spawned
-  connector containers join the `oasm-connectors` network and dial each replica
+- The compose service key is `mithril-worker` (not `worker`). It scales: spawned
+  connector containers join the `mithril-connectors` network and dial each replica
   on its own IP (`WORKER_CONNECTOR_NETWORK`), so no host port is published.
   Replicas share the `worker-state` volume but each locks its own token slot
   (`.worker-token`, `.worker-token.1`, …) and keeps a distinct identity.

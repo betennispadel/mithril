@@ -1,6 +1,6 @@
 ---
 name: project-builder
-description: Turn a scanning goal in plain words ("find the login pages of example.com", "weekly critical-CVE scan of our web apps", "watch new subdomains") into an OASM project with a configured tool pipeline — pick the tools from the data they take and find, set each connector's config fields from their meaning, wire the stages, schedule and verify it. Load before create_project or add_project_workflow with tools.
+description: Turn a scanning goal in plain words ("find the login pages of example.com", "weekly critical-CVE scan of our web apps", "watch new subdomains") into an Mithril project with a configured tool pipeline — pick the tools from the data they take and find, set each connector's config fields from their meaning, wire the stages, schedule and verify it. Load before create_project or add_project_workflow with tools.
 ---
 
 # Building a project and configuring its tools

@@ -22,7 +22,7 @@ id: exposed-git-config
 
 info:
   name: Exposed Git Config
-  author: oasm-ai
+  author: mithril-ai
   severity: medium
   description: |
     The .git/config file is publicly readable, which can leak repository URLs and credentials.
@@ -58,7 +58,7 @@ http:
 ## Field rules
 
 - **`id`**: required, lowercase letters, digits and hyphens only (`^[a-z0-9][a-z0-9-]*$`), no spaces. For a CVE use the CVE id (`CVE-2024-12345`, the one place uppercase is customary). The file name is `<id>.yaml`.
-- **`info.name`** and **`info.author`**: required. Author is `oasm-ai` unless the user gives a name.
+- **`info.name`** and **`info.author`**: required. Author is `mithril-ai` unless the user gives a name.
 - **`info.severity`**: one of `info`, `low`, `medium`, `high`, `critical`, `unknown`. Detection or fingerprint templates are `info`.
 - **`info.description`**: what is detected and why it matters, one to three sentences.
 - **`info.tags`**: one comma-separated string (`cve,cve2024,rce,apache`), lowercase.

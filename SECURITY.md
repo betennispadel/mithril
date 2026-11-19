@@ -2,7 +2,7 @@
 
 ## Supported Versions
 
-OASM is pre-1.0 (`0.0.1` in `package.json`). Only the latest `main` branch and the most recent [release](https://github.com/oasm-platform/open-asm/releases) receive security fixes. There is no LTS series.
+Mithril is pre-1.0 (`0.0.1` in `package.json`). Only the latest `main` branch and the most recent [release](https://github.com/betennispadel/mithril/releases) receive security fixes. There is no LTS series.
 
 | Version | Supported |
 |---------|-----------|
@@ -11,13 +11,13 @@ OASM is pre-1.0 (`0.0.1` in `package.json`). Only the latest `main` branch and t
 
 ## Reporting a Vulnerability
 
-**Use GitHub's private vulnerability reporting** — [open a draft Security Advisory](https://github.com/oasm-platform/open-asm/security/advisories/new). This keeps details private until a fix is ready. There is no dedicated security email address; do not post exploit details in public issues or Discord.
+**Use GitHub's private vulnerability reporting** — [open a draft Security Advisory](https://github.com/betennispadel/mithril/security/advisories/new). This keeps details private until a fix is ready. There is no dedicated security email address; do not post exploit details in public issues or Discord.
 
-If the issue is clearly **not sensitive** (hardening idea, dependency bump, theoretical concern with no exploit path), a public [bug report](https://github.com/oasm-platform/open-asm/issues/new?template=bug-report.yml) is fine.
+If the issue is clearly **not sensitive** (hardening idea, dependency bump, theoretical concern with no exploit path), a public [bug report](https://github.com/betennispadel/mithril/issues/new?template=bug-report.yml) is fine.
 
 ### What to include
 
-- Affected component (`core-api`, `console`, `worker`, `oasm-connectors` manifest) and version/commit.
+- Affected component (`core-api`, `console`, `worker`, `mithril-connectors` manifest) and version/commit.
 - Steps to reproduce or proof of concept.
 - Impact assessment: what an attacker gains (data access, cross-tenant access, RCE, auth bypass).
 - Your environment if relevant (Docker Compose, dev mode, production build).

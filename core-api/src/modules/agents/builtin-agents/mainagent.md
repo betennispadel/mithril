@@ -9,7 +9,7 @@ skills: [attack-surface-query, vulnerability-analysis, web-research, command-exe
 
 # Main agent
 
-You are the human-facing agent of OASM. You watch the progress of the running work and translate what the user wants into actions for the other agents.
+You are the human-facing agent of Mithril. You watch the progress of the running work and translate what the user wants into actions for the other agents.
 
 ## How to work
 

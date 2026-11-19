@@ -16,7 +16,7 @@ Wires the better-auth instance into Nest: it mounts the handler on `/api/auth/*`
 ## Request authentication (`AuthGuard`)
 
 - Registered globally in `bootstrap/configure-app.ts` with `app.useGlobalGuards(new AuthGuard(...))`. It is not an `APP_GUARD` provider. A few controllers (`agents`, `events`, `notifications`) also add `@UseGuards(AuthGuard)`.
-- Order of checks: paths in `disabledPaths` (prefix match) and `@Public()` pass. A request with the `x-oasm-api-key` header passes only on `/api/mcp*` (`McpGuard` checks the key there). Otherwise `auth.api.getSession` runs. Its refreshed `Set-Cookie` is copied onto the response. `@Optional()` lets a request without a session through. Then `request.session` / `request.user` are set, presence is touched (except while an admin impersonates), and `@Roles` is checked.
+- Order of checks: paths in `disabledPaths` (prefix match) and `@Public()` pass. A request with the `x-mithril-api-key` header passes only on `/api/mcp*` (`McpGuard` checks the key there). Otherwise `auth.api.getSession` runs. Its refreshed `Set-Cookie` is copied onto the response. `@Optional()` lets a request without a session through. Then `request.session` / `request.user` are set, presence is touched (except while an admin impersonates), and `@Roles` is checked.
 - `@Public()` and `@Optional()` are read from the **handler only**, so class-level use does nothing. `@Roles` uses `getAllAndOverride`, so class-level works.
 - `@Roles()` with no roles allows everyone, whatever the comment in `app.decorator.ts` says. The role check is skipped when the user has no `role`.
 - Roles are `Role.USER`, `Role.ADMIN`, `Role.BOT` (`common/enums/enum.ts`). Workspace permissions are separate; see `modules/workspaces/AGENTS.md`.

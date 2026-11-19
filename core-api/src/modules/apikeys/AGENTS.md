@@ -12,7 +12,7 @@ Stores API keys in the `api_keys` table. Today it is used only for workspace key
 ## Public surface
 
 - No HTTP routes. Workspace keys are read and rotated through `GET /workspaces/api-key` and `POST /workspaces/:id/api-key/rotate` (workspaces module).
-- `McpGuard` (`src/mcp/mcp.guard.ts`) calls `findByKey` with the `x-oasm-api-key` header. It accepts only `type = WORKSPACE`, and sets `request.workspaceId = ref`.
+- `McpGuard` (`src/mcp/mcp.guard.ts`) calls `findByKey` with the `x-mithril-api-key` header. It accepts only `type = WORKSPACE`, and sets `request.workspaceId = ref`.
 
 ## Data model
 
