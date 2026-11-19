@@ -64,7 +64,7 @@ func TestBuildAgentSandboxConfig_Labels(t *testing.T) {
 			t.Errorf("label %s = %q, want %q", k, cfg.Labels[k], v)
 		}
 	}
-	// Not oasm-managed: the connector pool/reconcile must not treat a
+	// Not mithril-managed: the connector pool/reconcile must not treat a
 	// sandbox as one of its containers.
 	if _, ok := cfg.Labels["mithril-managed"]; ok {
 		t.Error("sandbox must not carry the mithril-managed label")

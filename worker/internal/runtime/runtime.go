@@ -24,7 +24,7 @@ type JobSpec struct {
 	// PoolKey is the normalized (lowercase) container image the Manager
 	// resolves; the Docker runtime uses it for the mithril.pool_key label and for
 	// the registry segment of the container name
-	// (oasm-<tool-slug>-<registry-slug>-<rand4>). Empty for direct runtime
+	// (mithril-<tool-slug>-<registry-slug>-<rand4>). Empty for direct runtime
 	// users, which fall back to the image.
 	PoolKey string
 	// Lane is "agent" for jobs an AI agent pushed over the agent stream, empty

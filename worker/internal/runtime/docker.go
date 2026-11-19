@@ -553,7 +553,7 @@ const (
 // Only the REGISTRY is kept, never the repository path — the old scheme cut
 // the whole image key at 8 chars, which leaked the repo ("ghcr-io-open-asm-…")
 // and, when the cut landed on the separator, produced a doubled dash
-// ("oasm-nuclei-ghcr-io--a3f1").
+// ("mithril-nuclei-ghcr-io--a3f1").
 func imageRegistrySlug(image string) string {
 	ref := image
 	// Strip a digest: repo@sha256:… — the "@" tail carries no host.
@@ -586,8 +586,8 @@ func imageRegistrySlug(image string) string {
 	return slug
 }
 
-// buildContainerName builds the container name oasm-<tool-slug>-<registry-slug>-<rand4>
-// (e.g. "oasm-nikto-ghcr-io-1234"). The tool slug keeps a container listing
+// buildContainerName builds the container name mithril-<tool-slug>-<registry-slug>-<rand4>
+// (e.g. "mithril-nikto-ghcr-io-1234"). The tool slug keeps a container listing
 // readable, the registry slug groups containers by source, and the random
 // suffix makes concurrent creates of the same tool collision-free; a 409
 // Conflict (stale container holding the name) is retried once with a fresh
@@ -729,7 +729,7 @@ func (d *DockerRuntime) Create(ctx context.Context, spec JobSpec, opts RuntimeOp
 
 	// Container config: image, env, labels for lifecycle management.
 	// mithril.pool_key (normalized image) names pooled containers and lets the
-	// sweeper identify them; oasm-managed scopes the startup orphan
+	// sweeper identify them; mithril-managed scopes the startup orphan
 	// reconcile; mithril.last_used is informational only — the in-memory pool
 	// owns sweep timing.
 	labels := map[string]string{
@@ -810,7 +810,7 @@ func (d *DockerRuntime) Create(ctx context.Context, spec JobSpec, opts RuntimeOp
 		hostConfig.NetworkMode = container.NetworkMode(d.connectorNetwork)
 	}
 
-	// Container name: oasm-<tool-slug>-<registry-slug>-<rand4>. An idle warm
+	// Container name: mithril-<tool-slug>-<registry-slug>-<rand4>. An idle warm
 	// container is reused by the next execution of the same image (Phase 2);
 	// the name only has to be unique and readable, not the pool key itself.
 	name := buildContainerName(spec.Tool, poolRef)
@@ -1149,7 +1149,7 @@ type ReconcileReport struct {
 }
 
 // ReconcileOrphans enforces the startup ownership policy over every
-// oasm-managed container on the engine (Docker labels are the source of
+// mithril-managed container on the engine (Docker labels are the source of
 // truth — no state store):
 //
 //	tier 1  exited/created/dead/removing → always remove: nothing can use

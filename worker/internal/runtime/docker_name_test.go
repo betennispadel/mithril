@@ -6,14 +6,14 @@ import (
 	"testing"
 )
 
-// containerNameRe is the shipped name shape: oasm-<tool-slug>-<registry-slug>-<rand4>.
+// containerNameRe is the shipped name shape: mithril-<tool-slug>-<registry-slug>-<rand4>.
 // Slugs may themselves contain dashes, so the shape is checked structurally.
 var containerNameRe = regexp.MustCompile(`^mithril-[a-z0-9]+(?:-[a-z0-9]+)*-[0-9a-f]{4}$`)
 
-// Container naming contract: oasm-<tool-slug>-<registry-slug>-<rand4>.
+// Container naming contract: mithril-<tool-slug>-<registry-slug>-<rand4>.
 // Keep it short enough to read in a container listing and free of the doubled
 // separators the old 8-char image truncation produced
-// ("ghcr-io-" + "-" → "oasm-nuclei-ghcr-io--a3f1").
+// ("ghcr-io-" + "-" → "mithril-nuclei-ghcr-io--a3f1").
 func TestBuildContainerNameFormat(t *testing.T) {
 	tests := []struct {
 		name      string
@@ -142,7 +142,7 @@ func TestBuildContainerNameRandomSuffixVaries(t *testing.T) {
 }
 
 // The tool slug may be empty/garbage — the name must stay valid and keep the
-// oasm- prefix rather than collapsing to a bare "oasm--..." string.
+// mithril- prefix rather than collapsing to a bare "mithril--..." string.
 func TestBuildContainerNameHandlesEmptyTool(t *testing.T) {
 	got := buildContainerName("", "ghcr.io/open-asm/nuclei:1.0")
 	if !strings.HasPrefix(got, "mithril-") {

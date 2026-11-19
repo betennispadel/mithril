@@ -10,7 +10,7 @@ import (
 // worker connect deadline (ConnectorConnectTimeout), post-execution cleanup
 // (ConnectorCleanupTimeout), per-job manifest timeout (JobTimeoutSecondsKey) —
 // derives from the same named constant pair. The SDK send timeout is a
-// cross-repo contract with oasm-connectors; if it ever diverges, both sides
+// cross-repo contract with mithril-connectors; if it ever diverges, both sides
 // must change together.
 func TestTimeoutConstantsDocumentedValues(t *testing.T) {
 	if ConnectorConnectTimeout != 5*time.Minute {

@@ -206,7 +206,7 @@ func newWorkerTestSetup(t *testing.T) (*grpcclient.Client, *testJobsServer, *run
 	pb.RegisterJobsRegistryServiceServer(grpcSrv, jobsSrv)
 	go func() { _ = grpcSrv.Serve(lis) }()
 
-	// Keep the worker token and encryption key out of the real ~/.oasm.
+	// Keep the worker token and encryption key out of the real ~/.mithril.
 	t.Setenv("WORKER_TOKEN_FILE", filepath.Join(t.TempDir(), ".worker-token"))
 	client, err := grpcclient.NewClient("test-key", "passthrough:///bufnet", "test-tools", &testLogger{},
 		grpc.WithContextDialer(func(ctx context.Context, _ string) (net.Conn, error) {

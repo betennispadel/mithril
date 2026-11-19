@@ -11,7 +11,7 @@ import (
 )
 
 // managed builds a seeded engine-list entry the way DockerRuntime.Create
-// stamps containers: oasm-managed always, mithril.worker_id only when the
+// stamps containers: mithril-managed always, mithril.worker_id only when the
 // owner is known.
 func managed(id, state, owner string) container.Summary {
 	labels := map[string]string{"mithril-managed": "true"}
@@ -22,7 +22,7 @@ func managed(id, state, owner string) container.Summary {
 }
 
 // applyLabelFilter mimics the daemon's `label` filter over the seeded list,
-// so tests fail when production forgets to send the oasm-managed filter.
+// so tests fail when production forgets to send the mithril-managed filter.
 // The Docker SDK encodes filters as a set — {"label":{"k=v":true}}
 // (json.Marshal of map[string]map[string]bool); the daemon also accepts the
 // legacy list form {"label":["k=v"]}. Parse whichever arrives; unparseable
@@ -215,7 +215,7 @@ func TestReconcileContinuesAfterRemoveError(t *testing.T) {
 	}
 }
 
-// The list call must carry the oasm-managed filter — the pass is scoped to
+// The list call must carry the mithril-managed filter — the pass is scoped to
 // our containers, never a full-engine sweep.
 func TestReconcileListsManagedOnly(t *testing.T) {
 	engine := newFakeDockerEngine()

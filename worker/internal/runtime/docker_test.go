@@ -271,7 +271,7 @@ func TestBuildContainerEnvSplitsGrpcHostPort(t *testing.T) {
 }
 
 // A dial address without a port (e.g. a bare service-name override such as
-// WORKER_CONNECTOR_ADDR=oasm-worker) emits WORKER_GRPC_HOST only — the port is
+// WORKER_CONNECTOR_ADDR=mithril-worker) emits WORKER_GRPC_HOST only — the port is
 // unknown, so no WORKER_GRPC_PORT var is invented.
 func TestBuildContainerEnvNoPortAddrEmitsHostOnly(t *testing.T) {
 	spec := JobSpec{JobID: "j-noport", Tool: "nuclei", TraceID: "tr-noport"}
@@ -1298,7 +1298,7 @@ func TestCreateUsesOasmPrefixName(t *testing.T) {
 	log := &captureLogger{}
 	r := newFakeDockerRuntime(t, engine, log)
 
-	// Naming: oasm-<tool-slug>-<registry-slug>-<rand4> — the tool slug reads
+	// Naming: mithril-<tool-slug>-<registry-slug>-<rand4> — the tool slug reads
 	// well in `docker ps`, the registry slug groups by source, and the exec id
 	// is deliberately absent (pooled containers are reused across executions).
 	if _, err := r.Create(context.Background(), JobSpec{

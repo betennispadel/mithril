@@ -495,7 +495,7 @@ func (s *AgentSandbox) ensureImage(ctx context.Context) error {
 	return nil
 }
 
-// agentSandboxName is oasm-agent-<session-slug>-<rand4>.
+// agentSandboxName is mithril-agent-<session-slug>-<rand4>.
 func agentSandboxName(sessionID string) string {
 	slug := sanitizeToolName(sessionID)
 	if len(slug) > 40 {
