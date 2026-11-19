@@ -13,12 +13,12 @@ describe('DiscordConnector', () => {
     JSON.parse((fetchMock.mock.calls[0] as [string, RequestInit])[1].body as string) as Record<string, unknown>;
 
   it('posts content (not text) with mentions disabled', async () => {
-    await new DiscordConnector().push({ webhookUrl, username: 'OASM', text: 'hi @everyone' });
+    await new DiscordConnector().push({ webhookUrl, username: 'Mithril', text: 'hi @everyone' });
 
     expect(fetchMock).toHaveBeenCalledWith(webhookUrl, expect.objectContaining({ method: 'POST' }));
     expect(sentBody()).toEqual({
       content: 'hi @everyone',
-      username: 'OASM',
+      username: 'Mithril',
       allowed_mentions: { parse: [] },
     });
   });

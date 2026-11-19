@@ -12,7 +12,7 @@ import { AgentsSkillsService } from './agents.skills';
 import { AGENT_TOOL_CLASSES } from './agents.tools';
 import { agentFunctionsOf } from './tools/agent-function';
 
-// The use-oasm skill maps console pages to the tools that answer questions
+// The use-mithril skill maps console pages to the tools that answer questions
 // about them. A route or tool name that does not exist teaches the model to
 // call something that is not there, so both are checked against the code.
 
@@ -21,7 +21,7 @@ type LoadSkill = {
 };
 
 // A Windows checkout may turn the file into CRLF
-const SKILL = fs.readFileSync(path.join(__dirname, 'skills', 'use-oasm', 'SKILL.md'), 'utf8').replace(/\r\n/g, '\n');
+const SKILL = fs.readFileSync(path.join(__dirname, 'skills', 'use-mithril', 'SKILL.md'), 'utf8').replace(/\r\n/g, '\n');
 const AGENT: QueryScope = { workspaceId: 'w1', permissions: ['*'], caller: 'agent' };
 const SAMPLE_ID = '9f2c1e0a-4b7d-4c1e-9a3f-2d5b8e6c7a10';
 
@@ -47,7 +47,7 @@ const KNOWN_TOOLS = new Set([
   'dispatch_subagent',
 ]);
 
-describe('use-oasm built-in skill', () => {
+describe('use-mithril built-in skill', () => {
   const service = new AgentsSkillsService(
     {
       find: jest.fn(() => Promise.resolve([])),
@@ -59,18 +59,18 @@ describe('use-oasm built-in skill', () => {
   it('is listed as a built-in skill', async () => {
     const skills = await service.getSkills('w1');
     expect(skills).toContainEqual(
-      expect.objectContaining({ id: 'builtin-use-oasm', name: 'use-oasm', isBuiltin: true, isEnabled: true }),
+      expect.objectContaining({ id: 'builtin-use-mithril', name: 'use-mithril', isBuiltin: true, isEnabled: true }),
     );
   });
 
   it('is offered in the skills prompt for page_context messages', async () => {
     const prompt = await service.buildSkillsPrompt('w1');
-    expect(prompt).toMatch(/^- use-oasm: .*<page_context>/m);
+    expect(prompt).toMatch(/^- use-mithril: .*<page_context>/m);
   });
 
   it('loads its instructions through load_skill', async () => {
     const loadSkill = service.createLoadSkillTool('w1') as unknown as LoadSkill;
-    const result = await loadSkill.execute({ name: 'use-oasm' }, { toolCallId: 't', messages: [] });
+    const result = await loadSkill.execute({ name: 'use-mithril' }, { toolCallId: 't', messages: [] });
     expect(result.error).toBeUndefined();
     const content = result.content as string;
     expect(content).not.toMatch(/^---/);

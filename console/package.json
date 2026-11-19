@@ -2,7 +2,7 @@
   "name": "console",
   "private": true,
   "version": "0.12.2",
-  "author": "oasm-platform",
+  "author": "mithril-platform",
   "license": "AGPL-3.0-only",
   "type": "module",
   "scripts": {

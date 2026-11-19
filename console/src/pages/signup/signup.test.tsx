@@ -30,7 +30,7 @@ async function setup(
     '@/services/apis/gen/queries'
   );
   vi.mocked(useRootControllerGetMetadata).mockReturnValue({
-    data: metadata.data && { name: 'OASM', isInit: true, ...metadata.data },
+    data: metadata.data && { name: 'Mithril', isInit: true, ...metadata.data },
     isError: metadata.isError ?? false,
   } as unknown as ReturnType<typeof useRootControllerGetMetadata>);
   return renderWithProviders(<SignUp />, { initialEntries: [url] });

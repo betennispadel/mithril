@@ -46,7 +46,7 @@ describe('AuditSink', () => {
     fields: {
       specversion: '1.0',
       type: overrides.type ?? 'target.created',
-      source: 'oasm://core-api',
+      source: 'mithril://core-api',
       id: EVENT_ID,
       time: '2026-10-09T10:00:00.000Z',
       subject: `workspace:${WORKSPACE}/target:t-1`,

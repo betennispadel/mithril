@@ -99,7 +99,7 @@ describe('RedisService stream helpers', () => {
     it('folds the flat field array into a map', async () => {
       // Redis returns [f1, v1, f2, v2, …], never an object.
       blockingReply = [
-        ['oasm:events', [['1-0', ['type', 'job.completed', 'data', '{"a":1}']]]],
+        ['mithril:events', [['1-0', ['type', 'job.completed', 'data', '{"a":1}']]]],
       ];
 
       await expect(

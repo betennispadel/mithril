@@ -46,7 +46,7 @@ describe('MailService', () => {
     service = new MailService(
       {
         getMailServer,
-        getConfig: jest.fn().mockResolvedValue({ name: 'OASM' }),
+        getConfig: jest.fn().mockResolvedValue({ name: 'Mithril' }),
       } as unknown as SystemConfigsService,
       { options: { emailVerification } } as unknown as Auth,
     );
@@ -69,7 +69,7 @@ describe('MailService', () => {
         }),
       );
       expect(sendMail).toHaveBeenCalledWith({
-        from: { name: 'OASM', address: 'no-reply@example.com' },
+        from: { name: 'Mithril', address: 'no-reply@example.com' },
         to: 'ada@example.com',
         subject: 'Hi',
         text: 'Hello',
@@ -151,7 +151,7 @@ describe('MailService', () => {
       expect(sendMail).toHaveBeenCalledWith(
         expect.objectContaining({
           to: 'ada@example.com',
-          subject: 'Verify your email for OASM',
+          subject: 'Verify your email for Mithril',
           text: expect.stringContaining(url) as string,
           html: expect.stringContaining('Ada &lt;b&gt;') as string,
         }),

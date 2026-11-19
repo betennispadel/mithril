@@ -368,7 +368,7 @@ describe('WorkersController tool archive gRPC', () => {
   let root: string;
 
   beforeEach(() => {
-    root = mkdtempSync(join(tmpdir(), 'oasm-archive-'));
+    root = mkdtempSync(join(tmpdir(), 'mithril-archive-'));
     mkdirSync(join(root, 'public/archived/linux_amd64'), { recursive: true });
     writeFileSync(join(root, 'public/archived/linux_amd64/tool.zip'), 'zip-bytes');
     writeFileSync(join(root, '.env'), 'ENCRYPTION_KEYS=secret');

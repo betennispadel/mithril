@@ -33,7 +33,7 @@ const validRequest = (): WorkerTelemetryRequest => ({
     items: [
       {
         containerId: 'container-1',
-        containerName: 'oasm-nmap-a91c',
+        containerName: 'mithril-nmap-a91c',
         image: 'ghcr.io/oasm/nmap:latest',
         imageVersion: '1.4.2',
         tool: 'nmap',
@@ -50,7 +50,7 @@ const validRequest = (): WorkerTelemetryRequest => ({
       },
       {
         containerId: 'container-2',
-        containerName: 'oasm-naabu-73bf',
+        containerName: 'mithril-naabu-73bf',
         image: 'ghcr.io/oasm/naabu:latest',
         imageVersion: '1.2.0',
         tool: 'naabu',

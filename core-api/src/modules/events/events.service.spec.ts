@@ -90,7 +90,7 @@ describe('EventsService', () => {
     subscription.unsubscribe();
 
     expect(redis.xread).toHaveBeenCalledWith(
-      'oasm:events',
+      'mithril:events',
       expect.any(String),
       '5-0',
       expect.any(Number),
@@ -162,7 +162,7 @@ describe('EventsService', () => {
     jest.useRealTimers();
 
     expect(redis.xread).toHaveBeenCalledWith(
-      'oasm:events',
+      'mithril:events',
       expect.any(String),
       '7-0',
       expect.any(Number),

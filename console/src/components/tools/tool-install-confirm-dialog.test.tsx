@@ -89,7 +89,7 @@ describe('ToolInstallConfirmDialog', () => {
 
     expect(screen.getByRole('heading', { name: 'Install Gitleaks' })).toBeTruthy();
     expect(screen.getByRole('img', { name: 'gitleaks' })).toBeTruthy();
-    expect(screen.getByRole('img', { name: 'OASM Platform' })).toBeTruthy();
+    expect(screen.getByRole('img', { name: 'Mithril Platform' })).toBeTruthy();
   });
 
   it('names the selected workspace in its own section', async () => {

@@ -160,7 +160,7 @@ describe('EventPublishInterceptor', () => {
         makeRequest({
           session: undefined,
           user: undefined,
-          headers: { 'x-oasm-api-key': 'key-123' },
+          headers: { 'x-mithril-api-key': 'key-123' },
         }),
       );
       expect(published()).toMatchObject({

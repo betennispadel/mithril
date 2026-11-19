@@ -83,7 +83,7 @@ describe('SystemConfigsService', () => {
     it('returns null logoPath without calling helper when absent', async () => {
       (mockSystemConfigRepository.findOne as jest.Mock).mockResolvedValue({
         id: 1,
-        name: 'OASM',
+        name: 'Mithril',
         logoPath: null,
       });
 
@@ -92,7 +92,7 @@ describe('SystemConfigsService', () => {
       expect(
         mockStorageService.signStoragePath as jest.Mock,
       ).not.toHaveBeenCalled();
-      expect(result).toEqual({ name: 'OASM', logoPath: null });
+      expect(result).toEqual({ name: 'Mithril', logoPath: null });
     });
   });
 
@@ -115,7 +115,7 @@ describe('SystemConfigsService', () => {
     it('returns null when no logo is configured', async () => {
       (mockSystemConfigRepository.findOne as jest.Mock).mockResolvedValue({
         id: 1,
-        name: 'OASM',
+        name: 'Mithril',
         logoPath: null,
       });
 
@@ -154,7 +154,7 @@ describe('SystemConfigsService', () => {
     it('should create default config if none exists and return no logo message', async () => {
       const mockConfig = {
         id: 1,
-        name: 'OASM',
+        name: 'Mithril',
         logoPath: null,
       };
 
@@ -170,7 +170,7 @@ describe('SystemConfigsService', () => {
 
       expect(mockSystemConfigRepository.findOne).toHaveBeenCalled();
       expect(mockSystemConfigRepository.create).toHaveBeenCalledWith({
-        name: 'OASM',
+        name: 'Mithril',
         logoPath: undefined,
       });
       expect(result).toEqual({
@@ -203,7 +203,7 @@ describe('SystemConfigsService', () => {
     it('returns defaults for a row saved before settings existed', async () => {
       (mockSystemConfigRepository.findOne as jest.Mock).mockResolvedValue({
         id: 1,
-        name: 'OASM',
+        name: 'Mithril',
       });
 
       await expect(service.getSettings()).resolves.toEqual({

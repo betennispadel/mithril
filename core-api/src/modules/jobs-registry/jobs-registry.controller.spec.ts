@@ -462,7 +462,7 @@ describe('JobsRegistryController', () => {
           Buffer.from('7585c485a1a72bc3b66395caaa37a1940848a5acba85dfff49a0a2b446792360', 'hex'),
         ),
         enc: sealed.enc,
-        info: new TextEncoder().encode('oasm job secrets v1'),
+        info: new TextEncoder().encode('mithril job secrets v1'),
       });
       const opened = await recipient.open(
         sealed.ciphertext,

@@ -19,7 +19,7 @@ describe('StreamConsumer group recovery', () => {
     xgroupCreate = jest.fn().mockResolvedValue(undefined);
     xreadgroup = jest.fn().mockRejectedValue(
       new Error(
-        "NOGROUP No such key 'oasm:events' or consumer group 'audit'",
+        "NOGROUP No such key 'mithril:events' or consumer group 'audit'",
       ),
     );
 
@@ -45,7 +45,7 @@ describe('StreamConsumer group recovery', () => {
     await service.runOnce();
 
     expect(xgroupCreate).toHaveBeenCalledWith(
-      'oasm:events',
+      'mithril:events',
       EventBusGroup.Audit,
       // From 0: if the stream merely lost its group, surviving entries must
       // still be materialized rather than skipped.

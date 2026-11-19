@@ -128,7 +128,7 @@ describe('source-code connectors', () => {
       expect(init.method).toBe('POST');
       expect(JSON.parse(init.body as string)).toEqual({
         title: '2 new vulnerabilities found',
-        body: 'body text\n\n<!-- oasm-event-id: evt-1 -->',
+        body: 'body text\n\n<!-- mithril-event-id: evt-1 -->',
         labels: ['security'],
       });
     });

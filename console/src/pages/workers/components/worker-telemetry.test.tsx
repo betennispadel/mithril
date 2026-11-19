@@ -36,7 +36,7 @@ const telemetry: WorkerTelemetryDto = {
     items: [
       {
         containerId: 'container-1',
-        containerName: 'oasm-nmap-a91c',
+        containerName: 'mithril-nmap-a91c',
         image: 'ghcr.io/oasm/nmap:latest',
         imageVersion: '1.4.2',
         tool: 'nmap',
@@ -57,7 +57,7 @@ const telemetry: WorkerTelemetryDto = {
       },
       {
         containerId: 'container-2',
-        containerName: 'oasm-naabu-73bf',
+        containerName: 'mithril-naabu-73bf',
         image: 'ghcr.io/oasm/naabu:latest',
         imageVersion: '1.2.0',
         tool: 'naabu',
@@ -102,8 +102,8 @@ describe('WorkerTelemetry', () => {
     expect(screen.queryByText('HEALTHY')).not.toBeInTheDocument();
     expect(screen.queryByText('ACTIVE')).not.toBeInTheDocument();
     expect(screen.queryByText('NONE')).not.toBeInTheDocument();
-    expect(screen.getByText('oasm-nmap-a91c')).toBeInTheDocument();
-    expect(screen.getByText('oasm-naabu-73bf')).toBeInTheDocument();
+    expect(screen.getByText('mithril-nmap-a91c')).toBeInTheDocument();
+    expect(screen.getByText('mithril-naabu-73bf')).toBeInTheDocument();
     expect(screen.getByRole('img', { name: 'nmap' })).toBeInTheDocument();
     expect(screen.getByRole('img', { name: 'naabu' })).toBeInTheDocument();
     expect(screen.getAllByText('Pool').length).toBe(2);

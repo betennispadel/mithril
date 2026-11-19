@@ -67,7 +67,7 @@ describe('SystemConfigsController', () => {
     jest.spyOn(storageService, 'deleteFile').mockResolvedValue(undefined);
 
     systemConfigsService = {
-      getConfig: jest.fn().mockResolvedValue({ name: 'OASM', logoPath: null }),
+      getConfig: jest.fn().mockResolvedValue({ name: 'Mithril', logoPath: null }),
       getRawLogoPath: jest.fn().mockResolvedValue(null),
       updateConfig: jest
         .fn()
@@ -304,7 +304,7 @@ describe('SystemConfigsController', () => {
         'system/old-logo.png',
       );
       systemConfigsService.getConfig.mockResolvedValue({
-        name: 'OASM',
+        name: 'Mithril',
         logoPath:
           'http://localhost:9000/system/old-logo.png?X-Amz-Signature=abc&X-Amz-Expires=900',
       });
@@ -323,7 +323,7 @@ describe('SystemConfigsController', () => {
         'system/old-logo.png',
       );
       systemConfigsService.getConfig.mockResolvedValue({
-        name: 'OASM',
+        name: 'Mithril',
         logoPath: 'http://system.localhost:9000/old-logo.png',
       });
 

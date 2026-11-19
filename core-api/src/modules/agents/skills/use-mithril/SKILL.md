@@ -1,11 +1,11 @@
 ---
-name: use-oasm
-description: How the OASM console is organized — every page, what the user does there, and which tool reads the data behind it. Load it whenever a message ends with a <page_context> block (the console page the user is looking at), or when the user says "this", "this page", "this target", "what am I looking at" without naming the thing.
+name: use-mithril
+description: How the Mithril console is organized — every page, what the user does there, and which tool reads the data behind it. Load it whenever a message ends with a <page_context> block (the console page the user is looking at), or when the user says "this", "this page", "this target", "what am I looking at" without naming the thing.
 ---
 
-# Using OASM
+# Using Mithril
 
-The OASM console is where a workspace manages its external attack surface: targets (scan roots) are discovered into assets (hosts, services, URLs), scanned by tools on workers, and the findings become vulnerabilities and issues. Projects group a scope with scan pipelines and runs.
+The Mithril console is where a workspace manages its external attack surface: targets (scan roots) are discovered into assets (hosts, services, URLs), scanned by tools on workers, and the findings become vulnerabilities and issues. Projects group a scope with scan pipelines and runs.
 
 The user chats from the **Ask AI** sidebar while browsing the console. When the sidebar has the page attached, the message ends with a `<page_context>` block that says which page they are on. Use it to resolve "this", "here", "this target", "what is this?" — then read the data with the tools below. Never answer about the page from memory.
 

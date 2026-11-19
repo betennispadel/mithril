@@ -149,7 +149,7 @@ describe('resolveAwsCredentials', () => {
         },
         params: {
           RoleArn: 'arn:aws:iam::123456789012:role/Inventory',
-          RoleSessionName: 'oasm-inventory',
+          RoleSessionName: 'mithril-inventory',
           ExternalId: 'ext-1',
           DurationSeconds: 3600,
         },
@@ -242,7 +242,7 @@ describe('resolveAwsCredentials', () => {
         },
         params: {
           RoleArn: 'arn:aws:iam::999999999999:role/Cross',
-          RoleSessionName: 'oasm-inventory',
+          RoleSessionName: 'mithril-inventory',
           ExternalId: 'ext-2',
           DurationSeconds: 3600,
         },
@@ -279,7 +279,7 @@ describe('resolveAwsCredentials', () => {
       expect(mockFromWebToken).toHaveBeenCalledWith({
         roleArn: 'arn:aws:iam::123456789012:role/Web',
         webIdentityToken: 'jwt-token',
-        roleSessionName: 'oasm-inventory',
+        roleSessionName: 'mithril-inventory',
       });
     });
 

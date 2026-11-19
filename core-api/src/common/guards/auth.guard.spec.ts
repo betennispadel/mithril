@@ -81,10 +81,10 @@ describe('AuthGuard', () => {
   });
 
   describe('MCP API key bypass is scoped to /api/mcp', () => {
-    it('rejects a junk x-oasm-api-key header on a non-MCP route', async () => {
+    it('rejects a junk x-mithril-api-key header on a non-MCP route', async () => {
       // Regression: this header used to short-circuit the guard globally, so a
       // request carrying any value reached every non-public route unauthenticated.
-      request.headers['x-oasm-api-key'] = 'x';
+      request.headers['x-mithril-api-key'] = 'x';
 
       await expect(guard.canActivate(makeContext())).rejects.toThrow(
         UnauthorizedException,
@@ -94,7 +94,7 @@ describe('AuthGuard', () => {
 
     it('still lets an MCP route through so McpGuard can validate the key', async () => {
       request.path = '/api/mcp';
-      request.headers['x-oasm-api-key'] = 'x';
+      request.headers['x-mithril-api-key'] = 'x';
 
       await expect(guard.canActivate(makeContext())).resolves.toBe(true);
       expect(getSession).not.toHaveBeenCalled();
@@ -102,7 +102,7 @@ describe('AuthGuard', () => {
 
     it('covers MCP sub-paths', async () => {
       request.path = '/api/mcp/message';
-      request.headers['x-oasm-api-key'] = 'x';
+      request.headers['x-mithril-api-key'] = 'x';
 
       await expect(guard.canActivate(makeContext())).resolves.toBe(true);
     });

@@ -53,7 +53,7 @@ describe('RedisWorkerTelemetryStore', () => {
     await store.write(value);
 
     expect(redis.setWithExpiry).toHaveBeenCalledWith(
-      'oasm:worker:telemetry:v1:worker-1',
+      'mithril:worker:telemetry:v1:worker-1',
       90,
       JSON.stringify(value),
     );

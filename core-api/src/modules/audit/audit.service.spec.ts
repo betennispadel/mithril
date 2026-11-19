@@ -439,14 +439,14 @@ describe('AuditService', () => {
 
     it('attributes the action to the API key (actorType api_key, null actorId) when no user identity exists', () => {
       const req = {
-        headers: { 'x-oasm-api-key': 'oasm_live_1234' },
+        headers: { 'x-mithril-api-key': 'mithril_live_1234' },
         requestId: 'req-3',
       } as unknown as RequestWithMetadata;
 
       expect(service.buildActorContext(req)).toEqual({
         actorId: undefined,
         actorType: AuditActorType.ApiKey,
-        actorName: 'oasm_live_1234',
+        actorName: 'mithril_live_1234',
         actorEmail: undefined,
         sourceIp: undefined,
         userAgent: undefined,
@@ -458,7 +458,7 @@ describe('AuditService', () => {
       const longKey = 'k'.repeat(100);
       const longAgent = 'a'.repeat(600);
       const req = {
-        headers: { 'x-oasm-api-key': longKey, 'user-agent': longAgent },
+        headers: { 'x-mithril-api-key': longKey, 'user-agent': longAgent },
         requestId: 'req-4',
       } as unknown as RequestWithMetadata;
 
@@ -473,7 +473,7 @@ describe('AuditService', () => {
       const req = {
         user: { id: 'u-1', name: 'Alice', email: 'alice@x.io' },
         session: { userId: 'u-1' },
-        headers: { 'x-oasm-api-key': 'oasm_live_1234', 'user-agent': 'agent' },
+        headers: { 'x-mithril-api-key': 'mithril_live_1234', 'user-agent': 'agent' },
         requestId: 'req-5',
       } as unknown as RequestWithMetadata;
 

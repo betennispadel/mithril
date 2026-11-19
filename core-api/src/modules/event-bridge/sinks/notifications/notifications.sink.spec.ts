@@ -42,7 +42,7 @@ describe('NotificationsSink', () => {
     fields: {
       specversion: '1.0',
       type,
-      source: 'oasm://core-api',
+      source: 'mithril://core-api',
       id: EVENT_ID,
       time: '2026-10-09T10:00:00.000Z',
       data: JSON.stringify({

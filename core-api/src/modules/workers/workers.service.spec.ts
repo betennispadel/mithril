@@ -1229,7 +1229,7 @@ describe('WorkersService', () => {
         truncated: false,
         items: tools.map((tool, index) => ({
           containerId: `container-${index}`,
-          containerName: `oasm-${tool}-${index}`,
+          containerName: `mithril-${tool}-${index}`,
           image: `example/${tool}:latest`,
           imageVersion: '1.0.0',
           tool,

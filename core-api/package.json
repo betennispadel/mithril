@@ -2,7 +2,7 @@
   "name": "core-api",
   "version": "0.12.2",
   "description": "",
-  "author": "oasm-platform",
+  "author": "mithril-platform",
   "private": true,
   "license": "AGPL-3.0-only",
   "scripts": {
