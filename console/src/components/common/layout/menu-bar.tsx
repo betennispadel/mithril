@@ -149,6 +149,12 @@ export const menu: NavGroup[] = [
         url: '/reports',
         permission: 'report.read',
       },
+      {
+        title: 'SAST',
+        icon: <FileCode />,
+        url: '/sast',
+        permission: 'vulnerability.read',
+      },
     ],
   },
 
@@ -200,18 +206,7 @@ export const menu: NavGroup[] = [
       },
     ],
   },
-  {
-    title: 'SAST',
-    url: '#',
-    items: [
-      {
-        title: 'Semgrep',
-        icon: <FileCode />,
-        url: '/sast',
-        permission: 'vulnerability.read',
-      },
-    ],
-  },
+
   {
     title: 'Management',
     url: '#',
