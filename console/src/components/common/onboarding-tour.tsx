@@ -8,6 +8,7 @@ const STORAGE_KEY = 'mithril_tour_v1';
 export function OnboardingTour() {
   useEffect(() => {
     if (localStorage.getItem(STORAGE_KEY)) return;
+    if (!localStorage.getItem('mithril_setup_v1')) return;
 
     const driverObj = driver({
       showProgress: true,
