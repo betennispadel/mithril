@@ -1,6 +1,7 @@
 import { createFileRoute, Navigate, Outlet, redirect, useLocation } from '@tanstack/react-router';
 import { useEffect } from 'react';
 import ProtectedLayout from '@/components/common/layout/protect-layout';
+import { OnboardingTour } from '@/components/common/onboarding-tour';
 import { removeBootSplash } from '@/lib/boot-splash';
 import { useWorkspaceSelector } from '@/hooks/useWorkspaceSelector';
 import { useSession } from '@/utils/authClient';
@@ -48,10 +49,13 @@ function AuthedLayout() {
   }
 
   return (
-    <ProtectedLayout>
+    <>
+      <OnboardingTour />
+      <ProtectedLayout>
       {/* Remounted on a switch: no page keeps observing the previous
           workspace's queries, or refetches them with the new header. */}
       <Outlet key={selectedWorkspace} />
     </ProtectedLayout>
+    </>
   );
 }
