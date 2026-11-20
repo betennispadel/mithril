@@ -98,16 +98,7 @@ export function ToolInstallConfirmDialog({
   const [open, setOpen] = useState(false);
 
   const isConnector = tool.type === ToolsControllerGetManyToolsType.connector;
-  // Fantasy name → original manifest slug mapping (DB stores display names, API uses slugs).
-  const FANTASY_NAME_TO_SLUG: Record<string, string> = {
-    'One Ring': 'acunetix', 'Niffler': 'arjun', 'Time-Turner': 'gau',
-    'Zion Archive': 'gitleaks', 'Elder Wand': 'katana', 'Horcrux': 'nessus',
-    'Dementor': 'nikto', 'Sting': 'nmap', 'Palantir': 'nuclei',
-    'Red Pill': 'zap', 'Bullet Time': 'rustscan', 'Morpheus': 'trivy',
-    'Agent Smith': 'wpscan', 'Marauders Map': 'dirsearch', 'Alohomora': 'ffuf',
-    'Architect': 'semgrep',
-  };
-  const connectorSlug = FANTASY_NAME_TO_SLUG[tool.name] ?? tool.name;
+  const connectorSlug = tool.name;
   const { data: connector } = useToolsControllerGetConnectorBySlug(connectorSlug, {
     query: { enabled: open && isConnector, retry: false },
   });
