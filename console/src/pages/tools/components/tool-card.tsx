@@ -82,7 +82,7 @@ const ToolCard = ({ tool, onNavigate, openFrom = 'tools' }: ToolCardProps) => {
             </span>
           )}
         </div>
-        <div className="relative z-10 shrink-0">
+        <div data-tour="tool-install-btn" className="relative z-10 shrink-0">
           <ToolInstallButton
             tool={tool}
             workspaceId={selectedWorkspaceId || ''}
