@@ -111,7 +111,6 @@ function SetupWizardInner({ onDone }: { onDone: () => void }) {
 
   const complete = useCallback(() => {
     localStorage.setItem(STORAGE_KEY, '1');
-    localStorage.setItem('mithril_tour_v1', '1');
     onDone();
     void navigate({ to: '/' });
   }, [navigate, onDone]);
