@@ -111,6 +111,7 @@ function SetupWizardInner({ onDone }: { onDone: () => void }) {
 
   const complete = useCallback(() => {
     localStorage.setItem(STORAGE_KEY, '1');
+    window.dispatchEvent(new CustomEvent('mithril-setup-done'));
     onDone();
     void navigate({ to: '/' });
   }, [navigate, onDone]);
