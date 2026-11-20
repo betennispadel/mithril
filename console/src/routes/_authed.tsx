@@ -1,4 +1,4 @@
-import { createFileRoute, Navigate, Outlet, redirect, useLocation } from '@tanstack/react-router';
+import { createFileRoute, Navigate, Outlet, redirect, useLocation, useNavigate } from '@tanstack/react-router';
 import { useEffect } from 'react';
 import ProtectedLayout from '@/components/common/layout/protect-layout';
 import { OnboardingTour } from '@/components/common/onboarding-tour';
@@ -22,6 +22,7 @@ export const Route = createFileRoute('/_authed')({
 function AuthedLayout() {
   // Read the live session: useRouteContext is stale because beforeLoad does
   // not re-run when the session ends.
+  const navigate = useNavigate();
   const { data: liveSession } = useSession();
   const {
     workspaces,
@@ -52,7 +53,7 @@ function AuthedLayout() {
   return (
     <>
       <SetupWizard />
-      <OnboardingTour />
+      <OnboardingTour navigate={navigate} />
       <ProtectedLayout>
       {/* Remounted on a switch: no page keeps observing the previous
           workspace's queries, or refetches them with the new header. */}
