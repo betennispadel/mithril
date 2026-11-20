@@ -110,7 +110,7 @@ export function ListAssets({
         <TriggerList tabTriggerList={tabList} />
         {!isExtraTab && (
           <div className="flex justify-between items-center gap-2">
-            <AssetFilterBar />
+            <div data-tour="assets-filter"><AssetFilterBar /></div>
             {/* <ExportDataButton api="api/assets/services/export" prefix="assets" /> */}
             {tab === 'urls' && urlsActions}
           </div>

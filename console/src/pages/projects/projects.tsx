@@ -289,7 +289,7 @@ export function Projects() {
     if (isLoading) return renderSkeleton();
     if (!projects.length) return filter ? renderNoMatch() : renderEmpty();
     return (
-      <div className={GRID_CLASS}>
+      <div data-tour="projects-grid" className={GRID_CLASS}>
         {projects.map((project) => (
           <ProjectCard key={project.id} project={project} timezone={timezone} />
         ))}

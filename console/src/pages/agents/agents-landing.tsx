@@ -420,7 +420,7 @@ export default function AgentsLandingPage({
 
             {/* Starter prompts, grouped by topic. Agent mode offers prompts
                 that run scans and tools; Ask mode offers read-only ones. */}
-            <PromptGroups
+            <div data-tour="aistudio-prompts"><PromptGroups
               groups={isAgentMode ? AGENT_PROMPT_GROUPS : ASK_PROMPT_GROUPS}
               onSelect={handleSuggestionClick}
               onPreview={setPreviewPrompt}
@@ -428,7 +428,7 @@ export default function AgentsLandingPage({
               // open for picking another prompt or adding a target.
               closeOnSelect={!isAgentMode}
               className="absolute inset-x-0 top-full mt-4"
-            />
+            /></div>
           </div>
         </div>
       </Page>

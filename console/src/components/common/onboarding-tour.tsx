@@ -15,131 +15,247 @@ interface TourStep {
 }
 
 const STEPS: TourStep[] = [
+  /* 0 - Welcome */
   {
     navigateTo: null,
     selector: null,
     title: 'Welcome to Mithril',
     description:
-      'Mithril is an enterprise attack surface management platform. This tour walks you through the key sections in about a minute.',
+      'Mithril is an enterprise attack surface management platform. ' +
+      'This tour walks you through every section step by step -- it only takes a couple of minutes.',
   },
+
+  /* ===== TOOLS ===== */
   {
     navigateTo: null,
     selector: 'a[href="/tools"]',
-    title: 'Tools',
+    title: 'Tools -- the starting point',
     description:
-      'Everything starts with Tools. Click here to open the marketplace where you install security scanners into your workspace.',
+      'Everything in Mithril starts here. Click Tools in the sidebar to open the marketplace. ' +
+      'You must install at least one scanner before you can run a scan.',
     side: 'right',
   },
   {
     navigateTo: '/tools',
     selector: '[data-tour="tools-tabs"]',
-    title: 'Tool Types',
+    title: 'Tool types',
     description:
-      'Filter by All, Built-in, Connector or Installed. Built-in tools run on your worker. Connectors are Docker-packaged scanners like Semgrep, Nuclei and WPScan.',
+      'Four tabs: ' +
+      '<b>All</b> shows the full catalog. ' +
+      '<b>Built-in</b> are tools that run directly on your worker (Nmap, FFuf, Subfinder, etc.). ' +
+      '<b>Connector</b> are Docker-packaged scanners (Nuclei, WPScan, Semgrep, ZAP) -- richer but need Docker. ' +
+      '<b>Installed</b> shows only tools already in your workspace.',
     side: 'bottom',
   },
   {
     navigateTo: null,
     selector: '[data-tour="tools-search"]',
-    title: 'Search and Filter',
+    title: 'Search and category filter',
     description:
-      'Find tools by name or keyword. Use the category dropdown to narrow by type: recon, SAST, fuzzing, and more.',
+      'Type a tool name or keyword to search. Use the <b>category dropdown</b> on the right to filter by type: ' +
+      'Recon, SAST, Fuzzing, Web Scanner, Network, and more. ' +
+      'Combining both narrows the list quickly when you know what you need.',
     side: 'bottom',
   },
+  {
+    navigateTo: null,
+    selector: '[data-tour="tools-grid"]',
+    title: 'Tool cards',
+    description:
+      'Each card shows the tool name, a short description, category badges, and an <b>Install</b> button. ' +
+      'Click anywhere on a card (except the button) to open the detail page -- that has docs, example commands and a configuration tab. ' +
+      'Connectors show a <b>Config</b> button after install to create a configuration profile.',
+    side: 'top',
+  },
+
+  /* ===== TARGETS ===== */
   {
     navigateTo: null,
     selector: 'a[href="/targets"]',
     title: 'Targets',
     description:
-      'Once your tools are ready, add Targets. A target is any domain, IP range or repository you want to scan.',
+      'A Target is anything you want to scan: a domain, an IP address, a CIDR range, or a Git repository. ' +
+      'Once added, Mithril continuously discovers what is attached to it.',
     side: 'right',
   },
   {
     navigateTo: '/targets',
-    selector: '[data-tour="add-target"]',
-    title: 'Start Discovery',
+    selector: '[data-tour="target-summary"]',
+    title: 'Summary cards',
     description:
-      'Click here to add a new target. Enter a domain like example.com or a CIDR range. Mithril will automatically discover subdomains, open ports and running services.',
+      'At a glance: total targets in your workspace, how many are <b>Scanning</b> right now, ' +
+      'how many have an <b>open critical</b> vulnerability, and how many are <b>Stale</b> (no scan in 30+ days). ' +
+      'Click any card to filter the list to that view.',
+    side: 'bottom',
+  },
+  {
+    navigateTo: null,
+    selector: '[data-tour="add-target"]',
+    title: 'Start Discovery -- add your first target',
+    description:
+      'Click this button to open the target wizard. ' +
+      'Supported types: <b>Domain</b> (example.com), <b>IP</b> (1.2.3.4), <b>CIDR</b> (10.0.0.0/24), ' +
+      'or a <b>Git repository URL</b> for SAST scanning. ' +
+      'After you save, Mithril kicks off a discovery job and starts populating Assets automatically.',
     side: 'bottom',
   },
   {
     navigateTo: null,
     selector: '[data-tour="target-list"]',
-    title: 'Target List',
+    title: 'Target table',
     description:
-      'All targets in your workspace appear here. The summary cards show totals, active scans and targets with critical findings. Click any row to drill in.',
+      'Each row shows: target name and type icon, source integration (if synced from GitHub/GitLab/Jira), ' +
+      'a colour-coded <b>severity bar</b> of open findings, current scan status badge, schedule, and linked projects. ' +
+      'Use the <b>Type</b>, <b>Scan status</b> and <b>Scope</b> dropdowns above the table to filter. ' +
+      'Click any row to open the target detail page (Overview, Assets, Vulnerabilities, Jobs tabs).',
     side: 'top',
   },
+
+  /* ===== ASSETS ===== */
   {
     navigateTo: null,
     selector: 'a[href="/assets"]',
-    title: 'Assets',
+    title: 'Assets -- the discovered attack surface',
     description:
-      'After a scan runs, everything Mithril discovers -- subdomains, hosts, open ports, URLs and technologies -- appears here as Assets.',
+      'After a scan runs, everything Mithril finds -- subdomains, open ports, running services, ' +
+      'live URLs, detected technologies and TLS certificates -- appears here as Assets.',
     side: 'right',
   },
   {
     navigateTo: '/assets',
     selector: '[data-tour="assets-tabs"]',
-    title: 'Asset Categories',
+    title: 'Asset categories',
     description:
-      'Assets are grouped by type: Services, Hosts, Ports, IPs, URLs, Technologies and more. Use the tabs to explore each category.',
+      '<b>Services</b>: HTTP/HTTPS endpoints with status codes and titles. ' +
+      '<b>Hosts</b>: resolved hostnames. ' +
+      '<b>Ports</b>: open TCP/UDP ports per host. ' +
+      '<b>IPs</b>: observed IP addresses. ' +
+      '<b>URLs</b>: crawled paths. ' +
+      '<b>Technologies</b>: detected frameworks, CMS and libraries. ' +
+      '<b>TLS</b>: certificate details and expiry. ' +
+      'Click any row to open the asset detail sheet with full scan history and linked vulnerabilities.',
     side: 'bottom',
   },
   {
     navigateTo: null,
-    selector: 'a[href="/vulnerabilities"]',
-    title: 'Vulnerabilities',
+    selector: '[data-tour="assets-filter"]',
+    title: 'Asset filter bar',
     description:
-      'All findings from your scans land here, organised by severity. This is your main triage workspace.',
+      'Filter the current asset view by tags, source target, severity, discovery method and custom fields. ' +
+      'Filters are combinable -- useful for narrowing down a large attack surface to what matters most.',
+    side: 'bottom',
+  },
+
+  /* ===== VULNERABILITIES ===== */
+  {
+    navigateTo: null,
+    selector: 'a[href="/vulnerabilities"]',
+    title: 'Vulnerabilities -- your findings inbox',
+    description:
+      'All findings from every scan land here, ranked by severity: Critical, High, Medium, Low, Info. ' +
+      'This is your main triage and remediation workspace.',
     side: 'right',
   },
   {
     navigateTo: '/vulnerabilities',
     selector: '[data-tour="vuln-tabs"]',
-    title: 'Triage Workflow',
+    title: 'Triage workflow',
     description:
-      'Use the status tabs to manage findings. Move issues from Open to In Review once assigned, then to Fixed when patched. Dismiss false positives. Counts update in real time.',
+      '<b>Open</b>: new, unreviewed findings -- start here. ' +
+      '<b>In Review</b>: assigned to a team member, work in progress. ' +
+      '<b>Fixed</b>: patched and verified -- Mithril auto-closes these if the fingerprint is not seen again after the next scan. ' +
+      '<b>Dismissed</b>: false positives or accepted risks. ' +
+      'The count badge on each tab updates in real time as scans complete.',
     side: 'bottom',
   },
   {
     navigateTo: null,
-    selector: 'a[href="/projects"]',
-    title: 'Projects',
+    selector: '[data-tour="vuln-fastscan"]',
+    title: 'Fast Scan',
     description:
-      'Projects automate everything. Combine targets, a tool pipeline and a cron schedule into one repeatable workflow.',
+      'Kick off an instant scan on any target without building a full project. ' +
+      'Pick a target, choose a tool and hit Run -- results appear in Vulnerabilities within minutes. ' +
+      'Ideal for quick re-verification after patching a finding.',
+    side: 'bottom',
+  },
+
+  /* ===== PROJECTS ===== */
+  {
+    navigateTo: null,
+    selector: 'a[href="/projects"]',
+    title: 'Projects -- automated scan pipelines',
+    description:
+      'Projects combine targets, a tool pipeline and a schedule into one automated workflow. ' +
+      'Set it once, run it forever.',
     side: 'right',
   },
   {
     navigateTo: '/projects',
-    selector: '[data-tour="create-project"]',
-    title: 'Create a Project',
+    selector: '[data-tour="projects-grid"]',
+    title: 'Projects grid',
     description:
-      'Click Create to build a new project. Choose targets, pick a tool pipeline (for example Nmap then Nuclei), set a schedule and Mithril runs it automatically.',
+      'Each card shows the project name, the tool pipeline icons in order, next scheduled run time, ' +
+      'total asset count and a severity bar of its latest findings. ' +
+      'Click a card to open the project detail page: Overview (timeline, charts), Assets, Jobs (run history) and Settings.',
+    side: 'top',
+  },
+  {
+    navigateTo: null,
+    selector: '[data-tour="create-project"]',
+    title: 'Create a project',
+    description:
+      'Click Create to open the project wizard: ' +
+      '1. Name your project and select targets. ' +
+      '2. Build the tool pipeline -- drag tools into order (e.g. Nmap first, then Nuclei). ' +
+      '3. Set a cron schedule (daily, weekly, or custom). ' +
+      '4. Optionally add scope rules to include or exclude specific asset patterns. ' +
+      'Mithril runs the pipeline automatically and merges new findings into Vulnerabilities.',
     side: 'bottom',
   },
+
+  /* ===== AI STUDIO ===== */
   {
     navigateTo: null,
     selector: 'a[href="/aistudio"]',
     title: 'AI Studio',
     description:
-      'AI Studio connects a language model to your workspace data. Ask it to explain a vulnerability, trigger a scan or summarise your most critical findings.',
+      'AI Studio connects a language model directly to your workspace data -- targets, assets, vulnerabilities and job history. ' +
+      'Use it for analysis, automation and reporting, all in natural language.',
     side: 'right',
   },
   {
     navigateTo: '/aistudio',
-    selector: '[data-tour="aistudio-input"]',
-    title: 'Chat Interface',
+    selector: '[data-tour="aistudio-prompts"]',
+    title: 'Prompt categories',
     description:
-      'Type a natural-language command here. Try "What are my critical vulnerabilities?" or "Run Nuclei on example.com". The AI has full visibility of your workspace.',
+      'Click a topic chip to expand a list of example prompts for that category. ' +
+      'Hover a prompt to preview it in the input field below. ' +
+      'Click a prompt to fill it in and send, or customise it first. ' +
+      'Categories include Recon, SAST, Vulnerability Analysis, Reporting and more.',
     side: 'top',
   },
+  {
+    navigateTo: null,
+    selector: '[data-tour="aistudio-input"]',
+    title: 'Chat input',
+    description:
+      'Type any natural-language command and press Enter (or click the send button). ' +
+      'Examples: "What are my critical vulnerabilities on example.com?", ' +
+      '"Run a Nuclei scan on the staging target", ' +
+      '"Generate a summary report of last week's findings". ' +
+      'Switch to <b>Agent mode</b> (toggle in the input) for autonomous multi-step operations where the AI plans and executes a sequence of actions.',
+    side: 'top',
+  },
+
+  /* Done */
   {
     navigateTo: '/',
     selector: null,
     title: "You're all set!",
     description:
-      'Start by adding a target and installing a tool, then kick off your first scan. Good hunting.',
+      'You have seen everything Mithril has to offer. ' +
+      'Start by adding a target, installing a tool and running your first scan. ' +
+      'Good hunting.',
   },
 ];
 
@@ -158,7 +274,7 @@ export function OnboardingTour() {
       // eslint-disable-next-line prefer-const
       let d: ReturnType<typeof driver>;
 
-      const goThen = (path: string, cb: () => void, delay = 650) => {
+      const goThen = (path: string, cb: () => void, delay = 700) => {
         void navigate({ to: path as '/' });
         setTimeout(cb, delay);
       };
@@ -167,7 +283,7 @@ export function OnboardingTour() {
         showProgress: true,
         animate: true,
         allowClose: false,
-        overlayOpacity: 0.45,
+        overlayOpacity: 0.5,
         popoverClass: 'mithril-tour',
         nextBtnText: 'Next',
         prevBtnText: 'Back',

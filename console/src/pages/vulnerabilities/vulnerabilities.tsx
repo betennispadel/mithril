@@ -44,7 +44,7 @@ const Vulnerabilities = () => {
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
             {/* The header shows even without access: no stats fetch then */}
             {hasPermission('vulnerability.read') && <OpenSeverityBreakdown />}
-            <FastScanDialog />
+            <span data-tour="vuln-fastscan"><FastScanDialog /></span>
           </div>
         ) : undefined
       }

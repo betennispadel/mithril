@@ -23,7 +23,7 @@ const ToolsList = ({
       {isLoading ? (
         <ToolCardLoading />
       ) : (
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
+        <div data-tour="tools-grid" className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
           {data?.map((tool, index) => (
             <ToolCard key={tool.id ?? index} tool={tool} />
           ))}
