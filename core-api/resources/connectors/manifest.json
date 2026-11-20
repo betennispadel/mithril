@@ -1311,6 +1311,20 @@
             "title": "Template IDs",
             "type": "array",
             "ui:placeholder": "e.g. CVE-2024-12345"
+          },
+          "auth_header": {
+            "title": "Authorization Header",
+            "description": "Value for the Authorization header (e.g. Bearer eyJ... or ApiKey abc123). Leave empty for unauthenticated scan.",
+            "type": "string",
+            "ui:secret": true,
+            "ui:placeholder": "Bearer eyJhbGciOiJIUzI1NiJ9..."
+          },
+          "auth_cookie": {
+            "title": "Session Cookie",
+            "description": "Value for the Cookie header (e.g. session=abc123; csrftoken=xyz). Leave empty for unauthenticated scan.",
+            "type": "string",
+            "ui:secret": true,
+            "ui:placeholder": "session=abc123; csrftoken=xyz"
           }
         },
         "type": "object"
@@ -1433,6 +1447,20 @@
             "minimum": 1,
             "title": "Threads per host",
             "type": "integer"
+          },
+          "auth_header": {
+            "title": "Authorization Header",
+            "description": "Value for the Authorization header (e.g. Bearer eyJ... or ApiKey abc123). Leave empty for unauthenticated scan.",
+            "type": "string",
+            "ui:secret": true,
+            "ui:placeholder": "Bearer eyJhbGciOiJIUzI1NiJ9..."
+          },
+          "auth_cookie": {
+            "title": "Session Cookie",
+            "description": "Value for the Cookie header (e.g. session=abc123; csrftoken=xyz). Leave empty for unauthenticated scan.",
+            "type": "string",
+            "ui:secret": true,
+            "ui:placeholder": "session=abc123; csrftoken=xyz"
           }
         },
         "type": "object"
