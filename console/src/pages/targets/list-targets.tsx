@@ -367,7 +367,7 @@ export function ListTargets() {
   };
 
   return (
-    <div className="flex flex-col gap-4">
+    <div data-tour="target-list" className="flex flex-col gap-4">
       <TargetsSummary view={view} onViewChange={handleViewChange} />
       <DataTable
         data={targets}

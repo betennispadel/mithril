@@ -388,7 +388,7 @@ export default function AgentsLandingPage({
 
             {/* Input area: rounder box and a round send button. A gradient beam
                 runs once around the box when it first appears. */}
-            <div ref={inputWrapperRef} className="relative rounded-2xl">
+            <div data-tour="aistudio-input" ref={inputWrapperRef} className="relative rounded-2xl">
               {/* Above the box, out of the flow so the input stays centred */}
               <div className="absolute bottom-full left-1 mb-1 flex items-center gap-1">
                 <ProjectScopeSelect value={project} onChange={setProject} />

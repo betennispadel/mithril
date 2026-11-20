@@ -106,7 +106,7 @@ export function ListAssets({
   return (
     <div className="w-full">
       {/* gap-4: the 16px DataTable leaves between its toolbar and table, so tabs, filters and table sit evenly. */}
-      <Tabs value={tab} onValueChange={setTab} className="gap-4">
+      <Tabs data-tour="assets-tabs" value={tab} onValueChange={setTab} className="gap-4">
         <TriggerList tabTriggerList={tabList} />
         {!isExtraTab && (
           <div className="flex justify-between items-center gap-2">

@@ -26,6 +26,7 @@ export function StartDiscoveryButton() {
 
   return (
     <Button
+      data-tour="add-target"
       variant="outline"
       className="gap-2"
       onClick={() => navigate({ to: '/targets/start-discovery' })}

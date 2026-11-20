@@ -76,7 +76,7 @@ const Tools = () => {
         onValueChange={setActiveTab}
         className="w-full"
       >
-        <TabsList className="mb-4">
+        <TabsList data-tour="tools-tabs" className="mb-4">
           <TabsTrigger value="all">All</TabsTrigger>
           <TabsTrigger value="builtin">Built-in</TabsTrigger>
           <TabsTrigger value="connector">Connector</TabsTrigger>
@@ -84,7 +84,7 @@ const Tools = () => {
         </TabsList>
       </Tabs>
       <div className="flex items-center gap-2 mb-4">
-        <div className="relative flex-1 max-w-xs">
+        <div data-tour="tools-search" className="relative flex-1 max-w-xs">
           <Search className="absolute left-2.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
           <Input
             placeholder="Search tools..."

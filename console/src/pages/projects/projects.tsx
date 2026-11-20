@@ -310,6 +310,7 @@ export function Projects() {
           <div className="flex items-center gap-2 md:justify-end">
             <Button
               variant="outline"
+              data-tour="create-project"
               onClick={() => navigate({ to: '/projects/create' })}
             >
               <Plus />
