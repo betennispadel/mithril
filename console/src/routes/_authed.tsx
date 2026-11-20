@@ -2,6 +2,7 @@ import { createFileRoute, Navigate, Outlet, redirect, useLocation } from '@tanst
 import { useEffect } from 'react';
 import ProtectedLayout from '@/components/common/layout/protect-layout';
 import { OnboardingTour } from '@/components/common/onboarding-tour';
+import { SetupWizard } from '@/components/common/setup-wizard';
 import { removeBootSplash } from '@/lib/boot-splash';
 import { useWorkspaceSelector } from '@/hooks/useWorkspaceSelector';
 import { useSession } from '@/utils/authClient';
@@ -50,6 +51,7 @@ function AuthedLayout() {
 
   return (
     <>
+      <SetupWizard />
       <OnboardingTour />
       <ProtectedLayout>
       {/* Remounted on a switch: no page keeps observing the previous
