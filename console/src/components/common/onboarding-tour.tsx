@@ -66,7 +66,7 @@ const STEPS: TourStep[] = [
       '<b>Built-in tools</b> (Nmap, FFuf, etc.): click Install -- the tool is ready immediately. No configuration needed.<br><br>' +
       '<b>Connector tools</b> (Nuclei, WPScan, Semgrep, ZAP, etc.): after clicking Install, a <b>Configuration Profile</b> sheet slides in automatically. Inside that sheet:<br>' +
       '- <b>Profile name</b>: a label for this configuration set, e.g. "default", "web-recon", "api-scan". You can create multiple profiles with different settings.<br>' +
-      '- <b>Use default presets</b>: click this button first -- it fills every field with the tool's recommended values and is a safe starting point.<br>' +
+      '- <b>Use default presets</b>: click this button first -- it fills every field with the the tool recommended values and is a safe starting point.<br>' +
       '- <b>Tool-specific fields</b>: each connector defines its own schema. Common fields include: rate limit (requests per second), thread count, scan timeout, output verbosity, auth tokens for private repos, custom flags and target scope rules.<br>' +
       '- Click <b>Create</b> to save the profile. The tool is now installed and configured.',
     side: 'left',
@@ -294,7 +294,7 @@ const STEPS: TourStep[] = [
   {
     navigateTo: '/',
     selector: null,
-    title: "You are all set!",
+    title: "All done!",
     description:
       'You have seen every section of Mithril. The recommended first steps are:<br>' +
       '1. Go to <b>Tools</b> and install Nmap + Nuclei.<br>' +
