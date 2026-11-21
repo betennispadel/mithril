@@ -6,6 +6,8 @@ import type { VulnerabilityReportData } from '../types/vulnerability-report-data
 import { QueryReportDocument } from './query/QueryReportDocument';
 import { SummaryReportDocument } from './summary/SummaryReportDocument';
 import { VulnReportDocument } from './vuln/VulnReportDocument';
+import { CtiReportDocument } from './cti/CtiReportDocument';
+import type { CtiReportData } from '../types/cti-report-data.type';
 
 // Ensure fonts are registered once
 import './fonts';
@@ -15,8 +17,8 @@ import './fonts';
  * Accepts 'SUMMARY', 'VULNERABILITY' or 'QUERY' with the matching data.
  */
 export async function renderReportPdf(
-  type: 'SUMMARY' | 'VULNERABILITY' | 'QUERY',
-  data: ReportData | VulnerabilityReportData | QueryReportData,
+  type: 'SUMMARY' | 'VULNERABILITY' | 'QUERY' | 'CTI',
+  data: ReportData | VulnerabilityReportData | QueryReportData | CtiReportData,
 ): Promise<Buffer> {
   // Merge server-side fields into data
   const enrichedData = {
@@ -29,6 +31,10 @@ export async function renderReportPdf(
     return renderToBuffer(
       <VulnReportDocument data={enrichedData as VulnerabilityReportData} />,
     );
+  }
+
+  if (type === 'CTI') {
+    return renderToBuffer(<CtiReportDocument data={enrichedData as CtiReportData} />);
   }
 
   if (type === 'QUERY') {

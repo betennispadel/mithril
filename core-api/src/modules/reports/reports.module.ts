@@ -13,15 +13,18 @@ import { Workspace } from '@/modules/workspaces/entities/workspace.entity';
 import { StatisticModule } from '@/modules/statistic/statistic.module';
 import { AttackSurfaceQueryModule } from '@/modules/attack-surface-query/attack-surface-query.module';
 import { StorageModule } from '../storage/storage.module';
+import { CtiReportService } from './services/cti-report.service';
+import { CtiTarget } from '@/modules/cti/entities/cti-target.entity';
+import { CtiAsset } from '@/modules/cti/entities/cti-asset.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Report, Vulnerability, Target, AssetService, AssetTag, Workspace]),
+    TypeOrmModule.forFeature([Report, Vulnerability, Target, AssetService, AssetTag, Workspace, CtiTarget, CtiAsset]),
     StatisticModule,
     AttackSurfaceQueryModule,
     StorageModule,
   ],
   controllers: [ReportsController],
-  providers: [ReportsService, VulnerabilityReportService, SummaryReportService],
+  providers: [ReportsService, VulnerabilityReportService, SummaryReportService, CtiReportService],
 })
 export class ReportsModule {}

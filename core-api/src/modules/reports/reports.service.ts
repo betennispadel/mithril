@@ -14,6 +14,7 @@ import { VulnerabilityReportService } from './services/vulnerability-report.serv
 import { SummaryReportService } from './services/summary-report.service';
 import { renderReportPdf } from './renderer/pdf-renderer';
 import { AsqSavedQueriesService } from '@/modules/attack-surface-query/asq-saved-queries.service';
+import { CtiReportService } from './services/cti-report.service';
 import type { QueryBatchResult, QueryScope } from '@/modules/attack-surface-query/domain/query.types';
 import { toReportTables } from './services/query-report';
 import { NotFoundError } from '@/common/errors/domain.errors';
@@ -30,6 +31,7 @@ export class ReportsService {
     private readonly vulnerabilityReportService: VulnerabilityReportService,
     private readonly summaryReportService: SummaryReportService,
     private readonly savedQueries: AsqSavedQueriesService,
+    private readonly ctiReportService: CtiReportService,
   ) {
     this.logoPath = path.join(process.cwd(), 'public', 'images', 'logo.png');
     this.loadLogo();
@@ -111,7 +113,7 @@ export class ReportsService {
   async generateReport(
     workspaceId: string,
     userId: string,
-    type: 'SUMMARY' | 'VULNERABILITY' = 'SUMMARY',
+    type: 'SUMMARY' | 'VULNERABILITY' | 'CTI' = 'SUMMARY',
     options?: {
       startDate?: Date;
       endDate?: Date;
@@ -122,7 +124,9 @@ export class ReportsService {
   ): Promise<{ filePath: string; fileName: string }> {
     let data: ReportData | VulnerabilityReportData;
 
-    if (type === 'VULNERABILITY') {
+    if (type === 'CTI') {
+      data = await this.ctiReportService.getCtiReportData(workspaceId, options);
+    } else if (type === 'VULNERABILITY') {
       data = await this.vulnerabilityReportService.getVulnerabilityReportData(
         workspaceId,
         options,
