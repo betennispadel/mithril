@@ -41,6 +41,8 @@ export const SUBSCRIPTIONS = {
     'worker',
     'scan',
     'integration',
+    'cti_target',
+    'cti',
   ],
   [EventBusGroup.Integrations]: [
     'vulnerability',
@@ -49,6 +51,8 @@ export const SUBSCRIPTIONS = {
     'job',
     'workflow',
     'integration',
+    'cti_target',
+    'cti',
   ],
   // New assets are matched against project scope rules, and the events that
   // project triggers run on start runs; the sink narrows the domains to

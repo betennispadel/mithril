@@ -7,6 +7,8 @@ import { CtiAsset } from './entities/cti-asset.entity';
 import { CreateCtiTargetDto, CreateCtiTargetsBulkDto } from './dto/create-cti-target.dto';
 import { GetCtiTargetsDto } from './dto/get-cti-targets.dto';
 import { UpdateCtiTargetDto } from './dto/update-cti-target.dto';
+import { EventBridgeService } from '@/modules/event-bridge/publishing/event-bridge.service';
+import { EVENT_CATALOG } from '@/modules/event-bridge/contracts/event-catalog';
 
 @Injectable()
 export class CtiTargetsService {
@@ -16,6 +18,7 @@ export class CtiTargetsService {
     @InjectRepository(CtiAsset)
     private readonly assetRepository: Repository<CtiAsset>,
     private readonly eventEmitter: EventEmitter2,
+    private readonly eventBridge: EventBridgeService,
   ) {}
 
   async create(
@@ -31,6 +34,18 @@ export class CtiTargetsService {
       target: saved,
       workspaceId,
     });
+
+    // Publish to event bridge for notifications + integrations
+    await this.eventBridge.publishSafely(
+      EVENT_CATALOG.cti_target.created,
+      {
+        targetId: saved.id,
+        targetValue: saved.value,
+        targetType: saved.type,
+      },
+      { subject: workspaceId },
+    );
+
     return saved;
   }
 
@@ -203,5 +218,80 @@ export class CtiTargetsService {
       workspaceId,
     });
     return target;
+  }
+
+  /**
+   * Called by the data-adapter or job completion handler after a Pensieve scan
+   * finishes. Publishes events to the event bridge so both in-app notifications
+   * and integration pushes (Slack/Discord/Telegram/Webhook) fire automatically.
+   */
+  async onScanCompleted(
+    targetId: string,
+    workspaceId: string,
+    results: { newAssets: number; totalFindings: number; highestThreatScore: number },
+  ): Promise<void> {
+    const target = await this.findOne(targetId, workspaceId);
+
+    // Update lastScanAt
+    target.lastScanAt = new Date();
+    await this.targetRepository.save(target);
+
+    // Publish scan completed event
+    await this.eventBridge.publishSafely(
+      EVENT_CATALOG.cti_target.scanned,
+      {
+        targetId: target.id,
+        targetValue: target.value,
+        targetType: target.type,
+        newAssets: results.newAssets,
+        totalFindings: results.totalFindings,
+        highestThreatScore: results.highestThreatScore,
+      },
+      { subject: workspaceId },
+    );
+
+    // If highest threat score is critical (>=80), emit threat detected
+    if (results.highestThreatScore >= 80) {
+      const topAsset = await this.assetRepository.findOne({
+        where: { ctiTargetId: target.id, workspaceId },
+        order: { threatScore: 'DESC' },
+      });
+
+      if (topAsset) {
+        await this.eventBridge.publishSafely(
+          EVENT_CATALOG.cti.threat_detected,
+          {
+            targetId: target.id,
+            targetValue: target.value,
+            assetValue: topAsset.value,
+            assetType: topAsset.type,
+            threatScore: topAsset.threatScore,
+            source: topAsset.source ?? 'pensieve',
+          },
+          { subject: workspaceId },
+        );
+      }
+    }
+  }
+
+  /**
+   * Called when an investigation finishes. Publishes event to the bridge.
+   */
+  async onInvestigationCompleted(
+    investigationId: string,
+    workspaceId: string,
+    results: { query: string; entityCount: number; findingCount: number; targetId?: string },
+  ): Promise<void> {
+    await this.eventBridge.publishSafely(
+      EVENT_CATALOG.cti.investigation.completed,
+      {
+        investigationId,
+        query: results.query,
+        entityCount: results.entityCount,
+        findingCount: results.findingCount,
+        targetId: results.targetId,
+      },
+      { subject: workspaceId },
+    );
   }
 }

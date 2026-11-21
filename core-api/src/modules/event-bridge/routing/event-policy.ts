@@ -165,14 +165,8 @@ export const EVENT_POLICY: Record<EventName, EventPolicy> = {
   // consume domain `notification`, or it would loop on its own output.
   'notification.sent': { persist: false, severity: 'normal' },
   'notification.failed': { persist: false, severity: 'normal' },
-};
-
-/** Audit sink filter: does this event belong in `audit_events`? */
-export function isPersisted(name: EventName): boolean {
-  return EVENT_POLICY[name]?.persist === true;
-}
-
-/** Routing weight, used by the notification / email groups. */
-export function eventSeverity(name: EventName): EventPolicy['severity'] {
-  return EVENT_POLICY[name]?.severity ?? 'normal';
-}
+  // ─── CTI events ─────────────────────────────────────────────────────
+  'cti_target.created': { persist: true, severity: 'normal' },
+  'cti_target.scanned': { persist: false, severity: 'normal' },
+  'cti.threat_detected': { persist: false, severity: 'critical' },
+  'cti.investigation.completed': { persist: false, severity: 'normal' },

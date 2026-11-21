@@ -161,6 +161,33 @@ export interface VulnerabilityAnalysisCompletedPayload {
   vulnerabilityName: string;
 }
 
+
+export interface CtiTargetScannedPayload {
+  targetId: string;
+  targetValue: string;
+  targetType: string;
+  newAssets: number;
+  totalFindings: number;
+  highestThreatScore: number;
+}
+
+export interface CtiThreatDetectedPayload {
+  targetId: string;
+  targetValue: string;
+  assetValue: string;
+  assetType: string;
+  threatScore: number;
+  source: string;
+}
+
+export interface CtiInvestigationCompletedPayload {
+  investigationId: string;
+  query: string;
+  entityCount: number;
+  findingCount: number;
+  targetId?: string;
+}
+
 export interface EventPayloadMap {
   'asset.discovered': AssetDiscoveredPayload;
   'vulnerability.detected': VulnerabilityDetectedPayload;
@@ -173,6 +200,9 @@ export interface EventPayloadMap {
   'asset.url.discovered': UrlDiscoveredPayload;
   'project.assets.added': ProjectAssetsAddedPayload;
   'project.run.completed': ProjectRunCompletedPayload;
+  'cti_target.scanned': CtiTargetScannedPayload;
+  'cti.threat_detected': CtiThreatDetectedPayload;
+  'cti.investigation.completed': CtiInvestigationCompletedPayload;
 }
 
 export type PayloadEventName = keyof EventPayloadMap & EventName;

@@ -4,5 +4,8 @@
   "ASSET_NEW_DETECT": "/targets/{targetId}/inventory?isNew=true",
   "NEW_VULNERABILITY_FOUND": "/targets/{targetId}/vulnerabilities",
   "WORKSPACE_INVITATION": "{action, select, created {/invite/{token}} accepted {/settings/members} declined {/settings/members} other {/invite/{token}}}",
-  "NEW_URL_FOUND": "/targets/{targetId}/inventory?tab=urls&isNew=true"
+  "NEW_URL_FOUND": "/targets/{targetId}/inventory?tab=urls&isNew=true",
+  "CTI_SCAN_COMPLETED": "/cti/{targetId}",
+  "CTI_THREAT_DETECTED": "/cti/{targetId}",
+  "CTI_INVESTIGATION_COMPLETED": "/cti/investigations/{investigationId}"
 }

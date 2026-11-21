@@ -54,6 +54,10 @@ export function draftMessage(name: EventName, event: ConsumedEvent): MessageDraf
       return { ...draftVulnerabilityStatus(event), footer };
     case 'asset.url.discovered':
       return { ...draftUrlDiscovered(event), footer };
+    case 'cti_target.scanned':
+      return { ...draftCtiScanCompleted(event), footer };
+    case 'cti.threat_detected':
+      return { ...draftCtiThreatDetected(event), footer };
     default:
       return { ...draftGeneric(name, event), footer };
   }
@@ -222,6 +226,58 @@ function draftVulnerabilityStatus(event: ConsumedEvent): Body {
  * title and the scalar payload/metadata values as fields. Keeps a newly pushed
  * event readable instead of silently empty.
  */
+function draftCtiScanCompleted(event: ConsumedEvent): Body {
+  const p = readPayload('cti_target.scanned', event);
+  const fields: Body['fields'] = [];
+  if (p.targetValue) {
+    fields.push({ label: 'Target', value: [{ code: p.targetValue }] });
+  }
+  if (p.targetType) {
+    fields.push({ label: 'Type', value: [p.targetType] });
+  }
+  const parts = [
+    p.newAssets ? `${p.newAssets} new asset${(p.newAssets ?? 0) > 1 ? 's' : ''}` : null,
+    p.totalFindings ? `${p.totalFindings} finding${(p.totalFindings ?? 0) > 1 ? 's' : ''}` : null,
+  ].filter(Boolean);
+  if (parts.length > 0) {
+    fields.push({ label: 'Results', value: [parts.join(' \u00b7 ')] });
+  }
+  if (typeof p.highestThreatScore === 'number' && p.highestThreatScore > 0) {
+    fields.push({ label: 'Highest threat score', value: [`${p.highestThreatScore}/100`] });
+  }
+  return {
+    icon: '\ud83d\udd0d',
+    title: 'CTI scan completed',
+    fields,
+  };
+}
+
+function draftCtiThreatDetected(event: ConsumedEvent): Body {
+  const p = readPayload('cti.threat_detected', event);
+  const fields: Body['fields'] = [];
+  if (p.assetValue) {
+    fields.push({ label: 'Asset', value: [{ code: p.assetValue }] });
+  }
+  if (p.assetType) {
+    fields.push({ label: 'Type', value: [p.assetType] });
+  }
+  if (typeof p.threatScore === 'number') {
+    const icon = p.threatScore >= 80 ? '\ud83d\udd34' : p.threatScore >= 60 ? '\ud83d\udfe0' : '\ud83d\udfe1';
+    fields.push({ label: 'Threat score', value: [`${icon} ${p.threatScore}/100`] });
+  }
+  if (p.source) {
+    fields.push({ label: 'Source', value: [p.source] });
+  }
+  if (p.targetValue) {
+    fields.push({ label: 'Target', value: [{ code: p.targetValue }] });
+  }
+  return {
+    icon: '\ud83d\udea8',
+    title: `Critical threat detected: ${clip(p.assetValue ?? 'unknown')}`,
+    fields,
+  };
+}
+
 function draftGeneric(name: EventName, event: ConsumedEvent): Body {
   const fields: Body['fields'] = [];
   if (event.resourceType && event.resourceId) {

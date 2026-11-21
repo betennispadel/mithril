@@ -195,6 +195,12 @@ export enum NotificationType {
   WORKSPACE_INVITATION = 'WORKSPACE_INVITATION',
   /** A URL discovery run stored URLs no earlier run had. */
   NEW_URL_FOUND = 'NEW_URL_FOUND',
+  /** CTI scan completed with results. */
+  CTI_SCAN_COMPLETED = 'CTI_SCAN_COMPLETED',
+  /** High-severity CTI threat detected. */
+  CTI_THREAT_DETECTED = 'CTI_THREAT_DETECTED',
+  /** CTI investigation finished. */
+  CTI_INVESTIGATION_COMPLETED = 'CTI_INVESTIGATION_COMPLETED',
 }
 
 export enum IssueStatus {

@@ -5,5 +5,8 @@
   "SCAN_INCOMPLETE": "Scan of {targetValue} did not finish. {details}",
   "NEW_VULNERABILITY_FOUND": "{count, plural, =1 {# new vulnerability} other {# new vulnerabilities}} found on {assetValue}",
   "WORKSPACE_INVITATION": "{action, select, created {You have been invited to workspace {workspaceName}} accepted {{userName} accepted your invitation to workspace {workspaceName}} declined {{userName} declined your invitation to workspace {workspaceName}} other {Workspace invitation}}",
-  "NEW_URL_FOUND": "{count, plural, =1 {# new URL} other {# new URLs}} found on {targetValue}"
+  "NEW_URL_FOUND": "{count, plural, =1 {# new URL} other {# new URLs}} found on {targetValue}",
+  "CTI_SCAN_COMPLETED": "CTI scan completed for {targetValue} ({targetType}): {newAssets, plural, =0 {no new assets} =1 {# new asset} other {# new assets}}, {totalFindings, plural, =0 {no findings} =1 {# finding} other {# findings}}",
+  "CTI_THREAT_DETECTED": "Critical threat detected: {assetValue} ({assetType}) with threat score {threatScore}/100 from {source}",
+  "CTI_INVESTIGATION_COMPLETED": "CTI investigation completed for \"{query}\": {entityCount, plural, =0 {no entities} =1 {# entity} other {# entities}}, {findingCount, plural, =0 {no findings} =1 {# finding} other {# findings}}"
 }

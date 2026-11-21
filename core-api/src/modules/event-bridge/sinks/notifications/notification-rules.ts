@@ -138,4 +138,56 @@ export const NOTIFICATION_RULES: Partial<Record<EventName, NotificationRule[]>> 
         },
       },
     ],
+    // ─── CTI events ─────────────────────────────────────────────────────
+    'cti_target.scanned': [
+      {
+        type: NotificationType.CTI_SCAN_COMPLETED,
+        scope: NotificationScope.GROUP,
+        audience: 'workspace-members',
+        metadata: (event) => {
+          const p = readPayload('cti_target.scanned', event);
+          return {
+            targetValue: p.targetValue ?? '',
+            targetType: p.targetType ?? '',
+            targetId: p.targetId ?? '',
+            newAssets: String(p.newAssets ?? 0),
+            totalFindings: String(p.totalFindings ?? 0),
+          };
+        },
+      },
+    ],
+    'cti.threat_detected': [
+      {
+        type: NotificationType.CTI_THREAT_DETECTED,
+        scope: NotificationScope.GROUP,
+        audience: 'workspace-members',
+        metadata: (event) => {
+          const p = readPayload('cti.threat_detected', event);
+          return {
+            assetValue: p.assetValue ?? '',
+            assetType: p.assetType ?? '',
+            threatScore: String(p.threatScore ?? 0),
+            source: p.source ?? '',
+            targetValue: p.targetValue ?? '',
+            targetId: p.targetId ?? '',
+          };
+        },
+      },
+    ],
+    'cti.investigation.completed': [
+      {
+        type: NotificationType.CTI_INVESTIGATION_COMPLETED,
+        scope: NotificationScope.GROUP,
+        audience: 'workspace-members',
+        metadata: (event) => {
+          const p = readPayload('cti.investigation.completed', event);
+          return {
+            query: p.query ?? '',
+            entityCount: String(p.entityCount ?? 0),
+            findingCount: String(p.findingCount ?? 0),
+            investigationId: p.investigationId ?? '',
+          };
+        },
+      },
+    ],
   };

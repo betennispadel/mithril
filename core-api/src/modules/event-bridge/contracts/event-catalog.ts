@@ -529,6 +529,29 @@ export const EVENT_CATALOG = {
     sent: { name: 'notification.sent', summary: 'Notification delivered' },
     failed: { name: 'notification.failed', summary: 'Notification delivery failed' },
   },
+  // ─── CTI events ──────────────────────────────────────────────────────
+  cti_target: {
+    created: {
+      name: 'cti_target.created',
+      summary: 'CTI target created for monitoring',
+    },
+    scanned: {
+      name: 'cti_target.scanned',
+      summary: 'CTI target scan completed',
+    },
+  },
+  cti: {
+    threat_detected: {
+      name: 'cti.threat_detected',
+      summary: 'High-severity threat intelligence finding detected',
+    },
+    investigation: {
+      completed: {
+        name: 'cti.investigation.completed',
+        summary: 'CTI investigation completed',
+      },
+    },
+  },
 } as const satisfies EventNode;
 
 /**

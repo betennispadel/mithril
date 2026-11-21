@@ -31,6 +31,8 @@ const PUSHABLE_EVENTS = new Set<EventName>([
   'integration.sync.failed',
   'integration.ticket.created',
   'asset.url.discovered',
+  'cti_target.scanned',
+  'cti.threat_detected',
 ]);
 
 /**
