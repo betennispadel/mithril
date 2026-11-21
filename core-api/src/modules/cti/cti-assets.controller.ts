@@ -4,10 +4,13 @@ import { Doc } from '@/common/doc/doc.decorator';
 import {
   Controller,
   Get,
+  Header,
   Param,
   ParseUUIDPipe,
   Query,
+  Res,
 } from '@nestjs/common';
+import type { Response } from 'express';
 import { ApiTags } from '@nestjs/swagger';
 import { CtiAsset } from './entities/cti-asset.entity';
 import { GetCtiAssetsDto } from './dto/get-cti-assets.dto';
@@ -45,6 +48,50 @@ export class CtiAssetsController {
     @WorkspaceId() workspaceId: string,
   ) {
     return this.service.findOne(id, workspaceId);
+  }
+
+  @Doc({
+    summary: 'Export CTI assets as STIX 2.1 Bundle',
+    description: 'Download all CTI assets in STIX 2.1 JSON format.',
+    request: { getWorkspaceId: true },
+  })
+  @WorkspaceAccess('vulnerability.read')
+  @Get('export/stix')
+  @Header('Content-Type', 'application/json')
+  async exportStix(@WorkspaceId() workspaceId: string) {
+    return this.service.exportStix(workspaceId);
+  }
+
+  @Doc({
+    summary: 'Export CTI assets as MISP Event',
+    description: 'Download all CTI assets in MISP JSON format.',
+    request: { getWorkspaceId: true },
+  })
+  @WorkspaceAccess('vulnerability.read')
+  @Get('export/misp')
+  @Header('Content-Type', 'application/json')
+  async exportMisp(@WorkspaceId() workspaceId: string) {
+    return this.service.exportMisp(workspaceId);
+  }
+
+  @Doc({
+    summary: 'Export CTI assets as YARA rules',
+    description: 'Download IOC-based YARA rules generated from CTI assets.',
+    request: { getWorkspaceId: true },
+  })
+  @WorkspaceAccess('vulnerability.read')
+  @Get('export/yara')
+  async exportYara(
+    @WorkspaceId() workspaceId: string,
+    @Res() res: Response,
+  ) {
+    const rules = await this.service.exportYara(workspaceId);
+    res.setHeader('Content-Type', 'text/plain');
+    res.setHeader(
+      'Content-Disposition',
+      `attachment; filename="pensieve-cti-${new Date().toISOString().slice(0, 10)}.yar"`,
+    );
+    res.send(rules);
   }
 
   @Doc({
