@@ -51,6 +51,25 @@ export class CtiAssetsController {
   }
 
   @Doc({
+    summary: 'Get CTI entity graph',
+    description: 'Get nodes and edges for entity relationship visualization.',
+    request: { getWorkspaceId: true },
+  })
+  @WorkspaceAccess('vulnerability.read')
+  @Get('graph')
+  async getGraph(
+    @WorkspaceId() workspaceId: string,
+    @Query('rootAssetId') rootAssetId?: string,
+    @Query('depth') depth?: string,
+  ) {
+    return this.service.getGraph(
+      workspaceId,
+      rootAssetId,
+      depth ? parseInt(depth, 10) : 2,
+    );
+  }
+
+  @Doc({
     summary: 'Export CTI assets as STIX 2.1 Bundle',
     description: 'Download all CTI assets in STIX 2.1 JSON format.',
     request: { getWorkspaceId: true },

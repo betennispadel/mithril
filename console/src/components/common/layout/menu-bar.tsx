@@ -204,6 +204,13 @@ export const menu: NavGroup[] = [
         permission: 'vulnerability.read',
       },
       {
+        title: 'Entity Graph',
+        icon: <GitBranch />,
+        url: '/cti/graph',
+        isNew: true,
+        permission: 'vulnerability.read',
+      },
+      {
         title: 'Data Leaks',
         icon: <Lock />,
         url: '/cti-data-leaks',

@@ -66,6 +66,130 @@ export class CtiAssetsService {
       .getMany();
   }
 
+  async getGraph(
+    workspaceId: string,
+    rootAssetId?: string,
+    depth: number = 2,
+  ): Promise<{
+    nodes: Array<{
+      id: string;
+      value: string;
+      type: string;
+      threatScore: number;
+      confidence: number;
+      source: string | null;
+    }>;
+    edges: Array<{
+      id: string;
+      source: string;
+      target: string;
+      relationType: string;
+      confidence: number;
+    }>;
+  }> {
+    if (rootAssetId) {
+      // BFS from root asset
+      const visited = new Set<string>();
+      const queue: string[] = [rootAssetId];
+      visited.add(rootAssetId);
+
+      for (let d = 0; d < depth && queue.length > 0; d++) {
+        const batch = [...queue];
+        queue.length = 0;
+
+        const rels = await this.relationRepository
+          .createQueryBuilder('rel')
+          .where(
+            '(rel.sourceAssetId IN (:...ids) OR rel.targetAssetId IN (:...ids))',
+            { ids: batch },
+          )
+          .getMany();
+
+        for (const rel of rels) {
+          for (const neighbor of [rel.sourceAssetId, rel.targetAssetId]) {
+            if (!visited.has(neighbor)) {
+              visited.add(neighbor);
+              queue.push(neighbor);
+            }
+          }
+        }
+      }
+
+      const nodeIds = Array.from(visited);
+      if (nodeIds.length === 0) {
+        return { nodes: [], edges: [] };
+      }
+
+      const assets = await this.assetRepository
+        .createQueryBuilder('a')
+        .where('a.id IN (:...ids)', { ids: nodeIds })
+        .getMany();
+
+      const edges = await this.relationRepository
+        .createQueryBuilder('rel')
+        .where(
+          'rel.sourceAssetId IN (:...ids) AND rel.targetAssetId IN (:...ids)',
+          { ids: nodeIds },
+        )
+        .getMany();
+
+      return {
+        nodes: assets.map((a) => ({
+          id: a.id,
+          value: a.value,
+          type: a.type,
+          threatScore: a.threatScore ?? 0,
+          confidence: a.confidence ?? 0,
+          source: a.source,
+        })),
+        edges: edges.map((e) => ({
+          id: e.id,
+          source: e.sourceAssetId,
+          target: e.targetAssetId,
+          relationType: e.relationType,
+          confidence: e.confidence ?? 0,
+        })),
+      };
+    }
+
+    // No root: return all assets + relations (capped at 500 nodes)
+    const assets = await this.assetRepository.find({
+      where: { workspaceId },
+      order: { threatScore: 'DESC' },
+      take: 500,
+    });
+
+    const assetIds = assets.map((a) => a.id);
+    const relations =
+      assetIds.length > 0
+        ? await this.relationRepository
+            .createQueryBuilder('rel')
+            .where(
+              'rel.sourceAssetId IN (:...ids) AND rel.targetAssetId IN (:...ids)',
+              { ids: assetIds },
+            )
+            .getMany()
+        : [];
+
+    return {
+      nodes: assets.map((a) => ({
+        id: a.id,
+        value: a.value,
+        type: a.type,
+        threatScore: a.threatScore ?? 0,
+        confidence: a.confidence ?? 0,
+        source: a.source,
+      })),
+      edges: relations.map((e) => ({
+        id: e.id,
+        source: e.sourceAssetId,
+        target: e.targetAssetId,
+        relationType: e.relationType,
+        confidence: e.confidence ?? 0,
+      })),
+    };
+  }
+
   async getAllAssetsAndRelations(workspaceId: string): Promise<{
     assets: CtiAsset[];
     relations: CtiAssetRelation[];
