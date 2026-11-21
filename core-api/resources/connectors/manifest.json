@@ -2745,11 +2745,6 @@
                 "title": "Check Subdomains",
                 "default": false
               },
-              "opensquatApiKey": {
-                "type": "string",
-                "title": "openSquat API Key",
-                "format": "password"
-              },
               "virusTotalKey": {
                 "type": "string",
                 "title": "VirusTotal API Key",
