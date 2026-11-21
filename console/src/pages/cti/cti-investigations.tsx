@@ -1,6 +1,7 @@
 import Page from '@/components/common/page';
 import { Badge } from '@/components/ui/badge';
 import { useQuery } from '@tanstack/react-query';
+import { Link } from '@tanstack/react-router';
 import { Search } from 'lucide-react';
 import { axiosInstance } from '@/services/apis/axios-instance';
 import { useWorkspaceSelector } from '@/hooks/useWorkspaceSelector';
@@ -79,7 +80,15 @@ export default function CtiInvestigationsPage() {
             <tbody>
               {investigations.map((inv) => (
                 <tr key={inv.id} className="border-b last:border-0">
-                  <td className="px-4 py-3 font-medium">{inv.query}</td>
+                  <td className="px-4 py-3 font-medium">
+                    <Link
+                      to="/cti/investigations/$investigationId"
+                      params={{ investigationId: inv.id }}
+                      className="text-primary hover:underline"
+                    >
+                      {inv.query}
+                    </Link>
+                  </td>
                   <td className="px-4 py-3">
                     <Badge
                       variant="outline"

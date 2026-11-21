@@ -134,7 +134,13 @@ export default function CtiTargetsPage() {
               {targets.map((t) => (
                 <tr key={t.id} className="border-b last:border-0">
                   <td className="px-4 py-3 font-medium">
-                    {t.label || t.value}
+                    <Link
+                      to="/cti/$targetId"
+                      params={{ targetId: t.id }}
+                      className="text-primary hover:underline"
+                    >
+                      {t.label || t.value}
+                    </Link>
                   </td>
                   <td className="px-4 py-3">
                     <Badge

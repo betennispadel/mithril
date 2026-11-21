@@ -1,6 +1,7 @@
 import Page from '@/components/common/page';
 import { Badge } from '@/components/ui/badge';
 import { useQuery } from '@tanstack/react-query';
+import { Link } from '@tanstack/react-router';
 import { Network } from 'lucide-react';
 import { axiosInstance } from '@/services/apis/axios-instance';
 import { useWorkspaceSelector } from '@/hooks/useWorkspaceSelector';
@@ -84,7 +85,13 @@ export default function CtiAssetsPage() {
               {assets.map((a) => (
                 <tr key={a.id} className="border-b last:border-0">
                   <td className="px-4 py-3 font-mono text-xs">
-                    {a.value}
+                    <Link
+                      to="/cti/assets/$assetId"
+                      params={{ assetId: a.id }}
+                      className="text-primary hover:underline"
+                    >
+                      {a.value}
+                    </Link>
                   </td>
                   <td className="px-4 py-3">
                     <Badge variant="outline">{a.type}</Badge>

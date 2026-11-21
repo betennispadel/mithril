@@ -33,7 +33,7 @@ export class CtiInvestigationsController {
   }
 
   @Doc({
-    summary: 'Get CTI investigation details',
+    summary: 'Get CTI investigation details with entities and findings',
     response: { type: CtiInvestigation },
     request: { getWorkspaceId: true },
   })
@@ -41,8 +41,10 @@ export class CtiInvestigationsController {
   @Get(':id')
   async getInvestigation(
     @Param('id', ParseUUIDPipe) id: string,
+    @Query('page') page: number = 1,
+    @Query('pageSize') pageSize: number = 50,
     @WorkspaceId() workspaceId: string,
   ) {
-    return this.service.findOne(id, workspaceId);
+    return this.service.findOneWithEntities(id, workspaceId, page, pageSize);
   }
 }

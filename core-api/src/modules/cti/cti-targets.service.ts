@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import { CtiTarget } from './entities/cti-target.entity';
+import { CtiAsset } from './entities/cti-asset.entity';
 import { CreateCtiTargetDto, CreateCtiTargetsBulkDto } from './dto/create-cti-target.dto';
 import { GetCtiTargetsDto } from './dto/get-cti-targets.dto';
 import { UpdateCtiTargetDto } from './dto/update-cti-target.dto';
@@ -12,6 +13,8 @@ export class CtiTargetsService {
   constructor(
     @InjectRepository(CtiTarget)
     private readonly targetRepository: Repository<CtiTarget>,
+    @InjectRepository(CtiAsset)
+    private readonly assetRepository: Repository<CtiAsset>,
     private readonly eventEmitter: EventEmitter2,
   ) {}
 
@@ -95,6 +98,87 @@ export class CtiTargetsService {
       throw new NotFoundException(`CTI Target ${id} not found`);
     }
     return target;
+  }
+
+  async findOneWithStats(id: string, workspaceId: string): Promise<any> {
+    const target = await this.findOne(id, workspaceId);
+
+    // Count assets by type
+    const assetStats = await this.assetRepository
+      .createQueryBuilder('asset')
+      .select('asset.type', 'type')
+      .addSelect('COUNT(*)', 'count')
+      .where('asset.ctiTargetId = :id', { id })
+      .groupBy('asset.type')
+      .getRawMany();
+
+    const totalAssets = assetStats.reduce((sum, s) => sum + parseInt(s.count, 10), 0);
+
+    // Count findings from vulnerabilities table linked to this target
+    const findingStats = await this.targetRepository.manager.query(
+      `SELECT severity, COUNT(*) as count
+       FROM vulnerabilities
+       WHERE "workspaceId" = $1
+         AND tags @> ARRAY['pensieve']
+         AND ("matchedAt" ILIKE $2 OR description ILIKE $2)
+       GROUP BY severity`,
+      [workspaceId, `%${target.value}%`],
+    );
+
+    const totalFindings = findingStats.reduce(
+      (sum: number, s: any) => sum + parseInt(s.count, 10),
+      0,
+    );
+
+    // Count investigations
+    const investigationCount = await this.targetRepository.manager.query(
+      `SELECT COUNT(*) as count FROM cti_investigations
+       WHERE "ctiTargetId" = $1`,
+      [id],
+    );
+
+    return {
+      ...target,
+      stats: {
+        totalAssets,
+        assetsByType: assetStats,
+        totalFindings,
+        findingsBySeverity: findingStats,
+        totalInvestigations: parseInt(investigationCount[0]?.count ?? '0', 10),
+      },
+    };
+  }
+
+  async getTargetFindings(
+    id: string,
+    workspaceId: string,
+    page = 1,
+    pageSize = 20,
+  ): Promise<{ items: any[]; total: number }> {
+    const target = await this.findOne(id, workspaceId);
+
+    const [items, total]: [any[], any[]] = await Promise.all([
+      this.targetRepository.manager.query(
+        `SELECT id, name, severity, description, tags, "matchedAt", "createdAt"
+         FROM vulnerabilities
+         WHERE "workspaceId" = $1
+           AND tags @> ARRAY['pensieve']
+           AND ("matchedAt" ILIKE $2 OR description ILIKE $2)
+         ORDER BY "createdAt" DESC
+         LIMIT $3 OFFSET $4`,
+        [workspaceId, `%${target.value}%`, pageSize, (page - 1) * pageSize],
+      ),
+      this.targetRepository.manager.query(
+        `SELECT COUNT(*) as count
+         FROM vulnerabilities
+         WHERE "workspaceId" = $1
+           AND tags @> ARRAY['pensieve']
+           AND ("matchedAt" ILIKE $2 OR description ILIKE $2)`,
+        [workspaceId, `%${target.value}%`],
+      ),
+    ]);
+
+    return { items, total: parseInt(total[0]?.count ?? '0', 10) };
   }
 
   async update(

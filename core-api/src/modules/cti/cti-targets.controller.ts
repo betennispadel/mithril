@@ -41,7 +41,8 @@ export class CtiTargetsController {
   }
 
   @Doc({
-    summary: 'Get CTI target details',
+    summary: 'Get CTI target details with stats',
+    description: 'Get a single CTI target with asset counts, finding counts, and investigation counts.',
     response: { type: CtiTarget },
     request: { getWorkspaceId: true },
   })
@@ -51,7 +52,23 @@ export class CtiTargetsController {
     @Param('id', ParseUUIDPipe) id: string,
     @WorkspaceId() workspaceId: string,
   ) {
-    return this.service.findOne(id, workspaceId);
+    return this.service.findOneWithStats(id, workspaceId);
+  }
+
+  @Doc({
+    summary: 'Get findings for a CTI target',
+    description: 'Get paginated vulnerability findings associated with this target.',
+    request: { getWorkspaceId: true },
+  })
+  @WorkspaceAccess('vulnerability.read')
+  @Get(':id/findings')
+  async getTargetFindings(
+    @Param('id', ParseUUIDPipe) id: string,
+    @Query('page') page: number = 1,
+    @Query('pageSize') pageSize: number = 20,
+    @WorkspaceId() workspaceId: string,
+  ) {
+    return this.service.getTargetFindings(id, workspaceId, page, pageSize);
   }
 
   @Doc({
