@@ -1431,6 +1431,10 @@ export class DataAdapterService {
           handler: (input) =>
             this.urlDiscovery(input as DataAdapterInput<DiscoveredUrl[]>),
         },
+        [ToolCategory.PHISHING_SIMULATION]: {
+          handler: (input) =>
+            this.vulnerabilities(input as DataAdapterInput<Vulnerability[]>),
+        },
       };
 
       // Get the appropriate sync function based on category

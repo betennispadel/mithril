@@ -47,6 +47,8 @@ export function defaultInputs(
     case ToolCategory.SCREENSHOT:
     case ToolCategory.URL_DISCOVERY:
       return [DataKind.WEB];
+    case ToolCategory.PHISHING_SIMULATION:
+      return [DataKind.TARGET];
     case ToolCategory.VULNERABILITIES:
       // A repository scanner only ever sees Git organization targets.
       return targetTypes.length > 0 &&
@@ -69,6 +71,8 @@ export function defaultProduces(category: ToolCategory): DataKind[] {
       return [];
     case ToolCategory.URL_DISCOVERY:
       return [DataKind.URL];
+    case ToolCategory.PHISHING_SIMULATION:
+      return [DataKind.VULNERABILITY];
     case ToolCategory.VULNERABILITIES:
       return [DataKind.VULNERABILITY];
   }

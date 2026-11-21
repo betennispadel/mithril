@@ -30,6 +30,7 @@ import { RemoteExecuteModule } from './remote-execute/remote-execute.module';
 import { ReportsModule } from './reports/reports.module';
 import { ArtifactsModule } from './artifacts/artifacts.module';
 import { AttackSurfaceQueryModule } from './attack-surface-query/attack-surface-query.module';
+import { PhishingCampaignsModule } from './phishing-campaigns/phishing-campaigns.module';
 
 @Module({
   imports: [
@@ -69,6 +70,7 @@ import { AttackSurfaceQueryModule } from './attack-surface-query/attack-surface-
     ConnectorsModule,
     EventsModule,
     AttackSurfaceQueryModule,
+    PhishingCampaignsModule,
   ],
 })
 export class CombineModule {}

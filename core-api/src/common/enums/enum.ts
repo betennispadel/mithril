@@ -41,6 +41,7 @@ export enum ToolCategory {
   VULNERABILITIES = 'vulnerabilities',
   SCREENSHOT = 'screenshot',
   URL_DISCOVERY = 'url_discovery',
+  PHISHING_SIMULATION = 'phishing_simulation',
 }
 
 /**

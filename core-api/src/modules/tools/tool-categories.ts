@@ -77,6 +77,8 @@ export function capabilityToCategory(
       return ToolCategory.VULNERABILITIES;
     case 'screenshot':
       return ToolCategory.SCREENSHOT;
+    case 'phishing_simulation':
+      return ToolCategory.PHISHING_SIMULATION;
     case 'url_discovery':
       return ToolCategory.URL_DISCOVERY;
     default:

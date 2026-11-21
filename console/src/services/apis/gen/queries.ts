@@ -1465,6 +1465,7 @@ export const ToolCategory = {
   vulnerabilities: 'vulnerabilities',
   screenshot: 'screenshot',
   url_discovery: 'url_discovery',
+  phishing_simulation: 'phishing_simulation',
 } as const;
 
 export type DataKind = (typeof DataKind)[keyof typeof DataKind];
@@ -1616,6 +1617,7 @@ export const JobListItemDtoCategory = {
   vulnerabilities: 'vulnerabilities',
   screenshot: 'screenshot',
   url_discovery: 'url_discovery',
+  phishing_simulation: 'phishing_simulation',
 } as const;
 
 export type JobListItemDtoConfig = { [key: string]: unknown };
@@ -1672,6 +1674,7 @@ export const JobTimelineItemToolCategory = {
   vulnerabilities: 'vulnerabilities',
   screenshot: 'screenshot',
   url_discovery: 'url_discovery',
+  phishing_simulation: 'phishing_simulation',
 } as const;
 
 export type JobTimelineItem = {
@@ -1721,6 +1724,7 @@ export const GetNextJobResponseDtoCategory = {
   vulnerabilities: 'vulnerabilities',
   screenshot: 'screenshot',
   url_discovery: 'url_discovery',
+  phishing_simulation: 'phishing_simulation',
 } as const;
 
 export type GetNextJobResponseDtoStatus =
@@ -8453,6 +8457,7 @@ export const ToolsControllerGetManyToolsCategory = {
   vulnerabilities: 'vulnerabilities',
   screenshot: 'screenshot',
   url_discovery: 'url_discovery',
+  phishing_simulation: 'phishing_simulation',
 } as const;
 
 export type ToolsControllerGetInstalledToolsParams = {
@@ -8469,6 +8474,7 @@ export const ToolsControllerGetInstalledToolsCategory = {
   vulnerabilities: 'vulnerabilities',
   screenshot: 'screenshot',
   url_discovery: 'url_discovery',
+  phishing_simulation: 'phishing_simulation',
 } as const;
 
 export type WorkersControllerGetWorkersParams = {
