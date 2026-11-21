@@ -59,7 +59,7 @@ const STEPS: TourStep[] = [
   },
   {
     navigateTo: null,
-    selector: '[data-tour="tool-install-btn"]',
+    selector: null,
     title: 'Installing a tool',
     description:
       'This Install button adds the tool to your workspace. Here is exactly what happens for each type:<br><br>' +
@@ -69,11 +69,11 @@ const STEPS: TourStep[] = [
       '- <b>Use default presets</b>: click this button first -- it fills every field with the the tool recommended values and is a safe starting point.<br>' +
       '- <b>Tool-specific fields</b>: each connector defines its own schema. Common fields include: rate limit (requests per second), thread count, scan timeout, output verbosity, auth tokens for private repos, custom flags and target scope rules.<br>' +
       '- Click <b>Create</b> to save the profile. The tool is now installed and configured.',
-    side: 'left',
+    side: undefined,
   },
   {
     navigateTo: null,
-    selector: '[data-tour="tools-grid"]',
+    selector: null,
     title: 'Tool cards and detail page',
     description:
       'Each card shows the tool logo, name, official badge (blue tick = officially supported), description, and category badges with compatible target types.<br><br>' +
