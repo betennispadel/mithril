@@ -2669,6 +2669,106 @@
         "timeoutSeconds": 7200
       },
       "logo": ""
+    },
+    {
+      "name": "Polyjuice",
+      "slug": "polyjuice",
+      "version": "1.0.0",
+      "image": "connector-polyjuice:1.0.0",
+      "author": "custom",
+      "pricingTier": [
+        "free"
+      ],
+      "shortDescription": "Domain squatting detection powered by openSquat",
+      "description": "Detects typosquatting, phishing, IDN homograph, doppelganger and bitsquatting domains targeting your brand using newly registered domain (NRD) feeds and Levenshtein distance matching.",
+      "agentTool": true,
+      "capabilities": [
+        {
+          "name": "vulnerabilities",
+          "targetTypes": [
+            "domain"
+          ],
+          "inputs": [
+            "host"
+          ],
+          "produces": [
+            "vulnerability"
+          ],
+          "inputsSchema": {
+            "type": "object",
+            "required": [
+              "host"
+            ],
+            "properties": {
+              "host": {
+                "type": "string",
+                "title": "Domain",
+                "description": "Target domain to monitor for squatting. Auto-filled from target."
+              },
+              "keywords": {
+                "type": "string",
+                "title": "Additional Keywords",
+                "description": "Comma-separated brand names or keywords to monitor",
+                "maxLength": 1000
+              }
+            }
+          },
+          "configSchema": {
+            "type": "object",
+            "properties": {
+              "confidenceLevel": {
+                "type": "integer",
+                "title": "Confidence Level",
+                "description": "0=very high (fewer results), 1=high (default), 2=medium, 3=low, 4=very low",
+                "default": 1,
+                "minimum": 0,
+                "maximum": 4
+              },
+              "dnsValidation": {
+                "type": "boolean",
+                "title": "DNS Validation",
+                "description": "Validate discovered domains via Quad9 DNS",
+                "default": true
+              },
+              "ctLogs": {
+                "type": "boolean",
+                "title": "Certificate Transparency Logs",
+                "default": false
+              },
+              "portCheck": {
+                "type": "boolean",
+                "title": "Port Check",
+                "default": false
+              },
+              "subdomains": {
+                "type": "boolean",
+                "title": "Check Subdomains",
+                "default": false
+              },
+              "opensquatApiKey": {
+                "type": "string",
+                "title": "openSquat API Key",
+                "format": "password"
+              },
+              "virusTotalKey": {
+                "type": "string",
+                "title": "VirusTotal API Key",
+                "format": "password"
+              },
+              "maxFindings": {
+                "type": "integer",
+                "title": "Max Findings",
+                "default": 500
+              }
+            }
+          }
+        }
+      ],
+      "resourceDefaults": {
+        "cpu": "500m",
+        "memory": "512Mi",
+        "timeoutSeconds": 900
+      }
     }
   ]
 }

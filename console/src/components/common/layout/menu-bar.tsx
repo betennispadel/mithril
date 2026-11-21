@@ -51,6 +51,7 @@ import {
   Shield,
   Sparkles,
   Target,
+  ScanSearch,
   Wallet,
 } from 'lucide-react';
 import { NavUser } from '../../ui/nav-user';
@@ -185,6 +186,13 @@ export const menu: NavGroup[] = [
         title: 'Brand Protection',
         icon: <Shield />,
         url: '/cti-brand-protection',
+        permission: 'vulnerability.read',
+      },
+      {
+        title: 'Polyjuice',
+        icon: <ScanSearch />,
+        url: '/cti-domain-squatting',
+        isNew: true,
         permission: 'vulnerability.read',
       },
       {
