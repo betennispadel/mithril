@@ -220,6 +220,104 @@ export class CtiTargetsService {
     return target;
   }
 
+  async getDashboardStats(workspaceId: string): Promise<Record<string, unknown>> {
+    // Target stats
+    const [targets, totalTargets] = await this.targetRepository.findAndCount({
+      where: { workspaceId },
+    });
+    const activeTargets = targets.filter((t) => t.isEnabled).length;
+
+    // Asset stats
+    const assetStats = await this.assetRepository
+      .createQueryBuilder('a')
+      .select('a.type', 'type')
+      .addSelect('COUNT(*)', 'count')
+      .addSelect('AVG(a.threatScore)', 'avgScore')
+      .addSelect('MAX(a.threatScore)', 'maxScore')
+      .where('a.workspaceId = :workspaceId', { workspaceId })
+      .groupBy('a.type')
+      .getRawMany();
+
+    const totalAssets = assetStats.reduce(
+      (sum, s) => sum + parseInt(s.count, 10),
+      0,
+    );
+
+    // Threat score distribution
+    const threatDist = await this.assetRepository
+      .createQueryBuilder('a')
+      .select(
+        `CASE
+          WHEN a."threatScore" >= 80 THEN 'critical'
+          WHEN a."threatScore" >= 60 THEN 'high'
+          WHEN a."threatScore" >= 40 THEN 'medium'
+          WHEN a."threatScore" >= 20 THEN 'low'
+          ELSE 'info'
+        END`,
+        'level',
+      )
+      .addSelect('COUNT(*)', 'count')
+      .where('a.workspaceId = :workspaceId', { workspaceId })
+      .groupBy('level')
+      .getRawMany();
+
+    // Finding stats from vulnerabilities table
+    const findingStats = await this.targetRepository.manager.query(
+      `SELECT severity, COUNT(*) as count
+       FROM vulnerabilities
+       WHERE "workspaceId" = $1 AND tags @> ARRAY['pensieve']
+       GROUP BY severity`,
+      [workspaceId],
+    );
+    const totalFindings = findingStats.reduce(
+      (sum: number, s: any) => sum + parseInt(s.count, 10),
+      0,
+    );
+
+    // Recent assets (last 7 days)
+    const recentAssets = await this.assetRepository
+      .createQueryBuilder('a')
+      .where('a.workspaceId = :workspaceId', { workspaceId })
+      .andWhere('a."firstSeenAt" >= NOW() - INTERVAL \'7 days\'')
+      .orderBy('a."threatScore"', 'DESC')
+      .take(10)
+      .getMany();
+
+    // Top threat actors
+    const topThreats = await this.assetRepository
+      .createQueryBuilder('a')
+      .where('a.workspaceId = :workspaceId', { workspaceId })
+      .andWhere('a."threatScore" >= 60')
+      .orderBy('a."threatScore"', 'DESC')
+      .take(10)
+      .getMany();
+
+    // Scan activity (last 30 days)
+    const scanActivity = await this.targetRepository
+      .createQueryBuilder('t')
+      .select('DATE(t."lastScanAt")', 'date')
+      .addSelect('COUNT(*)', 'count')
+      .where('t.workspaceId = :workspaceId', { workspaceId })
+      .andWhere('t."lastScanAt" IS NOT NULL')
+      .andWhere('t."lastScanAt" >= NOW() - INTERVAL \'30 days\'')
+      .groupBy('DATE(t."lastScanAt")')
+      .orderBy('date', 'ASC')
+      .getRawMany();
+
+    return {
+      totalTargets,
+      activeTargets,
+      totalAssets,
+      totalFindings,
+      assetsByType: assetStats,
+      threatDistribution: threatDist,
+      findingsBySeverity: findingStats,
+      recentAssets,
+      topThreats,
+      scanActivity,
+    };
+  }
+
   /**
    * Called by the data-adapter or job completion handler after a Pensieve scan
    * finishes. Publishes events to the event bridge so both in-app notifications

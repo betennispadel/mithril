@@ -176,6 +176,13 @@ export const menu: NavGroup[] = [
     url: '#',
     items: [
       {
+        title: 'Dashboard',
+        icon: <Shield />,
+        url: '/cti/dashboard',
+        isNew: true,
+        permission: 'vulnerability.read',
+      },
+      {
         title: 'CTI Targets',
         icon: <Crosshair />,
         url: '/cti',

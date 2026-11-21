@@ -26,6 +26,17 @@ export class CtiTargetsController {
   constructor(private readonly service: CtiTargetsService) {}
 
   @Doc({
+    summary: 'Get CTI dashboard stats',
+    description: 'Aggregated statistics for the CTI dashboard.',
+    request: { getWorkspaceId: true },
+  })
+  @WorkspaceAccess('vulnerability.read')
+  @Get('dashboard')
+  async getDashboard(@WorkspaceId() workspaceId: string) {
+    return this.service.getDashboardStats(workspaceId);
+  }
+
+  @Doc({
     summary: 'List CTI targets',
     description: 'Get a paginated list of CTI intelligence targets.',
     response: { type: CtiTarget, isArray: true },
