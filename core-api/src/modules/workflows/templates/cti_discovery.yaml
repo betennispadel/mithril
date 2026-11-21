@@ -1,0 +1,10 @@
+name: cti_discovery
+
+on:
+  cti-target: [create, re-scan]
+
+jobs:
+  pensieve_scan:
+    name: CTI Intelligence Scan
+    run: pensieve
+    timeout: 1800

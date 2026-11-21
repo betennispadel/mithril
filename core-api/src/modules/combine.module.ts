@@ -31,6 +31,7 @@ import { ReportsModule } from './reports/reports.module';
 import { ArtifactsModule } from './artifacts/artifacts.module';
 import { AttackSurfaceQueryModule } from './attack-surface-query/attack-surface-query.module';
 import { PhishingCampaignsModule } from './phishing-campaigns/phishing-campaigns.module';
+import { CtiModule } from './cti/cti.module';
 
 @Module({
   imports: [
@@ -71,6 +72,7 @@ import { PhishingCampaignsModule } from './phishing-campaigns/phishing-campaigns
     EventsModule,
     AttackSurfaceQueryModule,
     PhishingCampaignsModule,
+    CtiModule,
   ],
 })
 export class CombineModule {}
