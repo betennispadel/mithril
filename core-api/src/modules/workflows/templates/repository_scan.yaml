@@ -11,3 +11,7 @@ jobs:
   dependency_scan:
     name: Dependency & IaC Scan
     run: morpheus
+
+  sast_scan:
+    name: Static Code Analysis
+    run: architect
