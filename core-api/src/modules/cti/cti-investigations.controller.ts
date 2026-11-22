@@ -6,8 +6,7 @@ import {
   Get,
   Param,
   ParseUUIDPipe,
-  Query,
-} from '@nestjs/common';
+  Query } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { CtiInvestigation } from './entities/cti-investigation.entity';
 import { CtiInvestigationsService } from './cti-investigations.service';
@@ -19,9 +18,8 @@ export class CtiInvestigationsController {
 
   @Doc({
     summary: 'List CTI investigations',
-    response: { type: CtiInvestigation, isArray: true },
-    request: { getWorkspaceId: true },
-  })
+    response: { isArray: true },
+    request: { getWorkspaceId: true } })
   @WorkspaceAccess('vulnerability.read')
   @Get()
   async getInvestigations(
@@ -33,10 +31,7 @@ export class CtiInvestigationsController {
   }
 
   @Doc({
-    summary: 'Get CTI investigation details with entities and findings',
-    response: { type: CtiInvestigation },
-    request: { getWorkspaceId: true },
-  })
+    summary: 'Get CTI investigation details with entities and findings', request: { getWorkspaceId: true } })
   @WorkspaceAccess('vulnerability.read')
   @Get(':id')
   async getInvestigation(

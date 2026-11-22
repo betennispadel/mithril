@@ -13,7 +13,7 @@ import {
   AlertTriangle,
   Loader2,
 } from 'lucide-react';
-import { axiosInstance } from '@/services/apis/axios-instance';
+import { axiosInstance } from '@/services/apis/axios-client';
 import { toast } from 'sonner';
 
 interface CtiTargetDetail {
@@ -105,7 +105,7 @@ export default function CtiTargetDetailPage() {
     queryKey: ['cti-target', targetId],
     queryFn: () =>
       axiosInstance
-        .get<CtiTargetDetail>(`/cti-targets/${targetId}`)
+        .get<CtiTargetDetail>(`/api/cti-targets/${targetId}`)
         .then((r) => r.data),
   });
 
@@ -114,7 +114,7 @@ export default function CtiTargetDetailPage() {
     queryFn: () =>
       axiosInstance
         .get<{ items: Finding[]; total: number }>(
-          `/cti-targets/${targetId}/findings`,
+          `/api/cti-targets/${targetId}/findings`,
         )
         .then((r) => r.data),
     enabled: !!target,
@@ -125,14 +125,14 @@ export default function CtiTargetDetailPage() {
     queryFn: () =>
       axiosInstance
         .get<{ items: CtiAsset[]; total: number }>(
-          `/cti-assets?ctiTargetId=${targetId}`,
+          `/api/cti-assets?ctiTargetId=${targetId}`,
         )
         .then((r) => r.data),
     enabled: !!target,
   });
 
   const rescanMutation = useMutation({
-    mutationFn: () => axiosInstance.post(`/cti-targets/${targetId}/scan`),
+    mutationFn: () => axiosInstance.post(`/api/cti-targets/${targetId}/scan`),
     onSuccess: () => {
       toast.success('Re-scan triggered');
       queryClient.invalidateQueries({ queryKey: ['cti-target', targetId] });

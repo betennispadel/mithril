@@ -4,7 +4,7 @@ import { Badge } from '@/components/ui/badge';
 import { Link, useNavigate } from '@tanstack/react-router';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Plus, RefreshCw, Trash2, Crosshair } from 'lucide-react';
-import { axiosInstance } from '@/services/apis/axios-instance';
+import { axiosInstance } from '@/services/apis/axios-client';
 import { toast } from 'sonner';
 import { useWorkspaceSelector } from '@/hooks/useWorkspaceSelector';
 import CreateWorkspace from '@/pages/workspaces/create-workspace';
@@ -50,14 +50,14 @@ export default function CtiTargetsPage() {
     queryKey: ['cti-targets'],
     queryFn: () =>
       axiosInstance
-        .get<{ items: CtiTarget[]; total: number }>('/cti-targets')
+        .get<{ items: CtiTarget[]; total: number }>('/api/cti-targets')
         .then((r) => r.data),
     enabled: hasWorkspace,
   });
 
   const rescanMutation = useMutation({
     mutationFn: (id: string) =>
-      axiosInstance.post(`/cti-targets/${id}/scan`),
+      axiosInstance.post(`/api/cti-targets/${id}/scan`),
     onSuccess: () => {
       toast.success('Scan triggered');
       queryClient.invalidateQueries({ queryKey: ['cti-targets'] });
@@ -66,7 +66,7 @@ export default function CtiTargetsPage() {
 
   const deleteMutation = useMutation({
     mutationFn: (id: string) =>
-      axiosInstance.delete(`/cti-targets/${id}`),
+      axiosInstance.delete(`/api/cti-targets/${id}`),
     onSuccess: () => {
       toast.success('Target deleted');
       queryClient.invalidateQueries({ queryKey: ['cti-targets'] });

@@ -11,8 +11,7 @@ import {
   ParseUUIDPipe,
   Patch,
   Post,
-  Query,
-} from '@nestjs/common';
+  Query } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { CtiTarget } from './entities/cti-target.entity';
 import { CreateCtiTargetDto, CreateCtiTargetsBulkDto } from './dto/create-cti-target.dto';
@@ -28,8 +27,7 @@ export class CtiTargetsController {
   @Doc({
     summary: 'Get CTI dashboard stats',
     description: 'Aggregated statistics for the CTI dashboard.',
-    request: { getWorkspaceId: true },
-  })
+    request: { getWorkspaceId: true } })
   @WorkspaceAccess('vulnerability.read')
   @Get('dashboard')
   async getDashboard(@WorkspaceId() workspaceId: string) {
@@ -39,9 +37,8 @@ export class CtiTargetsController {
   @Doc({
     summary: 'List CTI targets',
     description: 'Get a paginated list of CTI intelligence targets.',
-    response: { type: CtiTarget, isArray: true },
-    request: { getWorkspaceId: true },
-  })
+    response: { isArray: true },
+    request: { getWorkspaceId: true } })
   @WorkspaceAccess('vulnerability.read')
   @Get()
   async getTargets(
@@ -53,10 +50,7 @@ export class CtiTargetsController {
 
   @Doc({
     summary: 'Get CTI target details with stats',
-    description: 'Get a single CTI target with asset counts, finding counts, and investigation counts.',
-    response: { type: CtiTarget },
-    request: { getWorkspaceId: true },
-  })
+    description: 'Get a single CTI target with asset counts, finding counts, and investigation counts.', request: { getWorkspaceId: true } })
   @WorkspaceAccess('vulnerability.read')
   @Get(':id')
   async getTarget(
@@ -69,8 +63,7 @@ export class CtiTargetsController {
   @Doc({
     summary: 'Get findings for a CTI target',
     description: 'Get paginated vulnerability findings associated with this target.',
-    request: { getWorkspaceId: true },
-  })
+    request: { getWorkspaceId: true } })
   @WorkspaceAccess('vulnerability.read')
   @Get(':id/findings')
   async getTargetFindings(
@@ -83,10 +76,7 @@ export class CtiTargetsController {
   }
 
   @Doc({
-    summary: 'Create a CTI target',
-    response: { type: CtiTarget },
-    request: { getWorkspaceId: true },
-  })
+    summary: 'Create a CTI target', request: { getWorkspaceId: true } })
   @WorkspaceAccess('vulnerability.write')
   @Post()
   async createTarget(
@@ -99,9 +89,8 @@ export class CtiTargetsController {
   @Doc({
     summary: 'Bulk create CTI targets and start discovery',
     description: 'Create multiple CTI targets and trigger scans for each.',
-    response: { type: CtiTarget, isArray: true },
-    request: { getWorkspaceId: true },
-  })
+    response: { isArray: true },
+    request: { getWorkspaceId: true } })
   @WorkspaceAccess('vulnerability.write')
   @Post('discover')
   async discover(
@@ -112,10 +101,7 @@ export class CtiTargetsController {
   }
 
   @Doc({
-    summary: 'Update a CTI target',
-    response: { type: CtiTarget },
-    request: { getWorkspaceId: true },
-  })
+    summary: 'Update a CTI target', request: { getWorkspaceId: true } })
   @WorkspaceAccess('vulnerability.write')
   @Patch(':id')
   async updateTarget(
@@ -127,10 +113,7 @@ export class CtiTargetsController {
   }
 
   @Doc({
-    summary: 'Delete a CTI target',
-    response: { type: DefaultMessageResponseDto },
-    request: { getWorkspaceId: true },
-  })
+    summary: 'Delete a CTI target', request: { getWorkspaceId: true } })
   @WorkspaceAccess('vulnerability.write')
   @Delete(':id')
   async deleteTarget(
@@ -142,10 +125,7 @@ export class CtiTargetsController {
   }
 
   @Doc({
-    summary: 'Trigger a re-scan for a CTI target',
-    response: { type: CtiTarget },
-    request: { getWorkspaceId: true },
-  })
+    summary: 'Trigger a re-scan for a CTI target', request: { getWorkspaceId: true } })
   @WorkspaceAccess('vulnerability.write')
   @Post(':id/scan')
   async rescan(

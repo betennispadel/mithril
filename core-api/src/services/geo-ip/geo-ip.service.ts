@@ -75,8 +75,7 @@ export class GeoIpService {
     } catch (error: unknown) {
       const errorMessage =
         error instanceof Error ? error.message : String(error);
-      this.logger.error(`Failed to connect to Geo IP service: ${errorMessage}`);
-      throw new Error(`Geo IP service connection failed: ${errorMessage}`);
+      this.logger.warn(`Failed to connect to Geo IP service: ${errorMessage}. IP geolocation will be unavailable.`);
     }
   }
 

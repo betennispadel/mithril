@@ -3,7 +3,7 @@ import { Badge } from '@/components/ui/badge';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from '@tanstack/react-router';
 import { Search } from 'lucide-react';
-import { axiosInstance } from '@/services/apis/axios-instance';
+import { axiosInstance } from '@/services/apis/axios-client';
 import { useWorkspaceSelector } from '@/hooks/useWorkspaceSelector';
 import CreateWorkspace from '@/pages/workspaces/create-workspace';
 
@@ -32,7 +32,7 @@ export default function CtiInvestigationsPage() {
     queryKey: ['cti-investigations'],
     queryFn: () =>
       axiosInstance
-        .get<{ items: CtiInvestigation[]; total: number }>('/cti-investigations')
+        .get<{ items: CtiInvestigation[]; total: number }>('/api/cti-investigations')
         .then((r) => r.data),
     enabled: hasWorkspace,
   });

@@ -170,3 +170,14 @@ export const EVENT_POLICY: Record<EventName, EventPolicy> = {
   'cti_target.scanned': { persist: false, severity: 'normal' },
   'cti.threat_detected': { persist: false, severity: 'critical' },
   'cti.investigation.completed': { persist: false, severity: 'normal' },
+};
+
+/** Convenience: does this event get a row in audit_events? */
+export function isPersisted(name: EventName): boolean {
+  return EVENT_POLICY[name]?.persist === true;
+}
+
+/** Convenience: routing weight for the notification / email groups. */
+export function eventSeverity(name: EventName): EventPolicy['severity'] {
+  return EVENT_POLICY[name]?.severity ?? 'normal';
+}

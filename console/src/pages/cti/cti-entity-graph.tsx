@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from '@tanstack/react-router';
 import { GitBranch, ZoomIn, ZoomOut, Maximize2 } from 'lucide-react';
-import { axiosInstance } from '@/services/apis/axios-instance';
+import { axiosInstance } from '@/services/apis/axios-client';
 import { useWorkspaceSelector } from '@/hooks/useWorkspaceSelector';
 import CreateWorkspace from '@/pages/workspaces/create-workspace';
 import { useCallback, useEffect, useRef, useState } from 'react';
@@ -155,7 +155,7 @@ export default function CtiEntityGraphPage() {
     queryKey: ['cti-graph'],
     queryFn: () =>
       axiosInstance
-        .get<{ nodes: GraphNode[]; edges: GraphEdge[] }>('/cti-assets/graph')
+        .get<{ nodes: GraphNode[]; edges: GraphEdge[] }>('/api/cti-assets/graph')
         .then((r) => r.data),
     enabled: hasWorkspace,
   });

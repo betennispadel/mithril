@@ -10,8 +10,7 @@ import {
   Param,
   ParseUUIDPipe,
   Post,
-  Query,
-} from '@nestjs/common';
+  Query } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { PhishingCampaign } from './entities/phishing-campaign.entity';
 import { CreatePhishingCampaignDto } from './dto/create-campaign.dto';
@@ -26,9 +25,8 @@ export class PhishingCampaignsController {
   @Doc({
     summary: 'List phishing campaigns',
     description: 'Get a paginated list of phishing simulation campaigns.',
-    response: { type: PhishingCampaign, isArray: true },
-    request: { getWorkspaceId: true },
-  })
+    response: { isArray: true },
+    request: { getWorkspaceId: true } })
   @WorkspaceAccess('phishing_campaign.read')
   @Get()
   async getCampaigns(
@@ -40,10 +38,7 @@ export class PhishingCampaignsController {
 
   @Doc({
     summary: 'Get phishing campaign details',
-    description: 'Get a single phishing campaign with current stats.',
-    response: { type: PhishingCampaign },
-    request: { getWorkspaceId: true },
-  })
+    description: 'Get a single phishing campaign with current stats.', request: { getWorkspaceId: true } })
   @WorkspaceAccess('phishing_campaign.read')
   @Get(':id')
   async getCampaign(
@@ -56,10 +51,7 @@ export class PhishingCampaignsController {
 
   @Doc({
     summary: 'Create a phishing campaign',
-    description: 'Create a new phishing simulation campaign in draft state.',
-    response: { type: PhishingCampaign },
-    request: { getWorkspaceId: true },
-  })
+    description: 'Create a new phishing simulation campaign in draft state.', request: { getWorkspaceId: true } })
   @WorkspaceAccess('phishing_campaign.write')
   @Post()
   async createCampaign(
@@ -72,10 +64,7 @@ export class PhishingCampaignsController {
   @Doc({
     summary: 'Launch a phishing campaign',
     description:
-      'Launch a draft campaign. This creates a job for the Imperius connector and starts sending phishing emails.',
-    response: { type: PhishingCampaign },
-    request: { getWorkspaceId: true },
-  })
+      'Launch a draft campaign. This creates a job for the Imperius connector and starts sending phishing emails.', request: { getWorkspaceId: true } })
   @WorkspaceAccess('phishing_campaign.write')
   @Post(':id/launch')
   async launchCampaign(
@@ -88,8 +77,7 @@ export class PhishingCampaignsController {
   @Doc({
     summary: 'Get campaign results',
     description: 'Get the phishing simulation findings for a campaign.',
-    request: { getWorkspaceId: true },
-  })
+    request: { getWorkspaceId: true } })
   @WorkspaceAccess('phishing_campaign.read')
   @Get(':id/results')
   async getCampaignResults(
@@ -101,10 +89,7 @@ export class PhishingCampaignsController {
 
   @Doc({
     summary: 'Delete a phishing campaign',
-    description: 'Delete a draft or completed campaign.',
-    response: { type: DefaultMessageResponseDto },
-    request: { getWorkspaceId: true },
-  })
+    description: 'Delete a draft or completed campaign.', request: { getWorkspaceId: true } })
   @WorkspaceAccess('phishing_campaign.write')
   @Delete(':id')
   async deleteCampaign(

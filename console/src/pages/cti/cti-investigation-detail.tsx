@@ -4,7 +4,7 @@ import { Badge } from '@/components/ui/badge';
 import { Link, useParams } from '@tanstack/react-router';
 import { useQuery } from '@tanstack/react-query';
 import { ArrowLeft, Loader2 } from 'lucide-react';
-import { axiosInstance } from '@/services/apis/axios-instance';
+import { axiosInstance } from '@/services/apis/axios-client';
 
 interface InvestigationDetail {
   id: string;
@@ -60,7 +60,7 @@ export default function CtiInvestigationDetailPage() {
     queryKey: ['cti-investigation', investigationId],
     queryFn: () =>
       axiosInstance
-        .get<InvestigationDetail>(`/cti-investigations/${investigationId}`)
+        .get<InvestigationDetail>(`/api/cti-investigations/${investigationId}`)
         .then((r) => r.data),
     refetchInterval: (query) =>
       query.state.data?.status === 'running' ? 5000 : false,

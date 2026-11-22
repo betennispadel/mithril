@@ -12,7 +12,7 @@ import {
   TrendingUp,
   Download,
 } from 'lucide-react';
-import { axiosInstance } from '@/services/apis/axios-instance';
+import { axiosInstance } from '@/services/apis/axios-client';
 import { useWorkspaceSelector } from '@/hooks/useWorkspaceSelector';
 import CreateWorkspace from '@/pages/workspaces/create-workspace';
 
@@ -132,7 +132,7 @@ export default function CtiDashboardPage() {
     queryKey: ['cti-dashboard'],
     queryFn: () =>
       axiosInstance
-        .get<DashboardData>('/cti-targets/dashboard')
+        .get<DashboardData>('/api/cti-targets/dashboard')
         .then((r) => r.data),
     enabled: hasWorkspace,
     refetchInterval: 30000,

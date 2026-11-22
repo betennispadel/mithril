@@ -22,7 +22,7 @@ import {
 } from 'lucide-react';
 import { useState } from 'react';
 import { Link, useNavigate } from '@tanstack/react-router';
-import { axiosInstance } from '@/services/apis/axios-instance';
+import { axiosInstance } from '@/services/apis/axios-client';
 import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
 
@@ -61,7 +61,7 @@ export default function CtiStartDiscoveryPage() {
 
   const discoverMutation = useMutation({
     mutationFn: (targets: { value: string; type: string; scanSchedule: string }[]) =>
-      axiosInstance.post('/cti-targets/discover', { targets }),
+      axiosInstance.post('/api/cti-targets/discover', { targets }),
     onSuccess: (data) => {
       toast.success(`Discovery started for ${data.data?.length ?? 0} targets`);
       navigate({ to: '/cti' });

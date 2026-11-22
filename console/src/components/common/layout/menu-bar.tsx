@@ -58,6 +58,7 @@ import {
   Fingerprint,
   AlertTriangle,
   Wallet,
+  GitBranch,
 } from 'lucide-react';
 import { NavUser } from '../../ui/nav-user';
 import { NewBadge } from '../new-badge';

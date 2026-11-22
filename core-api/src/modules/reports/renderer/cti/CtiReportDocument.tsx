@@ -1,7 +1,7 @@
 import React from 'react';
 import { Document, Page, View, Text, StyleSheet } from '@react-pdf/renderer';
 import type { CtiReportData } from '../../types/cti-report-data.type';
-import { slate, palette } from '../theme';
+import { slate, palette, severityStyles } from '../theme';
 import { CoverPage } from '../components/CoverPage';
 import { ReportHeader } from '../components/ReportHeader';
 import { ReportFooter } from '../components/ReportFooter';
@@ -67,11 +67,11 @@ const styles = StyleSheet.create({
 });
 
 const threatColor = (score: number): string => {
-  if (score >= 80) return palette.critical;
-  if (score >= 60) return palette.high;
-  if (score >= 40) return palette.medium;
-  if (score >= 20) return palette.low;
-  return palette.info;
+  if (score >= 80) return severityStyles.critical.text;
+  if (score >= 60) return severityStyles.high.text;
+  if (score >= 40) return severityStyles.medium.text;
+  if (score >= 20) return severityStyles.low.text;
+  return severityStyles.info.text;
 };
 
 const ThreatBadge: React.FC<{ score: number }> = ({ score }) => (
@@ -92,20 +92,17 @@ export const CtiReportDocument: React.FC<{ data: CtiReportData }> = ({
   <Document>
     {/* Cover */}
     <CoverPage
-      title={data.reportTitle}
-      systemName={data.systemName ?? 'Open Attack Surface Management'}
-      classification={data.classification ?? 'Strictly Confidential'}
-      exportedAt={data.exportedAt}
+      coverTitle={data.reportTitle}
+      coverDescription="Cyber Threat Intelligence Report"
+      docRefPrefix="CTI"
+      dateLabel={data.exportedAt}
       logoBase64={data.logoBase64}
     />
 
     {/* Summary */}
     <Page size="A4" style={styles.contentPage}>
-      <ReportHeader
-        systemName={data.systemName}
-        classification={data.classification}
-      />
-      <SectionHeader title="Executive Summary" />
+      <ReportHeader reportTitle="CTI Report" />
+      <SectionHeader number="1" title="Executive Summary" />
 
       <View style={styles.row}>
         <MetricCard label="Targets" value={String(data.totalTargets)} />
@@ -114,7 +111,7 @@ export const CtiReportDocument: React.FC<{ data: CtiReportData }> = ({
         <MetricCard
           label="Critical Threats"
           value={String(data.criticalThreats)}
-          color={palette.critical}
+          critical
         />
         <MetricCard
           label="Avg Threat Score"
@@ -124,7 +121,7 @@ export const CtiReportDocument: React.FC<{ data: CtiReportData }> = ({
 
       {/* Threat Distribution */}
       <View style={styles.sectionSpacing}>
-        <SectionHeader title="Threat Score Distribution" />
+        <SectionHeader number="2" title="Threat Score Distribution" />
         <View>
           {data.threatDistribution.map((d) => (
             <View
@@ -141,14 +138,14 @@ export const CtiReportDocument: React.FC<{ data: CtiReportData }> = ({
                   width: `${Math.max(d.percent, 2)}%`,
                   height: 12,
                   backgroundColor: d.level.includes('Critical')
-                    ? palette.critical
+                    ? severityStyles.critical.text
                     : d.level.includes('High')
-                      ? palette.high
+                      ? severityStyles.high.text
                       : d.level.includes('Medium')
-                        ? palette.medium
+                        ? severityStyles.medium.text
                         : d.level.includes('Low')
-                          ? palette.low
-                          : palette.info,
+                          ? severityStyles.low.text
+                          : severityStyles.info.text,
                   borderRadius: 2,
                   maxWidth: '50%',
                 }}
@@ -163,7 +160,7 @@ export const CtiReportDocument: React.FC<{ data: CtiReportData }> = ({
 
       {/* Assets by Type */}
       <View style={styles.sectionSpacing}>
-        <SectionHeader title="Assets by Type" />
+        <SectionHeader number="3" title="Assets by Type" />
         <View style={styles.tableHeader}>
           <Text style={{ ...styles.th, width: '50%' }}>Type</Text>
           <Text style={{ ...styles.th, width: '25%' }}>Count</Text>
@@ -196,11 +193,8 @@ export const CtiReportDocument: React.FC<{ data: CtiReportData }> = ({
 
     {/* Top Threats */}
     <Page size="A4" style={styles.contentPage}>
-      <ReportHeader
-        systemName={data.systemName}
-        classification={data.classification}
-      />
-      <SectionHeader title="Top Threat Intelligence Assets" />
+      <ReportHeader reportTitle="CTI Report" />
+      <SectionHeader number="4" title="Top Threat Intelligence Assets" />
 
       <View style={styles.tableHeader}>
         <Text style={{ ...styles.th, width: '30%' }}>Value</Text>
@@ -247,11 +241,8 @@ export const CtiReportDocument: React.FC<{ data: CtiReportData }> = ({
 
     {/* Targets Overview */}
     <Page size="A4" style={styles.contentPage}>
-      <ReportHeader
-        systemName={data.systemName}
-        classification={data.classification}
-      />
-      <SectionHeader title="CTI Targets Overview" />
+      <ReportHeader reportTitle="CTI Report" />
+      <SectionHeader number="5" title="CTI Targets Overview" />
 
       <View style={styles.tableHeader}>
         <Text style={{ ...styles.th, width: '30%' }}>Target</Text>

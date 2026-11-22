@@ -3,7 +3,7 @@ import { Badge } from '@/components/ui/badge';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from '@tanstack/react-router';
 import { Network } from 'lucide-react';
-import { axiosInstance } from '@/services/apis/axios-instance';
+import { axiosInstance } from '@/services/apis/axios-client';
 import { useWorkspaceSelector } from '@/hooks/useWorkspaceSelector';
 import CreateWorkspace from '@/pages/workspaces/create-workspace';
 
@@ -35,7 +35,7 @@ export default function CtiAssetsPage() {
     queryKey: ['cti-assets'],
     queryFn: () =>
       axiosInstance
-        .get<{ items: CtiAsset[]; total: number }>('/cti-assets')
+        .get<{ items: CtiAsset[]; total: number }>('/api/cti-assets')
         .then((r) => r.data),
     enabled: hasWorkspace,
   });

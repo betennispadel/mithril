@@ -27,7 +27,7 @@ COPY console/ ./console
 ENV NODE_ENV production
 ENV VITE_API_URL=APP_VITE_API_URL
 
-RUN pnpm --filter console run build && \
+RUN cd console && npx vite build && \
   rm -rf console/node_modules/.cache
 
 # Nginx runtime stage

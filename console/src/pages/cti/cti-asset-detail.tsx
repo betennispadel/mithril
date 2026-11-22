@@ -4,7 +4,7 @@ import { Badge } from '@/components/ui/badge';
 import { Link, useParams } from '@tanstack/react-router';
 import { useQuery } from '@tanstack/react-query';
 import { ArrowLeft, Loader2, ArrowRight } from 'lucide-react';
-import { axiosInstance } from '@/services/apis/axios-instance';
+import { axiosInstance } from '@/services/apis/axios-client';
 
 interface CtiAssetDetail {
   id: string;
@@ -57,7 +57,7 @@ export default function CtiAssetDetailPage() {
     queryKey: ['cti-asset', assetId],
     queryFn: () =>
       axiosInstance
-        .get<CtiAssetDetail>(`/cti-assets/${assetId}`)
+        .get<CtiAssetDetail>(`/api/cti-assets/${assetId}`)
         .then((r) => r.data),
   });
 
@@ -65,7 +65,7 @@ export default function CtiAssetDetailPage() {
     queryKey: ['cti-asset-relations', assetId],
     queryFn: () =>
       axiosInstance
-        .get<CtiRelation[]>(`/cti-assets/${assetId}/relations`)
+        .get<CtiRelation[]>(`/api/cti-assets/${assetId}/relations`)
         .then((r) => r.data),
     enabled: !!asset,
   });

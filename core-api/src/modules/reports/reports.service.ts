@@ -125,7 +125,7 @@ export class ReportsService {
     let data: ReportData | VulnerabilityReportData;
 
     if (type === 'CTI') {
-      data = await this.ctiReportService.getCtiReportData(workspaceId, options);
+      data = await this.ctiReportService.getCtiReportData(workspaceId, options) as any;
     } else if (type === 'VULNERABILITY') {
       data = await this.vulnerabilityReportService.getVulnerabilityReportData(
         workspaceId,
