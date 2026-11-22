@@ -9,14 +9,14 @@ on:
 jobs:
   port_scan:
     name: Port Scan
-    run: naabu
+    run: sneakoscope
 
   http_probe:
     name: HTTP Probe
-    run: httpx
+    run: omnioculars
     needs: [port_scan]
 
   take_screenshot:
     name: Take Screenshot
-    run: screenshot
+    run: remembrall
     needs: [http_probe]

@@ -9,8 +9,7 @@ import { categorySpec } from '../tool-categories';
 
 export const builtInTools: Tool[] = [
   {
-    name: 'subfinder',
-    // Subdomain enumeration only makes sense for a domain.
+    name: 'revelio',
     categories: [
       categorySpec(ToolCategory.SUBDOMAINS, [TargetType.DOMAIN], {
         inputs: [DataKind.TARGET],
@@ -18,24 +17,21 @@ export const builtInTools: Tool[] = [
       }),
     ],
     description:
-      'Subfinder is a subdomain discovery tool that returns valid subdomains for websites, using passive online sources.',
-    logoUrl: '/static/images/subfinder.png',
+      'Passive subdomain enumeration engine that reveals hidden subdomains using OSINT sources and DNS resolution.',
+    logoUrl: '/static/images/tools/revelio.png',
     command:
       '(echo {{value}} && subfinder -duc -d {{value}}) | dnsx -duc -a -aaaa -cname -mx -ns -soa -txt -resp',
     parser: (result: string) => {
-      // domain -> record type -> values
       const parsed: Record<string, Record<string, string[]>> = {};
       result.split('\n').forEach((line) => {
         const cleaned = line.replace(/\x1B\[[0-9;]*m/g, '').trim();
         const match = cleaned.match(/^([^\[]+)\s+\[([A-Z]+)\]\s+\[(.+)\]$/);
         if (!match) return;
-
         const [, domain, type, value] = match;
         if (!parsed[domain]) parsed[domain] = {};
         if (!parsed[domain][type]) parsed[domain][type] = [];
         parsed[domain][type].push(value);
       });
-
       return Object.keys(parsed).map((i) => ({
         id: randomUUID(),
         value: i,
@@ -46,8 +42,7 @@ export const builtInTools: Tool[] = [
     priority: JobPriority.MEDIUM,
   },
   {
-    name: 'httpx',
-    // Probes every open port; the ones that answer HTTP become web services.
+    name: 'omnioculars',
     categories: [
       categorySpec(ToolCategory.HTTP_PROBE, [TargetType.DOMAIN, TargetType.IP, TargetType.CIDR], {
         inputs: [DataKind.SERVICE],
@@ -55,8 +50,8 @@ export const builtInTools: Tool[] = [
       }),
     ],
     description:
-      'Httpx is a fast and multi-purpose HTTP toolkit that allows running multiple probes using the retryable http library. It is designed to maintain result reliability with an increased number of threads.',
-    logoUrl: '/static/images/httpx.png',
+      'Multi-purpose HTTP reconnaissance probe that inspects web services for status codes, technologies, TLS certificates, CDN detection and server fingerprints.',
+    logoUrl: '/static/images/tools/omnioculars.png',
     command:
       'httpx -duc -u {{value}} -status-code -favicon -asn -title -web-server -irr -tech-detect -ip -cname -location -tls-grab -cdn -probe -json -follow-redirects -timeout 10 -threads 100 -silent',
     parser: JSON.parse,
@@ -64,22 +59,22 @@ export const builtInTools: Tool[] = [
     priority: JobPriority.MEDIUM,
   },
   {
-    name: 'screenshot',
+    name: 'remembrall',
     categories: [
       categorySpec(ToolCategory.SCREENSHOT, [TargetType.DOMAIN, TargetType.IP, TargetType.CIDR], {
         inputs: [DataKind.WEB],
         produces: [],
       }),
     ],
-    description: 'Take a screenshot of a website.',
-    logoUrl: '/static/images/screenshot.png',
+    description: 'Captures visual snapshots of live web pages for quick reconnaissance and change detection.',
+    logoUrl: '/static/images/tools/remembrall.png',
     parser: JSON.parse,
     version: '1.0.0',
     command: 'screenshot {{value}}',
     priority: JobPriority.MEDIUM,
   },
   {
-    name: 'naabu',
+    name: 'sneakoscope',
     categories: [
       categorySpec(ToolCategory.PORTS_SCANNER, [TargetType.DOMAIN, TargetType.IP, TargetType.CIDR], {
         inputs: [DataKind.HOST],
@@ -87,10 +82,8 @@ export const builtInTools: Tool[] = [
       }),
     ],
     description:
-      'A fast port scanner written in go with a focus on reliability and simplicity. Designed to be used in combination with other tools for attack surface discovery in bug bounties and pentests.',
-    logoUrl: '/static/images/naabu.png',
-    // naabu resolves only through hard-coded public resolvers; -sr falls back
-    // to the system resolver when they are unreachable (blocked egress DNS).
+      'High-speed TCP port scanner optimized for reliability, discovering open services across your attack surface.',
+    logoUrl: '/static/images/tools/sneakoscope.png',
     command: 'naabu -host {{value}} -silent -sr',
     parser: (result: string) => {
       const parsed = result
@@ -103,119 +96,5 @@ export const builtInTools: Tool[] = [
     },
     version: '2.3.5',
     priority: JobPriority.MEDIUM,
-  },
-
-  // ===== CTI TOOLS (Threat Intelligence) =====
-  {
-    name: 'ioc-feed',
-    categories: [
-      categorySpec(ToolCategory.VULNERABILITIES, [TargetType.DOMAIN, TargetType.IP], {
-        inputs: [DataKind.TARGET],
-        produces: [DataKind.VULNERABILITY],
-      }),
-    ],
-    description: 'Checks IPs, domains and hashes against threat intelligence feeds including OTX, GreyNoise and AbuseIPDB.',
-    logoUrl: '/static/images/tools/ioc-feed.png',
-    command: 'ioc-feed {{value}}',
-    parser: JSON.parse,
-    version: '1.0.0',
-    priority: JobPriority.MEDIUM,
-    isBuiltIn: true,
-  },
-  {
-    name: 'data-leaks',
-    categories: [
-      categorySpec(ToolCategory.VULNERABILITIES, [TargetType.DOMAIN], {
-        inputs: [DataKind.TARGET],
-        produces: [DataKind.VULNERABILITY],
-      }),
-    ],
-    description: 'Searches for exposed credentials and leaked data associated with the target domain.',
-    logoUrl: '/static/images/tools/data-leaks.png',
-    command: 'data-leaks {{value}}',
-    parser: JSON.parse,
-    version: '1.0.0',
-    priority: JobPriority.MEDIUM,
-    isBuiltIn: true,
-  },
-  {
-    name: 'brand-protection',
-    categories: [
-      categorySpec(ToolCategory.VULNERABILITIES, [TargetType.DOMAIN], {
-        inputs: [DataKind.TARGET],
-        produces: [DataKind.VULNERABILITY],
-      }),
-    ],
-    description: 'Detects typosquatting, phishing sites and brand impersonation targeting your domain.',
-    logoUrl: '/static/images/tools/brand-protection.png',
-    command: 'brand-protection {{value}}',
-    parser: JSON.parse,
-    version: '1.0.0',
-    priority: JobPriority.MEDIUM,
-    isBuiltIn: true,
-  },
-  {
-    name: 'darkweb',
-    categories: [
-      categorySpec(ToolCategory.VULNERABILITIES, [TargetType.DOMAIN], {
-        inputs: [DataKind.TARGET],
-        produces: [DataKind.VULNERABILITY],
-      }),
-    ],
-    description: 'Monitors dark web forums, ransomware leak sites and underground markets for mentions of your organization.',
-    logoUrl: '/static/images/tools/darkweb.png',
-    command: 'darkweb {{value}}',
-    parser: JSON.parse,
-    version: '1.0.0',
-    priority: JobPriority.MEDIUM,
-    isBuiltIn: true,
-  },
-  {
-    name: 'crypto',
-    categories: [
-      categorySpec(ToolCategory.VULNERABILITIES, [TargetType.DOMAIN, TargetType.IP], {
-        inputs: [DataKind.TARGET],
-        produces: [DataKind.VULNERABILITY],
-      }),
-    ],
-    description: 'Traces cryptocurrency transactions linked to your assets and checks blockchain abuse databases.',
-    logoUrl: '/static/images/tools/crypto.png',
-    command: 'crypto {{value}}',
-    parser: JSON.parse,
-    version: '1.0.0',
-    priority: JobPriority.MEDIUM,
-    isBuiltIn: true,
-  },
-  {
-    name: 'social-monitor',
-    categories: [
-      categorySpec(ToolCategory.VULNERABILITIES, [TargetType.DOMAIN], {
-        inputs: [DataKind.TARGET],
-        produces: [DataKind.VULNERABILITY],
-      }),
-    ],
-    description: 'Social media, news, Telegram and dark web social intelligence monitoring for your brand.',
-    logoUrl: '/static/images/tools/social-monitor.png',
-    command: 'social-monitor {{value}}',
-    parser: JSON.parse,
-    version: '1.0.0',
-    priority: JobPriority.MEDIUM,
-    isBuiltIn: true,
-  },
-  {
-    name: 'supplier-risk',
-    categories: [
-      categorySpec(ToolCategory.VULNERABILITIES, [TargetType.DOMAIN], {
-        inputs: [DataKind.TARGET],
-        produces: [DataKind.VULNERABILITY],
-      }),
-    ],
-    description: 'Assesses third-party and supplier risk using sanctions lists and open-source intelligence.',
-    logoUrl: '/static/images/tools/supplier-risk.png',
-    command: 'supplier-risk {{value}}',
-    parser: JSON.parse,
-    version: '1.0.0',
-    priority: JobPriority.MEDIUM,
-    isBuiltIn: true,
   },
 ];

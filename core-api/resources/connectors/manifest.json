@@ -13,8 +13,8 @@
       "homepage": "https://mithril.dev/tools/one-ring",
       "repositoryUrl": "https://github.com/betennispadel/mithril-connectors",
       "supportUrl": "https://mithril.dev/tools/one-ring",
-      "shortDescription": "Acunetix web vulnerability scanner",
-      "description": "Connects to an Acunetix instance, runs a scan against a target, and streams the discovered vulnerabilities back to the Worker.",
+      "shortDescription": "Enterprise web application vulnerability scanner",
+      "description": "Comprehensive DAST scanner that crawls and audits web applications for SQL injection, XSS, SSRF, authentication flaws and thousands of other vulnerability classes.",
       "capabilities": [
         {
           "name": "vulnerabilities",
@@ -134,8 +134,8 @@
       "homepage": "https://mithril.dev/tools/niffler",
       "repositoryUrl": "https://github.com/betennispadel/mithril-connectors",
       "supportUrl": "https://mithril.dev/tools/niffler",
-      "shortDescription": "HTTP parameter discovery",
-      "description": "Discovers hidden HTTP parameters for a URL using Arjun, probing a wordlist of parameter names against the target and reporting every parameter the endpoint responds to.",
+      "shortDescription": "HTTP parameter discovery and enumeration",
+      "description": "Discovers hidden and undocumented HTTP parameters in web applications by analyzing responses to crafted requests, revealing potential attack vectors.",
       "capabilities": [
         {
           "name": "url_discovery",
@@ -314,7 +314,7 @@
       "repositoryUrl": "https://github.com/betennispadel/mithril-connectors",
       "supportUrl": "https://mithril.dev/tools/time-turner",
       "shortDescription": "Historical URL discovery via public archives",
-      "description": "Discovers historical/archived URLs for a domain using Gau (GetAllUrls) across Wayback Machine, Common Crawl, AlienVault OTX and urlscan.io.",
+      "description": "Retrieves historical URLs from web archives, search engine caches and passive DNS sources to uncover forgotten endpoints, old API versions and deprecated resources.",
       "capabilities": [
         {
           "name": "url_discovery",
@@ -457,8 +457,8 @@
       "homepage": "https://mithril.dev/tools/zion-archive",
       "repositoryUrl": "https://github.com/betennispadel/mithril-connectors",
       "supportUrl": "https://mithril.dev/tools/zion-archive",
-      "shortDescription": "Finds secrets committed to Git repositories",
-      "description": "Scans the repositories of a Git organization for committed credentials \u2014 API keys, tokens, private keys, passwords \u2014 with Gitleaks rules. Secret values are redacted at the source: findings name the rule, file, line and commit, never the secret itself. Optionally scans recent history, where deleted secrets remain exposed.",
+      "shortDescription": "Git repository secret scanner",
+      "description": "Scans Git repositories for committed secrets, API keys, tokens, passwords and other sensitive data using pattern matching and entropy analysis.",
       "capabilities": [
         {
           "name": "secrets",
@@ -548,7 +548,7 @@
       "repositoryUrl": "https://github.com/betennispadel/mithril-connectors",
       "supportUrl": "https://mithril.dev/tools/elder-wand",
       "shortDescription": "Web crawler and endpoint discovery",
-      "description": "Crawls a target website with Katana (ProjectDiscovery) up to a configurable depth and streams every discovered HTTP/HTTPS URL as a finding for URL discovery.",
+      "description": "Intelligent web crawler that discovers endpoints, JavaScript files, API routes and hidden resources by parsing responses, following links and extracting URLs from scripts.",
       "capabilities": [
         {
           "name": "url_discovery",
@@ -756,8 +756,8 @@
       "homepage": "https://mithril.dev/tools/horcrux",
       "repositoryUrl": "https://github.com/betennispadel/mithril-connectors",
       "supportUrl": "https://mithril.dev/tools/horcrux",
-      "shortDescription": "Tenable Nessus vulnerability scanner",
-      "description": "Connects to a Tenable Nessus instance, creates and runs a scan against a target, and streams the discovered vulnerabilities back to the Worker as JSONL findings.",
+      "shortDescription": "Enterprise network vulnerability scanner",
+      "description": "Professional-grade vulnerability assessment scanner that identifies security weaknesses, misconfigurations and compliance gaps across network infrastructure and web applications.",
       "capabilities": [
         {
           "name": "vulnerabilities",
@@ -869,8 +869,8 @@
       "homepage": "https://mithril.dev/tools/dementor",
       "repositoryUrl": "https://github.com/betennispadel/mithril-connectors",
       "supportUrl": "https://mithril.dev/tools/dementor",
-      "shortDescription": "Signature-based web server and CGI scanner",
-      "description": "Scans a web server for 7,000+ known issues: dangerous files and CGIs, outdated server software, missing security headers, and version-specific flaws. Each finding is classified from Nikto's own test database and correlated with CVE references.",
+      "shortDescription": "Web server and CGI vulnerability scanner",
+      "description": "Signature-based scanner that checks web servers for dangerous files, outdated software, server misconfigurations and known CGI vulnerabilities.",
       "capabilities": [
         {
           "name": "vulnerabilities",
@@ -1046,8 +1046,8 @@
       "homepage": "https://mithril.dev/tools/sting",
       "repositoryUrl": "https://github.com/betennispadel/mithril-connectors",
       "supportUrl": "https://mithril.dev/tools/sting",
-      "shortDescription": "TCP/UDP port scanner and CVE detection",
-      "description": "Scans a single host with Nmap (Nmap Security Scanner) and streams every open port as a finding for port scanning: one finding per protocol/port with its Nmap service name, product and version. For vulnerabilities it adds service version detection and the vulners NSE script and streams one finding per CVE matched to a detected service version. Unprivileged TCP connect scan; requires no raw sockets.",
+      "shortDescription": "TCP/UDP port scanner with service and CVE detection",
+      "description": "Comprehensive port scanner that identifies open services, detects software versions, maps OS fingerprints and cross-references findings against known CVE databases.",
       "capabilities": [
         {
           "name": "ports_scanner",
@@ -1180,8 +1180,8 @@
       "homepage": "https://mithril.dev/tools/palantir",
       "repositoryUrl": "https://github.com/betennispadel/mithril-connectors",
       "supportUrl": "https://mithril.dev/tools/palantir",
-      "shortDescription": "Fast template-based vulnerability scanner",
-      "description": "Runs ProjectDiscovery Nuclei template-based scans against a target URL to detect known vulnerabilities, misconfigurations, and exposed secrets.",
+      "shortDescription": "Template-based vulnerability scanner",
+      "description": "Fast and customizable vulnerability scanner powered by community-driven templates, detecting CVEs, misconfigurations, exposed panels, default credentials and more.",
       "capabilities": [
         {
           "name": "vulnerabilities",
@@ -1348,8 +1348,8 @@
       "homepage": "https://mithril.dev/tools/red-pill",
       "repositoryUrl": "https://github.com/betennispadel/mithril-connectors",
       "supportUrl": "https://mithril.dev/tools/red-pill",
-      "shortDescription": "OWASP ZAP dynamic web application scanner",
-      "description": "Runs OWASP ZAP (Zed Attack Proxy) against a target web application using the Automation Framework, then streams the discovered alerts back to the Worker as normalized findings.",
+      "shortDescription": "Dynamic web application security testing (DAST)",
+      "description": "Automated DAST scanner that actively probes running web applications for injection flaws, broken authentication, security misconfigurations and other OWASP Top 10 vulnerabilities.",
       "capabilities": [
         {
           "name": "vulnerabilities",
@@ -1484,8 +1484,8 @@
       "homepage": "https://mithril.dev/tools/bullet-time",
       "repositoryUrl": "https://github.com/betennispadel/mithril-connectors",
       "supportUrl": "https://mithril.dev/tools/bullet-time",
-      "shortDescription": "Fast async TCP/UDP port scanner",
-      "description": "Scans a single host with RustScan in greppable mode and streams every open port as a finding for port scanning: one finding per protocol/port. Async TCP connect scan; needs no raw sockets, no privileges and no nmap, so findings carry no service or version \u2014 run the Nmap connector alongside it for service detection.",
+      "shortDescription": "High-speed asynchronous TCP/UDP port scanner",
+      "description": "Ultra-fast async port scanner capable of scanning millions of hosts per minute, designed for large-scale attack surface mapping and network reconnaissance.",
       "capabilities": [
         {
           "name": "ports_scanner",
@@ -1591,8 +1591,8 @@
       "homepage": "https://mithril.dev/tools/morpheus",
       "repositoryUrl": "https://github.com/betennispadel/mithril-connectors",
       "supportUrl": "https://mithril.dev/tools/morpheus",
-      "shortDescription": "Finds vulnerable dependencies and IaC misconfigurations in Git repositories",
-      "description": "Scans the repositories of a Git organization with Aqua Security Trivy. Reports known vulnerabilities (CVE, GHSA) in the dependencies declared by lockfiles and manifests \u2014 npm, pip, Go, Maven, Cargo, Composer, NuGet, RubyGems and more \u2014 with the installed and fixed versions, and misconfigurations in Dockerfiles, Kubernetes manifests, Helm charts and Terraform. Secret scanning can be turned on in the profile; secret values are never reported.",
+      "shortDescription": "Dependency and infrastructure-as-code scanner for Git repositories",
+      "description": "Scans Git repositories for vulnerable dependencies, outdated packages, IaC misconfigurations in Terraform/CloudFormation/Kubernetes manifests and license compliance issues.",
       "capabilities": [
         {
           "name": "vulnerabilities",
@@ -1722,8 +1722,8 @@
       "homepage": "https://mithril.dev/tools/agent-smith",
       "repositoryUrl": "https://github.com/betennispadel/mithril-connectors",
       "supportUrl": "https://mithril.dev/tools/agent-smith",
-      "shortDescription": "WordPress vulnerability scanner",
-      "description": "Scans WordPress sites using WPScan to enumerate vulnerable plugins and themes, detect known CVEs, misconfigurations, and weak credentials.",
+      "shortDescription": "CMS vulnerability scanner",
+      "description": "Specialized scanner that detects vulnerabilities in WordPress, Joomla and other CMS platforms including outdated plugins, weak credentials and known exploits.",
       "capabilities": [
         {
           "name": "vulnerabilities",
@@ -1999,8 +1999,8 @@
       "homepage": "https://mithril.dev/tools/marauders-map",
       "repositoryUrl": "https://github.com/betennispadel/mithril-connectors",
       "supportUrl": "https://mithril.dev/tools/marauders-map",
-      "shortDescription": "Brute-force web path and file discovery",
-      "description": "Discovers hidden files, directories and endpoints on a web target by brute-forcing paths from a wordlist with dirsearch, filtering by status code and file extension.",
+      "shortDescription": "Web path and directory brute-force discovery",
+      "description": "Brute-force tool that discovers hidden directories, files, virtual hosts and subdomains on web servers using customizable wordlists and smart filtering.",
       "capabilities": [
         {
           "name": "url_discovery",
@@ -2200,8 +2200,8 @@
       "homepage": "https://mithril.dev/tools/alohomora",
       "repositoryUrl": "https://github.com/betennispadel/mithril-connectors",
       "supportUrl": "https://mithril.dev/tools/alohomora",
-      "shortDescription": "Directory and file discovery via web fuzzing",
-      "description": "Fuzzes a target path base with ffuf wordlists to discover directories, files and endpoints, streaming every match as a finding for URL discovery.",
+      "shortDescription": "Web content and directory fuzzer",
+      "description": "High-performance web fuzzer that discovers hidden content, directories, files and API endpoints through intelligent wordlist-based probing and response analysis.",
       "capabilities": [
         {
           "name": "url_discovery",
@@ -2419,8 +2419,8 @@
       "homepage": "https://mithril.dev/tools/architect",
       "repositoryUrl": "https://github.com/betennispadel/mithril-connectors",
       "supportUrl": "https://mithril.dev/tools/architect",
-      "shortDescription": "Static code analysis for security vulnerabilities",
-      "description": "Runs Semgrep SAST against a Git repository and streams security findings back to the Worker. Detects injection flaws, insecure dependencies, hardcoded secrets and hundreds of other vulnerability classes across 30+ languages using the auto ruleset.",
+      "shortDescription": "Static application security testing (SAST)",
+      "description": "Multi-language static code analysis engine that identifies security vulnerabilities, code smells and anti-patterns in source code before deployment.",
       "agentTool": true,
       "capabilities": [
         {
@@ -2529,8 +2529,8 @@
       "homepage": "https://getgophish.com",
       "repositoryUrl": "https://github.com/betennispadel/mithril-connectors",
       "supportUrl": "https://github.com/betennispadel/mithril-connectors/issues",
-      "shortDescription": "Phishing simulation and security awareness testing",
-      "description": "Runs automated phishing simulation campaigns against target email addresses using GoPhish. Measures email open rates, click-through rates, credential submission rates, and reporting rates. Produces findings indicating organizational phishing susceptibility and social engineering risk.",
+      "shortDescription": "Phishing simulation and security awareness platform",
+      "description": "Full-featured phishing simulation engine for running controlled campaigns, tracking user interactions and measuring security awareness training effectiveness.",
       "capabilities": [
         {
           "name": "phishing_simulation",
@@ -2679,8 +2679,8 @@
       "pricingTier": [
         "free"
       ],
-      "shortDescription": "Domain squatting detection powered by openSquat",
-      "description": "Detects typosquatting, phishing, IDN homograph, doppelganger and bitsquatting domains targeting your brand using newly registered domain (NRD) feeds and Levenshtein distance matching.",
+      "shortDescription": "Domain squatting and typosquat detection",
+      "description": "Monitors for lookalike domains, typosquatting attempts and homoglyph attacks targeting your brand by generating permutations and checking registration status.",
       "agentTool": true,
       "capabilities": [
         {
@@ -2774,8 +2774,8 @@
       "pricingTier": [
         "free"
       ],
-      "shortDescription": "Unified CTI engine - dark web, data leaks, IOC feeds, brand protection, fraud intelligence",
-      "description": "Comprehensive threat intelligence powered by VoidAccess + LeakRadar + 10 specialized sources. Supports 16 target types.",
+      "shortDescription": "Unified threat intelligence engine",
+      "description": "Comprehensive CTI platform combining dark web monitoring, data leak detection, IOC feeds, brand protection, fraud intelligence, sanctions screening and social media surveillance into a single powerful engine.",
       "agentTool": true,
       "capabilities": [
         {

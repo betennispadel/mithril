@@ -33,6 +33,21 @@ import { Route as AuthedAistudioAgentsRouteImport } from './routes/_authed/aistu
 import { Route as AuthedAistudioConnectorsRouteImport } from './routes/_authed/aistudio/connectors'
 import { Route as AuthedAistudioUsageRouteImport } from './routes/_authed/aistudio/usage'
 import { Route as AuthedAssetsIndexRouteImport } from './routes/_authed/assets/index'
+import { Route as AuthedCtiBrandProtectionIndexRouteImport } from './routes/_authed/cti-brand-protection/index'
+import { Route as AuthedCtiCryptoIndexRouteImport } from './routes/_authed/cti-crypto/index'
+import { Route as AuthedCtiDarkwebIndexRouteImport } from './routes/_authed/cti-darkweb/index'
+import { Route as AuthedCtiDataLeaksIndexRouteImport } from './routes/_authed/cti-data-leaks/index'
+import { Route as AuthedCtiDomainSquattingIndexRouteImport } from './routes/_authed/cti-domain-squatting/index'
+import { Route as AuthedCtiFraudIndexRouteImport } from './routes/_authed/cti-fraud/index'
+import { Route as AuthedCtiIocFeedIndexRouteImport } from './routes/_authed/cti-ioc-feed/index'
+import { Route as AuthedCtiSanctionsIndexRouteImport } from './routes/_authed/cti-sanctions/index'
+import { Route as AuthedCtiSocialMonitorIndexRouteImport } from './routes/_authed/cti-social-monitor/index'
+import { Route as AuthedCtiSupplierRiskIndexRouteImport } from './routes/_authed/cti-supplier-risk/index'
+import { Route as AuthedCtiIndexRouteImport } from './routes/_authed/cti/index'
+import { Route as AuthedCtiTargetIdRouteImport } from './routes/_authed/cti/$targetId'
+import { Route as AuthedCtiDashboardRouteImport } from './routes/_authed/cti/dashboard'
+import { Route as AuthedCtiGraphRouteImport } from './routes/_authed/cti/graph'
+import { Route as AuthedCtiStartDiscoveryRouteImport } from './routes/_authed/cti/start-discovery'
 import { Route as AuthedIntegrationsIndexRouteImport } from './routes/_authed/integrations/index'
 import { Route as AuthedInternalNetworksIndexRouteImport } from './routes/_authed/internal-networks/index'
 import { Route as AuthedInternalNetworksIdRouteImport } from './routes/_authed/internal-networks/$id'
@@ -40,24 +55,19 @@ import { Route as AuthedInternalNetworksCreateRouteImport } from './routes/_auth
 import { Route as AuthedIssuesIndexRouteImport } from './routes/_authed/issues/index'
 import { Route as AuthedIssuesIdRouteImport } from './routes/_authed/issues/$id'
 import { Route as AuthedJobsIndexRouteImport } from './routes/_authed/jobs/index'
+import { Route as AuthedPhishingIndexRouteImport } from './routes/_authed/phishing/index'
+import { Route as AuthedPhishingCampaignIdRouteImport } from './routes/_authed/phishing/$campaignId'
+import { Route as AuthedPhishingNewRouteImport } from './routes/_authed/phishing/new'
 import { Route as AuthedProjectsIndexRouteImport } from './routes/_authed/projects/index'
 import { Route as AuthedProjectsCreateRouteImport } from './routes/_authed/projects/create'
 import { Route as AuthedProvidersIndexRouteImport } from './routes/_authed/providers/index'
 import { Route as AuthedProvidersCreateRouteImport } from './routes/_authed/providers/create'
+import { Route as AuthedSastIndexRouteImport } from './routes/_authed/sast/index'
 import { Route as AuthedTargetsIndexRouteImport } from './routes/_authed/targets/index'
 import { Route as AuthedTargetsStartDiscoveryRouteImport } from './routes/_authed/targets/start-discovery'
 import { Route as AuthedToolsIndexRouteImport } from './routes/_authed/tools/index'
 import { Route as AuthedToolsIdRouteImport } from './routes/_authed/tools/$id'
 import { Route as AuthedVulnerabilitiesIndexRouteImport } from './routes/_authed/vulnerabilities/index'
-import { Route as AuthedCtiBrandProtectionIndexRouteImport } from './routes/_authed/cti-brand-protection/index'
-import { Route as AuthedCtiCryptoIndexRouteImport } from './routes/_authed/cti-crypto/index'
-import { Route as AuthedCtiDarkwebIndexRouteImport } from './routes/_authed/cti-darkweb/index'
-import { Route as AuthedCtiDataLeaksIndexRouteImport } from './routes/_authed/cti-data-leaks/index'
-import { Route as AuthedCtiIocFeedIndexRouteImport } from './routes/_authed/cti-ioc-feed/index'
-import { Route as AuthedSastIndexRouteImport } from './routes/_authed/sast/index'
-import { Route as AuthedCtiSocialMonitorIndexRouteImport } from './routes/_authed/cti-social-monitor/index'
-import { Route as AuthedCtiSupplierRiskIndexRouteImport } from './routes/_authed/cti-supplier-risk/index'
-
 import { Route as AuthedVulnerabilitiesIdRouteImport } from './routes/_authed/vulnerabilities/$id'
 import { Route as AuthedWorkersIndexRouteImport } from './routes/_authed/workers/index'
 import { Route as AuthedWorkersIdRouteImport } from './routes/_authed/workers/$id'
@@ -73,6 +83,10 @@ import { Route as AuthedAgentsProvidersConnectRouteImport } from './routes/_auth
 import { Route as AuthedAistudioConversationsIndexRouteImport } from './routes/_authed/aistudio/conversations/index'
 import { Route as AuthedAistudioConversationsConversationIdRouteImport } from './routes/_authed/aistudio/conversations/$conversationId'
 import { Route as AuthedAssetsServicesIdRouteImport } from './routes/_authed/assets/services/$id'
+import { Route as AuthedCtiAssetsIndexRouteImport } from './routes/_authed/cti/assets/index'
+import { Route as AuthedCtiAssetsAssetIdRouteImport } from './routes/_authed/cti/assets/$assetId'
+import { Route as AuthedCtiInvestigationsIndexRouteImport } from './routes/_authed/cti/investigations/index'
+import { Route as AuthedCtiInvestigationsInvestigationIdRouteImport } from './routes/_authed/cti/investigations/$investigationId'
 import { Route as AuthedJobsRunsIdRouteImport } from './routes/_authed/jobs/runs/$id'
 import { Route as AuthedProjectsIdIndexRouteImport } from './routes/_authed/projects/$id/index'
 import { Route as AuthedProjectsIdTabRouteImport } from './routes/_authed/projects/$id/$tab'
@@ -203,6 +217,85 @@ const AuthedAssetsIndexRoute = AuthedAssetsIndexRouteImport.update({
   path: '/assets/',
   getParentRoute: () => AuthedRoute,
 } as any)
+const AuthedCtiBrandProtectionIndexRoute =
+  AuthedCtiBrandProtectionIndexRouteImport.update({
+    id: '/cti-brand-protection/',
+    path: '/cti-brand-protection/',
+    getParentRoute: () => AuthedRoute,
+  } as any)
+const AuthedCtiCryptoIndexRoute = AuthedCtiCryptoIndexRouteImport.update({
+  id: '/cti-crypto/',
+  path: '/cti-crypto/',
+  getParentRoute: () => AuthedRoute,
+} as any)
+const AuthedCtiDarkwebIndexRoute = AuthedCtiDarkwebIndexRouteImport.update({
+  id: '/cti-darkweb/',
+  path: '/cti-darkweb/',
+  getParentRoute: () => AuthedRoute,
+} as any)
+const AuthedCtiDataLeaksIndexRoute = AuthedCtiDataLeaksIndexRouteImport.update({
+  id: '/cti-data-leaks/',
+  path: '/cti-data-leaks/',
+  getParentRoute: () => AuthedRoute,
+} as any)
+const AuthedCtiDomainSquattingIndexRoute =
+  AuthedCtiDomainSquattingIndexRouteImport.update({
+    id: '/cti-domain-squatting/',
+    path: '/cti-domain-squatting/',
+    getParentRoute: () => AuthedRoute,
+  } as any)
+const AuthedCtiFraudIndexRoute = AuthedCtiFraudIndexRouteImport.update({
+  id: '/cti-fraud/',
+  path: '/cti-fraud/',
+  getParentRoute: () => AuthedRoute,
+} as any)
+const AuthedCtiIocFeedIndexRoute = AuthedCtiIocFeedIndexRouteImport.update({
+  id: '/cti-ioc-feed/',
+  path: '/cti-ioc-feed/',
+  getParentRoute: () => AuthedRoute,
+} as any)
+const AuthedCtiSanctionsIndexRoute = AuthedCtiSanctionsIndexRouteImport.update({
+  id: '/cti-sanctions/',
+  path: '/cti-sanctions/',
+  getParentRoute: () => AuthedRoute,
+} as any)
+const AuthedCtiSocialMonitorIndexRoute =
+  AuthedCtiSocialMonitorIndexRouteImport.update({
+    id: '/cti-social-monitor/',
+    path: '/cti-social-monitor/',
+    getParentRoute: () => AuthedRoute,
+  } as any)
+const AuthedCtiSupplierRiskIndexRoute =
+  AuthedCtiSupplierRiskIndexRouteImport.update({
+    id: '/cti-supplier-risk/',
+    path: '/cti-supplier-risk/',
+    getParentRoute: () => AuthedRoute,
+  } as any)
+const AuthedCtiIndexRoute = AuthedCtiIndexRouteImport.update({
+  id: '/cti/',
+  path: '/cti/',
+  getParentRoute: () => AuthedRoute,
+} as any)
+const AuthedCtiTargetIdRoute = AuthedCtiTargetIdRouteImport.update({
+  id: '/cti/$targetId',
+  path: '/cti/$targetId',
+  getParentRoute: () => AuthedRoute,
+} as any)
+const AuthedCtiDashboardRoute = AuthedCtiDashboardRouteImport.update({
+  id: '/cti/dashboard',
+  path: '/cti/dashboard',
+  getParentRoute: () => AuthedRoute,
+} as any)
+const AuthedCtiGraphRoute = AuthedCtiGraphRouteImport.update({
+  id: '/cti/graph',
+  path: '/cti/graph',
+  getParentRoute: () => AuthedRoute,
+} as any)
+const AuthedCtiStartDiscoveryRoute = AuthedCtiStartDiscoveryRouteImport.update({
+  id: '/cti/start-discovery',
+  path: '/cti/start-discovery',
+  getParentRoute: () => AuthedRoute,
+} as any)
 const AuthedIntegrationsIndexRoute = AuthedIntegrationsIndexRouteImport.update({
   id: '/integrations/',
   path: '/integrations/',
@@ -241,6 +334,22 @@ const AuthedJobsIndexRoute = AuthedJobsIndexRouteImport.update({
   path: '/jobs/',
   getParentRoute: () => AuthedRoute,
 } as any)
+const AuthedPhishingIndexRoute = AuthedPhishingIndexRouteImport.update({
+  id: '/phishing/',
+  path: '/phishing/',
+  getParentRoute: () => AuthedRoute,
+} as any)
+const AuthedPhishingCampaignIdRoute =
+  AuthedPhishingCampaignIdRouteImport.update({
+    id: '/phishing/$campaignId',
+    path: '/phishing/$campaignId',
+    getParentRoute: () => AuthedRoute,
+  } as any)
+const AuthedPhishingNewRoute = AuthedPhishingNewRouteImport.update({
+  id: '/phishing/new',
+  path: '/phishing/new',
+  getParentRoute: () => AuthedRoute,
+} as any)
 const AuthedProjectsIndexRoute = AuthedProjectsIndexRouteImport.update({
   id: '/projects/',
   path: '/projects/',
@@ -259,6 +368,11 @@ const AuthedProvidersIndexRoute = AuthedProvidersIndexRouteImport.update({
 const AuthedProvidersCreateRoute = AuthedProvidersCreateRouteImport.update({
   id: '/providers/create',
   path: '/providers/create',
+  getParentRoute: () => AuthedRoute,
+} as any)
+const AuthedSastIndexRoute = AuthedSastIndexRouteImport.update({
+  id: '/sast/',
+  path: '/sast/',
   getParentRoute: () => AuthedRoute,
 } as any)
 const AuthedTargetsIndexRoute = AuthedTargetsIndexRouteImport.update({
@@ -282,55 +396,6 @@ const AuthedToolsIdRoute = AuthedToolsIdRouteImport.update({
   path: '/tools/$id',
   getParentRoute: () => AuthedRoute,
 } as any)
-
-const AuthedCtiBrandProtectionIndexRoute = AuthedCtiBrandProtectionIndexRouteImport.update({
-  id: '/cti-brand-protection/',
-  path: '/cti-brand-protection/',
-  getParentRoute: () => AuthedRoute,
-})
-
-const AuthedCtiCryptoIndexRoute = AuthedCtiCryptoIndexRouteImport.update({
-  id: '/cti-crypto/',
-  path: '/cti-crypto/',
-  getParentRoute: () => AuthedRoute,
-})
-
-const AuthedCtiDarkwebIndexRoute = AuthedCtiDarkwebIndexRouteImport.update({
-  id: '/cti-darkweb/',
-  path: '/cti-darkweb/',
-  getParentRoute: () => AuthedRoute,
-})
-
-const AuthedCtiDataLeaksIndexRoute = AuthedCtiDataLeaksIndexRouteImport.update({
-  id: '/cti-data-leaks/',
-  path: '/cti-data-leaks/',
-  getParentRoute: () => AuthedRoute,
-})
-
-const AuthedCtiIocFeedIndexRoute = AuthedCtiIocFeedIndexRouteImport.update({
-  id: '/cti-ioc-feed/',
-  path: '/cti-ioc-feed/',
-  getParentRoute: () => AuthedRoute,
-})
-
-const AuthedSastIndexRoute = AuthedSastIndexRouteImport.update({
-  id: '/sast/',
-  path: '/sast/',
-  getParentRoute: () => AuthedRoute,
-})
-
-const AuthedCtiSocialMonitorIndexRoute = AuthedCtiSocialMonitorIndexRouteImport.update({
-  id: '/cti-social-monitor/',
-  path: '/cti-social-monitor/',
-  getParentRoute: () => AuthedRoute,
-})
-
-const AuthedCtiSupplierRiskIndexRoute = AuthedCtiSupplierRiskIndexRouteImport.update({
-  id: '/cti-supplier-risk/',
-  path: '/cti-supplier-risk/',
-  getParentRoute: () => AuthedRoute,
-})
-
 const AuthedVulnerabilitiesIndexRoute =
   AuthedVulnerabilitiesIndexRouteImport.update({
     id: '/vulnerabilities/',
@@ -415,6 +480,28 @@ const AuthedAssetsServicesIdRoute = AuthedAssetsServicesIdRouteImport.update({
   path: '/assets/services/$id',
   getParentRoute: () => AuthedRoute,
 } as any)
+const AuthedCtiAssetsIndexRoute = AuthedCtiAssetsIndexRouteImport.update({
+  id: '/cti/assets/',
+  path: '/cti/assets/',
+  getParentRoute: () => AuthedRoute,
+} as any)
+const AuthedCtiAssetsAssetIdRoute = AuthedCtiAssetsAssetIdRouteImport.update({
+  id: '/cti/assets/$assetId',
+  path: '/cti/assets/$assetId',
+  getParentRoute: () => AuthedRoute,
+} as any)
+const AuthedCtiInvestigationsIndexRoute =
+  AuthedCtiInvestigationsIndexRouteImport.update({
+    id: '/cti/investigations/',
+    path: '/cti/investigations/',
+    getParentRoute: () => AuthedRoute,
+  } as any)
+const AuthedCtiInvestigationsInvestigationIdRoute =
+  AuthedCtiInvestigationsInvestigationIdRouteImport.update({
+    id: '/cti/investigations/$investigationId',
+    path: '/cti/investigations/$investigationId',
+    getParentRoute: () => AuthedRoute,
+  } as any)
 const AuthedJobsRunsIdRoute = AuthedJobsRunsIdRouteImport.update({
   id: '/jobs/runs/$id',
   path: '/jobs/runs/$id',
@@ -485,9 +572,15 @@ export interface FileRoutesByFullPath {
   '/aistudio/agents': typeof AuthedAistudioAgentsRoute
   '/aistudio/connectors': typeof AuthedAistudioConnectorsRoute
   '/aistudio/usage': typeof AuthedAistudioUsageRoute
+  '/cti/$targetId': typeof AuthedCtiTargetIdRoute
+  '/cti/dashboard': typeof AuthedCtiDashboardRoute
+  '/cti/graph': typeof AuthedCtiGraphRoute
+  '/cti/start-discovery': typeof AuthedCtiStartDiscoveryRoute
   '/internal-networks/$id': typeof AuthedInternalNetworksIdRoute
   '/internal-networks/create': typeof AuthedInternalNetworksCreateRoute
   '/issues/$id': typeof AuthedIssuesIdRoute
+  '/phishing/$campaignId': typeof AuthedPhishingCampaignIdRoute
+  '/phishing/new': typeof AuthedPhishingNewRoute
   '/projects/create': typeof AuthedProjectsCreateRoute
   '/providers/create': typeof AuthedProvidersCreateRoute
   '/targets/start-discovery': typeof AuthedTargetsStartDiscoveryRoute
@@ -499,22 +592,27 @@ export interface FileRoutesByFullPath {
   '/admin/workspaces/$id': typeof AdminWorkspacesIdRoute
   '/aistudio/': typeof AuthedAistudioIndexRoute
   '/assets/': typeof AuthedAssetsIndexRoute
-  '/integrations/': typeof AuthedIntegrationsIndexRoute
-  '/internal-networks/': typeof AuthedInternalNetworksIndexRoute
-  '/issues/': typeof AuthedIssuesIndexRoute
-  '/jobs/': typeof AuthedJobsIndexRoute
-  '/projects/': typeof AuthedProjectsIndexRoute
-  '/providers/': typeof AuthedProvidersIndexRoute
-  '/targets/': typeof AuthedTargetsIndexRoute
-  '/tools/': typeof AuthedToolsIndexRoute
   '/cti-brand-protection/': typeof AuthedCtiBrandProtectionIndexRoute
   '/cti-crypto/': typeof AuthedCtiCryptoIndexRoute
   '/cti-darkweb/': typeof AuthedCtiDarkwebIndexRoute
   '/cti-data-leaks/': typeof AuthedCtiDataLeaksIndexRoute
+  '/cti-domain-squatting/': typeof AuthedCtiDomainSquattingIndexRoute
+  '/cti-fraud/': typeof AuthedCtiFraudIndexRoute
   '/cti-ioc-feed/': typeof AuthedCtiIocFeedIndexRoute
-  '/sast/': typeof AuthedSastIndexRoute
+  '/cti-sanctions/': typeof AuthedCtiSanctionsIndexRoute
   '/cti-social-monitor/': typeof AuthedCtiSocialMonitorIndexRoute
   '/cti-supplier-risk/': typeof AuthedCtiSupplierRiskIndexRoute
+  '/cti/': typeof AuthedCtiIndexRoute
+  '/integrations/': typeof AuthedIntegrationsIndexRoute
+  '/internal-networks/': typeof AuthedInternalNetworksIndexRoute
+  '/issues/': typeof AuthedIssuesIndexRoute
+  '/jobs/': typeof AuthedJobsIndexRoute
+  '/phishing/': typeof AuthedPhishingIndexRoute
+  '/projects/': typeof AuthedProjectsIndexRoute
+  '/providers/': typeof AuthedProvidersIndexRoute
+  '/sast/': typeof AuthedSastIndexRoute
+  '/targets/': typeof AuthedTargetsIndexRoute
+  '/tools/': typeof AuthedToolsIndexRoute
   '/vulnerabilities/': typeof AuthedVulnerabilitiesIndexRoute
   '/workers/': typeof AuthedWorkersIndexRoute
   '/workspaces/': typeof AuthedWorkspacesIndexRoute
@@ -524,6 +622,8 @@ export interface FileRoutesByFullPath {
   '/agents/providers/connect': typeof AuthedAgentsProvidersConnectRoute
   '/aistudio/conversations/$conversationId': typeof AuthedAistudioConversationsConversationIdRoute
   '/assets/services/$id': typeof AuthedAssetsServicesIdRoute
+  '/cti/assets/$assetId': typeof AuthedCtiAssetsAssetIdRoute
+  '/cti/investigations/$investigationId': typeof AuthedCtiInvestigationsInvestigationIdRoute
   '/jobs/runs/$id': typeof AuthedJobsRunsIdRoute
   '/projects/$id/$tab': typeof AuthedProjectsIdTabRoute
   '/providers/$id/edit': typeof AuthedProvidersIdEditRoute
@@ -532,6 +632,8 @@ export interface FileRoutesByFullPath {
   '/settings/members/permission-groups/new': typeof SettingsMembersPermissionGroupsNewRoute
   '/agents/$id/': typeof AuthedAgentsIdIndexRoute
   '/aistudio/conversations/': typeof AuthedAistudioConversationsIndexRoute
+  '/cti/assets/': typeof AuthedCtiAssetsIndexRoute
+  '/cti/investigations/': typeof AuthedCtiInvestigationsIndexRoute
   '/projects/$id/': typeof AuthedProjectsIdIndexRoute
   '/providers/$id/': typeof AuthedProvidersIdIndexRoute
   '/targets/$id/': typeof AuthedTargetsIdIndexRoute
@@ -556,9 +658,15 @@ export interface FileRoutesByTo {
   '/aistudio/agents': typeof AuthedAistudioAgentsRoute
   '/aistudio/connectors': typeof AuthedAistudioConnectorsRoute
   '/aistudio/usage': typeof AuthedAistudioUsageRoute
+  '/cti/$targetId': typeof AuthedCtiTargetIdRoute
+  '/cti/dashboard': typeof AuthedCtiDashboardRoute
+  '/cti/graph': typeof AuthedCtiGraphRoute
+  '/cti/start-discovery': typeof AuthedCtiStartDiscoveryRoute
   '/internal-networks/$id': typeof AuthedInternalNetworksIdRoute
   '/internal-networks/create': typeof AuthedInternalNetworksCreateRoute
   '/issues/$id': typeof AuthedIssuesIdRoute
+  '/phishing/$campaignId': typeof AuthedPhishingCampaignIdRoute
+  '/phishing/new': typeof AuthedPhishingNewRoute
   '/projects/create': typeof AuthedProjectsCreateRoute
   '/providers/create': typeof AuthedProvidersCreateRoute
   '/targets/start-discovery': typeof AuthedTargetsStartDiscoveryRoute
@@ -570,12 +678,25 @@ export interface FileRoutesByTo {
   '/admin/workspaces/$id': typeof AdminWorkspacesIdRoute
   '/aistudio': typeof AuthedAistudioIndexRoute
   '/assets': typeof AuthedAssetsIndexRoute
+  '/cti-brand-protection': typeof AuthedCtiBrandProtectionIndexRoute
+  '/cti-crypto': typeof AuthedCtiCryptoIndexRoute
+  '/cti-darkweb': typeof AuthedCtiDarkwebIndexRoute
+  '/cti-data-leaks': typeof AuthedCtiDataLeaksIndexRoute
+  '/cti-domain-squatting': typeof AuthedCtiDomainSquattingIndexRoute
+  '/cti-fraud': typeof AuthedCtiFraudIndexRoute
+  '/cti-ioc-feed': typeof AuthedCtiIocFeedIndexRoute
+  '/cti-sanctions': typeof AuthedCtiSanctionsIndexRoute
+  '/cti-social-monitor': typeof AuthedCtiSocialMonitorIndexRoute
+  '/cti-supplier-risk': typeof AuthedCtiSupplierRiskIndexRoute
+  '/cti': typeof AuthedCtiIndexRoute
   '/integrations': typeof AuthedIntegrationsIndexRoute
   '/internal-networks': typeof AuthedInternalNetworksIndexRoute
   '/issues': typeof AuthedIssuesIndexRoute
   '/jobs': typeof AuthedJobsIndexRoute
+  '/phishing': typeof AuthedPhishingIndexRoute
   '/projects': typeof AuthedProjectsIndexRoute
   '/providers': typeof AuthedProvidersIndexRoute
+  '/sast': typeof AuthedSastIndexRoute
   '/targets': typeof AuthedTargetsIndexRoute
   '/tools': typeof AuthedToolsIndexRoute
   '/vulnerabilities': typeof AuthedVulnerabilitiesIndexRoute
@@ -587,6 +708,8 @@ export interface FileRoutesByTo {
   '/agents/providers/connect': typeof AuthedAgentsProvidersConnectRoute
   '/aistudio/conversations/$conversationId': typeof AuthedAistudioConversationsConversationIdRoute
   '/assets/services/$id': typeof AuthedAssetsServicesIdRoute
+  '/cti/assets/$assetId': typeof AuthedCtiAssetsAssetIdRoute
+  '/cti/investigations/$investigationId': typeof AuthedCtiInvestigationsInvestigationIdRoute
   '/jobs/runs/$id': typeof AuthedJobsRunsIdRoute
   '/projects/$id/$tab': typeof AuthedProjectsIdTabRoute
   '/providers/$id/edit': typeof AuthedProvidersIdEditRoute
@@ -595,6 +718,8 @@ export interface FileRoutesByTo {
   '/settings/members/permission-groups/new': typeof SettingsMembersPermissionGroupsNewRoute
   '/agents/$id': typeof AuthedAgentsIdIndexRoute
   '/aistudio/conversations': typeof AuthedAistudioConversationsIndexRoute
+  '/cti/assets': typeof AuthedCtiAssetsIndexRoute
+  '/cti/investigations': typeof AuthedCtiInvestigationsIndexRoute
   '/projects/$id': typeof AuthedProjectsIdIndexRoute
   '/providers/$id': typeof AuthedProvidersIdIndexRoute
   '/targets/$id': typeof AuthedTargetsIdIndexRoute
@@ -623,9 +748,15 @@ export interface FileRoutesById {
   '/_authed/aistudio/agents': typeof AuthedAistudioAgentsRoute
   '/_authed/aistudio/connectors': typeof AuthedAistudioConnectorsRoute
   '/_authed/aistudio/usage': typeof AuthedAistudioUsageRoute
+  '/_authed/cti/$targetId': typeof AuthedCtiTargetIdRoute
+  '/_authed/cti/dashboard': typeof AuthedCtiDashboardRoute
+  '/_authed/cti/graph': typeof AuthedCtiGraphRoute
+  '/_authed/cti/start-discovery': typeof AuthedCtiStartDiscoveryRoute
   '/_authed/internal-networks/$id': typeof AuthedInternalNetworksIdRoute
   '/_authed/internal-networks/create': typeof AuthedInternalNetworksCreateRoute
   '/_authed/issues/$id': typeof AuthedIssuesIdRoute
+  '/_authed/phishing/$campaignId': typeof AuthedPhishingCampaignIdRoute
+  '/_authed/phishing/new': typeof AuthedPhishingNewRoute
   '/_authed/projects/create': typeof AuthedProjectsCreateRoute
   '/_authed/providers/create': typeof AuthedProvidersCreateRoute
   '/_authed/targets/start-discovery': typeof AuthedTargetsStartDiscoveryRoute
@@ -637,22 +768,27 @@ export interface FileRoutesById {
   '/admin/workspaces/$id': typeof AdminWorkspacesIdRoute
   '/_authed/aistudio/': typeof AuthedAistudioIndexRoute
   '/_authed/assets/': typeof AuthedAssetsIndexRoute
-  '/_authed/integrations/': typeof AuthedIntegrationsIndexRoute
-  '/_authed/internal-networks/': typeof AuthedInternalNetworksIndexRoute
-  '/_authed/issues/': typeof AuthedIssuesIndexRoute
-  '/_authed/jobs/': typeof AuthedJobsIndexRoute
-  '/_authed/projects/': typeof AuthedProjectsIndexRoute
-  '/_authed/providers/': typeof AuthedProvidersIndexRoute
-  '/_authed/targets/': typeof AuthedTargetsIndexRoute
-  '/_authed/tools/': typeof AuthedToolsIndexRoute
   '/_authed/cti-brand-protection/': typeof AuthedCtiBrandProtectionIndexRoute
   '/_authed/cti-crypto/': typeof AuthedCtiCryptoIndexRoute
   '/_authed/cti-darkweb/': typeof AuthedCtiDarkwebIndexRoute
   '/_authed/cti-data-leaks/': typeof AuthedCtiDataLeaksIndexRoute
+  '/_authed/cti-domain-squatting/': typeof AuthedCtiDomainSquattingIndexRoute
+  '/_authed/cti-fraud/': typeof AuthedCtiFraudIndexRoute
   '/_authed/cti-ioc-feed/': typeof AuthedCtiIocFeedIndexRoute
-  '/_authed/sast/': typeof AuthedSastIndexRoute
+  '/_authed/cti-sanctions/': typeof AuthedCtiSanctionsIndexRoute
   '/_authed/cti-social-monitor/': typeof AuthedCtiSocialMonitorIndexRoute
   '/_authed/cti-supplier-risk/': typeof AuthedCtiSupplierRiskIndexRoute
+  '/_authed/cti/': typeof AuthedCtiIndexRoute
+  '/_authed/integrations/': typeof AuthedIntegrationsIndexRoute
+  '/_authed/internal-networks/': typeof AuthedInternalNetworksIndexRoute
+  '/_authed/issues/': typeof AuthedIssuesIndexRoute
+  '/_authed/jobs/': typeof AuthedJobsIndexRoute
+  '/_authed/phishing/': typeof AuthedPhishingIndexRoute
+  '/_authed/projects/': typeof AuthedProjectsIndexRoute
+  '/_authed/providers/': typeof AuthedProvidersIndexRoute
+  '/_authed/sast/': typeof AuthedSastIndexRoute
+  '/_authed/targets/': typeof AuthedTargetsIndexRoute
+  '/_authed/tools/': typeof AuthedToolsIndexRoute
   '/_authed/vulnerabilities/': typeof AuthedVulnerabilitiesIndexRoute
   '/_authed/workers/': typeof AuthedWorkersIndexRoute
   '/_authed/workspaces/': typeof AuthedWorkspacesIndexRoute
@@ -662,6 +798,8 @@ export interface FileRoutesById {
   '/_authed/agents/providers/connect': typeof AuthedAgentsProvidersConnectRoute
   '/_authed/aistudio/conversations/$conversationId': typeof AuthedAistudioConversationsConversationIdRoute
   '/_authed/assets/services/$id': typeof AuthedAssetsServicesIdRoute
+  '/_authed/cti/assets/$assetId': typeof AuthedCtiAssetsAssetIdRoute
+  '/_authed/cti/investigations/$investigationId': typeof AuthedCtiInvestigationsInvestigationIdRoute
   '/_authed/jobs/runs/$id': typeof AuthedJobsRunsIdRoute
   '/_authed/projects/$id/$tab': typeof AuthedProjectsIdTabRoute
   '/_authed/providers/$id/edit': typeof AuthedProvidersIdEditRoute
@@ -670,6 +808,8 @@ export interface FileRoutesById {
   '/settings/members/permission-groups/new': typeof SettingsMembersPermissionGroupsNewRoute
   '/_authed/agents/$id/': typeof AuthedAgentsIdIndexRoute
   '/_authed/aistudio/conversations/': typeof AuthedAistudioConversationsIndexRoute
+  '/_authed/cti/assets/': typeof AuthedCtiAssetsIndexRoute
+  '/_authed/cti/investigations/': typeof AuthedCtiInvestigationsIndexRoute
   '/_authed/projects/$id/': typeof AuthedProjectsIdIndexRoute
   '/_authed/providers/$id/': typeof AuthedProvidersIdIndexRoute
   '/_authed/targets/$id/': typeof AuthedTargetsIdIndexRoute
@@ -698,9 +838,15 @@ export interface FileRouteTypes {
     | '/aistudio/agents'
     | '/aistudio/connectors'
     | '/aistudio/usage'
+    | '/cti/$targetId'
+    | '/cti/dashboard'
+    | '/cti/graph'
+    | '/cti/start-discovery'
     | '/internal-networks/$id'
     | '/internal-networks/create'
     | '/issues/$id'
+    | '/phishing/$campaignId'
+    | '/phishing/new'
     | '/projects/create'
     | '/providers/create'
     | '/targets/start-discovery'
@@ -712,22 +858,27 @@ export interface FileRouteTypes {
     | '/admin/workspaces/$id'
     | '/aistudio/'
     | '/assets/'
-    | '/integrations/'
-    | '/internal-networks/'
-    | '/issues/'
-    | '/jobs/'
-    | '/projects/'
-    | '/providers/'
-    | '/targets/'
-    | '/tools/'
     | '/cti-brand-protection/'
     | '/cti-crypto/'
     | '/cti-darkweb/'
     | '/cti-data-leaks/'
+    | '/cti-domain-squatting/'
+    | '/cti-fraud/'
     | '/cti-ioc-feed/'
-    | '/sast/'
+    | '/cti-sanctions/'
     | '/cti-social-monitor/'
     | '/cti-supplier-risk/'
+    | '/cti/'
+    | '/integrations/'
+    | '/internal-networks/'
+    | '/issues/'
+    | '/jobs/'
+    | '/phishing/'
+    | '/projects/'
+    | '/providers/'
+    | '/sast/'
+    | '/targets/'
+    | '/tools/'
     | '/vulnerabilities/'
     | '/workers/'
     | '/workspaces/'
@@ -737,6 +888,8 @@ export interface FileRouteTypes {
     | '/agents/providers/connect'
     | '/aistudio/conversations/$conversationId'
     | '/assets/services/$id'
+    | '/cti/assets/$assetId'
+    | '/cti/investigations/$investigationId'
     | '/jobs/runs/$id'
     | '/projects/$id/$tab'
     | '/providers/$id/edit'
@@ -745,6 +898,8 @@ export interface FileRouteTypes {
     | '/settings/members/permission-groups/new'
     | '/agents/$id/'
     | '/aistudio/conversations/'
+    | '/cti/assets/'
+    | '/cti/investigations/'
     | '/projects/$id/'
     | '/providers/$id/'
     | '/targets/$id/'
@@ -769,9 +924,15 @@ export interface FileRouteTypes {
     | '/aistudio/agents'
     | '/aistudio/connectors'
     | '/aistudio/usage'
+    | '/cti/$targetId'
+    | '/cti/dashboard'
+    | '/cti/graph'
+    | '/cti/start-discovery'
     | '/internal-networks/$id'
     | '/internal-networks/create'
     | '/issues/$id'
+    | '/phishing/$campaignId'
+    | '/phishing/new'
     | '/projects/create'
     | '/providers/create'
     | '/targets/start-discovery'
@@ -783,12 +944,25 @@ export interface FileRouteTypes {
     | '/admin/workspaces/$id'
     | '/aistudio'
     | '/assets'
+    | '/cti-brand-protection'
+    | '/cti-crypto'
+    | '/cti-darkweb'
+    | '/cti-data-leaks'
+    | '/cti-domain-squatting'
+    | '/cti-fraud'
+    | '/cti-ioc-feed'
+    | '/cti-sanctions'
+    | '/cti-social-monitor'
+    | '/cti-supplier-risk'
+    | '/cti'
     | '/integrations'
     | '/internal-networks'
     | '/issues'
     | '/jobs'
+    | '/phishing'
     | '/projects'
     | '/providers'
+    | '/sast'
     | '/targets'
     | '/tools'
     | '/vulnerabilities'
@@ -800,6 +974,8 @@ export interface FileRouteTypes {
     | '/agents/providers/connect'
     | '/aistudio/conversations/$conversationId'
     | '/assets/services/$id'
+    | '/cti/assets/$assetId'
+    | '/cti/investigations/$investigationId'
     | '/jobs/runs/$id'
     | '/projects/$id/$tab'
     | '/providers/$id/edit'
@@ -808,6 +984,8 @@ export interface FileRouteTypes {
     | '/settings/members/permission-groups/new'
     | '/agents/$id'
     | '/aistudio/conversations'
+    | '/cti/assets'
+    | '/cti/investigations'
     | '/projects/$id'
     | '/providers/$id'
     | '/targets/$id'
@@ -835,9 +1013,15 @@ export interface FileRouteTypes {
     | '/_authed/aistudio/agents'
     | '/_authed/aistudio/connectors'
     | '/_authed/aistudio/usage'
+    | '/_authed/cti/$targetId'
+    | '/_authed/cti/dashboard'
+    | '/_authed/cti/graph'
+    | '/_authed/cti/start-discovery'
     | '/_authed/internal-networks/$id'
     | '/_authed/internal-networks/create'
     | '/_authed/issues/$id'
+    | '/_authed/phishing/$campaignId'
+    | '/_authed/phishing/new'
     | '/_authed/projects/create'
     | '/_authed/providers/create'
     | '/_authed/targets/start-discovery'
@@ -849,12 +1033,25 @@ export interface FileRouteTypes {
     | '/admin/workspaces/$id'
     | '/_authed/aistudio/'
     | '/_authed/assets/'
+    | '/_authed/cti-brand-protection/'
+    | '/_authed/cti-crypto/'
+    | '/_authed/cti-darkweb/'
+    | '/_authed/cti-data-leaks/'
+    | '/_authed/cti-domain-squatting/'
+    | '/_authed/cti-fraud/'
+    | '/_authed/cti-ioc-feed/'
+    | '/_authed/cti-sanctions/'
+    | '/_authed/cti-social-monitor/'
+    | '/_authed/cti-supplier-risk/'
+    | '/_authed/cti/'
     | '/_authed/integrations/'
     | '/_authed/internal-networks/'
     | '/_authed/issues/'
     | '/_authed/jobs/'
+    | '/_authed/phishing/'
     | '/_authed/projects/'
     | '/_authed/providers/'
+    | '/_authed/sast/'
     | '/_authed/targets/'
     | '/_authed/tools/'
     | '/_authed/vulnerabilities/'
@@ -866,6 +1063,8 @@ export interface FileRouteTypes {
     | '/_authed/agents/providers/connect'
     | '/_authed/aistudio/conversations/$conversationId'
     | '/_authed/assets/services/$id'
+    | '/_authed/cti/assets/$assetId'
+    | '/_authed/cti/investigations/$investigationId'
     | '/_authed/jobs/runs/$id'
     | '/_authed/projects/$id/$tab'
     | '/_authed/providers/$id/edit'
@@ -874,6 +1073,8 @@ export interface FileRouteTypes {
     | '/settings/members/permission-groups/new'
     | '/_authed/agents/$id/'
     | '/_authed/aistudio/conversations/'
+    | '/_authed/cti/assets/'
+    | '/_authed/cti/investigations/'
     | '/_authed/projects/$id/'
     | '/_authed/providers/$id/'
     | '/_authed/targets/$id/'
@@ -1060,6 +1261,111 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthedAssetsIndexRouteImport
       parentRoute: typeof AuthedRoute
     }
+    '/_authed/cti-brand-protection/': {
+      id: '/_authed/cti-brand-protection/'
+      path: '/cti-brand-protection'
+      fullPath: '/cti-brand-protection/'
+      preLoaderRoute: typeof AuthedCtiBrandProtectionIndexRouteImport
+      parentRoute: typeof AuthedRoute
+    }
+    '/_authed/cti-crypto/': {
+      id: '/_authed/cti-crypto/'
+      path: '/cti-crypto'
+      fullPath: '/cti-crypto/'
+      preLoaderRoute: typeof AuthedCtiCryptoIndexRouteImport
+      parentRoute: typeof AuthedRoute
+    }
+    '/_authed/cti-darkweb/': {
+      id: '/_authed/cti-darkweb/'
+      path: '/cti-darkweb'
+      fullPath: '/cti-darkweb/'
+      preLoaderRoute: typeof AuthedCtiDarkwebIndexRouteImport
+      parentRoute: typeof AuthedRoute
+    }
+    '/_authed/cti-data-leaks/': {
+      id: '/_authed/cti-data-leaks/'
+      path: '/cti-data-leaks'
+      fullPath: '/cti-data-leaks/'
+      preLoaderRoute: typeof AuthedCtiDataLeaksIndexRouteImport
+      parentRoute: typeof AuthedRoute
+    }
+    '/_authed/cti-domain-squatting/': {
+      id: '/_authed/cti-domain-squatting/'
+      path: '/cti-domain-squatting'
+      fullPath: '/cti-domain-squatting/'
+      preLoaderRoute: typeof AuthedCtiDomainSquattingIndexRouteImport
+      parentRoute: typeof AuthedRoute
+    }
+    '/_authed/cti-fraud/': {
+      id: '/_authed/cti-fraud/'
+      path: '/cti-fraud'
+      fullPath: '/cti-fraud/'
+      preLoaderRoute: typeof AuthedCtiFraudIndexRouteImport
+      parentRoute: typeof AuthedRoute
+    }
+    '/_authed/cti-ioc-feed/': {
+      id: '/_authed/cti-ioc-feed/'
+      path: '/cti-ioc-feed'
+      fullPath: '/cti-ioc-feed/'
+      preLoaderRoute: typeof AuthedCtiIocFeedIndexRouteImport
+      parentRoute: typeof AuthedRoute
+    }
+    '/_authed/cti-sanctions/': {
+      id: '/_authed/cti-sanctions/'
+      path: '/cti-sanctions'
+      fullPath: '/cti-sanctions/'
+      preLoaderRoute: typeof AuthedCtiSanctionsIndexRouteImport
+      parentRoute: typeof AuthedRoute
+    }
+    '/_authed/cti-social-monitor/': {
+      id: '/_authed/cti-social-monitor/'
+      path: '/cti-social-monitor'
+      fullPath: '/cti-social-monitor/'
+      preLoaderRoute: typeof AuthedCtiSocialMonitorIndexRouteImport
+      parentRoute: typeof AuthedRoute
+    }
+    '/_authed/cti-supplier-risk/': {
+      id: '/_authed/cti-supplier-risk/'
+      path: '/cti-supplier-risk'
+      fullPath: '/cti-supplier-risk/'
+      preLoaderRoute: typeof AuthedCtiSupplierRiskIndexRouteImport
+      parentRoute: typeof AuthedRoute
+    }
+    '/_authed/cti/': {
+      id: '/_authed/cti/'
+      path: '/cti'
+      fullPath: '/cti/'
+      preLoaderRoute: typeof AuthedCtiIndexRouteImport
+      parentRoute: typeof AuthedRoute
+    }
+    '/_authed/cti/$targetId': {
+      id: '/_authed/cti/$targetId'
+      path: '/cti/$targetId'
+      fullPath: '/cti/$targetId'
+      preLoaderRoute: typeof AuthedCtiTargetIdRouteImport
+      parentRoute: typeof AuthedRoute
+    }
+    '/_authed/cti/dashboard': {
+      id: '/_authed/cti/dashboard'
+      path: '/cti/dashboard'
+      fullPath: '/cti/dashboard'
+      preLoaderRoute: typeof AuthedCtiDashboardRouteImport
+      parentRoute: typeof AuthedRoute
+    }
+    '/_authed/cti/graph': {
+      id: '/_authed/cti/graph'
+      path: '/cti/graph'
+      fullPath: '/cti/graph'
+      preLoaderRoute: typeof AuthedCtiGraphRouteImport
+      parentRoute: typeof AuthedRoute
+    }
+    '/_authed/cti/start-discovery': {
+      id: '/_authed/cti/start-discovery'
+      path: '/cti/start-discovery'
+      fullPath: '/cti/start-discovery'
+      preLoaderRoute: typeof AuthedCtiStartDiscoveryRouteImport
+      parentRoute: typeof AuthedRoute
+    }
     '/_authed/integrations/': {
       id: '/_authed/integrations/'
       path: '/integrations'
@@ -1109,6 +1415,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthedJobsIndexRouteImport
       parentRoute: typeof AuthedRoute
     }
+    '/_authed/phishing/': {
+      id: '/_authed/phishing/'
+      path: '/phishing'
+      fullPath: '/phishing/'
+      preLoaderRoute: typeof AuthedPhishingIndexRouteImport
+      parentRoute: typeof AuthedRoute
+    }
+    '/_authed/phishing/$campaignId': {
+      id: '/_authed/phishing/$campaignId'
+      path: '/phishing/$campaignId'
+      fullPath: '/phishing/$campaignId'
+      preLoaderRoute: typeof AuthedPhishingCampaignIdRouteImport
+      parentRoute: typeof AuthedRoute
+    }
+    '/_authed/phishing/new': {
+      id: '/_authed/phishing/new'
+      path: '/phishing/new'
+      fullPath: '/phishing/new'
+      preLoaderRoute: typeof AuthedPhishingNewRouteImport
+      parentRoute: typeof AuthedRoute
+    }
     '/_authed/projects/': {
       id: '/_authed/projects/'
       path: '/projects'
@@ -1137,6 +1464,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthedProvidersCreateRouteImport
       parentRoute: typeof AuthedRoute
     }
+    '/_authed/sast/': {
+      id: '/_authed/sast/'
+      path: '/sast'
+      fullPath: '/sast/'
+      preLoaderRoute: typeof AuthedSastIndexRouteImport
+      parentRoute: typeof AuthedRoute
+    }
     '/_authed/targets/': {
       id: '/_authed/targets/'
       path: '/targets'
@@ -1163,62 +1497,6 @@ declare module '@tanstack/react-router' {
       path: '/tools/$id'
       fullPath: '/tools/$id'
       preLoaderRoute: typeof AuthedToolsIdRouteImport
-      parentRoute: typeof AuthedRoute
-    }
-    '/_authed/cti-brand-protection/': {
-      id: '/_authed/cti-brand-protection/'
-      path: '/cti-brand-protection'
-      fullPath: '/cti-brand-protection/'
-      preLoaderRoute: typeof AuthedCtiBrandProtectionIndexRouteImport
-      parentRoute: typeof AuthedRoute
-    }
-    '/_authed/cti-crypto/': {
-      id: '/_authed/cti-crypto/'
-      path: '/cti-crypto'
-      fullPath: '/cti-crypto/'
-      preLoaderRoute: typeof AuthedCtiCryptoIndexRouteImport
-      parentRoute: typeof AuthedRoute
-    }
-    '/_authed/cti-darkweb/': {
-      id: '/_authed/cti-darkweb/'
-      path: '/cti-darkweb'
-      fullPath: '/cti-darkweb/'
-      preLoaderRoute: typeof AuthedCtiDarkwebIndexRouteImport
-      parentRoute: typeof AuthedRoute
-    }
-    '/_authed/cti-data-leaks/': {
-      id: '/_authed/cti-data-leaks/'
-      path: '/cti-data-leaks'
-      fullPath: '/cti-data-leaks/'
-      preLoaderRoute: typeof AuthedCtiDataLeaksIndexRouteImport
-      parentRoute: typeof AuthedRoute
-    }
-    '/_authed/sast/': {
-      id: '/_authed/sast/'
-      path: '/sast'
-      fullPath: '/sast/'
-      preLoaderRoute: typeof AuthedSastIndexRouteImport
-      parentRoute: typeof AuthedRoute
-    }
-    '/_authed/cti-ioc-feed/': {
-      id: '/_authed/cti-ioc-feed/'
-      path: '/cti-ioc-feed'
-      fullPath: '/cti-ioc-feed/'
-      preLoaderRoute: typeof AuthedCtiIocFeedIndexRouteImport
-      parentRoute: typeof AuthedRoute
-    }
-    '/_authed/cti-social-monitor/': {
-      id: '/_authed/cti-social-monitor/'
-      path: '/cti-social-monitor'
-      fullPath: '/cti-social-monitor/'
-      preLoaderRoute: typeof AuthedCtiSocialMonitorIndexRouteImport
-      parentRoute: typeof AuthedRoute
-    }
-    '/_authed/cti-supplier-risk/': {
-      id: '/_authed/cti-supplier-risk/'
-      path: '/cti-supplier-risk'
-      fullPath: '/cti-supplier-risk/'
-      preLoaderRoute: typeof AuthedCtiSupplierRiskIndexRouteImport
       parentRoute: typeof AuthedRoute
     }
     '/_authed/vulnerabilities/': {
@@ -1333,6 +1611,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthedAssetsServicesIdRouteImport
       parentRoute: typeof AuthedRoute
     }
+    '/_authed/cti/assets/': {
+      id: '/_authed/cti/assets/'
+      path: '/cti/assets'
+      fullPath: '/cti/assets/'
+      preLoaderRoute: typeof AuthedCtiAssetsIndexRouteImport
+      parentRoute: typeof AuthedRoute
+    }
+    '/_authed/cti/assets/$assetId': {
+      id: '/_authed/cti/assets/$assetId'
+      path: '/cti/assets/$assetId'
+      fullPath: '/cti/assets/$assetId'
+      preLoaderRoute: typeof AuthedCtiAssetsAssetIdRouteImport
+      parentRoute: typeof AuthedRoute
+    }
+    '/_authed/cti/investigations/': {
+      id: '/_authed/cti/investigations/'
+      path: '/cti/investigations'
+      fullPath: '/cti/investigations/'
+      preLoaderRoute: typeof AuthedCtiInvestigationsIndexRouteImport
+      parentRoute: typeof AuthedRoute
+    }
+    '/_authed/cti/investigations/$investigationId': {
+      id: '/_authed/cti/investigations/$investigationId'
+      path: '/cti/investigations/$investigationId'
+      fullPath: '/cti/investigations/$investigationId'
+      preLoaderRoute: typeof AuthedCtiInvestigationsInvestigationIdRouteImport
+      parentRoute: typeof AuthedRoute
+    }
     '/_authed/jobs/runs/$id': {
       id: '/_authed/jobs/runs/$id'
       path: '/jobs/runs/$id'
@@ -1407,9 +1713,15 @@ interface AuthedRouteChildren {
   AuthedAistudioAgentsRoute: typeof AuthedAistudioAgentsRoute
   AuthedAistudioConnectorsRoute: typeof AuthedAistudioConnectorsRoute
   AuthedAistudioUsageRoute: typeof AuthedAistudioUsageRoute
+  AuthedCtiTargetIdRoute: typeof AuthedCtiTargetIdRoute
+  AuthedCtiDashboardRoute: typeof AuthedCtiDashboardRoute
+  AuthedCtiGraphRoute: typeof AuthedCtiGraphRoute
+  AuthedCtiStartDiscoveryRoute: typeof AuthedCtiStartDiscoveryRoute
   AuthedInternalNetworksIdRoute: typeof AuthedInternalNetworksIdRoute
   AuthedInternalNetworksCreateRoute: typeof AuthedInternalNetworksCreateRoute
   AuthedIssuesIdRoute: typeof AuthedIssuesIdRoute
+  AuthedPhishingCampaignIdRoute: typeof AuthedPhishingCampaignIdRoute
+  AuthedPhishingNewRoute: typeof AuthedPhishingNewRoute
   AuthedProjectsCreateRoute: typeof AuthedProjectsCreateRoute
   AuthedProvidersCreateRoute: typeof AuthedProvidersCreateRoute
   AuthedTargetsStartDiscoveryRoute: typeof AuthedTargetsStartDiscoveryRoute
@@ -1419,22 +1731,27 @@ interface AuthedRouteChildren {
   AuthedWorkspacesCreateRoute: typeof AuthedWorkspacesCreateRoute
   AuthedAistudioIndexRoute: typeof AuthedAistudioIndexRoute
   AuthedAssetsIndexRoute: typeof AuthedAssetsIndexRoute
-  AuthedIntegrationsIndexRoute: typeof AuthedIntegrationsIndexRoute
-  AuthedInternalNetworksIndexRoute: typeof AuthedInternalNetworksIndexRoute
-  AuthedIssuesIndexRoute: typeof AuthedIssuesIndexRoute
-  AuthedJobsIndexRoute: typeof AuthedJobsIndexRoute
-  AuthedProjectsIndexRoute: typeof AuthedProjectsIndexRoute
-  AuthedProvidersIndexRoute: typeof AuthedProvidersIndexRoute
-  AuthedTargetsIndexRoute: typeof AuthedTargetsIndexRoute
-  AuthedToolsIndexRoute: typeof AuthedToolsIndexRoute
   AuthedCtiBrandProtectionIndexRoute: typeof AuthedCtiBrandProtectionIndexRoute
   AuthedCtiCryptoIndexRoute: typeof AuthedCtiCryptoIndexRoute
   AuthedCtiDarkwebIndexRoute: typeof AuthedCtiDarkwebIndexRoute
   AuthedCtiDataLeaksIndexRoute: typeof AuthedCtiDataLeaksIndexRoute
-  AuthedSastIndexRoute: typeof AuthedSastIndexRoute
+  AuthedCtiDomainSquattingIndexRoute: typeof AuthedCtiDomainSquattingIndexRoute
+  AuthedCtiFraudIndexRoute: typeof AuthedCtiFraudIndexRoute
   AuthedCtiIocFeedIndexRoute: typeof AuthedCtiIocFeedIndexRoute
+  AuthedCtiSanctionsIndexRoute: typeof AuthedCtiSanctionsIndexRoute
   AuthedCtiSocialMonitorIndexRoute: typeof AuthedCtiSocialMonitorIndexRoute
   AuthedCtiSupplierRiskIndexRoute: typeof AuthedCtiSupplierRiskIndexRoute
+  AuthedCtiIndexRoute: typeof AuthedCtiIndexRoute
+  AuthedIntegrationsIndexRoute: typeof AuthedIntegrationsIndexRoute
+  AuthedInternalNetworksIndexRoute: typeof AuthedInternalNetworksIndexRoute
+  AuthedIssuesIndexRoute: typeof AuthedIssuesIndexRoute
+  AuthedJobsIndexRoute: typeof AuthedJobsIndexRoute
+  AuthedPhishingIndexRoute: typeof AuthedPhishingIndexRoute
+  AuthedProjectsIndexRoute: typeof AuthedProjectsIndexRoute
+  AuthedProvidersIndexRoute: typeof AuthedProvidersIndexRoute
+  AuthedSastIndexRoute: typeof AuthedSastIndexRoute
+  AuthedTargetsIndexRoute: typeof AuthedTargetsIndexRoute
+  AuthedToolsIndexRoute: typeof AuthedToolsIndexRoute
   AuthedVulnerabilitiesIndexRoute: typeof AuthedVulnerabilitiesIndexRoute
   AuthedWorkersIndexRoute: typeof AuthedWorkersIndexRoute
   AuthedWorkspacesIndexRoute: typeof AuthedWorkspacesIndexRoute
@@ -1442,12 +1759,16 @@ interface AuthedRouteChildren {
   AuthedAgentsProvidersConnectRoute: typeof AuthedAgentsProvidersConnectRoute
   AuthedAistudioConversationsConversationIdRoute: typeof AuthedAistudioConversationsConversationIdRoute
   AuthedAssetsServicesIdRoute: typeof AuthedAssetsServicesIdRoute
+  AuthedCtiAssetsAssetIdRoute: typeof AuthedCtiAssetsAssetIdRoute
+  AuthedCtiInvestigationsInvestigationIdRoute: typeof AuthedCtiInvestigationsInvestigationIdRoute
   AuthedJobsRunsIdRoute: typeof AuthedJobsRunsIdRoute
   AuthedProjectsIdTabRoute: typeof AuthedProjectsIdTabRoute
   AuthedProvidersIdEditRoute: typeof AuthedProvidersIdEditRoute
   AuthedTargetsIdTabRoute: typeof AuthedTargetsIdTabRoute
   AuthedAgentsIdIndexRoute: typeof AuthedAgentsIdIndexRoute
   AuthedAistudioConversationsIndexRoute: typeof AuthedAistudioConversationsIndexRoute
+  AuthedCtiAssetsIndexRoute: typeof AuthedCtiAssetsIndexRoute
+  AuthedCtiInvestigationsIndexRoute: typeof AuthedCtiInvestigationsIndexRoute
   AuthedProjectsIdIndexRoute: typeof AuthedProjectsIdIndexRoute
   AuthedProvidersIdIndexRoute: typeof AuthedProvidersIdIndexRoute
   AuthedTargetsIdIndexRoute: typeof AuthedTargetsIdIndexRoute
@@ -1461,9 +1782,15 @@ const AuthedRouteChildren: AuthedRouteChildren = {
   AuthedAistudioAgentsRoute: AuthedAistudioAgentsRoute,
   AuthedAistudioConnectorsRoute: AuthedAistudioConnectorsRoute,
   AuthedAistudioUsageRoute: AuthedAistudioUsageRoute,
+  AuthedCtiTargetIdRoute: AuthedCtiTargetIdRoute,
+  AuthedCtiDashboardRoute: AuthedCtiDashboardRoute,
+  AuthedCtiGraphRoute: AuthedCtiGraphRoute,
+  AuthedCtiStartDiscoveryRoute: AuthedCtiStartDiscoveryRoute,
   AuthedInternalNetworksIdRoute: AuthedInternalNetworksIdRoute,
   AuthedInternalNetworksCreateRoute: AuthedInternalNetworksCreateRoute,
   AuthedIssuesIdRoute: AuthedIssuesIdRoute,
+  AuthedPhishingCampaignIdRoute: AuthedPhishingCampaignIdRoute,
+  AuthedPhishingNewRoute: AuthedPhishingNewRoute,
   AuthedProjectsCreateRoute: AuthedProjectsCreateRoute,
   AuthedProvidersCreateRoute: AuthedProvidersCreateRoute,
   AuthedTargetsStartDiscoveryRoute: AuthedTargetsStartDiscoveryRoute,
@@ -1473,22 +1800,27 @@ const AuthedRouteChildren: AuthedRouteChildren = {
   AuthedWorkspacesCreateRoute: AuthedWorkspacesCreateRoute,
   AuthedAistudioIndexRoute: AuthedAistudioIndexRoute,
   AuthedAssetsIndexRoute: AuthedAssetsIndexRoute,
-  AuthedIntegrationsIndexRoute: AuthedIntegrationsIndexRoute,
-  AuthedInternalNetworksIndexRoute: AuthedInternalNetworksIndexRoute,
-  AuthedIssuesIndexRoute: AuthedIssuesIndexRoute,
-  AuthedJobsIndexRoute: AuthedJobsIndexRoute,
-  AuthedProjectsIndexRoute: AuthedProjectsIndexRoute,
-  AuthedProvidersIndexRoute: AuthedProvidersIndexRoute,
-  AuthedTargetsIndexRoute: AuthedTargetsIndexRoute,
-  AuthedToolsIndexRoute: AuthedToolsIndexRoute,
   AuthedCtiBrandProtectionIndexRoute: AuthedCtiBrandProtectionIndexRoute,
   AuthedCtiCryptoIndexRoute: AuthedCtiCryptoIndexRoute,
   AuthedCtiDarkwebIndexRoute: AuthedCtiDarkwebIndexRoute,
   AuthedCtiDataLeaksIndexRoute: AuthedCtiDataLeaksIndexRoute,
-  AuthedSastIndexRoute: AuthedSastIndexRoute,
+  AuthedCtiDomainSquattingIndexRoute: AuthedCtiDomainSquattingIndexRoute,
+  AuthedCtiFraudIndexRoute: AuthedCtiFraudIndexRoute,
   AuthedCtiIocFeedIndexRoute: AuthedCtiIocFeedIndexRoute,
+  AuthedCtiSanctionsIndexRoute: AuthedCtiSanctionsIndexRoute,
   AuthedCtiSocialMonitorIndexRoute: AuthedCtiSocialMonitorIndexRoute,
   AuthedCtiSupplierRiskIndexRoute: AuthedCtiSupplierRiskIndexRoute,
+  AuthedCtiIndexRoute: AuthedCtiIndexRoute,
+  AuthedIntegrationsIndexRoute: AuthedIntegrationsIndexRoute,
+  AuthedInternalNetworksIndexRoute: AuthedInternalNetworksIndexRoute,
+  AuthedIssuesIndexRoute: AuthedIssuesIndexRoute,
+  AuthedJobsIndexRoute: AuthedJobsIndexRoute,
+  AuthedPhishingIndexRoute: AuthedPhishingIndexRoute,
+  AuthedProjectsIndexRoute: AuthedProjectsIndexRoute,
+  AuthedProvidersIndexRoute: AuthedProvidersIndexRoute,
+  AuthedSastIndexRoute: AuthedSastIndexRoute,
+  AuthedTargetsIndexRoute: AuthedTargetsIndexRoute,
+  AuthedToolsIndexRoute: AuthedToolsIndexRoute,
   AuthedVulnerabilitiesIndexRoute: AuthedVulnerabilitiesIndexRoute,
   AuthedWorkersIndexRoute: AuthedWorkersIndexRoute,
   AuthedWorkspacesIndexRoute: AuthedWorkspacesIndexRoute,
@@ -1497,12 +1829,17 @@ const AuthedRouteChildren: AuthedRouteChildren = {
   AuthedAistudioConversationsConversationIdRoute:
     AuthedAistudioConversationsConversationIdRoute,
   AuthedAssetsServicesIdRoute: AuthedAssetsServicesIdRoute,
+  AuthedCtiAssetsAssetIdRoute: AuthedCtiAssetsAssetIdRoute,
+  AuthedCtiInvestigationsInvestigationIdRoute:
+    AuthedCtiInvestigationsInvestigationIdRoute,
   AuthedJobsRunsIdRoute: AuthedJobsRunsIdRoute,
   AuthedProjectsIdTabRoute: AuthedProjectsIdTabRoute,
   AuthedProvidersIdEditRoute: AuthedProvidersIdEditRoute,
   AuthedTargetsIdTabRoute: AuthedTargetsIdTabRoute,
   AuthedAgentsIdIndexRoute: AuthedAgentsIdIndexRoute,
   AuthedAistudioConversationsIndexRoute: AuthedAistudioConversationsIndexRoute,
+  AuthedCtiAssetsIndexRoute: AuthedCtiAssetsIndexRoute,
+  AuthedCtiInvestigationsIndexRoute: AuthedCtiInvestigationsIndexRoute,
   AuthedProjectsIdIndexRoute: AuthedProjectsIdIndexRoute,
   AuthedProvidersIdIndexRoute: AuthedProvidersIdIndexRoute,
   AuthedTargetsIdIndexRoute: AuthedTargetsIdIndexRoute,

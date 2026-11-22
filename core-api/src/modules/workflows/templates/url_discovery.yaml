@@ -6,7 +6,7 @@ name: url_discovery
 jobs:
   historical_urls:
     name: Historical URLs
-    run: gau
+    run: time-turner
     # Inline config: a connector with a configSchema needs either a default
     # profile in the workspace or a config here.
     config:

@@ -5,7 +5,9 @@ import {
   IsNotEmpty,
   IsOptional,
   IsString,
+  ValidateNested,
 } from 'class-validator';
+import { Type } from 'class-transformer';
 import { CtiTargetType } from '../enums/cti-types.enum';
 
 export class CreateCtiTargetDto {
@@ -32,5 +34,7 @@ export class CreateCtiTargetDto {
 export class CreateCtiTargetsBulkDto {
   @ApiProperty({ type: [CreateCtiTargetDto] })
   @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => CreateCtiTargetDto)
   targets: CreateCtiTargetDto[];
 }
