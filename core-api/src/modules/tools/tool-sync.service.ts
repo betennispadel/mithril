@@ -48,6 +48,7 @@ export class ToolSyncService implements OnModuleInit {
     @InjectRepository(Tool)
     private readonly toolsRepository: Repository<Tool>,
 
+    @InjectRepository(WorkspaceTool)
     private readonly workspaceToolRepository: Repository<WorkspaceTool>,
 
     private readonly storageService: StorageService,
