@@ -104,8 +104,9 @@ export class CtiDispatchService {
     }
 
     // Create the connector job
+    const jobId = randomUUID();
     const job = jobRepo.create({
-      id: randomUUID(),
+      id: jobId,
       jobName: tool.name,
       status: JobStatus.PENDING,
       category: ToolCategory.VULNERABILITIES,
@@ -119,7 +120,7 @@ export class CtiDispatchService {
     await jobRepo.save(job);
 
     this.logger.log(
-      'Dispatched CTI job ' + job.id + ' for ' + target.type + ':' + target.value,
+      'Dispatched CTI job ' + jobId + ' for ' + target.type + ':' + target.value,
     );
   }
 }
