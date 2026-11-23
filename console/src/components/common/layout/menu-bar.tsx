@@ -255,12 +255,13 @@ export const menu: NavGroup[] = [
   {
     title: 'Management',
     url: '#',
-    roles: ['admin'],
+    // roles: removed — visibility controlled by item-level permissions
     items: [
       {
         title: 'Tools',
         icon: <Cpu />,
-        url: '/tools',
+        url: "/tools",
+        permission: "tool.read",
       },
       {
         title: 'Integrations',
