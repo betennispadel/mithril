@@ -2,123 +2,247 @@
   {
     "resource": "workspace",
     "actions": [
-      { "action": "read", "description": "View workspace information" },
-      { "action": "write", "description": "Update workspace settings" },
-      { "action": "delete", "description": "Delete the workspace" },
-      { "action": "config", "description": "View and update workspace configuration" },
-      { "action": "apikey", "description": "View and rotate the workspace API key" }
+      {
+        "action": "read",
+        "description": "View workspace information"
+      },
+      {
+        "action": "write",
+        "description": "Update workspace settings"
+      },
+      {
+        "action": "delete",
+        "description": "Delete the workspace"
+      },
+      {
+        "action": "config",
+        "description": "View and update workspace configuration"
+      },
+      {
+        "action": "apikey",
+        "description": "View and rotate the workspace API key"
+      }
     ]
   },
   {
     "resource": "member",
     "actions": [
-      { "action": "read", "description": "View workspace members" },
-      { "action": "write", "description": "Edit member permissions and remove members" }
+      {
+        "action": "read",
+        "description": "View workspace members"
+      },
+      {
+        "action": "write",
+        "description": "Edit member permissions and remove members"
+      }
     ]
   },
   {
     "resource": "invitation",
     "actions": [
-      { "action": "read", "description": "View workspace invitations" },
-      { "action": "write", "description": "Invite members and cancel invitations" }
+      {
+        "action": "read",
+        "description": "View workspace invitations"
+      },
+      {
+        "action": "write",
+        "description": "Invite members and cancel invitations"
+      }
     ]
   },
   {
     "resource": "workflow",
     "actions": [
-      { "action": "read", "description": "View workflows" },
-      { "action": "write", "description": "Create, edit and run workflows" }
+      {
+        "action": "read",
+        "description": "View workflows"
+      },
+      {
+        "action": "write",
+        "description": "Create, edit and run workflows"
+      }
     ]
   },
   {
     "resource": "project",
     "actions": [
-      { "action": "read", "description": "View projects" },
-      { "action": "write", "description": "Create and edit projects" }
+      {
+        "action": "read",
+        "description": "View projects"
+      },
+      {
+        "action": "write",
+        "description": "Create and edit projects"
+      }
     ]
   },
   {
     "resource": "target",
     "actions": [
-      { "action": "read", "description": "View scan targets" },
-      { "action": "write", "description": "Add and edit scan targets" }
+      {
+        "action": "read",
+        "description": "View scan targets"
+      },
+      {
+        "action": "write",
+        "description": "Add and edit scan targets"
+      }
     ]
   },
   {
     "resource": "asset",
     "actions": [
-      { "action": "read", "description": "View assets" },
-      { "action": "write", "description": "Manage assets" }
+      {
+        "action": "read",
+        "description": "View assets"
+      },
+      {
+        "action": "write",
+        "description": "Manage assets"
+      }
     ]
   },
   {
     "resource": "vulnerability",
     "actions": [
-      { "action": "read", "description": "View vulnerabilities" },
-      { "action": "write", "description": "Manage vulnerabilities and dismissals" }
+      {
+        "action": "read",
+        "description": "View vulnerabilities"
+      },
+      {
+        "action": "write",
+        "description": "Manage vulnerabilities and dismissals"
+      }
     ]
   },
   {
     "resource": "network",
     "actions": [
-      { "action": "read", "description": "View internal networks" },
-      { "action": "write", "description": "Create and edit internal networks" }
+      {
+        "action": "read",
+        "description": "View internal networks"
+      },
+      {
+        "action": "write",
+        "description": "Create and edit internal networks"
+      }
     ]
   },
   {
     "resource": "integration",
     "actions": [
-      { "action": "read", "description": "View integrations" },
-      { "action": "write", "description": "Manage integrations" }
+      {
+        "action": "read",
+        "description": "View integrations"
+      },
+      {
+        "action": "write",
+        "description": "Manage integrations"
+      }
     ]
   },
   {
     "resource": "report",
     "actions": [
-      { "action": "read", "description": "View reports" },
-      { "action": "write", "description": "Generate and manage reports" }
+      {
+        "action": "read",
+        "description": "View reports"
+      },
+      {
+        "action": "write",
+        "description": "Generate and manage reports"
+      }
     ]
   },
   {
     "resource": "agent",
     "actions": [
-      { "action": "read", "description": "View agents" },
-      { "action": "write", "description": "Manage agents" }
+      {
+        "action": "read",
+        "description": "View agents"
+      },
+      {
+        "action": "write",
+        "description": "Manage agents"
+      }
     ]
   },
   {
     "resource": "notification",
     "actions": [
-      { "action": "read", "description": "View notifications" }
+      {
+        "action": "read",
+        "description": "View notifications"
+      }
     ]
   },
   {
     "resource": "job",
     "actions": [
-      { "action": "read", "description": "View jobs" },
-      { "action": "write", "description": "Re-run and cancel jobs" },
-      { "action": "delete", "description": "Delete jobs" }
+      {
+        "action": "read",
+        "description": "View jobs"
+      },
+      {
+        "action": "write",
+        "description": "Re-run and cancel jobs"
+      },
+      {
+        "action": "delete",
+        "description": "Delete jobs"
+      }
     ]
   },
   {
     "resource": "worker",
     "actions": [
-      { "action": "read", "description": "View workers" },
-      { "action": "write", "description": "Manage workers" }
+      {
+        "action": "read",
+        "description": "View workers"
+      },
+      {
+        "action": "write",
+        "description": "Manage workers"
+      }
     ]
   },
   {
     "resource": "artifact",
     "actions": [
-      { "action": "read", "description": "View files shared with you and storage usage" },
-      { "action": "write", "description": "Upload, share and delete your own files" },
-      { "action": "manage", "description": "See and delete any file in the workspace (no content access)" }
+      {
+        "action": "read",
+        "description": "View files shared with you and storage usage"
+      },
+      {
+        "action": "write",
+        "description": "Upload, share and delete your own files"
+      },
+      {
+        "action": "manage",
+        "description": "See and delete any file in the workspace (no content access)"
+      }
+    ]
+  },
+  {
+    "resource": "tool",
+    "actions": [
+      {
+        "action": "read",
+        "description": "View tools and config profiles"
+      },
+      {
+        "action": "write",
+        "description": "Install, uninstall and configure tools"
+      }
     ]
   },
   {
     "resource": "audit",
     "actions": [
-      { "action": "read", "description": "View and export the workspace audit log" }
+      {
+        "action": "read",
+        "description": "View and export the workspace audit log"
+      }
     ]
   }
 ]

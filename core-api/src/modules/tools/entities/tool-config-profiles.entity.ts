@@ -24,4 +24,7 @@ export class ToolConfigProfile extends BaseEntity {
 
   @Column({ default: false })
   isDefault: boolean;
+
+  @Column({ default: false })
+  isSystem: boolean;
 }

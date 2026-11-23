@@ -67,7 +67,7 @@ export class ToolsController {
       serialization: WorkspaceTool,
     },
   })
-  @WorkspaceAccess('workspace.write')
+  @WorkspaceAccess('tool.write')
   @Post('add-to-workspace')
   async addToolToWorkspace(
     @Body() dto: AddToolToWorkspaceDto,
@@ -90,7 +90,7 @@ export class ToolsController {
       tool: { after: (result as WorkspaceTool | undefined)?.tool?.name ?? '' },
     }),
   })
-  @WorkspaceAccess('workspace.write')
+  @WorkspaceAccess('tool.write')
   @Post('install')
   async installTool(@Body() dto: InstallToolDto, @WorkspaceId() workspaceId: string) {
     return this.toolsService.installTool(dto, workspaceId);
@@ -112,7 +112,7 @@ export class ToolsController {
       },
     }),
   })
-  @WorkspaceAccess('workspace.write')
+  @WorkspaceAccess('tool.write')
   @Post('uninstall')
   async uninstallTool(@Body() dto: InstallToolDto, @WorkspaceId() workspaceId: string) {
     return this.toolsService.uninstallTool(dto, workspaceId);
@@ -143,7 +143,7 @@ export class ToolsController {
       getWorkspaceId: true,
     },
   })
-  @WorkspaceAccess('workspace.read')
+  @WorkspaceAccess('tool.read')
   @Get()
   async getManyTools(
     @Query() query: ToolsQueryDto,
@@ -166,7 +166,7 @@ export class ToolsController {
       getWorkspaceId: true,
     },
   })
-  @WorkspaceAccess('workspace.read')
+  @WorkspaceAccess('tool.read')
   @Get('installed')
   async getInstalledTools(
     @Query() dto: GetInstalledToolsDto,
@@ -186,7 +186,7 @@ export class ToolsController {
       getWorkspaceId: true,
     },
   })
-  @WorkspaceAccess('workspace.read')
+  @WorkspaceAccess('tool.read')
   @Get('connectors/:slug')
   getConnectorBySlug(@Param() { slug }: GetConnectorBySlugDto) {
     const connector = this.connectorRegistryService.getConnector(slug);
@@ -221,7 +221,7 @@ export class ToolsController {
       getWorkspaceId: true,
     },
   })
-  @WorkspaceAccess('workspace.read')
+  @WorkspaceAccess('tool.read')
   @Get(':id')
   getToolById(
     @Param() { id }: GetToolByIdDto,
@@ -238,7 +238,7 @@ export class ToolsController {
       getWorkspaceId: true,
     },
   })
-  @WorkspaceAccess('workspace.read')
+  @WorkspaceAccess('tool.read')
   @Get(':id/schema')
   getToolSchema(
     @Param() { id }: GetToolByIdDto,

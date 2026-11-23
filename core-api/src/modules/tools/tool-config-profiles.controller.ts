@@ -13,6 +13,7 @@ import {
 import { ApiParam, ApiProperty, ApiTags } from '@nestjs/swagger';
 import { IsUUID } from 'class-validator';
 
+import { Admin } from '@/modules/admin/admin.decorator';
 import { CreateProfileDto } from './dto/create-profile.dto';
 import { UpdateProfileDto } from './dto/update-profile.dto';
 import { ToolConfigProfile } from './entities/tool-config-profiles.entity';
@@ -36,7 +37,7 @@ export class ToolConfigProfilesController {
     response: { serialization: ToolConfigProfile },
     request: { getWorkspaceId: true },
   })
-  @WorkspaceAccess('workspace.write')
+  @WorkspaceAccess('tool.write')
   @Post()
   create(
     @Param() { toolId }: ToolIdParamDto,
@@ -53,7 +54,7 @@ export class ToolConfigProfilesController {
     response: { serialization: ToolConfigProfile, isArray: true },
     request: { getWorkspaceId: true },
   })
-  @WorkspaceAccess('workspace.read')
+  @WorkspaceAccess('tool.read')
   @Get()
   list(
     @Param() { toolId }: ToolIdParamDto,
@@ -69,7 +70,7 @@ export class ToolConfigProfilesController {
     response: { serialization: ToolConfigProfile },
     request: { getWorkspaceId: true },
   })
-  @WorkspaceAccess('workspace.read')
+  @WorkspaceAccess('tool.read')
   @ApiParam({ name: 'toolId', type: String })
   @ApiParam({ name: 'id', type: String })
   @Get(':id')
@@ -88,7 +89,7 @@ export class ToolConfigProfilesController {
     response: { serialization: ToolConfigProfile },
     request: { getWorkspaceId: true },
   })
-  @WorkspaceAccess('workspace.write')
+  @WorkspaceAccess('tool.write')
   @ApiParam({ name: 'toolId', type: String })
   @ApiParam({ name: 'id', type: String })
   @Patch(':id')
@@ -108,7 +109,7 @@ export class ToolConfigProfilesController {
     response: {},
     request: { getWorkspaceId: true },
   })
-  @WorkspaceAccess('workspace.write')
+  @WorkspaceAccess('tool.write')
   @ApiParam({ name: 'toolId', type: String })
   @ApiParam({ name: 'id', type: String })
   @Delete(':id')
@@ -127,7 +128,7 @@ export class ToolConfigProfilesController {
     response: { serialization: ToolConfigProfile },
     request: { getWorkspaceId: true },
   })
-  @WorkspaceAccess('workspace.write')
+  @WorkspaceAccess('tool.write')
   @ApiParam({ name: 'toolId', type: String })
   @ApiParam({ name: 'id', type: String })
   @Post(':id/set-default')
@@ -138,4 +139,65 @@ export class ToolConfigProfilesController {
   ) {
     return this.profilesService.setDefault(workspaceId, id);
   }
+
+  // -- System-level config (admin only) --
+
+  @Doc({
+    summary: 'Create system config profile',
+    description:
+      'Creates a system-level config profile shared across all workspaces. Admin only.',
+    response: { serialization: ToolConfigProfile },
+    request: { getWorkspaceId: true },
+  })
+  @Admin()
+  @Post('system')
+  createSystem(
+    @Param() { toolId }: ToolIdParamDto,
+    @Body() dto: CreateProfileDto,
+    @WorkspaceId() workspaceId: string,
+  ) {
+    return this.profilesService.createSystemProfile(workspaceId, toolId, dto);
+  }
+
+  @Doc({
+    summary: 'List system config profiles',
+    description:
+      'Lists all system-level config profiles for a tool. Admin only.',
+    response: { serialization: ToolConfigProfile, isArray: true },
+  })
+  @Admin()
+  @Get('system')
+  listSystem(@Param() { toolId }: ToolIdParamDto) {
+    return this.profilesService.listSystemProfiles(toolId);
+  }
+
+  @Doc({
+    summary: 'Update system config profile',
+    description: 'Updates a system-level config profile. Admin only.',
+    response: { serialization: ToolConfigProfile },
+  })
+  @Admin()
+  @ApiParam({ name: 'toolId', type: String })
+  @ApiParam({ name: 'id', type: String })
+  @Patch('system/:id')
+  updateSystem(
+    @Param('id') id: string,
+    @Body() dto: UpdateProfileDto,
+  ) {
+    return this.profilesService.updateSystemProfile(id, dto);
+  }
+
+  @Doc({
+    summary: 'Delete system config profile',
+    description: 'Deletes a system-level config profile. Admin only.',
+    response: {},
+  })
+  @Admin()
+  @ApiParam({ name: 'toolId', type: String })
+  @ApiParam({ name: 'id', type: String })
+  @Delete('system/:id')
+  removeSystem(@Param('id') id: string) {
+    return this.profilesService.removeSystemProfile(id);
+  }
+
 }

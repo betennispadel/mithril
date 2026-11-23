@@ -424,7 +424,34 @@ export class ToolConfigProfilesService {
       });
     }
 
+    // Fallback: system-level config profile (admin-configured, shared across all workspaces)
+    if (!profile) {
+      profile = await this.profilesRepo.findOne({
+        where: {
+          tool: { id: toolId },
+          isSystem: true,
+          isDefault: true,
+        },
+      });
+    }
+
+    // Last resort: any system profile for this tool
+    if (!profile) {
+      profile = await this.profilesRepo.findOne({
+        where: {
+          tool: { id: toolId },
+          isSystem: true,
+        },
+        order: { createdAt: 'ASC' },
+      });
+    }
+
     if (!profile) return undefined;
+
+    // For system profiles, use the workspace they were created under
+    const effectiveWorkspaceId = profile.isSystem
+      ? ((profile.workspace as unknown as { id: string })?.id ?? workspaceId)
+      : workspaceId;
 
     // Get tool for schema lookup
     const tool = await this.toolsRepo.findOne({ where: { id: toolId } });
@@ -437,8 +464,148 @@ export class ToolConfigProfilesService {
     const sensitiveFields = getSensitiveFields(schema);
     if (sensitiveFields.length === 0) return profile.config;
 
-    const dek = await this.encryptionService.getDEK(workspaceId);
+    const dek = await this.encryptionService.getDEK(effectiveWorkspaceId);
     return decryptProfile(profile.config, sensitiveFields, dek);
+  }
+
+  // -- System Config CRUD --
+
+  /**
+   * Creates a system-level config profile (admin only).
+   * System profiles are shared across ALL workspaces as fallback.
+   */
+  async createSystemProfile(
+    workspaceId: string,
+    toolId: string,
+    dto: { name: string; config: Record<string, unknown> },
+  ): Promise<ToolConfigProfile> {
+    const { tool, schema, sensitiveFields } =
+      await this.resolveConnectorSchema(toolId);
+
+    if (schema) {
+      validateProfileOrThrow(this.connectorRegistry, tool.name, dto.config);
+    }
+
+    const existing = await this.profilesRepo.findOne({
+      where: { tool: { id: toolId }, isSystem: true, name: dto.name },
+    });
+    if (existing) {
+      throw new ConflictError(
+        `System profile "${dto.name}" already exists for this tool`,
+      );
+    }
+
+    const count = await this.profilesRepo.count({
+      where: { tool: { id: toolId }, isSystem: true },
+    });
+
+    const profile = this.profilesRepo.create({
+      workspace: { id: workspaceId },
+      tool: { id: toolId },
+      name: dto.name,
+      config: dto.config,
+      isDefault: count === 0,
+      isSystem: true,
+    });
+
+    return this.encryptAndSave(profile, sensitiveFields, workspaceId);
+  }
+
+  /**
+   * Lists all system-level config profiles for a tool.
+   */
+  async listSystemProfiles(toolId: string): Promise<ToolConfigProfile[]> {
+    const profiles = await this.profilesRepo.find({
+      where: { tool: { id: toolId }, isSystem: true },
+      relations: ['tool'],
+      order: { createdAt: 'DESC' },
+    });
+    return profiles.map((p) => this.maskConfig(p));
+  }
+
+  /**
+   * Updates a system-level config profile.
+   */
+  async updateSystemProfile(
+    profileId: string,
+    dto: { name?: string; config?: Record<string, unknown> },
+  ): Promise<ToolConfigProfile> {
+    const profile = await this.profilesRepo.findOne({
+      where: { id: profileId, isSystem: true },
+      relations: ['workspace', 'tool'],
+    });
+    if (!profile) {
+      throw new NotFoundError(`System profile ${profileId} not found`);
+    }
+
+    const toolId = (profile.tool as unknown as { id: string }).id;
+    const { tool, schema, sensitiveFields } =
+      await this.resolveConnectorSchema(toolId);
+
+    if (dto.name && dto.name !== profile.name) {
+      const dup = await this.profilesRepo.findOne({
+        where: { tool: { id: toolId }, isSystem: true, name: dto.name },
+      });
+      if (dup) {
+        throw new ConflictError(
+          `System profile "${dto.name}" already exists for this tool`,
+        );
+      }
+      profile.name = dto.name;
+    }
+
+    if (dto.config !== undefined) {
+      if (schema) {
+        validateProfileOrThrow(this.connectorRegistry, tool.name, dto.config);
+      }
+
+      const incoming: Record<string, unknown> = { ...dto.config };
+      const preserved: Record<string, unknown> = {};
+      for (const field of sensitiveFields) {
+        if (field in incoming && isMaskedValue(incoming[field])) {
+          if (field in profile.config) {
+            preserved[field] = profile.config[field];
+          }
+          delete incoming[field];
+        }
+      }
+
+      const wsId = (profile.workspace as unknown as { id: string }).id;
+      const dek = await this.encryptionService.getDEK(wsId);
+      const encryptedIncoming = encryptProfile(incoming, sensitiveFields, dek);
+      profile.config = { ...encryptedIncoming, ...preserved };
+    }
+
+    return this.profilesRepo.save(profile);
+  }
+
+  /**
+   * Deletes a system-level config profile.
+   */
+  async removeSystemProfile(profileId: string): Promise<void> {
+    const profile = await this.profilesRepo.findOne({
+      where: { id: profileId, isSystem: true },
+      relations: ['tool'],
+    });
+    if (!profile) {
+      throw new NotFoundError(`System profile ${profileId} not found`);
+    }
+
+    const toolId = (profile.tool as unknown as { id: string }).id;
+    const wasDefault = profile.isDefault;
+
+    await this.profilesRepo.remove(profile);
+
+    if (wasDefault) {
+      const next = await this.profilesRepo.findOne({
+        where: { tool: { id: toolId }, isSystem: true },
+        order: { createdAt: 'ASC' },
+      });
+      if (next) {
+        next.isDefault = true;
+        await this.profilesRepo.save(next);
+      }
+    }
   }
 
   /**
