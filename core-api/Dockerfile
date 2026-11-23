@@ -36,6 +36,8 @@ RUN pnpm --filter core-api run build && \
   cp -r core-api/src/proto/* /prod/core-api/proto/ 2>/dev/null || true && \
   mkdir -p /prod/core-api/resources && \
   cp -r core-api/resources/* /prod/core-api/resources/ 2>/dev/null || true && \
+  mkdir -p /prod/core-api/public && \
+  cp -r core-api/public/* /prod/core-api/public/ 2>/dev/null || true && \
   rm -rf core-api/node_modules/.cache
 
 # Production stage
