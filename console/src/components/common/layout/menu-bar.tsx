@@ -76,6 +76,8 @@ interface SubMenuItem {
   isNew?: boolean;
   /** Permission key required to see this item (e.g. 'target.read'). Omit to always show. */
   permission?: string;
+  /** Platform roles required to see this item (e.g. ['admin']). Omit to always show. */
+  roles?: string[];
 }
 
 export interface NavGroup {
@@ -262,6 +264,7 @@ export const menu: NavGroup[] = [
         icon: <Cpu />,
         url: "/tools",
         permission: "tool.read",
+        roles: ['admin'],
       },
       {
         title: 'Integrations',
@@ -442,7 +445,7 @@ export function AppSidebar({
               .map((group) => ({
                 ...group,
                 items: group.items.filter(
-                  (sub) => !sub.permission || hasPermission(sub.permission),
+                  (sub) => (!sub.permission || hasPermission(sub.permission)) && (!sub.roles || sub.roles.length === 0 || (data?.user.role != null && sub.roles.includes(data.user.role))),
                 ),
               }))
               .filter(
