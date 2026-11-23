@@ -13,7 +13,8 @@ import {
 import { ApiParam, ApiProperty, ApiTags } from '@nestjs/swagger';
 import { IsUUID } from 'class-validator';
 
-import { Admin } from '@/modules/admin/admin.decorator';
+import { Roles } from '@/common/decorators/app.decorator';
+import { Role } from '@/common/enums/enum';
 import { CreateProfileDto } from './dto/create-profile.dto';
 import { UpdateProfileDto } from './dto/update-profile.dto';
 import { ToolConfigProfile } from './entities/tool-config-profiles.entity';
@@ -149,7 +150,7 @@ export class ToolConfigProfilesController {
     response: { serialization: ToolConfigProfile },
     request: { getWorkspaceId: true },
   })
-  @Admin()
+  @Roles(Role.ADMIN)
   @Post('system')
   createSystem(
     @Param() { toolId }: ToolIdParamDto,
@@ -165,7 +166,7 @@ export class ToolConfigProfilesController {
       'Lists all system-level config profiles for a tool. Admin only.',
     response: { serialization: ToolConfigProfile, isArray: true },
   })
-  @Admin()
+  @Roles(Role.ADMIN)
   @Get('system')
   listSystem(@Param() { toolId }: ToolIdParamDto) {
     return this.profilesService.listSystemProfiles(toolId);
@@ -176,7 +177,7 @@ export class ToolConfigProfilesController {
     description: 'Updates a system-level config profile. Admin only.',
     response: { serialization: ToolConfigProfile },
   })
-  @Admin()
+  @Roles(Role.ADMIN)
   @ApiParam({ name: 'toolId', type: String })
   @ApiParam({ name: 'id', type: String })
   @Patch('system/:id')
@@ -192,7 +193,7 @@ export class ToolConfigProfilesController {
     description: 'Deletes a system-level config profile. Admin only.',
     response: {},
   })
-  @Admin()
+  @Roles(Role.ADMIN)
   @ApiParam({ name: 'toolId', type: String })
   @ApiParam({ name: 'id', type: String })
   @Delete('system/:id')
