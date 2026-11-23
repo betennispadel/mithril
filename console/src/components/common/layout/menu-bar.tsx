@@ -251,6 +251,13 @@ export const menu: NavGroup[] = [
         isNew: true,
         permission: 'vulnerability.read',
       },
+      {
+        title: 'Phishing Intelligence',
+        icon: <ScanSearch />,
+        url: '/cti-domain-squatting',
+        isNew: true,
+        permission: 'vulnerability.read',
+      },
     ],
   },
 

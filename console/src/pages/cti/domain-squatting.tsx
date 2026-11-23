@@ -8,7 +8,7 @@ const DomainSquattingPage = () => {
   const hasWorkspace = workspaces.length > 0;
   return (
     <Page
-      title="Polyjuice"
+      title="Phishing Intelligence"
       description="Detect typosquatting, phishing, IDN homograph and domain squatting threats targeting your brand"
       permission="vulnerability.read"
     >

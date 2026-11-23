@@ -10,6 +10,8 @@ import { CtiAssetsController } from './cti-assets.controller';
 import { CtiAssetsService } from './cti-assets.service';
 import { CtiInvestigationsController } from './cti-investigations.controller';
 import { CtiInvestigationsService } from './cti-investigations.service';
+import { CtiDispatchService } from './cti-dispatch.service';
+import { ToolsModule } from '@/modules/tools/tools.module';
 
 @Module({
   imports: [
@@ -19,6 +21,7 @@ import { CtiInvestigationsService } from './cti-investigations.service';
       CtiAssetRelation,
       CtiInvestigation,
     ]),
+    ToolsModule,
   ],
   controllers: [
     CtiTargetsController,
@@ -29,6 +32,7 @@ import { CtiInvestigationsService } from './cti-investigations.service';
     CtiTargetsService,
     CtiAssetsService,
     CtiInvestigationsService,
+    CtiDispatchService,
   ],
   exports: [
     CtiTargetsService,

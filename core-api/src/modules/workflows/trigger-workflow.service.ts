@@ -35,6 +35,9 @@ export class TriggerWorkflowService implements OnModuleInit {
       (event: string | string[], payload: Target, options?: TriggerOptions) => {
         // Emitted as a dotted string; an emitter may also pass the segments
         const name = Array.isArray(event) ? event.join('.') : event;
+        // CTI events are handled by CtiDispatchService - the standard ASM
+        // workflow pipeline cannot resolve CTI targets into scope assets.
+        if (name.startsWith('cti-')) return;
         // Every event lands here, so the third argument is not trusted to be
         // a TriggerOptions: anything but SCHEDULED is a manual run.
         const jobRunType =
