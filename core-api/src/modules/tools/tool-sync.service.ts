@@ -1,4 +1,5 @@
 import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
+import { OnEvent } from '@nestjs/event-emitter';
 import { InjectRepository } from '@nestjs/typeorm';
 import { randomUUID } from 'crypto';
 import * as fs from 'fs/promises';
@@ -13,6 +14,7 @@ import { StorageService } from '../storage/storage.service';
 import { DataSource } from 'typeorm';
 import { parseManifestCategories, sameCategories } from './tool-categories';
 import { builtInTools } from './tools-provider/built-in-tools';
+import { WORKSPACE_INITIALIZING_EVENT, WorkspaceInitializingEvent } from '../workspaces/workspace.events';
 
 /** The manifest fields an existing tool row is overridden with. */
 type ConnectorOverride = {
@@ -46,7 +48,6 @@ export class ToolSyncService implements OnModuleInit {
     @InjectRepository(Tool)
     private readonly toolsRepository: Repository<Tool>,
 
-    @InjectRepository(WorkspaceTool)
     private readonly workspaceToolRepository: Repository<WorkspaceTool>,
 
     private readonly storageService: StorageService,
@@ -599,4 +600,41 @@ export class ToolSyncService implements OnModuleInit {
     // Then delete the orphaned tools
     await this.toolsRepository.delete({ id: In(orphanIds) });
   }
+
+  /**
+   * Auto-installs all connector tools into a newly created workspace.
+   * Triggered by the workspace.initializing event so every workspace
+   * starts with all tools available — users never need to visit the
+   * Tools page to install connectors.
+   */
+  @OnEvent(WORKSPACE_INITIALIZING_EVENT, { promisify: true, suppressErrors: false })
+  async autoInstallToolsForWorkspace(event: WorkspaceInitializingEvent): Promise<void> {
+    const { workspaceId } = event;
+    const allTools = await this.toolsRepository.find();
+
+    // Find tools already installed in this workspace
+    const existing = await this.workspaceToolRepository.find({
+      where: { workspace: { id: workspaceId } },
+      relations: ['tool'],
+    });
+    const installedIds = new Set(existing.map((wt) => (wt.tool as unknown as { id: string }).id));
+
+    const toInstall = allTools
+      .filter((t) => !installedIds.has(t.id!))
+      .map((t) =>
+        this.workspaceToolRepository.create({
+          workspace: { id: workspaceId },
+          tool: { id: t.id },
+          isEnabled: true,
+        }),
+      );
+
+    if (toInstall.length > 0) {
+      await this.workspaceToolRepository.save(toInstall);
+      this.logger.log(
+        `Auto-installed ${toInstall.length} tool(s) in workspace ${workspaceId}`,
+      );
+    }
+  }
+
 }
