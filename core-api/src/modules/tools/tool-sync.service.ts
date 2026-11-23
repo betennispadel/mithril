@@ -131,6 +131,9 @@ export class ToolSyncService implements OnModuleInit {
         .execute();
     }
 
+    // Upload built-in tool logos to storage (connectors/<name>.png in system bucket)
+    await this.uploadBuiltInLogos();
+
     // Remove built-in tools no longer declared — wrapped in distributed
     // lock so only one replica runs cleanup across a multi-instance cluster.
     await this.removeOrphanBuiltInTools();
@@ -139,6 +142,35 @@ export class ToolSyncService implements OnModuleInit {
     // This also handles legacy PROVIDER → CONNECTOR takeover and orphan cleanup.
     // With unique(name), connector data overrides any existing tool with same slug.
     await this.syncConnectorTools();
+  }
+
+  /**
+   * Uploads built-in tool logo PNGs from resources/built-in-logos/ to the
+   * storage bucket so they're served at /connectors/<name>.png like connector logos.
+   */
+  private async uploadBuiltInLogos(): Promise<void> {
+    const logosDir = path.join(process.cwd(), 'resources', 'built-in-logos');
+    let files: string[];
+    try {
+      files = await fs.readdir(logosDir);
+    } catch {
+      // Directory may not exist in dev environments — skip silently
+      return;
+    }
+    const uploads: Promise<unknown>[] = [];
+    for (const file of files) {
+      if (!file.endsWith('.png')) continue;
+      const name = file.replace('.png', '');
+      uploads.push(
+        fs.readFile(path.join(logosDir, file))
+          .then((buffer) => this.storageService.uploadFile(`connectors/${name}.png`, buffer, 'system'))
+          .catch(() => this.logger.warn(`Failed to upload built-in logo: ${name}`)),
+      );
+    }
+    if (uploads.length > 0) {
+      await Promise.allSettled(uploads);
+      this.logger.log(`Uploaded ${uploads.length} built-in tool logo(s)`);
+    }
   }
 
   /**

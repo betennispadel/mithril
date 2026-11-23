@@ -18,7 +18,7 @@ export const builtInTools: Tool[] = [
     ],
     description:
       'Passive subdomain enumeration engine that reveals hidden subdomains using OSINT sources and DNS resolution.',
-    logoUrl: '/static/images/tools/revelio.png',
+    logoUrl: '/connectors/revelio.png',
     command:
       '(echo {{value}} && subfinder -duc -d {{value}}) | dnsx -duc -a -aaaa -cname -mx -ns -soa -txt -resp',
     parser: (result: string) => {
@@ -51,7 +51,7 @@ export const builtInTools: Tool[] = [
     ],
     description:
       'Multi-purpose HTTP reconnaissance probe that inspects web services for status codes, technologies, TLS certificates, CDN detection and server fingerprints.',
-    logoUrl: '/static/images/tools/omnioculars.png',
+    logoUrl: '/connectors/omnioculars.png',
     command:
       'httpx -duc -u {{value}} -status-code -favicon -asn -title -web-server -irr -tech-detect -ip -cname -location -tls-grab -cdn -probe -json -follow-redirects -timeout 10 -threads 100 -silent',
     parser: JSON.parse,
@@ -67,7 +67,7 @@ export const builtInTools: Tool[] = [
       }),
     ],
     description: 'Captures visual snapshots of live web pages for quick reconnaissance and change detection.',
-    logoUrl: '/static/images/tools/remembrall.png',
+    logoUrl: '/connectors/remembrall.png',
     parser: JSON.parse,
     version: '1.0.0',
     command: 'screenshot {{value}}',
@@ -83,7 +83,7 @@ export const builtInTools: Tool[] = [
     ],
     description:
       'High-speed TCP port scanner optimized for reliability, discovering open services across your attack surface.',
-    logoUrl: '/static/images/tools/sneakoscope.png',
+    logoUrl: '/connectors/sneakoscope.png',
     command: 'naabu -host {{value}} -silent -sr',
     parser: (result: string) => {
       const parsed = result
