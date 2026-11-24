@@ -92,6 +92,7 @@ export class CtiDispatchService {
     const inputs: Record<string, string> = {
       target: target.value,
       ctiTargetType: target.type,
+      _workspaceId: workspaceId,
     };
 
     // Flatten metadata into inputs (e.g. telegramChannels, keywords, etc.)

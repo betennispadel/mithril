@@ -156,7 +156,7 @@ export default function CtiEntityGraphPage() {
     queryFn: () =>
       axiosInstance
         .get<{ nodes: GraphNode[]; edges: GraphEdge[] }>('/api/cti-assets/graph')
-        .then((r) => r.data),
+        ,
     enabled: hasWorkspace,
   });
 

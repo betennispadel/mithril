@@ -58,7 +58,7 @@ export default function CtiAssetDetailPage() {
     queryFn: () =>
       axiosInstance
         .get<CtiAssetDetail>(`/api/cti-assets/${assetId}`)
-        .then((r) => r.data),
+        ,
   });
 
   const { data: relations } = useQuery({
@@ -66,7 +66,7 @@ export default function CtiAssetDetailPage() {
     queryFn: () =>
       axiosInstance
         .get<CtiRelation[]>(`/api/cti-assets/${assetId}/relations`)
-        .then((r) => r.data),
+        ,
     enabled: !!asset,
   });
 

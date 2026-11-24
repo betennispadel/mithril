@@ -36,7 +36,7 @@ export default function CtiAssetsPage() {
     queryFn: () =>
       axiosInstance
         .get<{ items: CtiAsset[]; total: number }>('/api/cti-assets')
-        .then((r) => r.data),
+        ,
     enabled: hasWorkspace,
   });
 

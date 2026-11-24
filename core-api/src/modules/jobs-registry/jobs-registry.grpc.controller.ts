@@ -183,6 +183,9 @@ export class JobsRegistryGrpcController {
   private async resolveConnectorInputs(
     job: GetNextJobResult,
   ): Promise<Record<string, string>> {
+    // CTI jobs have no asset — return inputs directly
+    if (!job.asset && job.inputs) return job.inputs;
+
     const asset = job.asset as unknown as {
       value: string;
       metadata?: Record<string, unknown> | null;

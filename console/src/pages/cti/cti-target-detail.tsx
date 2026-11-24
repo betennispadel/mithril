@@ -106,7 +106,7 @@ export default function CtiTargetDetailPage() {
     queryFn: () =>
       axiosInstance
         .get<CtiTargetDetail>(`/api/cti-targets/${targetId}`)
-        .then((r) => r.data),
+        ,
   });
 
   const { data: findingsData } = useQuery({
@@ -116,7 +116,7 @@ export default function CtiTargetDetailPage() {
         .get<{ items: Finding[]; total: number }>(
           `/api/cti-targets/${targetId}/findings`,
         )
-        .then((r) => r.data),
+        ,
     enabled: !!target,
   });
 
@@ -127,7 +127,7 @@ export default function CtiTargetDetailPage() {
         .get<{ items: CtiAsset[]; total: number }>(
           `/api/cti-assets?ctiTargetId=${targetId}`,
         )
-        .then((r) => r.data),
+        ,
     enabled: !!target,
   });
 

@@ -95,8 +95,8 @@ export class JobDispatchService {
     try {
       const queryBuilder = queryRunner.manager
         .createQueryBuilder(Job, 'jobs')
-        .innerJoinAndSelect('jobs.asset', 'asset')
-        .innerJoinAndSelect('asset.target', 'target')
+        .leftJoinAndSelect('jobs.asset', 'asset')
+        .leftJoinAndSelect('asset.target', 'target')
         .leftJoinAndSelect('jobs.tool', 'tool')
         .where('jobs.status = :status', { status: JobStatus.PENDING })
         // [OPT-1] Use addOrderBy for compound sort (priority first, then createdAt)
@@ -146,7 +146,7 @@ export class JobDispatchService {
         }
 
         if (worker.scope !== WorkerScope.CLOUD) {
-          queryBuilder.andWhere('workspaces.id = :workspaceId', {
+          queryBuilder.andWhere('(workspaces.id = :workspaceId OR asset.id IS NULL)', {
             workspaceId: worker.workspace.id,
           });
         }
@@ -155,7 +155,7 @@ export class JobDispatchService {
       }
 
       if (worker.internalNetworkId) {
-        queryBuilder.andWhere('target.internalNetworkId = :internalNetworkId', {
+        queryBuilder.andWhere('(target.internalNetworkId = :internalNetworkId OR target.id IS NULL)', {
           internalNetworkId: worker.internalNetworkId,
         });
       }
@@ -224,7 +224,7 @@ export class JobDispatchService {
         dispatchable.push(job);
         continue;
       }
-      const workspaceId = job.asset.target?.workspaceId ?? '';
+      const workspaceId = job.asset?.target?.workspaceId ?? '';
       const key = `${workspaceId}:${ids.join(',')}`;
       if (!signed.has(key)) {
         signed.set(key, this.signCustomTemplates(workspaceId, ids as string[]));
@@ -312,15 +312,16 @@ export class JobDispatchService {
       base.tool = { id: worker.tool.id!, name: worker.tool.name };
       // Connector workers have no workspace — derive from job's target instead, fallback to worker workspace for backward compat
       base.workspaceId =
-        job.asset.target?.workspaceId ??
-        (worker.workspace as { id?: string })?.id;
+        job.asset?.target?.workspaceId ??
+        (worker.workspace as { id?: string })?.id ??
+        (job.inputs as Record<string, string> | null)?._workspaceId;
       base.configProfileId = job.configProfileId;
       base.config = job.config;
       base.inputs = job.inputs;
     } else if (isBuiltInTools && job.tool) {
       // Connector job picked up by BUILT_IN worker
       base.tool = { id: job.tool.id!, name: job.tool.name };
-      base.workspaceId = job.asset.target?.workspaceId;
+      base.workspaceId = job.asset?.target?.workspaceId ?? (job.inputs as Record<string, string> | null)?._workspaceId;
       base.configProfileId = job.configProfileId;
       base.config = job.config;
       base.inputs = job.inputs;

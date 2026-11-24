@@ -61,7 +61,7 @@ export default function CtiInvestigationDetailPage() {
     queryFn: () =>
       axiosInstance
         .get<InvestigationDetail>(`/api/cti-investigations/${investigationId}`)
-        .then((r) => r.data),
+        ,
     refetchInterval: (query) =>
       query.state.data?.status === 'running' ? 5000 : false,
   });

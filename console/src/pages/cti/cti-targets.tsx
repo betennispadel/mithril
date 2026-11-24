@@ -51,7 +51,7 @@ export default function CtiTargetsPage() {
     queryFn: () =>
       axiosInstance
         .get<{ items: CtiTarget[]; total: number }>('/api/cti-targets')
-        .then((r) => r.data),
+        ,
     enabled: hasWorkspace,
   });
 

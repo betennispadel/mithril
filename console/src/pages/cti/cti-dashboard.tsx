@@ -133,7 +133,7 @@ export default function CtiDashboardPage() {
     queryFn: () =>
       axiosInstance
         .get<DashboardData>('/api/cti-targets/dashboard')
-        .then((r) => r.data),
+        ,
     enabled: hasWorkspace,
     refetchInterval: 30000,
   });

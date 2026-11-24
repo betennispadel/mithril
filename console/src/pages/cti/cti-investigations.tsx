@@ -33,7 +33,7 @@ export default function CtiInvestigationsPage() {
     queryFn: () =>
       axiosInstance
         .get<{ items: CtiInvestigation[]; total: number }>('/api/cti-investigations')
-        .then((r) => r.data),
+        ,
     enabled: hasWorkspace,
   });
 
