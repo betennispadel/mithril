@@ -5,6 +5,7 @@ import {
 } from '@/common/enums/enum';
 import { JobDataResultType } from '@/common/types/app.types';
 import { DataAdapterService } from '@/modules/data-adapter/data-adapter.service';
+import { CtiDataAdapterService } from '@/modules/cti/cti-data-adapter.service';
 import { StorageService } from '@/modules/storage/storage.service';
 import { builtInTools } from '@/modules/tools/tools-provider/built-in-tools';
 import { RedisService } from '@/services/redis/redis.service';
@@ -134,6 +135,7 @@ export class JobResultProcessor extends WorkerHost {
     private readonly jobsRegistryService: JobsRegistryService,
     private readonly workflowRunnerService: WorkflowRunnerService,
     private readonly dataAdapterService: DataAdapterService,
+    private readonly ctiDataAdapterService: CtiDataAdapterService,
     private readonly redis: RedisService,
     private readonly storageService: StorageService,
     @InjectRepository(Job)
@@ -281,12 +283,21 @@ export class JobResultProcessor extends WorkerHost {
       // Taken before the sync: a finding this job reports gets a lastSeenDate
       // at or after it, so the auto-close can tell what it did not report.
       const syncStartedAt = new Date();
+      const isCtiJob = Boolean(job.inputs?.['ctiTargetType']);
       const synced = Boolean(job.isSaveData) && dataForSync !== undefined;
       if (synced) {
-        await this.dataAdapterService.syncData({
-          data: dataForSync,
-          job,
-        });
+        if (isCtiJob) {
+          // CTI jobs go to their own data adapter (cti_findings table)
+          await this.ctiDataAdapterService.syncFindings(
+            job,
+            dataForSync as any[],
+          );
+        } else {
+          await this.dataAdapterService.syncData({
+            data: dataForSync,
+            job,
+          });
+        }
       }
 
       const completedAt = new Date();

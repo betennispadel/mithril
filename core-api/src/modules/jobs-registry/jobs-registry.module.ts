@@ -17,6 +17,7 @@ import { JobResultCleanupService } from './job-result-cleanup.service';
 import { JobConfigSealService } from './job-config-seal.service';
 import { JobRetentionService } from './job-retention.service';
 import { JobResultProcessor } from './processors/job-result.processor';
+import { CtiModule } from '@/modules/cti/cti.module';
 import { WorkflowRunReconcilerService } from './workflow-run-reconciler.service';
 import { WorkflowRunnerService } from './workflow-runner.service';
 import { ToolsModule } from '../tools/tools.module';
@@ -41,6 +42,7 @@ import { DataAdapterModule } from '../data-adapter/data-adapter.module';
     StorageModule,
     WorkersModule,
     DataAdapterModule,
+      CtiModule,
   ],
   controllers: [JobsRegistryController, JobsRegistryGrpcController],
   providers: [
