@@ -62,9 +62,8 @@ export default function CtiStartDiscoveryPage() {
   const discoverMutation = useMutation({
     mutationFn: (targets: { value: string; type: string; scanSchedule: string }[]) =>
       axiosInstance.post('/api/cti-targets/discover', { targets }),
-    onSuccess: (response) => {
-      const results = response.data;
-      const count = Array.isArray(results) ? results.length : 0;
+    onSuccess: (data) => {
+      const count = Array.isArray(data) ? data.length : 0;
       toast.success('Discovery started for ' + count + ' targets');
       navigate({ to: '/cti' });
     },
