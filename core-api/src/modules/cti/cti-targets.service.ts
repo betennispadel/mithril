@@ -129,15 +129,14 @@ export class CtiTargetsService {
 
     const totalAssets = assetStats.reduce((sum, s) => sum + parseInt(s.count, 10), 0);
 
-    // Count findings from vulnerabilities table linked to this target
+    // Count findings from cti_findings table
     const findingStats = await this.targetRepository.manager.query(
       `SELECT severity, COUNT(*) as count
-       FROM vulnerabilities
+       FROM cti_findings
        WHERE "workspaceId" = $1
-         AND tags @> ARRAY['pensieve']
-         AND ("matchedAt" ILIKE $2 OR description ILIKE $2)
+         AND "ctiTargetId" = $2
        GROUP BY severity`,
-      [workspaceId, `%${target.value}%`],
+      [workspaceId, id],
     );
 
     const totalFindings = findingStats.reduce(
@@ -174,22 +173,20 @@ export class CtiTargetsService {
 
     const [items, total]: [any[], any[]] = await Promise.all([
       this.targetRepository.manager.query(
-        `SELECT id, name, severity, description, tags, "matchedAt", "createdAt"
-         FROM vulnerabilities
+        `SELECT id, name, severity, description, tags, "matchedAt", category, source, "firstSeenAt" as "createdAt"
+         FROM cti_findings
          WHERE "workspaceId" = $1
-           AND tags @> ARRAY['pensieve']
-           AND ("matchedAt" ILIKE $2 OR description ILIKE $2)
-         ORDER BY "createdAt" DESC
+           AND "ctiTargetId" = $2
+         ORDER BY "firstSeenAt" DESC
          LIMIT $3 OFFSET $4`,
-        [workspaceId, `%${target.value}%`, pageSize, (page - 1) * pageSize],
+        [workspaceId, id, pageSize, (page - 1) * pageSize],
       ),
       this.targetRepository.manager.query(
         `SELECT COUNT(*) as count
-         FROM vulnerabilities
+         FROM cti_findings
          WHERE "workspaceId" = $1
-           AND tags @> ARRAY['pensieve']
-           AND ("matchedAt" ILIKE $2 OR description ILIKE $2)`,
-        [workspaceId, `%${target.value}%`],
+           AND "ctiTargetId" = $2`,
+        [workspaceId, id],
       ),
     ]);
 
@@ -261,11 +258,11 @@ export class CtiTargetsService {
       .groupBy('level')
       .getRawMany();
 
-    // Finding stats from vulnerabilities table
+    // Finding stats from cti_findings table
     const findingStats = await this.targetRepository.manager.query(
       `SELECT severity, COUNT(*) as count
-       FROM vulnerabilities
-       WHERE "workspaceId" = $1 AND tags @> ARRAY['pensieve']
+       FROM cti_findings
+       WHERE "workspaceId" = $1
        GROUP BY severity`,
       [workspaceId],
     );

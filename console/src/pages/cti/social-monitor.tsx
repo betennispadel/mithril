@@ -1,20 +1,20 @@
 import Page from '@/components/common/page';
 import { useWorkspaceSelector } from '@/hooks/useWorkspaceSelector';
-import { VulnerabilitiesView } from '@/pages/vulnerabilities/vulnerabilities-view';
+import { CtiFindingsView } from '@/pages/cti/cti-findings-view';
 import CreateWorkspace from '@/pages/workspaces/create-workspace';
 
-const SocialMonitorPage = () => {
+const CtiPage = () => {
   const { workspaces } = useWorkspaceSelector();
   const hasWorkspace = workspaces.length > 0;
   return (
     <Page
       title="Social Monitor"
-      description="Social media, news, Telegram and dark web social intelligence monitoring"
+      description="Twitter, Telegram and social media threat monitoring"
       permission="vulnerability.read"
     >
-      {hasWorkspace ? <VulnerabilitiesView /> : <CreateWorkspace />}
+      {hasWorkspace ? <CtiFindingsView category="social" /> : <CreateWorkspace />}
     </Page>
   );
 };
 
-export default SocialMonitorPage;
+export default CtiPage;

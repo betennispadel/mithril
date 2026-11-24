@@ -1,20 +1,20 @@
 import Page from '@/components/common/page';
 import { useWorkspaceSelector } from '@/hooks/useWorkspaceSelector';
-import { VulnerabilitiesView } from '@/pages/vulnerabilities/vulnerabilities-view';
+import { CtiFindingsView } from '@/pages/cti/cti-findings-view';
 import CreateWorkspace from '@/pages/workspaces/create-workspace';
 
-const CtifraudPage = () => {
+const CtiPage = () => {
   const { workspaces } = useWorkspaceSelector();
   const hasWorkspace = workspaces.length > 0;
   return (
     <Page
       title="Fraud Intelligence"
-      description="Stealer logs, credential dumps, and fraud-related threat intelligence"
+      description="Stealer logs, credential dumps and fraud activity monitoring"
       permission="vulnerability.read"
     >
-      {hasWorkspace ? <VulnerabilitiesView /> : <CreateWorkspace />}
+      {hasWorkspace ? <CtiFindingsView category="fraud" /> : <CreateWorkspace />}
     </Page>
   );
 };
 
-export default CtifraudPage;
+export default CtiPage;

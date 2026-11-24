@@ -11,6 +11,7 @@ import { CtiTargetsService } from './cti-targets.service';
 import { CtiAssetsController } from './cti-assets.controller';
 import { CtiAssetsService } from './cti-assets.service';
 import { CtiInvestigationsController } from './cti-investigations.controller';
+import { CtiFindingsController } from './cti-findings.controller';
 import { CtiInvestigationsService } from './cti-investigations.service';
 import { CtiDispatchService } from './cti-dispatch.service';
 import { ToolsModule } from '@/modules/tools/tools.module';
@@ -30,6 +31,7 @@ import { ToolsModule } from '@/modules/tools/tools.module';
     CtiTargetsController,
     CtiAssetsController,
     CtiInvestigationsController,
+    CtiFindingsController,
   ],
   providers: [
     CtiTargetsService,

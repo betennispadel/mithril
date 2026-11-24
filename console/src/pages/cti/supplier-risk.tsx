@@ -1,20 +1,20 @@
 import Page from '@/components/common/page';
 import { useWorkspaceSelector } from '@/hooks/useWorkspaceSelector';
-import { VulnerabilitiesView } from '@/pages/vulnerabilities/vulnerabilities-view';
+import { CtiFindingsView } from '@/pages/cti/cti-findings-view';
 import CreateWorkspace from '@/pages/workspaces/create-workspace';
 
-const SupplierRiskPage = () => {
+const CtiPage = () => {
   const { workspaces } = useWorkspaceSelector();
   const hasWorkspace = workspaces.length > 0;
   return (
     <Page
       title="Supplier Risk"
-      description="Third-party and supplier risk assessment using sanctions lists and OSINT"
+      description="Third-party risk assessment and supply chain monitoring"
       permission="vulnerability.read"
     >
-      {hasWorkspace ? <VulnerabilitiesView /> : <CreateWorkspace />}
+      {hasWorkspace ? <CtiFindingsView category="sanctions" /> : <CreateWorkspace />}
     </Page>
   );
 };
 
-export default SupplierRiskPage;
+export default CtiPage;
