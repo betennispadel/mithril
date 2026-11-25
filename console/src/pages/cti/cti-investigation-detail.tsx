@@ -58,12 +58,12 @@ export default function CtiInvestigationDetailPage() {
 
   const { data: investigation, isLoading } = useQuery({
     queryKey: ['cti-investigation', investigationId],
-    queryFn: () =>
-      axiosInstance
-        .get<InvestigationDetail>(`/api/cti-investigations/${investigationId}`)
-        ,
+    queryFn: async () => {
+      const res = await axiosInstance.get<InvestigationDetail>(`/api/cti-investigations/${investigationId}`);
+      return res as unknown as InvestigationDetail;
+    },
     refetchInterval: (query) =>
-      query.state.data?.status === 'running' ? 5000 : false,
+      (query.state.data as InvestigationDetail | undefined)?.status === 'running' ? 5000 : false,
   });
 
   if (isLoading || !investigation) {
@@ -158,7 +158,7 @@ export default function CtiInvestigationDetailPage() {
                 </tr>
               </thead>
               <tbody>
-                {entities.map((e) => (
+                {entities.map((e: InvestigationDetail["entities"][number]) => (
                   <tr key={e.id} className="border-b last:border-0">
                     <td className="px-4 py-2">
                       <Link
@@ -210,7 +210,7 @@ export default function CtiInvestigationDetailPage() {
           </div>
         ) : (
           <div className="space-y-2">
-            {findings.map((f) => (
+            {findings.map((f: InvestigationDetail["findings"][number]) => (
               <div
                 key={f.id}
                 className="flex items-start gap-3 rounded-lg border px-4 py-3"

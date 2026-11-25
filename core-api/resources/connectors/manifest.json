@@ -3014,7 +3014,8 @@
           "telegramChannels": {
             "type": "string",
             "title": "Telegram Channels",
-            "description": "Comma-separated channel list to monitor (e.g. @vxunderground,@ransomwatch,@exploitbroker)"
+            "description": "Select which Telegram channels to monitor. All defaults are active when empty.",
+            "ui:widget": "telegram-channels"
           },
           "openRouterApiKey": {
             "type": "string",

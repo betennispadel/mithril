@@ -85,6 +85,7 @@ import { Route as AuthedAistudioConversationsConversationIdRouteImport } from '.
 import { Route as AuthedAssetsServicesIdRouteImport } from './routes/_authed/assets/services/$id'
 import { Route as AuthedCtiAssetsIndexRouteImport } from './routes/_authed/cti/assets/index'
 import { Route as AuthedCtiAssetsAssetIdRouteImport } from './routes/_authed/cti/assets/$assetId'
+import { Route as AuthedCtiFindingsFindingIdRouteImport } from './routes/_authed/cti/findings/$findingId'
 import { Route as AuthedCtiInvestigationsIndexRouteImport } from './routes/_authed/cti/investigations/index'
 import { Route as AuthedCtiInvestigationsInvestigationIdRouteImport } from './routes/_authed/cti/investigations/$investigationId'
 import { Route as AuthedJobsRunsIdRouteImport } from './routes/_authed/jobs/runs/$id'
@@ -490,6 +491,12 @@ const AuthedCtiAssetsAssetIdRoute = AuthedCtiAssetsAssetIdRouteImport.update({
   path: '/cti/assets/$assetId',
   getParentRoute: () => AuthedRoute,
 } as any)
+const AuthedCtiFindingsFindingIdRoute =
+  AuthedCtiFindingsFindingIdRouteImport.update({
+    id: '/cti/findings/$findingId',
+    path: '/cti/findings/$findingId',
+    getParentRoute: () => AuthedRoute,
+  } as any)
 const AuthedCtiInvestigationsIndexRoute =
   AuthedCtiInvestigationsIndexRouteImport.update({
     id: '/cti/investigations/',
@@ -623,6 +630,7 @@ export interface FileRoutesByFullPath {
   '/aistudio/conversations/$conversationId': typeof AuthedAistudioConversationsConversationIdRoute
   '/assets/services/$id': typeof AuthedAssetsServicesIdRoute
   '/cti/assets/$assetId': typeof AuthedCtiAssetsAssetIdRoute
+  '/cti/findings/$findingId': typeof AuthedCtiFindingsFindingIdRoute
   '/cti/investigations/$investigationId': typeof AuthedCtiInvestigationsInvestigationIdRoute
   '/jobs/runs/$id': typeof AuthedJobsRunsIdRoute
   '/projects/$id/$tab': typeof AuthedProjectsIdTabRoute
@@ -709,6 +717,7 @@ export interface FileRoutesByTo {
   '/aistudio/conversations/$conversationId': typeof AuthedAistudioConversationsConversationIdRoute
   '/assets/services/$id': typeof AuthedAssetsServicesIdRoute
   '/cti/assets/$assetId': typeof AuthedCtiAssetsAssetIdRoute
+  '/cti/findings/$findingId': typeof AuthedCtiFindingsFindingIdRoute
   '/cti/investigations/$investigationId': typeof AuthedCtiInvestigationsInvestigationIdRoute
   '/jobs/runs/$id': typeof AuthedJobsRunsIdRoute
   '/projects/$id/$tab': typeof AuthedProjectsIdTabRoute
@@ -799,6 +808,7 @@ export interface FileRoutesById {
   '/_authed/aistudio/conversations/$conversationId': typeof AuthedAistudioConversationsConversationIdRoute
   '/_authed/assets/services/$id': typeof AuthedAssetsServicesIdRoute
   '/_authed/cti/assets/$assetId': typeof AuthedCtiAssetsAssetIdRoute
+  '/_authed/cti/findings/$findingId': typeof AuthedCtiFindingsFindingIdRoute
   '/_authed/cti/investigations/$investigationId': typeof AuthedCtiInvestigationsInvestigationIdRoute
   '/_authed/jobs/runs/$id': typeof AuthedJobsRunsIdRoute
   '/_authed/projects/$id/$tab': typeof AuthedProjectsIdTabRoute
@@ -889,6 +899,7 @@ export interface FileRouteTypes {
     | '/aistudio/conversations/$conversationId'
     | '/assets/services/$id'
     | '/cti/assets/$assetId'
+    | '/cti/findings/$findingId'
     | '/cti/investigations/$investigationId'
     | '/jobs/runs/$id'
     | '/projects/$id/$tab'
@@ -975,6 +986,7 @@ export interface FileRouteTypes {
     | '/aistudio/conversations/$conversationId'
     | '/assets/services/$id'
     | '/cti/assets/$assetId'
+    | '/cti/findings/$findingId'
     | '/cti/investigations/$investigationId'
     | '/jobs/runs/$id'
     | '/projects/$id/$tab'
@@ -1064,6 +1076,7 @@ export interface FileRouteTypes {
     | '/_authed/aistudio/conversations/$conversationId'
     | '/_authed/assets/services/$id'
     | '/_authed/cti/assets/$assetId'
+    | '/_authed/cti/findings/$findingId'
     | '/_authed/cti/investigations/$investigationId'
     | '/_authed/jobs/runs/$id'
     | '/_authed/projects/$id/$tab'
@@ -1625,6 +1638,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthedCtiAssetsAssetIdRouteImport
       parentRoute: typeof AuthedRoute
     }
+    '/_authed/cti/findings/$findingId': {
+      id: '/_authed/cti/findings/$findingId'
+      path: '/cti/findings/$findingId'
+      fullPath: '/cti/findings/$findingId'
+      preLoaderRoute: typeof AuthedCtiFindingsFindingIdRouteImport
+      parentRoute: typeof AuthedRoute
+    }
     '/_authed/cti/investigations/': {
       id: '/_authed/cti/investigations/'
       path: '/cti/investigations'
@@ -1760,6 +1780,7 @@ interface AuthedRouteChildren {
   AuthedAistudioConversationsConversationIdRoute: typeof AuthedAistudioConversationsConversationIdRoute
   AuthedAssetsServicesIdRoute: typeof AuthedAssetsServicesIdRoute
   AuthedCtiAssetsAssetIdRoute: typeof AuthedCtiAssetsAssetIdRoute
+  AuthedCtiFindingsFindingIdRoute: typeof AuthedCtiFindingsFindingIdRoute
   AuthedCtiInvestigationsInvestigationIdRoute: typeof AuthedCtiInvestigationsInvestigationIdRoute
   AuthedJobsRunsIdRoute: typeof AuthedJobsRunsIdRoute
   AuthedProjectsIdTabRoute: typeof AuthedProjectsIdTabRoute
@@ -1830,6 +1851,7 @@ const AuthedRouteChildren: AuthedRouteChildren = {
     AuthedAistudioConversationsConversationIdRoute,
   AuthedAssetsServicesIdRoute: AuthedAssetsServicesIdRoute,
   AuthedCtiAssetsAssetIdRoute: AuthedCtiAssetsAssetIdRoute,
+  AuthedCtiFindingsFindingIdRoute: AuthedCtiFindingsFindingIdRoute,
   AuthedCtiInvestigationsInvestigationIdRoute:
     AuthedCtiInvestigationsInvestigationIdRoute,
   AuthedJobsRunsIdRoute: AuthedJobsRunsIdRoute,

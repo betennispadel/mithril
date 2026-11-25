@@ -23,6 +23,7 @@ import {
 import { toast } from 'sonner';
 import { ArrayField } from './fields/ArrayField';
 import { EnumMultiSelect } from './fields/EnumMultiSelect';
+import { TelegramChannelsField } from './fields/TelegramChannelsField';
 
 export interface SchemaProperty {
   type?: string;
@@ -250,6 +251,15 @@ function renderField(
         id={key}
         checked={value === true}
         onCheckedChange={(checked) => onChange(checked)}
+      />
+    );
+  }
+
+  if (prop['ui:widget'] === 'telegram-channels') {
+    return (
+      <TelegramChannelsField
+        value={value}
+        onChange={onChange}
       />
     );
   }

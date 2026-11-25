@@ -130,10 +130,10 @@ export default function CtiDashboardPage() {
 
   const { data, isLoading } = useQuery({
     queryKey: ['cti-dashboard'],
-    queryFn: () =>
-      axiosInstance
-        .get<DashboardData>('/api/cti-targets/dashboard')
-        ,
+    queryFn: async () => {
+      const res = await axiosInstance.get<DashboardData>('/api/cti-targets/dashboard');
+      return res as unknown as DashboardData;
+    },
     enabled: hasWorkspace,
     refetchInterval: 30000,
   });

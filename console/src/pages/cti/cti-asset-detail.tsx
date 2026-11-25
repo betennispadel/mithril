@@ -55,18 +55,18 @@ export default function CtiAssetDetailPage() {
 
   const { data: asset, isLoading } = useQuery({
     queryKey: ['cti-asset', assetId],
-    queryFn: () =>
-      axiosInstance
-        .get<CtiAssetDetail>(`/api/cti-assets/${assetId}`)
-        ,
+    queryFn: async () => {
+      const res = await axiosInstance.get<CtiAssetDetail>(`/api/cti-assets/${assetId}`);
+      return res as unknown as CtiAssetDetail;
+    },
   });
 
   const { data: relations } = useQuery({
     queryKey: ['cti-asset-relations', assetId],
-    queryFn: () =>
-      axiosInstance
-        .get<CtiRelation[]>(`/api/cti-assets/${assetId}/relations`)
-        ,
+    queryFn: async () => {
+      const res = await axiosInstance.get<CtiRelation[]>(`/api/cti-assets/${assetId}/relations`);
+      return res as unknown as CtiRelation[];
+    },
     enabled: !!asset,
   });
 

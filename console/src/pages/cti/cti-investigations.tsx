@@ -30,10 +30,10 @@ export default function CtiInvestigationsPage() {
 
   const { data, isLoading } = useQuery({
     queryKey: ['cti-investigations'],
-    queryFn: () =>
-      axiosInstance
-        .get<{ items: CtiInvestigation[]; total: number }>('/api/cti-investigations')
-        ,
+    queryFn: async () => {
+      const res = await axiosInstance.get<{ items: CtiInvestigation[]; total: number }>('/api/cti-investigations');
+      return res as unknown as { items: CtiInvestigation[]; total: number };
+    },
     enabled: hasWorkspace,
   });
 
@@ -78,7 +78,7 @@ export default function CtiInvestigationsPage() {
               </tr>
             </thead>
             <tbody>
-              {investigations.map((inv) => (
+              {investigations.map((inv: CtiInvestigation) => (
                 <tr key={inv.id} className="border-b last:border-0">
                   <td className="px-4 py-3 font-medium">
                     <Link

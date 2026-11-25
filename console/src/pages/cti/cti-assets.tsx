@@ -33,10 +33,10 @@ export default function CtiAssetsPage() {
 
   const { data, isLoading } = useQuery({
     queryKey: ['cti-assets'],
-    queryFn: () =>
-      axiosInstance
-        .get<{ items: CtiAsset[]; total: number }>('/api/cti-assets')
-        ,
+    queryFn: async () => {
+      const res = await axiosInstance.get<{ items: CtiAsset[]; total: number }>('/api/cti-assets');
+      return res as unknown as { items: CtiAsset[]; total: number };
+    },
     enabled: hasWorkspace,
   });
 

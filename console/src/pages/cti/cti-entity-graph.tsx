@@ -153,10 +153,10 @@ export default function CtiEntityGraphPage() {
 
   const { data, isLoading } = useQuery({
     queryKey: ['cti-graph'],
-    queryFn: () =>
-      axiosInstance
-        .get<{ nodes: GraphNode[]; edges: GraphEdge[] }>('/api/cti-assets/graph')
-        ,
+    queryFn: async () => {
+      const res = await axiosInstance.get<{ nodes: GraphNode[]; edges: GraphEdge[] }>('/api/cti-assets/graph');
+      return res as unknown as { nodes: GraphNode[]; edges: GraphEdge[] };
+    },
     enabled: hasWorkspace,
   });
 
