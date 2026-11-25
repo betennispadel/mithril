@@ -48,10 +48,10 @@ export default function CtiTargetsPage() {
 
   const { data, isLoading } = useQuery({
     queryKey: ['cti-targets'],
-    queryFn: () =>
-      axiosInstance
-        .get<{ items: CtiTarget[]; total: number }>('/api/cti-targets')
-        ,
+    queryFn: async () => {
+      const res = await axiosInstance.get<{ items: CtiTarget[]; total: number }>('/api/cti-targets');
+      return res as unknown as { items: CtiTarget[]; total: number };
+    },
     enabled: hasWorkspace,
   });
 

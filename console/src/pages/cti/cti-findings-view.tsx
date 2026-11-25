@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import { useNavigate } from '@tanstack/react-router';
 import { axiosInstance } from '@/services/apis/axios-client';
 import {
   Table,
@@ -12,13 +13,6 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
 import { Search, ChevronLeft, ChevronRight, AlertTriangle, Shield, Info, AlertCircle, AlertOctagon } from 'lucide-react';
 
 interface CtiFinding {
@@ -66,6 +60,7 @@ export function CtiFindingsView({ category }: { category?: string }) {
   const [search, setSearch] = useState('');
   const [severity, setSeverity] = useState<string>('');
   const pageSize = 20;
+  const navigate = useNavigate();
 
   const { data, isLoading } = useQuery({
     queryKey: ['cti-findings', category, page, search, severity],
@@ -79,7 +74,7 @@ export function CtiFindingsView({ category }: { category?: string }) {
       const res = await axiosInstance.get<CtiFindingsResponse>(
         `/api/cti-findings?${params.toString()}`,
       );
-      return res.data;
+      return res as unknown as CtiFindingsResponse;
     },
   });
 
@@ -87,6 +82,10 @@ export function CtiFindingsView({ category }: { category?: string }) {
   const total = data?.total ?? 0;
   const totalPages = data?.totalPages ?? 1;
   const summary = data?.severitySummary ?? [];
+
+  const handleRowClick = (findingId: string) => {
+    navigate({ to: '/cti/findings/$findingId', params: { findingId } });
+  };
 
   return (
     <div className="space-y-4">
@@ -157,7 +156,11 @@ export function CtiFindingsView({ category }: { category?: string }) {
               </TableRow>
             ) : (
               findings.map((f) => (
-                <TableRow key={f.id} className="border-zinc-800 hover:bg-zinc-900/50">
+                <TableRow
+                  key={f.id}
+                  className="border-zinc-800 hover:bg-zinc-900/50 cursor-pointer"
+                  onClick={() => handleRowClick(f.id)}
+                >
                   <TableCell>
                     <Badge
                       variant="outline"

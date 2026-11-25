@@ -103,31 +103,27 @@ export default function CtiTargetDetailPage() {
 
   const { data: target, isLoading } = useQuery({
     queryKey: ['cti-target', targetId],
-    queryFn: () =>
-      axiosInstance
-        .get<CtiTargetDetail>(`/api/cti-targets/${targetId}`)
-        ,
+    queryFn: async () => {
+      const res = await axiosInstance.get<CtiTargetDetail>(`/api/cti-targets/${targetId}`);
+      return res as unknown as CtiTargetDetail;
+    },
   });
 
   const { data: findingsData } = useQuery({
     queryKey: ['cti-target-findings', targetId],
-    queryFn: () =>
-      axiosInstance
-        .get<{ items: Finding[]; total: number }>(
-          `/api/cti-targets/${targetId}/findings`,
-        )
-        ,
+    queryFn: async () => {
+      const res = await axiosInstance.get<{ items: Finding[]; total: number }>(`/api/cti-targets/${targetId}/findings`);
+      return res as unknown as { items: Finding[]; total: number };
+    },
     enabled: !!target,
   });
 
   const { data: assetsData } = useQuery({
     queryKey: ['cti-target-assets', targetId],
-    queryFn: () =>
-      axiosInstance
-        .get<{ items: CtiAsset[]; total: number }>(
-          `/api/cti-assets?ctiTargetId=${targetId}`,
-        )
-        ,
+    queryFn: async () => {
+      const res = await axiosInstance.get<{ items: CtiAsset[]; total: number }>(`/api/cti-assets?ctiTargetId=${targetId}`);
+      return res as unknown as { items: CtiAsset[]; total: number };
+    },
     enabled: !!target,
   });
 
