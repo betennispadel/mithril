@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-DRRqQ-cy.js";import{B as t}from"./index-vRHwZv8U.js";import{t as n}from"./llm-connect-LpjK3Dbx.js";var r=e();function i(){return(0,r.jsx)(t,{title:`Providers`,className:`w-full md:w-2/3 lg:w-1/2 mx-auto`,permission:`agent.write`,children:(0,r.jsx)(n,{})})}var a=()=>(0,r.jsx)(i,{});export{a as component};

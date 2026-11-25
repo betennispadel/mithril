@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-DRRqQ-cy.js";import{A as t}from"./queries-CgZ9VReV.js";import{t as n}from"./agents-landing-hzuKSEPY.js";var r=e(),i=()=>(0,r.jsx)(n,{initialAgentMode:t.agent});export{i as component};

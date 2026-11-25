@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-DRRqQ-cy.js";import{r as t,t as n}from"./list-assets-bepmaMem.js";import{B as r}from"./index-vRHwZv8U.js";var i=e(),a=()=>(0,i.jsx)(r,{title:`Assets`,description:`Services, hosts and other assets discovered from your targets`,permission:`asset.read`,children:(0,i.jsx)(t,{children:(0,i.jsx)(n,{})})}),o=()=>(0,i.jsx)(a,{});export{o as component};

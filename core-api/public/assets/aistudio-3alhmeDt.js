@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-DRRqQ-cy.js";import{A as t}from"./queries-CgZ9VReV.js";import{V as n}from"./index-vRHwZv8U.js";import{t as r}from"./agents-landing-hzuKSEPY.js";var i=e(),a=function(){let{mode:e}=n.useSearch();return(0,i.jsx)(r,{initialAgentMode:e===`agent`?t.agent:t.ask})};export{a as component};

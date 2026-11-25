@@ -1,0 +1,1 @@
+function e(e){let t=Number(e??0);if(!Number.isFinite(t)||t<=0)return`—`;let n=[`B`,`KiB`,`MiB`,`GiB`,`TiB`],r=Math.min(Math.floor(Math.log(t)/Math.log(1024)),n.length-1);return`${(t/1024**r).toFixed(r===0?0:1)} ${n[r]}`}export{e as t};

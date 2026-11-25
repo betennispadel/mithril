@@ -1,0 +1,1 @@
+var e=e=>{let t=new URL(`/login`,window.location.origin);return t.searchParams.set(`verified`,`1`),e&&t.searchParams.set(`redirect`,e),t.toString()};export{e as t};

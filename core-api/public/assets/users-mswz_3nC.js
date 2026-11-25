@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-DRRqQ-cy.js";import{B as t}from"./index-vRHwZv8U.js";import{t as n}from"./list-users-P9CUNMNY.js";var r=e();function i(){return(0,r.jsx)(t,{title:`Users`,description:`Manage user accounts across the platform`,children:(0,r.jsx)(n,{})})}var a=i;export{a as component};

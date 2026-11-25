@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-DRRqQ-cy.js";import{go as t}from"./queries-CgZ9VReV.js";var n=e();function r({children:e,className:r}){return(0,n.jsx)(`div`,{className:t(`light:bg-black dark:bg-white rounded-lg p-[3px]`,r),children:e})}export{r as t};

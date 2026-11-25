@@ -1,0 +1,1 @@
+import{t as e}from"./createState-BTsGGZFq.js";var t=e(`connectWorker`,{isOpen:!1,networkId:void 0,onJoined:void 0},{openDialog:(e,t,n)=>({...e,isOpen:!0,networkId:typeof t==`string`?t:void 0,onJoined:typeof n==`function`?n:void 0}),closeDialog:e=>({...e,isOpen:!1,networkId:void 0,onJoined:void 0})});export{t};
