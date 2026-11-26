@@ -1,0 +1,1 @@
+import{t as e}from"./createState-BTsGGZFq.js";var t=e(`agent-settings-dialog`,{isOpen:!1,tab:`provider`},{open:(e,t)=>({isOpen:!0,tab:typeof t==`string`?t:`provider`}),close:e=>({...e,isOpen:!1})});export{t};

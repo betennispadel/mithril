@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/logo.png" />
+    <link rel="apple-touch-icon" href="/icon-192.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta
+      name="theme-color"
+      content="#fafcfe"
+      media="(prefers-color-scheme: light)"
+    />
+    <meta
+      name="theme-color"
+      content="#152a4f"
+      media="(prefers-color-scheme: dark)"
+    />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="OASM" />
+    <title>OASM</title>
+    <script>
+      // The saved app theme (ThemeProvider's 'theme' key) before first paint,
+      // so the boot splash shows the app's background, not the OS scheme's.
+      (function () {
+        try {
+          var theme = localStorage.getItem('theme');
+          var dark =
+            theme === 'dark' ||
+            (theme !== 'light' &&
+              window.matchMedia('(prefers-color-scheme: dark)').matches);
+          document.documentElement.classList.add(dark ? 'dark' : 'light');
+        } catch (e) {
+          // storage blocked: the splash stays light until the app starts
+        }
+      })();
+    </script>
+    <style>#boot-splash{z-index:9999;background:#fafcfe;flex-direction:column;justify-content:center;align-items:center;gap:16px;transition:opacity .25s;display:flex;position:fixed;inset:0}.boot-logo{border-radius:8px;width:48px;max-width:none;height:48px;display:block}.boot-spinner{box-sizing:border-box;border:2px solid #d4d4d8;border-top-color:#3b5bdb;border-radius:50%;width:28px;height:28px;animation:.8s linear infinite boot-spin}#boot-splash.hide{opacity:0;pointer-events:none}@keyframes boot-spin{to{transform:rotate(360deg)}}.dark #boot-splash{background:#070a12}.dark .boot-spinner{border-color:#3b5bdb #27272a #27272a}</style>
+    <script type="module" crossorigin src="/assets/index-MC72a_mu.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/rolldown-runtime-B0Z9INg1.js">
+    <link rel="modulepreload" crossorigin href="/assets/jsx-runtime-DRRqQ-cy.js">
+    <link rel="modulepreload" crossorigin href="/assets/dist-DXLr02yy.js">
+    <link rel="modulepreload" crossorigin href="/assets/bundle-mjs-DS0BzJnq.js">
+    <link rel="modulepreload" crossorigin href="/assets/queries-CgZ9VReV.js">
+    <link rel="modulepreload" crossorigin href="/assets/useRouter-CURQPJ5g.js">
+    <link rel="modulepreload" crossorigin href="/assets/useStore-Di6Ssm3D.js">
+    <link rel="modulepreload" crossorigin href="/assets/link-Dh0ZSy_K.js">
+    <link rel="modulepreload" crossorigin href="/assets/root-CDpNo7ef.js">
+    <link rel="modulepreload" crossorigin href="/assets/redirect-BWHIdfef.js">
+    <link rel="modulepreload" crossorigin href="/assets/useMatch-CcKq1ihT.js">
+    <link rel="modulepreload" crossorigin href="/assets/useParams-BvM0MoOS.js">
+    <link rel="modulepreload" crossorigin href="/assets/useSearch-KNMZ0rz9.js">
+    <link rel="modulepreload" crossorigin href="/assets/button-variants-vF2JFX2P.js">
+    <link rel="modulepreload" crossorigin href="/assets/route-BTFLHJwk.js">
+    <link rel="modulepreload" crossorigin href="/assets/dist-BuF1AAQH.js">
+    <link rel="modulepreload" crossorigin href="/assets/dist-BYjb2JS0.js">
+    <link rel="modulepreload" crossorigin href="/assets/dist-DC1rGUho.js">
+    <link rel="modulepreload" crossorigin href="/assets/dist-CD8s9ADx.js">
+    <link rel="modulepreload" crossorigin href="/assets/dist-DkqLb5BO.js">
+    <link rel="modulepreload" crossorigin href="/assets/dist-BU1rCo4W.js">
+    <link rel="modulepreload" crossorigin href="/assets/dist-BDwt1Gww.js">
+    <link rel="modulepreload" crossorigin href="/assets/dist-B3mqIIcD.js">
+    <link rel="modulepreload" crossorigin href="/assets/authClient-CaejKuMA.js">
+    <link rel="modulepreload" crossorigin href="/assets/axios-Oz61phfl.js">
+    <link rel="modulepreload" crossorigin href="/assets/useWorkspaceSelector-BdeheoCK.js">
+    <link rel="modulepreload" crossorigin href="/assets/usePermission-BlstIqzI.js">
+    <link rel="modulepreload" crossorigin href="/assets/button-BDXvpBKg.js">
+    <link rel="modulepreload" crossorigin href="/assets/es2015-DGrYG_2p.js">
+    <link rel="modulepreload" crossorigin href="/assets/createLucideIcon-Dqbkz1MX.js">
+    <link rel="modulepreload" crossorigin href="/assets/lib-TLK8UIGX.js">
+    <link rel="modulepreload" crossorigin href="/assets/chevron-down-C1bz4MDo.js">
+    <link rel="modulepreload" crossorigin href="/assets/loader-circle-CxruNl_O.js">
+    <link rel="modulepreload" crossorigin href="/assets/pencil-CwhV3jjO.js">
+    <link rel="modulepreload" crossorigin href="/assets/x-CmdCxDfr.js">
+    <link rel="modulepreload" crossorigin href="/assets/activity-ButVPVkG.js">
+    <link rel="modulepreload" crossorigin href="/assets/message-square-qDWVcPi5.js">
+    <link rel="modulepreload" crossorigin href="/assets/trash-2-CfTbBi_0.js">
+    <link rel="modulepreload" crossorigin href="/assets/dialog-DQRtb2hU.js">
+    <link rel="modulepreload" crossorigin href="/assets/input-BGazlkQg.js">
+    <link rel="modulepreload" crossorigin href="/assets/confirm-dialog-COtS9ln5.js">
+    <link rel="modulepreload" crossorigin href="/assets/avatar-DYkzAO8z.js">
+    <link rel="modulepreload" crossorigin href="/assets/textarea-DF-n0tM9.js">
+    <link rel="modulepreload" crossorigin href="/assets/skeleton-DRvUwgG_.js">
+    <link rel="modulepreload" crossorigin href="/assets/format-DBJI1oEr.js">
+    <link rel="modulepreload" crossorigin href="/assets/getRoundingMethod-DH4sGo3m.js">
+    <link rel="modulepreload" crossorigin href="/assets/endOfMonth-4m48q6K1.js">
+    <link rel="modulepreload" crossorigin href="/assets/formatDistanceToNow-B4is55Cl.js">
+    <link rel="modulepreload" crossorigin href="/assets/comment-thread-j6KO6KtH.js">
+    <link rel="modulepreload" crossorigin href="/assets/access-denied-CHGEQjaa.js">
+    <link rel="modulepreload" crossorigin href="/assets/useDocumentTitle-DoYnWKRq.js">
+    <link rel="modulepreload" crossorigin href="/assets/check-BJ5BY77N.js">
+    <link rel="modulepreload" crossorigin href="/assets/checkbox-oiO3znX1.js">
+    <link rel="modulepreload" crossorigin href="/assets/dist-Cm7IFGbi.js">
+    <link rel="modulepreload" crossorigin href="/assets/chevron-up-CpU1jwIy.js">
+    <link rel="modulepreload" crossorigin href="/assets/dist-D8Wfxh48.js">
+    <link rel="modulepreload" crossorigin href="/assets/select-BYOJGnLs.js">
+    <link rel="modulepreload" crossorigin href="/assets/table-Bzz81Pep.js">
+    <link rel="modulepreload" crossorigin href="/assets/use-debounce-C1aWpSx-.js">
+    <link rel="modulepreload" crossorigin href="/assets/chevron-left-C9XJT3K4.js">
+    <link rel="modulepreload" crossorigin href="/assets/chevron-right-Bk98d-KR.js">
+    <link rel="modulepreload" crossorigin href="/assets/ellipsis-CvCP3eCA.js">
+    <link rel="modulepreload" crossorigin href="/assets/pagination-C4KEpw6d.js">
+    <link rel="modulepreload" crossorigin href="/assets/dist-CBDPh6ss.js">
+    <link rel="modulepreload" crossorigin href="/assets/progress-CQjeC-VS.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-DEUiYmiT.css">
+  <link rel="manifest" href="/manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="/registerSW.js"></script></head>
+  <body>
+    <div id="boot-splash">
+      <img src="/logo.png" alt="logo" width="48" height="48" class="boot-logo" />
+      <span class="boot-spinner" aria-hidden="true"></span>
+    </div>
+    <div id="root"></div>
+  </body>
+</html>
