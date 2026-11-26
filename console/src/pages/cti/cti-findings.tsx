@@ -5,18 +5,17 @@ import CreateWorkspace from '@/pages/workspaces/create-workspace';
 import { useSearch, useNavigate } from '@tanstack/react-router';
 import { cn } from '@/lib/utils';
 import {
-  Eye, Lock, Shield, Radio, Fingerprint, AlertTriangle, ScanSearch, LayoutList
+  Eye, Lock, Shield, Radio, Fingerprint, AlertTriangle, LayoutList
 } from 'lucide-react';
 
 const CATEGORIES = [
-  { key: '',              label: 'All',      icon: LayoutList,    description: 'All threat intelligence findings' },
-  { key: 'darkweb',      label: 'Dark Web',  icon: Eye,           description: 'Dark web forums, ransomware leak sites and underground markets' },
-  { key: 'data-leak',    label: 'Data Leaks', icon: Lock,         description: 'Leaked credentials, exposed databases and breached data' },
-  { key: 'brand',        label: 'Brand',     icon: Shield,        description: 'Brand impersonation, typosquatting and trademark abuse' },
-  { key: 'ioc',          label: 'IOC Feed',  icon: Radio,         description: 'Indicators of compromise from threat intelligence feeds' },
-  { key: 'fraud',        label: 'Fraud',     icon: Fingerprint,   description: 'Fraud schemes, carding and financial crime intelligence' },
-  { key: 'sanctions',    label: 'Sanctions', icon: AlertTriangle, description: 'Sanctioned entities, OFAC and regulatory watchlists' },
-  { key: 'phishing',     label: 'Phishing',  icon: ScanSearch,    description: 'Phishing domains, typosquats and domain impersonation' },
+  { key: '',                 label: 'All',        icon: LayoutList,    description: 'All threat intelligence findings' },
+  { key: 'darkweb',          label: 'Dark Web',   icon: Eye,           description: 'Dark web forums, ransomware leak sites and underground markets' },
+  { key: 'data-leak',        label: 'Data Leaks', icon: Lock,          description: 'Leaked credentials, exposed databases and breached data' },
+  { key: 'brand-protection', label: 'Brand',      icon: Shield,        description: 'Brand impersonation, typosquatting and phishing domains' },
+  { key: 'ioc',              label: 'IOC Feed',   icon: Radio,         description: 'Indicators of compromise from threat intelligence feeds' },
+  { key: 'fraud',            label: 'Fraud',      icon: Fingerprint,   description: 'Fraud schemes, carding and financial crime intelligence' },
+  { key: 'sanctions',        label: 'Sanctions',  icon: AlertTriangle, description: 'Sanctioned entities, OFAC and regulatory watchlists' },
 ];
 
 export default function CtiFindingsPage() {
