@@ -14,7 +14,7 @@ import { Logger } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Job as BullJob, UnrecoverableError } from 'bullmq';
-import { Repository } from 'typeorm';
+import { DataSource, Repository } from 'typeorm';
 import { DataPayloadResult } from '../dto/jobs-registry.dto';
 import { Job } from '../entities/job.entity';
 import { JOB_RESULT_SYNCED_EVENT, type JobResultSyncedEvent } from '../job.events';
@@ -141,6 +141,7 @@ export class JobResultProcessor extends WorkerHost {
     @InjectRepository(Job)
     private readonly jobRepo: Repository<Job>,
     private readonly events: EventEmitter2,
+    private readonly dataSource: DataSource,
   ) {
     super();
   }
@@ -382,6 +383,18 @@ export class JobResultProcessor extends WorkerHost {
           job,
           e instanceof Error ? e : new Error(String(e)),
         );
+
+        // Update CTI target scan status on permanent failure
+        if (job.inputs?.['ctiTargetType']) {
+          try {
+            await this.dataSource
+              .createQueryBuilder()
+              .update('cti_targets')
+              .set({ scanStatus: 'failed' })
+              .where('"currentJobId" = :jobId', { jobId: job.id })
+              .execute();
+          } catch {}
+        }
 
         // A permanently failed job is a terminal outcome for its step: let the
         // engine skip the dependents and finish the run (previously a failed

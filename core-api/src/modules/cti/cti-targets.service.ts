@@ -1,7 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { In, LessThan, Not, Repository } from 'typeorm';
 import { EventEmitter2 } from '@nestjs/event-emitter';
+import { Cron, CronExpression } from '@nestjs/schedule';
 import { CtiTarget } from './entities/cti-target.entity';
 import { CtiAsset } from './entities/cti-asset.entity';
 import { CreateCtiTargetDto, CreateCtiTargetsBulkDto } from './dto/create-cti-target.dto';
@@ -315,6 +316,56 @@ export class CtiTargetsService {
     };
   }
 
+  private readonly logger = new Logger(CtiTargetsService.name);
+
+  /**
+   * Cron job: check for CTI targets whose scanSchedule is due and emit re-scan events.
+   * Runs every 5 minutes.
+   */
+  @Cron(CronExpression.EVERY_5_MINUTES)
+  async handleScheduledScans(): Promise<void> {
+    const scheduleMap: Record<string, number> = {
+      'every_6h': 6 * 60,
+      'every_12h': 12 * 60,
+      'daily': 24 * 60,
+      'weekly': 7 * 24 * 60,
+      'monthly': 30 * 24 * 60,
+    };
+
+    const targets = await this.targetRepository.find({
+      where: {
+        isEnabled: true,
+        scanStatus: Not(In(['pending', 'scanning'])),
+      },
+    });
+
+    const now = Date.now();
+    let triggered = 0;
+
+    for (const target of targets) {
+      const schedule = target.scanSchedule;
+      if (!schedule || schedule === 'disabled') continue;
+
+      const intervalMinutes = scheduleMap[schedule];
+      if (!intervalMinutes) continue;
+
+      const lastScan = target.lastScanAt ? target.lastScanAt.getTime() : 0;
+      const elapsed = (now - lastScan) / (1000 * 60);
+
+      if (elapsed >= intervalMinutes) {
+        this.eventEmitter.emit('cti-target.re-scan', {
+          target,
+          workspaceId: target.workspaceId,
+        });
+        triggered++;
+      }
+    }
+
+    if (triggered > 0) {
+      this.logger.log(`Scheduled scan: triggered ${triggered} CTI target re-scans`);
+    }
+  }
+
   /**
    * Called by the data-adapter or job completion handler after a Pensieve scan
    * finishes. Publishes events to the event bridge so both in-app notifications
@@ -327,8 +378,9 @@ export class CtiTargetsService {
   ): Promise<void> {
     const target = await this.findOne(targetId, workspaceId);
 
-    // Update lastScanAt
+    // Update lastScanAt and reset scan status
     target.lastScanAt = new Date();
+    target.scanStatus = 'completed';
     await this.targetRepository.save(target);
 
     // Publish scan completed event

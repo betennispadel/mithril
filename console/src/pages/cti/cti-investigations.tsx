@@ -1,8 +1,9 @@
 import Page from '@/components/common/page';
 import { Badge } from '@/components/ui/badge';
-import { useQuery } from '@tanstack/react-query';
+import { useState } from 'react';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Link } from '@tanstack/react-router';
-import { Search } from 'lucide-react';
+import { Search, Plus } from 'lucide-react';
 import { axiosInstance } from '@/services/apis/axios-client';
 import { useWorkspaceSelector } from '@/hooks/useWorkspaceSelector';
 import CreateWorkspace from '@/pages/workspaces/create-workspace';
@@ -38,10 +39,57 @@ export default function CtiInvestigationsPage() {
   });
 
   if (!hasWorkspace) {
-    return (
-      <Page title="CTI Investigations" permission="vulnerability.read">
+    const [showCreate, setShowCreate] = useState(false);
+  const [newQuery, setNewQuery] = useState('');
+  const queryClient = useQueryClient();
+
+  const createMutation = useMutation({
+    mutationFn: async (query: string) => {
+      const res = await axiosInstance.post('/api/cti-investigations', { query });
+      return res as unknown as any;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['cti-investigations'] });
+      setShowCreate(false);
+      setNewQuery('');
+    },
+  });
+
+  return (
+      <Page title="CTI Investigations" permission="vulnerability.read"
+      action={<Button size="sm" onClick={() => setShowCreate(true)}><Plus className="mr-1.5 size-4" />New Investigation</Button>}>
         <CreateWorkspace />
-      </Page>
+        <Dialog open={showCreate} onOpenChange={setShowCreate}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>New Investigation</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4 py-2">
+            <div>
+              <Label>Query</Label>
+              <Input
+                placeholder="e.g., lockbit ransomware, company.com"
+                value={newQuery}
+                onChange={(e) => setNewQuery(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && newQuery.trim() && createMutation.mutate(newQuery.trim())}
+              />
+              <p className="mt-1 text-xs text-muted-foreground">
+                Enter a search query for deep dark web investigation. VoidAccess will search across Tor, threat feeds, and OSINT sources.
+              </p>
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setShowCreate(false)}>Cancel</Button>
+            <Button
+              onClick={() => newQuery.trim() && createMutation.mutate(newQuery.trim())}
+              disabled={!newQuery.trim() || createMutation.isPending}
+            >
+              {createMutation.isPending ? 'Starting...' : 'Start Investigation'}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </Page>
     );
   }
 

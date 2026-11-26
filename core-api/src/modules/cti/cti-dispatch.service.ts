@@ -120,6 +120,13 @@ export class CtiDispatchService {
     } as any);
     await jobRepo.save(job);
 
+    // Update target scan status
+    const targetRepo = this.dataSource.getRepository(CtiTarget);
+    await targetRepo.update(target.id, {
+      scanStatus: 'pending',
+      currentJobId: jobId,
+    });
+
     this.logger.log(
       'Dispatched CTI job ' + jobId + ' for ' + target.type + ':' + target.value,
     );

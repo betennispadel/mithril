@@ -190,4 +190,21 @@ export const NOTIFICATION_RULES: Partial<Record<EventName, NotificationRule[]>> 
         },
       },
     ],
+    'cti.monitor.triggered': [
+      {
+        type: NotificationType.CTI_THREAT_DETECTED,
+        scope: NotificationScope.GROUP,
+        audience: 'workspace-members',
+        metadata: (event) => {
+          return {
+            assetValue: (event.payload as any)?.monitorName ?? '',
+            assetType: 'monitor',
+            threatScore: String((event.payload as any)?.entityCountDelta ?? 0),
+            source: 'cti-monitor',
+            targetValue: (event.payload as any)?.query ?? '',
+            targetId: (event.payload as any)?.monitorId ?? '',
+          };
+        },
+      },
+    ],
   };

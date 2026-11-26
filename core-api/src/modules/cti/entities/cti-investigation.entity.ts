@@ -42,6 +42,53 @@ export class CtiInvestigation extends BaseEntity {
   @Column({ type: 'timestamptz', nullable: true })
   completedAt: Date;
 
+  @ApiProperty({ nullable: true, description: 'LLM-refined query' })
+  @Column({ nullable: true })
+  refinedQuery: string;
+
+  @ApiProperty({ nullable: true, description: 'AI-generated summary' })
+  @Column({ type: 'text', nullable: true })
+  summary: string;
+
+  @ApiProperty({ nullable: true, description: 'LLM model used' })
+  @Column({ nullable: true })
+  modelUsed: string;
+
+  @ApiProperty({ default: {}, description: 'Sources used and their status' })
+  @Column({ type: 'jsonb', default: '{}' })
+  sourcesUsed: Record<string, any>;
+
+  @ApiProperty({ default: 0, description: 'Number of pages scraped' })
+  @Column({ type: 'int', default: 0 })
+  pageCount: number;
+
+  @ApiProperty({ default: 'pending', description: 'Graph construction status' })
+  @Column({ default: 'pending' })
+  graphStatus: string;
+
+  @ApiProperty({ default: {}, description: 'Community detection results' })
+  @Column({ type: 'jsonb', default: '{}' })
+  communities: Record<string, number>;
+
+  @Column({ type: 'jsonb', nullable: true })
+  graphData: Record<string, any>;
+
+  @ApiProperty({ default: 0, description: 'Current pipeline step' })
+  @Column({ type: 'int', default: 0 })
+  currentStep: number;
+
+  @ApiProperty({ nullable: true, description: 'Current pipeline step label' })
+  @Column({ nullable: true })
+  currentStepLabel: string;
+
+  @ApiProperty({ default: 10, description: 'Total pipeline steps' })
+  @Column({ type: 'int', default: 10 })
+  totalSteps: number;
+
+  @ApiProperty({ default: 0, description: 'Number of relationships found' })
+  @Column({ type: 'int', default: 0 })
+  relationshipCount: number;
+
   @ApiProperty({ default: {} })
   @Column({ type: 'jsonb', default: '{}' })
   metadata: Record<string, any>;

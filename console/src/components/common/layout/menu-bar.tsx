@@ -59,6 +59,9 @@ import {
   AlertTriangle,
   Wallet,
   GitBranch,
+  FileText,
+  Users,
+  Bell,
 } from 'lucide-react';
 import { NavUser } from '../../ui/nav-user';
 import { NewBadge } from '../new-badge';
@@ -204,6 +207,24 @@ export const menu: NavGroup[] = [
         icon: <Search />,
         url: '/cti/investigations',
         isNew: true,
+        permission: 'vulnerability.read',
+      },
+      {
+        title: 'Findings',
+        icon: <FileText />,
+        url: '/cti/findings',
+        permission: 'vulnerability.read',
+      },
+      {
+        title: 'Actors',
+        icon: <Users />,
+        url: '/cti/actors',
+        permission: 'vulnerability.read',
+      },
+      {
+        title: 'Monitors',
+        icon: <Bell />,
+        url: '/cti/monitors',
         permission: 'vulnerability.read',
       },
       {

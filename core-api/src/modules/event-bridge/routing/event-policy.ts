@@ -170,6 +170,7 @@ export const EVENT_POLICY: Record<EventName, EventPolicy> = {
   'cti_target.scanned': { persist: false, severity: 'normal' },
   'cti.threat_detected': { persist: false, severity: 'critical' },
   'cti.investigation.completed': { persist: false, severity: 'normal' },
+  'cti.monitor.triggered': { persist: false, severity: 'important' },
 };
 
 /** Convenience: does this event get a row in audit_events? */

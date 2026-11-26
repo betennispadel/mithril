@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Link, useParams } from '@tanstack/react-router';
 import { useQuery } from '@tanstack/react-query';
-import { ArrowLeft, Loader2, ArrowRight } from 'lucide-react';
+import { ArrowLeft, Loader2, ArrowRight, Zap, Eye, Shield, Hash } from 'lucide-react';
 import { axiosInstance } from '@/services/apis/axios-client';
 
 interface CtiAssetDetail {
@@ -18,6 +18,17 @@ interface CtiAssetDetail {
   lastSeenAt: string;
   isActive: boolean;
   metadata: Record<string, any>;
+  // VoidAccess enriched fields
+  canonicalValue?: string;
+  contextSnippet?: string;
+  extractionMethod?: string;
+  sourceCount?: number;
+  highSignal?: boolean;
+  crossReferenced?: boolean;
+  freshnessTag?: string;
+  priorityScore?: number;
+  communityId?: number;
+  enrichmentData?: Record<string, any>;
   ctiTarget: {
     id: string;
     value: string;
@@ -70,6 +81,15 @@ export default function CtiAssetDetailPage() {
     enabled: !!asset,
   });
 
+  const { data: enrichment } = useQuery({
+    queryKey: ['cti-asset-enrichment', assetId],
+    queryFn: async () => {
+      const res = await axiosInstance.get<any>(`/api/cti-assets/${assetId}/enrichment`);
+      return res as unknown as any;
+    },
+    enabled: !!asset,
+  });
+
   if (isLoading || !asset) {
     return (
       <Page title="CTI Asset">
@@ -96,6 +116,29 @@ export default function CtiAssetDetailPage() {
           </Link>
           <span className="font-mono text-lg">{asset.value}</span>
           <Badge variant="outline">{asset.type}</Badge>
+          {asset.highSignal && (
+            <Badge variant="default" className="text-[10px] bg-amber-500">
+              <Zap className="size-3 mr-1" /> HIGH SIGNAL
+            </Badge>
+          )}
+          {asset.crossReferenced && (
+            <Badge variant="secondary" className="text-[10px]">
+              <Eye className="size-3 mr-1" /> Cross-referenced
+            </Badge>
+          )}
+          {asset.communityId != null && (
+            <Badge variant="outline" className="text-[10px]">
+              Community #{asset.communityId}
+            </Badge>
+          )}
+          {asset.freshnessTag && (
+            <Badge variant="outline" className={`text-[10px] ${
+              asset.freshnessTag === 'fresh' ? 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300' :
+              asset.freshnessTag === 'recent' ? 'bg-yellow-100 text-yellow-700' : 'bg-gray-100 text-gray-500'
+            }`}>
+              {asset.freshnessTag}
+            </Badge>
+          )}
           {asset.stixType && (
             <Badge variant="secondary" className="text-[10px]">
               STIX: {asset.stixType}
@@ -177,6 +220,75 @@ export default function CtiAssetDetailPage() {
           </dl>
         </div>
       </div>
+
+      {/* VoidAccess Intelligence Panel */}
+      {(asset.contextSnippet || asset.sourceCount || asset.extractionMethod || asset.canonicalValue) && (
+        <div className="mt-6 rounded-lg border bg-card p-5">
+          <h3 className="mb-3 text-sm font-semibold flex items-center gap-2">
+            <Shield className="size-4" /> Intelligence Details
+          </h3>
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-4 text-sm">
+            {asset.priorityScore != null && asset.priorityScore > 0 && (
+              <div>
+                <span className="text-xs text-muted-foreground">Priority Score</span>
+                <div className="text-lg font-bold">{asset.priorityScore.toFixed(0)}</div>
+              </div>
+            )}
+            {asset.sourceCount != null && asset.sourceCount > 0 && (
+              <div>
+                <span className="text-xs text-muted-foreground">Independent Sources</span>
+                <div className="text-lg font-bold">{asset.sourceCount}</div>
+              </div>
+            )}
+            {asset.extractionMethod && (
+              <div>
+                <span className="text-xs text-muted-foreground">Extraction Method</span>
+                <div className="font-medium">{asset.extractionMethod}</div>
+              </div>
+            )}
+            {asset.canonicalValue && asset.canonicalValue !== asset.value && (
+              <div>
+                <span className="text-xs text-muted-foreground">Canonical Value</span>
+                <div className="font-mono text-xs">{asset.canonicalValue}</div>
+              </div>
+            )}
+          </div>
+          {asset.contextSnippet && (
+            <div className="mt-4 rounded bg-muted/50 p-3">
+              <span className="text-xs font-medium text-muted-foreground">Context Snippet</span>
+              <p className="mt-1 text-sm italic text-muted-foreground">"{asset.contextSnippet}"</p>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Enrichment Data (from VoidAccess enrichment sources) */}
+      {enrichment?.enrichment && Object.keys(enrichment.enrichment).length > 0 && (
+        <div className="mt-6 rounded-lg border bg-card p-5">
+          <h3 className="mb-3 text-sm font-semibold flex items-center gap-2">
+            <Hash className="size-4" /> Enrichment Sources
+          </h3>
+          <div className="grid gap-4 md:grid-cols-2">
+            {Object.entries(enrichment.enrichment).map(([source, data]) => (
+              <div key={source} className="rounded border p-3">
+                <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2">{source}</h4>
+                {typeof data === 'object' && data !== null ? (
+                  <dl className="space-y-1">
+                    {Object.entries(data as Record<string, any>).slice(0, 6).map(([k, v]) => (
+                      <div key={k} className="flex justify-between text-xs">
+                        <dt className="text-muted-foreground">{k}</dt>
+                        <dd className="font-mono">{typeof v === 'object' ? JSON.stringify(v) : String(v)}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                ) : (
+                  <span className="text-xs text-muted-foreground">{String(data)}</span>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Relations */}
       <div className="mt-6 rounded-lg border bg-card p-6">

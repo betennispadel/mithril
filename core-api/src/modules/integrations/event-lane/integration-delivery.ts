@@ -33,6 +33,7 @@ const PUSHABLE_EVENTS = new Set<EventName>([
   'asset.url.discovered',
   'cti_target.scanned',
   'cti.threat_detected',
+  'cti.monitor.triggered',
 ]);
 
 /**

@@ -551,6 +551,12 @@ export const EVENT_CATALOG = {
         summary: 'CTI investigation completed',
       },
     },
+    monitor: {
+      triggered: {
+        name: 'cti.monitor.triggered',
+        summary: 'CTI monitor alert triggered',
+      },
+    },
   },
 } as const satisfies EventNode;
 

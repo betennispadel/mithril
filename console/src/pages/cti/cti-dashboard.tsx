@@ -174,12 +174,28 @@ export default function CtiDashboardPage() {
               Start Discovery
             </Button>
           </Link>
-          <a href="/api/cti-assets/export/stix" target="_blank" rel="noreferrer">
-            <Button variant="outline" size="sm">
-              <Download className="mr-1.5 size-4" />
-              Export STIX
-            </Button>
-          </a>
+          <div className="flex gap-1">
+            <a href="/api/cti-assets/export/stix" target="_blank" rel="noreferrer">
+              <Button variant="outline" size="sm">STIX</Button>
+            </a>
+            <a href="/api/cti-assets/export/misp" target="_blank" rel="noreferrer">
+              <Button variant="outline" size="sm">MISP</Button>
+            </a>
+            <a href="/api/cti-assets/export/yara" target="_blank" rel="noreferrer">
+              <Button variant="outline" size="sm">YARA</Button>
+            </a>
+            <a href="/api/cti-assets/export/sigma" target="_blank" rel="noreferrer">
+              <Button variant="outline" size="sm">Sigma</Button>
+            </a>
+            <a href="/api/cti-assets/export/snort" target="_blank" rel="noreferrer">
+              <Button variant="outline" size="sm">Snort</Button>
+            </a>
+            <a href="/api/cti-assets/export/csv" target="_blank" rel="noreferrer">
+              <Button variant="outline" size="sm">
+                <Download className="mr-1 size-3" />CSV
+              </Button>
+            </a>
+          </div>
         </div>
       }
     >

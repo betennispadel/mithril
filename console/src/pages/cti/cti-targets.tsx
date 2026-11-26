@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Link, useNavigate } from '@tanstack/react-router';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { Plus, RefreshCw, Trash2, Crosshair } from 'lucide-react';
+import { Plus, RefreshCw, Trash2, Crosshair, Loader2 } from 'lucide-react';
 import { axiosInstance } from '@/services/apis/axios-client';
 import { toast } from 'sonner';
 import { useWorkspaceSelector } from '@/hooks/useWorkspaceSelector';
@@ -19,6 +19,7 @@ interface CtiTarget {
   lastScanAt: string | null;
   isEnabled: boolean;
   createdAt: string;
+  scanStatus: string;
 }
 
 const typeColors: Record<string, string> = {
@@ -53,6 +54,11 @@ export default function CtiTargetsPage() {
       return res as unknown as { items: CtiTarget[]; total: number };
     },
     enabled: hasWorkspace,
+    refetchInterval: (query) => {
+      const items = (query.state.data as { items: CtiTarget[] } | undefined)?.items;
+      const anyScanning = items?.some((t: CtiTarget) => t.scanStatus === 'pending' || t.scanStatus === 'scanning');
+      return anyScanning ? 3000 : false;
+    },
   });
 
   const rescanMutation = useMutation({

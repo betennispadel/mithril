@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { axiosInstance } from '@/services/apis/axios-client';
 import { toast } from 'sonner';
+import { Progress } from '@/components/ui/progress';
 
 interface CtiTargetDetail {
   id: string;
@@ -26,6 +27,8 @@ interface CtiTargetDetail {
   lastScanAt: string | null;
   isEnabled: boolean;
   createdAt: string;
+  scanStatus: string;
+  currentJobId: string | null;
   stats: {
     totalAssets: number;
     assetsByType: { type: string; count: string }[];
@@ -107,6 +110,10 @@ export default function CtiTargetDetailPage() {
       const res = await axiosInstance.get<CtiTargetDetail>(`/api/cti-targets/${targetId}`);
       return res as unknown as CtiTargetDetail;
     },
+    refetchInterval: (query) => {
+      const status = (query.state.data as CtiTargetDetail | undefined)?.scanStatus;
+      return status === 'pending' || status === 'scanning' ? 3000 : false;
+    },
   });
 
   const { data: findingsData } = useQuery({
@@ -172,10 +179,10 @@ export default function CtiTargetDetailPage() {
       action={
         <Button
           onClick={() => rescanMutation.mutate()}
-          disabled={rescanMutation.isPending}
+          disabled={rescanMutation.isPending || target.scanStatus === 'pending' || target.scanStatus === 'scanning'}
         >
-          <RefreshCw className="mr-1.5 size-4" />
-          {rescanMutation.isPending ? 'Scanning...' : 'Re-scan'}
+          <RefreshCw className={`mr-1.5 size-4 ${target.scanStatus === 'scanning' ? 'animate-spin' : ''}`} />
+          {target.scanStatus === 'pending' ? 'Queued...' : target.scanStatus === 'scanning' ? 'Scanning...' : rescanMutation.isPending ? 'Starting...' : 'Re-scan'}
         </Button>
       }
     >
@@ -213,6 +220,40 @@ export default function CtiTargetDetailPage() {
           color="text-orange-600 dark:text-orange-400"
         />
       </div>
+
+      {/* Scan Progress */}
+      {(target.scanStatus === 'pending' || target.scanStatus === 'scanning') && (
+        <div className="mt-4 rounded-lg border border-blue-200 bg-blue-50 p-4 dark:border-blue-900 dark:bg-blue-950/30">
+          <div className="flex items-center gap-3">
+            <Loader2 className="size-5 animate-spin text-blue-600 dark:text-blue-400" />
+            <div className="flex-1">
+              <p className="text-sm font-medium text-blue-900 dark:text-blue-100">
+                {target.scanStatus === 'pending' ? 'Scan queued...' : 'Scanning in progress...'}
+              </p>
+              <p className="mt-0.5 text-xs text-blue-700 dark:text-blue-300">
+                {target.scanStatus === 'pending'
+                  ? 'Waiting for available worker to start the scan.'
+                  : 'Collecting threat intelligence from multiple sources. This may take a few minutes.'}
+              </p>
+            </div>
+          </div>
+          <Progress
+            value={target.scanStatus === 'pending' ? 10 : undefined}
+            className="mt-3 h-1.5"
+          />
+        </div>
+      )}
+
+      {target.scanStatus === 'failed' && (
+        <div className="mt-4 rounded-lg border border-red-200 bg-red-50 p-4 dark:border-red-900 dark:bg-red-950/30">
+          <p className="text-sm font-medium text-red-900 dark:text-red-100">
+            Last scan failed
+          </p>
+          <p className="mt-0.5 text-xs text-red-700 dark:text-red-300">
+            The scan encountered an error. Try re-scanning or check the job logs.
+          </p>
+        </div>
+      )}
 
       {/* Tabs */}
       <Tabs defaultValue="findings" className="mt-6">

@@ -41,4 +41,12 @@ export class CtiTarget extends BaseEntity {
   @ApiProperty({ default: {} })
   @Column({ type: 'jsonb', default: '{}' })
   metadata: Record<string, any>;
+
+  @ApiProperty({ default: 'idle', description: 'Current scan status: idle, pending, scanning, completed, failed' })
+  @Column({ default: 'idle' })
+  scanStatus: string;
+
+  @ApiProperty({ nullable: true, description: 'Current or last job ID for progress tracking' })
+  @Column({ type: 'uuid', nullable: true })
+  currentJobId: string;
 }
