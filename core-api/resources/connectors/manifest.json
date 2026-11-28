@@ -2850,11 +2850,27 @@
             "format": "password",
             "description": "Enables: infostealer log search (Cavalier engine)"
           },
-          "twitterBearerToken": {
+          "twitterUsername": {
             "type": "string",
-            "title": "Twitter Bearer Token",
+            "title": "Twitter/X Username",
+            "description": "Twitter account username for session-based scraping (twscrape). No API key needed."
+          },
+          "twitterPassword": {
+            "type": "string",
+            "title": "Twitter/X Password",
             "format": "password",
-            "description": "Enables: Twitter/X threat actor monitoring, brand mention search"
+            "description": "Twitter account password"
+          },
+          "twitterEmail": {
+            "type": "string",
+            "title": "Twitter/X Email",
+            "description": "Email associated with the Twitter account (for verification challenges)"
+          },
+          "twitterEmailPassword": {
+            "type": "string",
+            "title": "Twitter/X Email Password",
+            "format": "password",
+            "description": "Email password (for verification challenges during login)"
           },
           "hasDataApiKey": {
             "type": "string",
