@@ -2844,12 +2844,6 @@
             "format": "password",
             "description": "Enables: credential leak search, combolist detection, dark web mentions"
           },
-          "hudsonRockApiKey": {
-            "type": "string",
-            "title": "Hudson Rock API Key",
-            "format": "password",
-            "description": "Enables: infostealer log search (Cavalier engine)"
-          },
           "twitterCt0": {
             "type": "string",
             "title": "Twitter/X ct0 Cookie",
@@ -2909,6 +2903,12 @@
             "title": "AlienVault OTX API Key",
             "format": "password",
             "description": "Enables: IOC pulse feeds, threat indicators"
+          },
+          "abusechApiKey": {
+            "type": "string",
+            "title": "abuse.ch API Key",
+            "format": "password",
+            "description": "Enables: ThreatFox IOC feeds, MalwareBazaar hash lookups, URLhaus URL blocking"
           },
           "urlscanApiKey": {
             "type": "string",
@@ -3056,6 +3056,18 @@
             ],
             "default": "normal",
             "description": "quiet=polite delays, normal=balanced, aggressive=fast but noisy"
+          },
+          "i18nLanguages": {
+            "type": "string",
+            "title": "Query Languages",
+            "default": "en,ru,zh,ar,es,de,fr,pt",
+            "description": "Comma-separated ISO 639-1 codes. Dark web and social searches expand queries into these languages."
+          },
+          "dnsEnrichmentEnabled": {
+            "type": "boolean",
+            "title": "DNS Enrichment",
+            "default": true,
+            "description": "Enable DNS record enrichment (A, AAAA, MX, NS, TXT) for domain targets"
           },
           "maxFindings": {
             "type": "integer",
