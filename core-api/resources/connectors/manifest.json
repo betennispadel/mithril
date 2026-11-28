@@ -3011,6 +3011,12 @@
             "format": "password",
             "description": "App hash from my.telegram.org \u2014 required together with API ID"
           },
+          "telegramPhone": {
+            "type": "string",
+            "title": "Telegram Phone",
+            "description": "Phone number in E.164 format (e.g. +15551234567). Required for VoidAccess Telethon-based Telegram scraping.",
+            "ui:placeholder": "+15551234567"
+          },
           "telegramChannels": {
             "type": "string",
             "title": "Telegram Channels",
