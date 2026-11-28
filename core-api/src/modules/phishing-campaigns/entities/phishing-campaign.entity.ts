@@ -54,6 +54,10 @@ export class PhishingCampaign extends BaseEntity {
   @Column({ default: 'generic-login' })
   landingPreset: string;
 
+  @ApiProperty({ nullable: true })
+  @Column({ type: 'text', nullable: true })
+  customLandingHTML: string;
+
   // Campaign config
   @ApiProperty({ default: 60 })
   @Column({ type: 'int', default: 60 })

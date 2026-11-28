@@ -101,6 +101,7 @@ export class PhishingCampaignsService {
     if (campaign.customSubject) config.customTemplateSubject = campaign.customSubject;
     if (campaign.customHTML) config.customTemplateHTML = campaign.customHTML;
     if (campaign.redirectURL) config.redirectURL = campaign.redirectURL;
+    if (campaign.customLandingHTML) config.customLandingHTML = campaign.customLandingHTML;
 
     // Create the job via the existing job system
     const jobs = await this.jobsRegistryService.createNewJob({

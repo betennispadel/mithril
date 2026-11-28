@@ -40,6 +40,17 @@ export interface PhishingFinding {
   createdAt: string;
 }
 
+export interface PhishingTemplateItem {
+  id: string;
+  name: string;
+  type: 'email' | 'landing';
+  subject: string | null;
+  html: string;
+  description: string | null;
+  clonedFrom: string | null;
+  createdAt: string;
+}
+
 export interface CreateCampaignPayload {
   name: string;
   description?: string;
@@ -55,6 +66,8 @@ export interface CreateCampaignPayload {
   redirectURL?: string;
   configProfileId?: string;
 }
+
+// ── Campaigns ────────────────────────────────────────────────────────────────
 
 export async function getPhishingCampaigns(params?: {
   status?: string;
@@ -90,4 +103,36 @@ export async function getPhishingCampaignResults(
 
 export async function deletePhishingCampaign(id: string): Promise<void> {
   return axiosInstance.delete(`/api/phishing-campaigns/${id}`);
+}
+
+// ── Templates ────────────────────────────────────────────────────────────────
+
+export async function getPhishingTemplates(
+  type?: 'email' | 'landing',
+): Promise<PhishingTemplateItem[]> {
+  return axiosInstance.get('/api/phishing-templates', {
+    params: type ? { type } : undefined,
+  });
+}
+
+export async function savePhishingTemplate(data: {
+  name: string;
+  type: 'email' | 'landing';
+  subject?: string;
+  html: string;
+  description?: string;
+  clonedFrom?: string;
+}): Promise<PhishingTemplateItem> {
+  return axiosInstance.post('/api/phishing-templates', data);
+}
+
+export async function updatePhishingTemplate(
+  id: string,
+  data: { name?: string; subject?: string; html?: string; description?: string },
+): Promise<PhishingTemplateItem> {
+  return axiosInstance.patch(`/api/phishing-templates/${id}`, data);
+}
+
+export async function deletePhishingTemplate(id: string): Promise<void> {
+  return axiosInstance.delete(`/api/phishing-templates/${id}`);
 }

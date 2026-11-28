@@ -53,6 +53,11 @@ export class CreatePhishingCampaignDto {
   @IsString()
   customHTML?: string;
 
+  @ApiProperty({ required: false, description: 'Custom landing page HTML' })
+  @IsOptional()
+  @IsString()
+  customLandingHTML?: string;
+
   @ApiProperty({
     default: 'generic-login',
     enum: ['generic-login', 'o365-login', 'google-login'],
