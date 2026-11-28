@@ -2850,27 +2850,17 @@
             "format": "password",
             "description": "Enables: infostealer log search (Cavalier engine)"
           },
-          "twitterUsername": {
+          "twitterCt0": {
             "type": "string",
-            "title": "Twitter/X Username",
-            "description": "Twitter account username for session-based scraping (twscrape). No API key needed."
-          },
-          "twitterPassword": {
-            "type": "string",
-            "title": "Twitter/X Password",
+            "title": "Twitter/X ct0 Cookie",
             "format": "password",
-            "description": "Twitter account password"
+            "description": "CSRF token from browser cookies (x.com). Open DevTools > Application > Cookies > ct0"
           },
-          "twitterEmail": {
+          "twitterAuthToken": {
             "type": "string",
-            "title": "Twitter/X Email",
-            "description": "Email associated with the Twitter account (for verification challenges)"
-          },
-          "twitterEmailPassword": {
-            "type": "string",
-            "title": "Twitter/X Email Password",
+            "title": "Twitter/X auth_token Cookie",
             "format": "password",
-            "description": "Email password (for verification challenges during login)"
+            "description": "Session token from browser cookies (x.com). Open DevTools > Application > Cookies > auth_token"
           },
           "hasDataApiKey": {
             "type": "string",
